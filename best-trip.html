@@ -3,130 +3,117 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Best Beach Trip 2026 — Toronto Couple's Guide</title>
+<title>Amalfi Coast 2026 — The Complete Guide | Toronto Couple</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
   :root {
     --ocean: #0077b6; --ocean-dark: #023e8a; --ocean-light: #00b4d8;
     --sand: #f5e6d3; --sunset: #ff6b35; --coral: #e63946;
     --palm: #2d6a4f; --dark: #1a1a2e; --gray: #6b7280;
-    --light: #f8fafc; --white: #ffffff;
+    --light: #f8fafc; --white: #ffffff; --gold: #f59e0b;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { font-family: 'Inter', sans-serif; background: var(--light); color: var(--dark); line-height: 1.6; }
-
-  /* NAV */
   nav { background: var(--ocean-dark); padding: 14px 24px; position: sticky; top: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; }
-  nav a { color: white; text-decoration: none; font-weight: 600; font-size: 0.85rem; padding: 6px 14px; border-radius: 8px; transition: background 0.2s; }
+  nav a { color: white; text-decoration: none; font-weight: 600; font-size: 0.82rem; padding: 6px 12px; border-radius: 8px; transition: background 0.2s; }
   nav a:hover { background: rgba(255,255,255,0.15); }
   nav .logo { font-weight: 900; font-size: 1.1rem; }
-  .nav-links { display: flex; gap: 4px; }
-
-  /* HERO */
-  .hero { background: linear-gradient(135deg, var(--ocean) 0%, var(--ocean-dark) 100%); color: white; padding: 60px 24px 50px; text-align: center; }
+  .nav-links { display: flex; gap: 2px; flex-wrap: wrap; }
+  .hero { background: linear-gradient(135deg, #1a472a 0%, #023e8a 50%, var(--ocean) 100%); color: white; padding: 60px 24px 50px; text-align: center; }
   .hero h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 900; margin-bottom: 10px; }
-  .hero p { font-size: 1.1rem; opacity: 0.9; max-width: 650px; margin: 0 auto 20px; }
-  .hero-stats { display: flex; gap: 32px; justify-content: center; flex-wrap: wrap; margin-top: 20px; }
+  .hero p { font-size: 1.05rem; opacity: 0.9; max-width: 680px; margin: 0 auto 20px; }
+  .hero-stats { display: flex; gap: 28px; justify-content: center; flex-wrap: wrap; margin-top: 20px; }
   .hero-stat { text-align: center; }
-  .hero-stat .num { font-size: 1.8rem; font-weight: 900; }
-  .hero-stat .label { font-size: 0.8rem; opacity: 0.75; }
-
-  /* CONTAINER */
-  .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
-
-  /* SECTION */
-  .section { padding: 48px 0; }
-  .section h2 { font-size: 1.6rem; font-weight: 800; margin-bottom: 6px; color: var(--ocean-dark); }
-  .section .sub { color: var(--gray); font-size: 0.9rem; margin-bottom: 24px; }
-
-  /* TLDR CARD */
-  .tldr { background: linear-gradient(135deg, var(--sunset), var(--coral)); color: white; border-radius: 16px; padding: 28px 32px; margin: -30px auto 0; position: relative; z-index: 10; max-width: 900px; box-shadow: 0 12px 40px rgba(230,57,70,0.25); }
-  .tldr h2 { color: white; font-size: 1.2rem; margin-bottom: 12px; }
-  .tldr-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; }
-  .tldr-item { background: rgba(255,255,255,0.15); border-radius: 12px; padding: 14px 16px; backdrop-filter: blur(5px); }
-  .tldr-item .label { font-size: 0.75rem; opacity: 0.8; text-transform: uppercase; letter-spacing: 0.5px; }
-  .tldr-item .value { font-size: 1.1rem; font-weight: 800; margin-top: 2px; }
-
-  /* RANKING TABLE */
-  .rank-table { width: 100%; border-collapse: separate; border-spacing: 0 8px; }
-  .rank-table th { text-align: left; font-size: 0.75rem; text-transform: uppercase; color: var(--gray); padding: 0 12px 8px; letter-spacing: 0.5px; }
-  .rank-table td { padding: 16px 12px; background: white; }
-  .rank-table tr td:first-child { border-radius: 12px 0 0 12px; }
-  .rank-table tr td:last-child { border-radius: 0 12px 12px 0; }
-  .rank-table tr { box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
-  .rank-num { font-size: 1.4rem; font-weight: 900; color: var(--ocean); width: 50px; }
-  .rank-table tr:first-child .rank-num { color: var(--sunset); }
-  .dest-cell h3 { font-size: 1rem; font-weight: 700; }
-  .dest-cell .tagline { color: var(--gray); font-size: 0.8rem; }
-  .price-cell { font-weight: 800; font-size: 1.1rem; color: var(--ocean-dark); text-align: right; white-space: nowrap; }
-  .price-cell .price-sub { font-weight: 400; font-size: 0.7rem; color: var(--gray); }
-  .badge { display: inline-block; padding: 3px 10px; border-radius: 8px; font-size: 0.7rem; font-weight: 700; }
-  .badge-best { background: #dcfce7; color: #166534; }
-  .badge-cheap { background: #fef3c7; color: #92400e; }
-  .badge-romance { background: #fce7f3; color: #9d174d; }
-  .badge-beach { background: #dbeafe; color: #1e40af; }
-  .badge-warn { background: #fef2f2; color: #991b1b; }
-
-  /* DESTINATION DEEP DIVE */
-  .dest-section { background: white; border-radius: 16px; padding: 32px; margin-bottom: 24px; box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
-  .dest-section h3 { font-size: 1.3rem; font-weight: 800; margin-bottom: 4px; }
-  .dest-section .dest-tag { color: var(--gray); font-size: 0.9rem; margin-bottom: 20px; }
-
-  .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 24px; }
-  .info-card { background: var(--light); border-radius: 10px; padding: 14px 16px; }
-  .info-card .ic-label { font-size: 0.75rem; color: var(--gray); text-transform: uppercase; }
-  .info-card .ic-value { font-weight: 700; font-size: 0.95rem; margin-top: 2px; }
-
-  /* BUDGET BAR */
-  .budget-breakdown { margin: 20px 0; }
-  .budget-row { display: flex; align-items: center; margin-bottom: 10px; gap: 12px; }
+  .hero-stat .num { font-size: 1.6rem; font-weight: 900; }
+  .hero-stat .label { font-size: 0.75rem; opacity: 0.75; }
+  .container { max-width: 920px; margin: 0 auto; padding: 0 20px; }
+  .section { padding: 40px 0; }
+  .section h2 { font-size: 1.5rem; font-weight: 800; margin-bottom: 6px; color: var(--ocean-dark); }
+  .section .sub { color: var(--gray); font-size: 0.88rem; margin-bottom: 20px; }
+  .tldr { background: linear-gradient(135deg, var(--sunset), var(--coral)); color: white; border-radius: 16px; padding: 24px 28px; margin: -30px auto 0; position: relative; z-index: 10; max-width: 920px; box-shadow: 0 12px 40px rgba(230,57,70,0.25); }
+  .tldr h2 { color: white; font-size: 1.1rem; margin-bottom: 10px; }
+  .tldr-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; }
+  .tldr-item { background: rgba(255,255,255,0.15); border-radius: 10px; padding: 12px 14px; }
+  .tldr-item .label { font-size: 0.72rem; opacity: 0.8; text-transform: uppercase; letter-spacing: 0.5px; }
+  .tldr-item .value { font-size: 1rem; font-weight: 800; margin-top: 2px; }
+  .card { background: white; border-radius: 16px; padding: 28px 28px; margin-bottom: 20px; box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
+  .card h3 { font-size: 1.25rem; font-weight: 800; margin-bottom: 4px; }
+  .card .card-sub { color: var(--gray); font-size: 0.88rem; margin-bottom: 16px; }
+  .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 10px; margin-bottom: 20px; }
+  .info-card { background: var(--light); border-radius: 10px; padding: 12px 14px; }
+  .info-card .ic-label { font-size: 0.72rem; color: var(--gray); text-transform: uppercase; }
+  .info-card .ic-value { font-weight: 700; font-size: 0.92rem; margin-top: 2px; }
+  .map-frame { width: 100%; height: 400px; border: none; border-radius: 12px; margin: 12px 0 16px; }
+  .map-link { display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 0.85rem; color: white; background: var(--palm); transition: all 0.2s; }
+  .map-link:hover { transform: translateY(-1px); filter: brightness(1.1); }
+  .maps-grid { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; }
+  .budget-breakdown { margin: 16px 0; }
+  .budget-row { display: flex; align-items: center; margin-bottom: 8px; gap: 10px; }
   .budget-label { width: 100px; font-size: 0.82rem; font-weight: 600; flex-shrink: 0; }
   .budget-bar-bg { flex: 1; height: 10px; background: #e5e7eb; border-radius: 5px; overflow: hidden; }
-  .budget-bar-fill { height: 100%; border-radius: 5px; transition: width 0.6s ease; }
+  .budget-bar-fill { height: 100%; border-radius: 5px; }
   .budget-val { width: 80px; text-align: right; font-size: 0.82rem; font-weight: 600; color: var(--ocean-dark); flex-shrink: 0; }
   .fill-flight { background: var(--ocean); }
   .fill-stay { background: var(--sunset); }
   .fill-food { background: var(--palm); }
   .fill-activity { background: var(--coral); }
   .fill-transport { background: var(--ocean-light); }
-
-  /* TABS */
-  .tab-row { display: flex; gap: 4px; background: var(--light); border-radius: 10px; padding: 4px; margin-bottom: 20px; overflow-x: auto; }
-  .tab-btn { padding: 8px 16px; border: none; background: transparent; border-radius: 8px; font-family: inherit; font-weight: 600; font-size: 0.8rem; cursor: pointer; color: var(--gray); white-space: nowrap; transition: all 0.2s; }
-  .tab-btn:hover { background: rgba(0,119,182,0.08); }
-  .tab-btn.active { background: white; color: var(--ocean-dark); box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
-  .tab-pane { display: none; }
-  .tab-pane.active { display: block; }
-
-  /* ITINERARY */
-  .day { background: var(--light); border-radius: 12px; padding: 16px 20px; margin-bottom: 10px; border-left: 4px solid var(--ocean); }
+  .day { background: var(--light); border-radius: 12px; padding: 18px 20px; margin-bottom: 12px; border-left: 4px solid var(--ocean); }
+  .day.highlight { border-left-color: var(--sunset); background: #fff7ed; }
   .day h4 { font-size: 0.95rem; font-weight: 700; color: var(--ocean-dark); }
-  .day p { font-size: 0.85rem; color: #444; margin-top: 4px; }
-  .day .day-meta { display: flex; gap: 16px; margin-top: 6px; font-size: 0.78rem; }
-  .day .day-cost { color: var(--sunset); font-weight: 700; }
-  .day .day-links a { color: var(--ocean); text-decoration: none; font-weight: 500; }
-  .day .day-links a:hover { text-decoration: underline; }
-
-  /* LISTS */
+  .day .schedule { margin-top: 8px; }
+  .day .time-block { display: flex; gap: 10px; padding: 5px 0; border-bottom: 1px solid rgba(0,0,0,0.04); font-size: 0.82rem; }
+  .day .time-block:last-child { border: none; }
+  .day .time { font-weight: 700; color: var(--ocean-dark); min-width: 58px; flex-shrink: 0; }
+  .day .activity { flex: 1; }
+  .day .activity a { color: var(--ocean); text-decoration: none; font-weight: 600; }
+  .day .activity a:hover { text-decoration: underline; }
+  .day .day-footer { display: flex; gap: 12px; margin-top: 8px; font-size: 0.78rem; flex-wrap: wrap; align-items: center; }
+  .day .day-cost { color: var(--sunset); font-weight: 700; background: #fff7ed; padding: 2px 8px; border-radius: 6px; }
+  .day .day-map a { color: var(--palm); text-decoration: none; font-weight: 600; }
   .spot-list { list-style: none; }
   .spot-list li { padding: 12px 0; border-bottom: 1px solid #f0f0f0; }
   .spot-list li:last-child { border: none; }
   .spot-name { font-weight: 700; font-size: 0.9rem; }
   .spot-desc { color: var(--gray); font-size: 0.82rem; margin-top: 2px; }
-  .spot-meta { display: flex; gap: 12px; margin-top: 4px; font-size: 0.78rem; }
-  .spot-meta a { color: var(--ocean); text-decoration: none; font-weight: 500; }
+  .spot-meta { display: flex; gap: 10px; margin-top: 4px; font-size: 0.78rem; flex-wrap: wrap; }
+  .spot-meta a { color: var(--ocean); text-decoration: none; font-weight: 600; }
   .spot-meta a:hover { text-decoration: underline; }
   .spot-cost { color: var(--sunset); font-weight: 700; }
-
-  /* BOOKING CTA */
-  .booking-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .spot-tip { font-size: 0.78rem; color: var(--palm); font-style: italic; margin-top: 3px; }
+  .photo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 12px; }
+  .photo-card { background: var(--light); border-radius: 10px; padding: 14px 16px; border-left: 3px solid var(--gold); }
+  .photo-card .pc-title { font-weight: 700; font-size: 0.88rem; }
+  .photo-card .pc-when { color: var(--gold); font-weight: 600; font-size: 0.75rem; }
+  .photo-card .pc-desc { color: var(--gray); font-size: 0.8rem; margin-top: 3px; }
+  .photo-card .pc-link { margin-top: 4px; }
+  .photo-card .pc-link a { color: var(--ocean); font-size: 0.78rem; text-decoration: none; font-weight: 600; }
+  .tip { border-radius: 10px; padding: 14px 16px; font-size: 0.85rem; margin: 12px 0; line-height: 1.5; }
+  .tip-money { background: #dcfce7; border-left: 4px solid var(--palm); }
+  .tip-warn { background: #fef3c7; border-left: 4px solid var(--gold); }
+  .tip-pro { background: #dbeafe; border-left: 4px solid var(--ocean); }
+  .tip strong { font-weight: 700; }
+  .booking-grid { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0; }
   .book-btn { display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 0.85rem; color: white; transition: all 0.2s; }
   .book-btn:hover { transform: translateY(-1px); filter: brightness(1.1); }
   .book-flights { background: var(--ocean); }
   .book-stay { background: var(--sunset); }
   .book-maps { background: var(--palm); }
-
-  /* COMPARISON TABLE */
+  .book-ferry { background: #7c3aed; }
+  .book-food { background: var(--coral); }
+  .transport-option { background: var(--light); border-radius: 10px; padding: 14px 16px; margin-bottom: 10px; }
+  .transport-option h5 { font-size: 0.9rem; font-weight: 700; margin-bottom: 4px; }
+  .transport-option p { font-size: 0.82rem; color: #555; }
+  .transport-option .to-meta { display: flex; gap: 12px; margin-top: 6px; font-size: 0.78rem; }
+  .transport-option .to-meta span { font-weight: 600; }
+  .to-time { color: var(--ocean); }
+  .to-cost { color: var(--sunset); }
+  .pack-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+  .pack-cat { background: var(--light); border-radius: 10px; padding: 14px 16px; }
+  .pack-cat h5 { font-size: 0.85rem; font-weight: 700; margin-bottom: 6px; color: var(--ocean-dark); }
+  .pack-cat ul { list-style: none; font-size: 0.82rem; }
+  .pack-cat ul li { padding: 2px 0; }
+  .pack-cat ul li::before { content: "\2713  "; color: var(--palm); font-weight: 700; }
   .compare { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
   .compare th { text-align: left; padding: 10px 12px; background: var(--ocean-dark); color: white; font-weight: 600; }
   .compare th:first-child { border-radius: 8px 0 0 0; }
@@ -134,538 +121,705 @@
   .compare td { padding: 10px 12px; border-bottom: 1px solid #f0f0f0; }
   .compare tr:hover td { background: #f8fafc; }
   .compare .winner { background: #dcfce7; font-weight: 700; }
-
-  /* FOOTER */
-  footer { background: var(--dark); color: rgba(255,255,255,0.7); text-align: center; padding: 32px 20px; font-size: 0.82rem; }
+  footer { background: var(--dark); color: rgba(255,255,255,0.7); text-align: center; padding: 28px 20px; font-size: 0.82rem; }
   footer a { color: var(--ocean-light); }
-
-  /* RESPONSIVE */
   @media (max-width: 640px) {
-    .hero h1 { font-size: 1.8rem; }
+    .hero h1 { font-size: 1.7rem; }
     .tldr-grid { grid-template-columns: 1fr 1fr; }
-    .dest-section { padding: 20px; }
-    .rank-table td { padding: 10px 8px; }
+    .card { padding: 18px; }
     .nav-links { display: none; }
     .info-grid { grid-template-columns: 1fr; }
+    .photo-grid { grid-template-columns: 1fr; }
+    .map-frame { height: 280px; }
   }
 </style>
 </head>
 <body>
 
 <nav>
-  <a href="#" class="logo">🏖️ Beach Trip 2026</a>
+  <a href="#" class="logo">🇮🇹 Amalfi 2026</a>
   <div class="nav-links">
-    <a href="#ranking">Ranking</a>
-    <a href="#amalfi">🥇 Amalfi</a>
-    <a href="#tulum">🥈 Tulum</a>
-    <a href="#aruba">🥉 Aruba</a>
-    <a href="#compare">Compare</a>
+    <a href="#map">🗺️ Map</a>
+    <a href="#itinerary">📅 Itinerary</a>
+    <a href="#beaches">🏖️ Beaches</a>
+    <a href="#food">🍝 Food</a>
+    <a href="#photos">📸 Photos</a>
+    <a href="#transport">🚌 Transport</a>
+    <a href="#book">🔗 Book</a>
+    <a href="#alternatives">vs Others</a>
   </div>
 </nav>
 
-<!-- HERO -->
 <div class="hero">
   <h1>🇮🇹 Amalfi Coast, Baby.</h1>
-  <p>The definitive plan for a couple from Toronto · Late August 2026 · $5,000 CAD max · No Asian countries</p>
+  <p>The complete deep-dive plan for a couple from Toronto · Aug 22–29 2026 · $5,000 CAD max</p>
   <div class="hero-stats">
-    <div class="hero-stat"><div class="num">5</div><div class="label">Destinations Compared</div></div>
-    <div class="hero-stat"><div class="num">$4,500</div><div class="label">Amalfi Total</div></div>
+    <div class="hero-stat"><div class="num">$4,500</div><div class="label">Total (CAD)</div></div>
     <div class="hero-stat"><div class="num">7</div><div class="label">Nights</div></div>
     <div class="hero-stat"><div class="num">11h</div><div class="label">Flight (1 stop)</div></div>
+    <div class="hero-stat"><div class="num">6</div><div class="label">Towns to Visit</div></div>
+    <div class="hero-stat"><div class="num">30+</div><div class="label">Mapped Spots</div></div>
   </div>
 </div>
 
-<!-- TLDR -->
 <div class="container">
   <div class="tldr">
-    <h2>⚡ TL;DR — Just Tell Me Where to Go</h2>
+    <h2>⚡ Quick Facts</h2>
     <div class="tldr-grid">
-      <div class="tldr-item">
-        <div class="label">🏆 Best Overall</div>
-        <div class="value">Amalfi Coast 🇮🇹</div>
-      </div>
-      <div class="tldr-item">
-        <div class="label">💰 Best Budget</div>
-        <div class="value">Tulum, Mexico</div>
-      </div>
-      <div class="tldr-item">
-        <div class="label">💑 Most Romantic</div>
-        <div class="value">Amalfi Coast 🇮🇹</div>
-      </div>
-      <div class="tldr-item">
-        <div class="label">☀️ Best Weather</div>
-        <div class="value">Aruba (no rain!)</div>
-      </div>
-      <div class="tldr-item">
-        <div class="label">🍽️ Best Food</div>
-        <div class="value">Amalfi Coast 🇮🇹</div>
-      </div>
-      <div class="tldr-item">
-        <div class="label">🏖️ Best Beaches</div>
-        <div class="value">Crete (pink sand!)</div>
-      </div>
+      <div class="tldr-item"><div class="label">✈️ Fly Into</div><div class="value">Naples (NAP)</div></div>
+      <div class="tldr-item"><div class="label">🏠 Base In</div><div class="value">Amalfi or Atrani</div></div>
+      <div class="tldr-item"><div class="label">🌡️ August</div><div class="value">80–90°F, sunny</div></div>
+      <div class="tldr-item"><div class="label">🛂 Visa</div><div class="value">None (Schengen)</div></div>
+      <div class="tldr-item"><div class="label">💵 Currency</div><div class="value">EUR (1 CAD ≈ €0.68)</div></div>
+      <div class="tldr-item"><div class="label">⚠️ Don't</div><div class="value">Rent a car!</div></div>
     </div>
   </div>
 </div>
 
-<!-- RANKING -->
-<div class="container">
-  <div class="section" id="ranking">
-    <h2>🏅 Final Ranking</h2>
-    <p class="sub">Scored on: romance, food, scenery, beaches, culture, ease of travel from Toronto, August weather</p>
-
-    <table class="rank-table">
-      <tr>
-        <th>#</th><th>Destination</th><th>Why</th><th style="text-align:right">Est. Total</th>
-      </tr>
-      <tr>
-        <td class="rank-num">1</td>
-        <td class="dest-cell"><h3>🇮🇹 Amalfi Coast, Italy</h3><div class="tagline">Cliffside villages, world-class food, Capri</div></td>
-        <td><span class="badge badge-best">Best Overall</span> <span class="badge badge-romance">Most Romantic</span></td>
-        <td class="price-cell">$4,500<br><span class="price-sub">CAD for 2</span></td>
-      </tr>
-      <tr>
-        <td class="rank-num">2</td>
-        <td class="dest-cell"><h3>🇲🇽 Tulum, Mexico</h3><div class="tagline">Cenotes, ruins, beach — 4h direct</div></td>
-        <td><span class="badge badge-cheap">Budget King</span> <span class="badge badge-beach">Best Activities</span></td>
-        <td class="price-cell">$2,800<br><span class="price-sub">CAD for 2</span></td>
-      </tr>
-      <tr>
-        <td class="rank-num">3</td>
-        <td class="dest-cell"><h3>🇦🇼 Aruba</h3><div class="tagline">Guaranteed sun, no hurricane risk</div></td>
-        <td><span class="badge badge-beach">Best Weather</span></td>
-        <td class="price-cell">$3,800<br><span class="price-sub">CAD for 2</span></td>
-      </tr>
-      <tr>
-        <td class="rank-num">4</td>
-        <td class="dest-cell"><h3>🇬🇷 Crete, Greece</h3><div class="tagline">Pink sand, ancient ruins, Mediterranean food</div></td>
-        <td><span class="badge badge-beach">Best Beaches</span></td>
-        <td class="price-cell">$4,300<br><span class="price-sub">CAD for 2</span></td>
-      </tr>
-      <tr>
-        <td class="rank-num">5</td>
-        <td class="dest-cell"><h3>🇵🇹 Algarve, Portugal</h3><div class="tagline">Sea caves, cliffs, wine & pastéis</div></td>
-        <td><span class="badge badge-romance">Romantic</span></td>
-        <td class="price-cell">$4,200<br><span class="price-sub">CAD for 2</span></td>
-      </tr>
-    </table>
-  </div>
-</div>
-
-<!-- ═══════════ #1 AMALFI COAST ═══════════ -->
-<div class="container" id="amalfi">
-  <div class="dest-section">
-    <h3>🥇 #1 — Amalfi Coast, Italy 🇮🇹</h3>
-    <p class="dest-tag">Positano · Amalfi · Ravello · Capri · Limoncello · The most romantic coastline on Earth</p>
-
-    <div class="info-grid">
-      <div class="info-card"><div class="ic-label">✈️ Flight</div><div class="ic-value">11h (1 stop) YYZ→NAP</div></div>
-      <div class="info-card"><div class="ic-label">💰 Est. Total</div><div class="ic-value">~$4,500 CAD / couple</div></div>
-      <div class="info-card"><div class="ic-label">🛂 Visa</div><div class="ic-value">None needed (Schengen) 🇨🇦</div></div>
-      <div class="info-card"><div class="ic-label">🌡️ August</div><div class="ic-value">80-90°F, sunny ☀️</div></div>
-      <div class="info-card"><div class="ic-label">💵 Exchange</div><div class="ic-value">1 CAD ≈ 0.68 EUR</div></div>
-      <div class="info-card"><div class="ic-label">🚌 Getting Around</div><div class="ic-value">SITA bus + ferry (don't drive!)</div></div>
-    </div>
-
-    <!-- BUDGET -->
-    <h4 style="margin-bottom:12px;">💰 Budget Breakdown (7 nights, 2 people)</h4>
-    <div class="budget-breakdown">
-      <div class="budget-row">
-        <div class="budget-label">✈️ Flights</div>
-        <div class="budget-bar-bg"><div class="budget-bar-fill fill-flight" style="width:36%"></div></div>
-        <div class="budget-val">$1,600</div>
-      </div>
-      <div class="budget-row">
-        <div class="budget-label">🏠 Airbnb</div>
-        <div class="budget-bar-bg"><div class="budget-bar-fill fill-stay" style="width:27%"></div></div>
-        <div class="budget-val">$1,200</div>
-      </div>
-      <div class="budget-row">
-        <div class="budget-label">🍽️ Food</div>
-        <div class="budget-bar-bg"><div class="budget-bar-fill fill-food" style="width:19%"></div></div>
-        <div class="budget-val">$840</div>
-      </div>
-      <div class="budget-row">
-        <div class="budget-label">🎯 Activities</div>
-        <div class="budget-bar-bg"><div class="budget-bar-fill fill-activity" style="width:10%"></div></div>
-        <div class="budget-val">$450</div>
-      </div>
-      <div class="budget-row">
-        <div class="budget-label">🚌 Transport</div>
-        <div class="budget-bar-bg"><div class="budget-bar-fill fill-transport" style="width:8%"></div></div>
-        <div class="budget-val">$410</div>
-      </div>
-      <div style="text-align:right; font-weight:800; font-size:1.1rem; color:var(--sunset); margin-top:8px;">Total: ~$4,500 CAD · ⚠️ $500 under budget (tight but doable!)</div>
-    </div>
-
-    <p style="background:#fef3c7; border-radius:10px; padding:12px 16px; font-size:0.85rem; margin-bottom:20px;">
-      💡 <strong>Pro tip to save $300-500:</strong> Stay in Amalfi town or Atrani instead of Positano — same views, 40% cheaper Airbnbs. Visit Positano as a day trip instead.
-    </p>
-
-    <!-- TABS -->
-    <div class="tab-row" id="tabs-amalfi">
-      <button class="tab-btn active" onclick="tab('amalfi','itin')">📅 7-Day Plan</button>
-      <button class="tab-btn" onclick="tab('amalfi','beaches')">🏖️ Beaches</button>
-      <button class="tab-btn" onclick="tab('amalfi','activities')">🎯 Activities</button>
-      <button class="tab-btn" onclick="tab('amalfi','food')">🍽️ Food</button>
-      <button class="tab-btn" onclick="tab('amalfi','book')">🔗 Book</button>
-    </div>
-
-    <div class="tab-pane active" id="amalfi-itin">
-      <div class="day"><h4>Day 1 (Fri Aug 22) — Arrive in Naples → Amalfi</h4><p>Fly YYZ→NAP (1 stop). Grab a Margherita at L'Antica Pizzeria da Michele (the world's most famous pizza) in Naples. SITA bus or ferry to Amalfi town (1.5h). Check into Airbnb. Evening stroll, gelato on the piazza.</p><div class="day-meta"><span class="day-cost">~$110</span><span class="day-links"><a href="https://maps.google.com/?q=L'Antica+Pizzeria+da+Michele+Naples" target="_blank">📍 da Michele</a> · <a href="https://maps.google.com/?q=Amalfi+Italy" target="_blank">📍 Amalfi</a></span></div></div>
-      <div class="day"><h4>Day 2 (Sat) — Positano</h4><p>Ferry to Positano (25 min). Walk the iconic pastel cliffside. Spiaggia Grande beach morning. Shop the boutiques on Via dei Mulini. Long seafood lunch at Da Vincenzo. Sunset cocktails at Franco's Bar in Positano.</p><div class="day-meta"><span class="day-cost">~$130</span><span class="day-links"><a href="https://maps.google.com/?q=Spiaggia+Grande+Positano" target="_blank">📍 Positano Beach</a> · <a href="https://maps.google.com/?q=Da+Vincenzo+Positano" target="_blank">📍 Da Vincenzo</a> · <a href="https://maps.google.com/?q=Franco's+Bar+Positano" target="_blank">📍 Franco's Bar</a></span></div></div>
-      <div class="day"><h4>Day 3 (Sun) — Capri Day Trip</h4><p>Ferry Amalfi→Capri (1.5h). Blue Grotto boat tour (arrive by 9am!). Funicular to Capri town. Lunch at La Fontelina beach club. Chairlift to Monte Solaro for jaw-dropping 360° views. Evening ferry back.</p><div class="day-meta"><span class="day-cost">~$180</span><span class="day-links"><a href="https://maps.google.com/?q=Blue+Grotto+Capri" target="_blank">📍 Blue Grotto</a> · <a href="https://maps.google.com/?q=La+Fontelina+Capri" target="_blank">📍 La Fontelina</a> · <a href="https://maps.google.com/?q=Monte+Solaro+Capri" target="_blank">📍 Monte Solaro</a></span></div></div>
-      <div class="day"><h4>Day 4 (Mon) — Path of the Gods 🥾</h4><p>Bus to Bomerano. Hike the legendary Sentiero degli Dei (Path of the Gods) — 3.5h clifftop trail with insane coastal views ending in Nocelle. Steps down to Positano. Celebrate with Spritz on the beach.</p><div class="day-meta"><span class="day-cost">~$50</span><span class="day-links"><a href="https://maps.google.com/?q=Sentiero+degli+Dei+Amalfi" target="_blank">📍 Path of the Gods</a> · <a href="https://maps.google.com/?q=Nocelle+Positano" target="_blank">📍 Nocelle</a></span></div></div>
-      <div class="day"><h4>Day 5 (Tue) — Ravello + Wine</h4><p>Bus up to Ravello — the "City of Music" perched 350m above the sea. Villa Rufolo gardens (Infinity Terrace!). Villa Cimbrone's Terrace of Infinity. Long lunch at Cumpa' Cosimo. Wine tasting at local vineyard. Back to Amalfi for dinner.</p><div class="day-meta"><span class="day-cost">~$120</span><span class="day-links"><a href="https://maps.google.com/?q=Villa+Rufolo+Ravello" target="_blank">📍 Villa Rufolo</a> · <a href="https://maps.google.com/?q=Villa+Cimbrone+Ravello" target="_blank">📍 Villa Cimbrone</a> · <a href="https://maps.google.com/?q=Cumpa+Cosimo+Ravello" target="_blank">📍 Cumpa' Cosimo</a></span></div></div>
-      <div class="day"><h4>Day 6 (Wed) — Beach Day + Splurge</h4><p>Sleep in. Walk to hidden Atrani beach (5 min from Amalfi, way fewer tourists). Swim in crystal water. Afternoon boat rental (€40/half day) — cruise the coast, find secret coves. Splurge dinner at Ristorante Marina Grande with candlelit seafood on the water.</p><div class="day-meta"><span class="day-cost">~$190</span><span class="day-links"><a href="https://maps.google.com/?q=Atrani+Beach+Italy" target="_blank">📍 Atrani</a> · <a href="https://maps.google.com/?q=Ristorante+Marina+Grande+Amalfi" target="_blank">📍 Marina Grande</a></span></div></div>
-      <div class="day"><h4>Day 7 (Thu Aug 28) — Limoncello & Arrivederci</h4><p>Morning: Valle delle Ferriere hike (cool waterfalls in a lemon grove). Buy limoncello from a local producer. Last espresso on the piazza. Ferry/bus to Naples, flight home.</p><div class="day-meta"><span class="day-cost">~$95</span><span class="day-links"><a href="https://maps.google.com/?q=Valle+delle+Ferriere+Amalfi" target="_blank">📍 Ferriere</a> · <a href="https://maps.google.com/?q=Naples+International+Airport" target="_blank">📍 NAP Airport</a></span></div></div>
-    </div>
-
-    <div class="tab-pane" id="amalfi-beaches">
-      <ul class="spot-list">
-        <li><div class="spot-name">🏖️ Spiaggia Grande, Positano</div><div class="spot-desc">The iconic one — pastel cliffside village rising above you. Rent an umbrella & live your best life.</div><div class="spot-meta"><a href="https://maps.google.com/?q=Spiaggia+Grande+Positano" target="_blank">📍 Google Maps</a></div></li>
-        <li><div class="spot-name">🏖️ Atrani Beach</div><div class="spot-desc">Hidden gem 5 min walk from Amalfi — fraction of the crowds, authentic fishing village vibes</div><div class="spot-meta"><a href="https://maps.google.com/?q=Atrani+Beach+Italy" target="_blank">📍 Google Maps</a></div></li>
-        <li><div class="spot-name">🏖️ Marina di Praia, Praiano</div><div class="spot-desc">Tiny cove wedged between dramatic cliffs — feels like a secret. Great for snorkeling.</div><div class="spot-meta"><a href="https://maps.google.com/?q=Marina+di+Praia+Praiano" target="_blank">📍 Google Maps</a></div></li>
-        <li><div class="spot-name">🏖️ Fornillo Beach, Positano</div><div class="spot-desc">Quieter alternative to Spiaggia Grande — 10 min walk, more local, just as beautiful</div><div class="spot-meta"><a href="https://maps.google.com/?q=Fornillo+Beach+Positano" target="_blank">📍 Google Maps</a></div></li>
-        <li><div class="spot-name">🏖️ Marina Grande, Amalfi</div><div class="spot-desc">Amalfi town's main beach — fishing boats, restaurants right on the sand, gelato nearby</div><div class="spot-meta"><a href="https://maps.google.com/?q=Marina+Grande+Beach+Amalfi" target="_blank">📍 Google Maps</a></div></li>
-        <li><div class="spot-name">💎 Fiordo di Furore</div><div class="spot-desc">Dramatic hidden fjord between cliffs — surreal swimming spot only accessible by boat or steep stairs</div><div class="spot-meta"><a href="https://maps.google.com/?q=Fiordo+di+Furore" target="_blank">📍 Google Maps</a></div></li>
-      </ul>
-    </div>
-
-    <div class="tab-pane" id="amalfi-activities">
-      <ul class="spot-list">
-        <li><div class="spot-name">🥾 Path of the Gods (Sentiero degli Dei)</div><div class="spot-desc">Legendary 3.5h clifftop hike with insane panoramic views — #1 must-do activity</div><div class="spot-meta"><span class="spot-cost">Free!</span><a href="https://maps.google.com/?q=Sentiero+degli+Dei+Amalfi" target="_blank">📍 Maps</a></div></li>
-        <li><div class="spot-name">🔵 Blue Grotto, Capri</div><div class="spot-desc">Row into a cave where the water glows electric blue — magical</div><div class="spot-meta"><span class="spot-cost">~€18/pp</span><a href="https://maps.google.com/?q=Blue+Grotto+Capri" target="_blank">📍 Maps</a></div></li>
-        <li><div class="spot-name">🚤 Rent a Boat</div><div class="spot-desc">€40-80/half day — cruise the coast, find secret coves, swim wherever you want</div><div class="spot-meta"><span class="spot-cost">~€40-80</span><a href="https://maps.google.com/?q=Amalfi+boat+rental" target="_blank">📍 Amalfi Port</a></div></li>
-        <li><div class="spot-name">🏛️ Villa Rufolo, Ravello</div><div class="spot-desc">13th-century villa with the most famous garden terrace in Italy — Infinity views</div><div class="spot-meta"><span class="spot-cost">~€10/pp</span><a href="https://maps.google.com/?q=Villa+Rufolo+Ravello" target="_blank">📍 Maps</a></div></li>
-        <li><div class="spot-name">🍋 Limoncello Tasting</div><div class="spot-desc">Visit a lemon grove and taste fresh-made limoncello — the Amalfi Coast is where it was invented</div><div class="spot-meta"><span class="spot-cost">~€15/pp</span><a href="https://maps.google.com/?q=lemon+tour+amalfi" target="_blank">📍 Search</a></div></li>
-        <li><div class="spot-name">🌊 Valle delle Ferriere</div><div class="spot-desc">Hidden waterfall hike through lemon terraces above Amalfi town — refreshing escape from the heat</div><div class="spot-meta"><span class="spot-cost">~€5/pp</span><a href="https://maps.google.com/?q=Valle+delle+Ferriere+Amalfi" target="_blank">📍 Maps</a></div></li>
-      </ul>
-    </div>
-
-    <div class="tab-pane" id="amalfi-food">
-      <ul class="spot-list">
-        <li><div class="spot-name">🍕 L'Antica Pizzeria da Michele (Naples)</div><div class="spot-desc">The world's most famous pizzeria — get the Margherita. €5. Life-changing.</div><div class="spot-meta"><span class="spot-cost">~€5/pp</span><a href="https://maps.google.com/?q=L'Antica+Pizzeria+da+Michele+Naples" target="_blank">📍 Maps</a></div></li>
-        <li><div class="spot-name">🐙 Ristorante Marina Grande</div><div class="spot-desc">Candlelit seafood right on Amalfi beach — catch of the day, local wine, waves lapping</div><div class="spot-meta"><span class="spot-cost">~€35/pp</span><a href="https://maps.google.com/?q=Ristorante+Marina+Grande+Amalfi" target="_blank">📍 Maps</a></div></li>
-        <li><div class="spot-name">🍝 Da Vincenzo, Positano</div><div class="spot-desc">Family-run since 1958 — handmade pasta, grilled fish, incredible local wine</div><div class="spot-meta"><span class="spot-cost">~€30/pp</span><a href="https://maps.google.com/?q=Da+Vincenzo+Positano" target="_blank">📍 Maps</a></div></li>
-        <li><div class="spot-name">🍽️ Cumpa' Cosimo, Ravello</div><div class="spot-desc">Legendary Netta Bottone's family restaurant — everyone from Sophia Loren to you eats here</div><div class="spot-meta"><span class="spot-cost">~€20/pp</span><a href="https://maps.google.com/?q=Cumpa+Cosimo+Ravello" target="_blank">📍 Maps</a></div></li>
-        <li><div class="spot-name">🍋 Andrea Pansa, Amalfi</div><div class="spot-desc">Historic pastry shop (since 1830) — delizia al limone, sfogliatella, espresso</div><div class="spot-meta"><span class="spot-cost">~€6/pp</span><a href="https://maps.google.com/?q=Andrea+Pansa+Amalfi" target="_blank">📍 Maps</a></div></li>
-        <li><div class="spot-name">🏖️ La Fontelina, Capri</div><div class="spot-desc">Beach club with Faraglioni rock views — seafood & Aperol Spritz feet-in-the-sand</div><div class="spot-meta"><span class="spot-cost">~€40/pp</span><a href="https://maps.google.com/?q=La+Fontelina+Capri" target="_blank">📍 Maps</a></div></li>
-      </ul>
-      <p style="margin-top:12px; font-size:0.82rem; color:var(--gray);">💡 <strong>Budget hack:</strong> Eat lunch at restaurants (€10-15 "pranzo" menus) and dinners at pizza places (€8-12). Street food like arancini (€2) & sfogliatella (€3) are filling and incredible.</p>
-    </div>
-
-    <div class="tab-pane" id="amalfi-book">
-      <h4 style="margin-bottom:12px;">✈️ Flights (YYZ → NAP, Aug 22-29)</h4>
-      <div class="booking-grid">
-        <a href="https://www.google.com/travel/flights?q=flights+from+YYZ+to+NAP+august+22+returning+august+29+2026" target="_blank" class="book-btn book-flights">Google Flights</a>
-        <a href="https://www.ca.kayak.com/flights/YYZ-NAP/2026-08-22/2026-08-29/2adults?sort=bestflight_a" target="_blank" class="book-btn book-flights">Kayak</a>
-        <a href="https://www.skyscanner.ca/transport/flights/yyz/nap/260822/260829/?adultsv2=2&cabinclass=economy" target="_blank" class="book-btn book-flights">Skyscanner</a>
-      </div>
-      <h4 style="margin:16px 0 12px;">🏠 Accommodation</h4>
-      <div class="booking-grid">
-        <a href="https://www.airbnb.ca/s/Amalfi--Italy/homes?checkin=2026-08-22&checkout=2026-08-29&adults=2&price_max=200" target="_blank" class="book-btn book-stay">Airbnb Amalfi</a>
-        <a href="https://www.airbnb.ca/s/Atrani--Italy/homes?checkin=2026-08-22&checkout=2026-08-29&adults=2&price_max=180" target="_blank" class="book-btn book-stay">Airbnb Atrani (cheaper!)</a>
-      </div>
-      <h4 style="margin:16px 0 12px;">🚌 Getting There & Around</h4>
-      <p style="font-size:0.85rem; line-height:1.6;">
-        <strong>NAP Airport → Amalfi:</strong> SITA bus or ferry from Salerno (train from NAP → Salerno 40 min, then ferry 35 min)<br>
-        <strong>Along the coast:</strong> SITA buses (€2-4) run every 30 min. Ferries between towns are faster & more scenic (€8-12).<br>
-        <strong>⚠️ Do NOT rent a car</strong> — the Amalfi roads are narrow, terrifying, and parking is impossible/expensive.
-      </p>
-      <div class="booking-grid" style="margin-top:12px;">
-        <a href="https://maps.google.com/?q=Amalfi+Coast+Italy" target="_blank" class="book-btn book-maps">📍 Google Maps</a>
-        <a href="https://www.travelmar.it" target="_blank" class="book-btn book-maps">🚢 Ferry Schedule</a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ═══════════ #2 TULUM ═══════════ -->
-<div class="container" id="tulum">
-  <div class="dest-section">
-    <h3>🥈 #2 — Tulum, Mexico 🇲🇽</h3>
-    <p class="dest-tag">Bohemian Caribbean coast · Cenotes · Mayan ruins · Incredible food</p>
-
-    <div class="info-grid">
-      <div class="info-card"><div class="ic-label">✈️ Flight</div><div class="ic-value">4h direct YYZ→CUN</div></div>
-      <div class="info-card"><div class="ic-label">💰 Est. Total</div><div class="ic-value">~$2,800 CAD / couple</div></div>
-      <div class="info-card"><div class="ic-label">🛂 Visa</div><div class="ic-value">None needed 🇨🇦</div></div>
-      <div class="info-card"><div class="ic-label">🌡️ August</div><div class="ic-value">82-92°F, brief showers</div></div>
-      <div class="info-card"><div class="ic-label">💵 Exchange</div><div class="ic-value">1 CAD ≈ 15 MXN</div></div>
-      <div class="info-card"><div class="ic-label">🚌 Getting There</div><div class="ic-value">ADO Bus CUN→Tulum 2h</div></div>
-    </div>
-
-    <h4 style="margin-bottom:12px;">💰 Budget Breakdown (7 nights, 2 people)</h4>
-    <div class="budget-breakdown">
-      <div class="budget-row"><div class="budget-label">✈️ Flights</div><div class="budget-bar-bg"><div class="budget-bar-fill fill-flight" style="width:36%"></div></div><div class="budget-val">$1,000</div></div>
-      <div class="budget-row"><div class="budget-label">🏠 Airbnb</div><div class="budget-bar-bg"><div class="budget-bar-fill fill-stay" style="width:25%"></div></div><div class="budget-val">$700</div></div>
-      <div class="budget-row"><div class="budget-label">🍽️ Food</div><div class="budget-bar-bg"><div class="budget-bar-fill fill-food" style="width:18%"></div></div><div class="budget-val">$490</div></div>
-      <div class="budget-row"><div class="budget-label">🎯 Activities</div><div class="budget-bar-bg"><div class="budget-bar-fill fill-activity" style="width:11%"></div></div><div class="budget-val">$310</div></div>
-      <div class="budget-row"><div class="budget-label">🚗 Transport</div><div class="budget-bar-bg"><div class="budget-bar-fill fill-transport" style="width:10%"></div></div><div class="budget-val">$300</div></div>
-      <div style="text-align:right; font-weight:800; font-size:1.1rem; color:var(--palm); margin-top:8px;">Total: ~$2,800 CAD · ✅ $2,200 under budget</div>
-    </div>
-
-    <div class="tab-row" id="tabs-tulum">
-      <button class="tab-btn active" onclick="tab('tulum','itin')">📅 7-Day Plan</button>
-      <button class="tab-btn" onclick="tab('tulum','beaches')">🏖️ Beaches</button>
-      <button class="tab-btn" onclick="tab('tulum','food')">🍽️ Food</button>
-      <button class="tab-btn" onclick="tab('tulum','book')">🔗 Book</button>
-    </div>
-
-    <div class="tab-pane active" id="tulum-itin">
-      <div class="day"><h4>Day 1 — Arrive & Settle</h4><p>Direct flight YYZ→CUN. ADO bus to Tulum (2h, $30). Check into Airbnb. Playa Paraiso sunset. Dinner at Burrito Amor.</p><div class="day-meta"><span class="day-cost">~$140</span><span class="day-links"><a href="https://maps.google.com/?q=Playa+Paraiso+Tulum" target="_blank">📍 Playa Paraiso</a></span></div></div>
-      <div class="day"><h4>Day 2 — Ruins + Beach</h4><p>Tulum Ruins at 8am. Swim at Playa Ruinas. Sunset drinks at Papaya Playa Project (fire show!).</p><div class="day-meta"><span class="day-cost">~$45</span><span class="day-links"><a href="https://maps.google.com/?q=Tulum+Archaeological+Zone" target="_blank">📍 Ruins</a></span></div></div>
-      <div class="day"><h4>Day 3 — Cenote Day</h4><p>Gran Cenote + Cenote Suytun. Lunch at Taqueria Honorio (James Beard-nominated). Beach afternoon.</p><div class="day-meta"><span class="day-cost">~$65</span><span class="day-links"><a href="https://maps.google.com/?q=Gran+Cenote+Tulum" target="_blank">📍 Gran Cenote</a></span></div></div>
-      <div class="day"><h4>Day 4 — Sian Ka'an Biosphere</h4><p>Full-day UNESCO biosphere — float through mangroves, spot dolphins & sea turtles.</p><div class="day-meta"><span class="day-cost">~$130</span><span class="day-links"><a href="https://maps.google.com/?q=Sian+Ka'an+Biosphere" target="_blank">📍 Sian Ka'an</a></span></div></div>
-      <div class="day"><h4>Day 5 — Lazy Beach Day</h4><p>Sleep in. Playa Pescadores. Couples massage ($50 for 2). Seafood dinner at La Coqueta.</p><div class="day-meta"><span class="day-cost">~$90</span></div></div>
-      <div class="day"><h4>Day 6 — Explore + Splurge</h4><p>Beach Road bike ride. Splurge dinner at Arca — open-fire cooking, book ahead!</p><div class="day-meta"><span class="day-cost">~$170</span><span class="day-links"><a href="https://arcatulum.com" target="_blank">📍 Arca</a></span></div></div>
-      <div class="day"><h4>Day 7 — Last Beach & Fly Home</h4><p>Sunrise walk. Brunch at Burrito Amor. ADO bus to CUN. Evening flight.</p><div class="day-meta"><span class="day-cost">~$105</span></div></div>
-    </div>
-
-    <div class="tab-pane" id="tulum-beaches">
-      <ul class="spot-list">
-        <li><div class="spot-name">🏖️ Playa Paraiso</div><div class="spot-desc">#1 beach — powdery white sand, shallow turquoise water, palm trees</div><div class="spot-meta"><a href="https://maps.google.com/?q=Playa+Paraiso+Tulum" target="_blank">📍 Maps</a></div></li>
-        <li><div class="spot-name">🏖️ Playa Ruinas</div><div class="spot-desc">Beach below the Mayan ruins — iconic clifftop temple view</div><div class="spot-meta"><a href="https://maps.google.com/?q=Playa+Ruinas+Tulum" target="_blank">📍 Maps</a></div></li>
-        <li><div class="spot-name">🏖️ Playa Pescadores</div><div class="spot-desc">Quiet fishing beach, colorful boats, great for sunset walks</div><div class="spot-meta"><a href="https://maps.google.com/?q=Playa+Pescadores+Tulum" target="_blank">📍 Maps</a></div></li>
-      </ul>
-    </div>
-
-    <div class="tab-pane" id="tulum-food">
-      <ul class="spot-list">
-        <li><div class="spot-name">🌮 Taqueria Honorio</div><div class="spot-desc">James Beard-nominated carnitas tacos</div><div class="spot-meta"><span class="spot-cost">~$5 USD/pp</span><a href="https://maps.google.com/?q=Taqueria+Honorio+Tulum" target="_blank">📍 Maps</a></div></li>
-        <li><div class="spot-name">🌯 Burrito Amor</div><div class="spot-desc">Best cheap eats — huge burritos & bowls</div><div class="spot-meta"><span class="spot-cost">~$8 USD/pp</span><a href="https://maps.google.com/?q=Burrito+Amor+Tulum" target="_blank">📍 Maps</a></div></li>
-        <li><div class="spot-name">🔥 Arca (splurge!)</div><div class="spot-desc">Open-fire cooking — one of Latin America's best (BOOK AHEAD)</div><div class="spot-meta"><span class="spot-cost">~$60 USD/pp</span><a href="https://arcatulum.com" target="_blank">🌐 Book</a></div></li>
-      </ul>
-    </div>
-
-    <div class="tab-pane" id="tulum-book">
-      <div class="booking-grid">
-        <a href="https://www.google.com/travel/flights?q=flights+from+YYZ+to+CUN+august+22+returning+august+29+2026" target="_blank" class="book-btn book-flights">Google Flights</a>
-        <a href="https://www.airbnb.ca/s/Tulum--Mexico/homes?checkin=2026-08-22&checkout=2026-08-29&adults=2&price_max=150" target="_blank" class="book-btn book-stay">Airbnb Tulum</a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ═══════════ #3 ARUBA ═══════════ -->
-<div class="container" id="aruba">
-  <div class="dest-section">
-    <h3>🥉 #3 — Aruba 🇦🇼</h3>
-    <p class="dest-tag">One Happy Island · Outside hurricane belt · Guaranteed sun in August</p>
-
-    <div class="info-grid">
-      <div class="info-card"><div class="ic-label">✈️ Flight</div><div class="ic-value">5h direct YYZ→AUA</div></div>
-      <div class="info-card"><div class="ic-label">💰 Est. Total</div><div class="ic-value">~$3,800 CAD / couple</div></div>
-      <div class="info-card"><div class="ic-label">🛂 Visa</div><div class="ic-value">None needed 🇨🇦</div></div>
-      <div class="info-card"><div class="ic-label">🌡️ August</div><div class="ic-value">84-90°F, DRY! No rain!</div></div>
-      <div class="info-card"><div class="ic-label">🌀 Hurricanes</div><div class="ic-value">OUTSIDE the belt ✅</div></div>
-      <div class="info-card"><div class="ic-label">🚗 Transport</div><div class="ic-value">Rental car or bus</div></div>
-    </div>
-
-    <h4 style="margin-bottom:12px;">💰 Budget Breakdown</h4>
-    <div class="budget-breakdown">
-      <div class="budget-row"><div class="budget-label">✈️ Flights</div><div class="budget-bar-bg"><div class="budget-bar-fill fill-flight" style="width:34%"></div></div><div class="budget-val">$1,300</div></div>
-      <div class="budget-row"><div class="budget-label">🏠 Airbnb</div><div class="budget-bar-bg"><div class="budget-bar-fill fill-stay" style="width:24%"></div></div><div class="budget-val">$910</div></div>
-      <div class="budget-row"><div class="budget-label">🍽️ Food</div><div class="budget-bar-bg"><div class="budget-bar-fill fill-food" style="width:20%"></div></div><div class="budget-val">$770</div></div>
-      <div class="budget-row"><div class="budget-label">🎯 Activities</div><div class="budget-bar-bg"><div class="budget-bar-fill fill-activity" style="width:13%"></div></div><div class="budget-val">$500</div></div>
-      <div class="budget-row"><div class="budget-label">🚗 Transport</div><div class="budget-bar-bg"><div class="budget-bar-fill fill-transport" style="width:9%"></div></div><div class="budget-val">$320</div></div>
-      <div style="text-align:right; font-weight:800; font-size:1.1rem; color:var(--palm); margin-top:8px;">Total: ~$3,800 CAD · ✅ $1,200 under budget</div>
-    </div>
-
-    <div class="tab-row" id="tabs-aruba">
-      <button class="tab-btn active" onclick="tab('aruba','itin')">📅 7-Day Plan</button>
-      <button class="tab-btn" onclick="tab('aruba','beaches')">🏖️ Beaches</button>
-      <button class="tab-btn" onclick="tab('aruba','food')">🍽️ Food</button>
-      <button class="tab-btn" onclick="tab('aruba','book')">🔗 Book</button>
-    </div>
-
-    <div class="tab-pane active" id="aruba-itin">
-      <div class="day"><h4>Day 1 — Arrive & Eagle Beach</h4><p>Direct flight. Rent car. Eagle Beach sunset (world's best!). Zeerovers fresh fish dinner.</p><div class="day-meta"><span class="day-cost">~$80</span><span class="day-links"><a href="https://maps.google.com/?q=Eagle+Beach+Aruba" target="_blank">📍 Eagle Beach</a></span></div></div>
-      <div class="day"><h4>Day 2 — Palm Beach & Snorkel</h4><p>Palm Beach morning. Mangel Halto snorkeling (hidden gem). West Deck waterfront dinner.</p><div class="day-meta"><span class="day-cost">~$65</span></div></div>
-      <div class="day"><h4>Day 3 — Flamingo Beach</h4><p>Renaissance Island — hang with pink flamingos! Eduardo's smoothies.</p><div class="day-meta"><span class="day-cost">~$130</span></div></div>
-      <div class="day"><h4>Day 4 — Arikok Adventure</h4><p>National park jeep tour. Natural Pool hike. Arawak cave paintings.</p><div class="day-meta"><span class="day-cost">~$55</span></div></div>
-      <div class="day"><h4>Day 5 — Baby Beach</h4><p>Baby Beach lagoon — natural pool, crystal calm water. All-day chill.</p><div class="day-meta"><span class="day-cost">~$45</span></div></div>
-      <div class="day"><h4>Day 6 — Catamaran & Splurge</h4><p>Sunset catamaran sail (open bar!). Papiamento fine dining.</p><div class="day-meta"><span class="day-cost">~$160</span></div></div>
-      <div class="day"><h4>Day 7 — Final Beach & Depart</h4><p>Eagle Beach sunrise. Eduardo's acai bowl. Return car. Fly home.</p><div class="day-meta"><span class="day-cost">~$45</span></div></div>
-    </div>
-
-    <div class="tab-pane" id="aruba-beaches">
-      <ul class="spot-list">
-        <li><div class="spot-name">🏖️ Eagle Beach</div><div class="spot-desc">World's best beach — wide white sand, fofoti trees, stunning sunsets</div><div class="spot-meta"><a href="https://maps.google.com/?q=Eagle+Beach+Aruba" target="_blank">📍 Maps</a></div></li>
-        <li><div class="spot-name">🏖️ Palm Beach</div><div class="spot-desc">Resort strip — crystal water, beach bars, watersports</div><div class="spot-meta"><a href="https://maps.google.com/?q=Palm+Beach+Aruba" target="_blank">📍 Maps</a></div></li>
-        <li><div class="spot-name">🏖️ Baby Beach</div><div class="spot-desc">Shallow lagoon — calm as a pool, perfect for lazy floating</div><div class="spot-meta"><a href="https://maps.google.com/?q=Baby+Beach+Aruba" target="_blank">📍 Maps</a></div></li>
-      </ul>
-    </div>
-
-    <div class="tab-pane" id="aruba-food">
-      <ul class="spot-list">
-        <li><div class="spot-name">🐟 Zeerovers</div><div class="spot-desc">Fresh fish by the pound, ocean view — locals' #1</div><div class="spot-meta"><span class="spot-cost">~$13 USD/pp</span><a href="https://maps.google.com/?q=Zeerovers+Aruba" target="_blank">📍 Maps</a></div></li>
-        <li><div class="spot-name">🍽️ Papiamento</div><div class="spot-desc">Fine dining in a 200-year-old cunucu house</div><div class="spot-meta"><span class="spot-cost">~$40 USD/pp</span><a href="https://maps.google.com/?q=Papiamento+Restaurant+Aruba" target="_blank">📍 Maps</a></div></li>
-      </ul>
-    </div>
-
-    <div class="tab-pane" id="aruba-book">
-      <div class="booking-grid">
-        <a href="https://www.google.com/travel/flights?q=flights+from+YYZ+to+AUA+august+22+returning+august+29+2026" target="_blank" class="book-btn book-flights">Google Flights</a>
-        <a href="https://www.airbnb.ca/s/Aruba/homes?checkin=2026-08-22&checkout=2026-08-29&adults=2&price_max=200" target="_blank" class="book-btn book-stay">Airbnb Aruba</a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ═══════════ #4 CRETE ═══════════ -->
-<div class="container" id="crete">
-  <div class="dest-section">
-    <h3>#4 — Crete, Greece 🇬🇷</h3>
-    <p class="dest-tag">Pink sand beaches · Ancient Minoan ruins · Best food in the Mediterranean</p>
-
-    <div class="info-grid">
-      <div class="info-card"><div class="ic-label">✈️ Flight</div><div class="ic-value">14h (1 stop) YYZ→HER</div></div>
-      <div class="info-card"><div class="ic-label">💰 Est. Total</div><div class="ic-value">~$4,300 CAD / couple</div></div>
-      <div class="info-card"><div class="ic-label">🌡️ August</div><div class="ic-value">78-90°F, zero rain ☀️</div></div>
-      <div class="info-card"><div class="ic-label">🏖️ Beaches</div><div class="ic-value">Elafonissi (pink sand!)</div></div>
-    </div>
-
-    <div style="text-align:right; font-weight:800; font-size:1rem; color:var(--sunset); margin:8px 0 16px;">Total: ~$4,300 CAD · ⚠️ $700 under budget (tight)</div>
-
-    <div class="tab-row" id="tabs-crete">
-      <button class="tab-btn active" onclick="tab('crete','itin')">📅 7-Day Plan</button>
-      <button class="tab-btn" onclick="tab('crete','beaches')">🏖️ Beaches</button>
-      <button class="tab-btn" onclick="tab('crete','book')">🔗 Book</button>
-    </div>
-
-    <div class="tab-pane active" id="crete-itin">
-      <div class="day"><h4>Day 1 — Arrive in Chania</h4><p>Fly to Heraklion, rent car, drive to Chania. Venetian Harbor sunset. Dinner at Taverna Strata.</p><div class="day-meta"><span class="day-cost">~$80</span></div></div>
-      <div class="day"><h4>Day 2 — Elafonissi (Pink Sand!)</h4><p>Drive to Elafonissi — the famous pink sand lagoon. One of Europe's top beaches.</p><div class="day-meta"><span class="day-cost">~$70</span><span class="day-links"><a href="https://maps.google.com/?q=Elafonissi+Beach+Crete" target="_blank">📍 Elafonissi</a></span></div></div>
-      <div class="day"><h4>Day 3 — Balos Lagoon</h4><p>Boat to Balos — jaw-dropping turquoise water. Dinner at Thalassino Ageri.</p><div class="day-meta"><span class="day-cost">~$95</span><span class="day-links"><a href="https://maps.google.com/?q=Balos+Beach+Crete" target="_blank">📍 Balos</a></span></div></div>
-      <div class="day"><h4>Day 4 — Chania + Wine</h4><p>Harbor walk & Agora market. Manousakis Winery tour. Venetian Lighthouse sunset.</p><div class="day-meta"><span class="day-cost">~$110</span></div></div>
-      <div class="day"><h4>Day 5 — Preveli Beach</h4><p>Palm forest meets the sea — surreal tropical vibes in Europe.</p><div class="day-meta"><span class="day-cost">~$70</span><span class="day-links"><a href="https://maps.google.com/?q=Preveli+Beach+Crete" target="_blank">📍 Preveli</a></span></div></div>
-      <div class="day"><h4>Day 6 — Knossos Palace</h4><p>3,500-year-old Minoan palace. Splurge dinner at Peskesi (farm-to-table).</p><div class="day-meta"><span class="day-cost">~$138</span><span class="day-links"><a href="https://maps.google.com/?q=Knossos+Palace+Crete" target="_blank">📍 Knossos</a></span></div></div>
-      <div class="day"><h4>Day 7 — Depart</h4><p>Beach swim. Bougatsa Iordanis (legendary custard pastry). Fly home.</p><div class="day-meta"><span class="day-cost">~$50</span></div></div>
-    </div>
-
-    <div class="tab-pane" id="crete-beaches">
-      <ul class="spot-list">
-        <li><div class="spot-name">🏖️ Elafonissi Beach (PINK SAND)</div><div class="spot-desc">Pink sand lagoon — one of Europe's absolute best</div><div class="spot-meta"><a href="https://maps.google.com/?q=Elafonissi+Beach+Crete" target="_blank">📍 Maps</a></div></li>
-        <li><div class="spot-name">🏖️ Balos Lagoon</div><div class="spot-desc">Surreal turquoise water — Caribbean vibes in Greece</div><div class="spot-meta"><a href="https://maps.google.com/?q=Balos+Beach+Crete" target="_blank">📍 Maps</a></div></li>
-        <li><div class="spot-name">🌴 Preveli Beach</div><div class="spot-desc">Palm forest meets the sea</div><div class="spot-meta"><a href="https://maps.google.com/?q=Preveli+Beach+Crete" target="_blank">📍 Maps</a></div></li>
-      </ul>
-    </div>
-
-    <div class="tab-pane" id="crete-book">
-      <div class="booking-grid">
-        <a href="https://www.google.com/travel/flights?q=flights+from+YYZ+to+HER+august+22+returning+august+29+2026" target="_blank" class="book-btn book-flights">Google Flights</a>
-        <a href="https://www.airbnb.ca/s/Crete--Greece/homes?checkin=2026-08-22&checkout=2026-08-29&adults=2&price_max=160" target="_blank" class="book-btn book-stay">Airbnb Crete</a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ═══════════ COMPARISON TABLE ═══════════ -->
-<div class="container" id="compare">
+<!-- ═══════ INTERACTIVE MAP ═══════ -->
+<div class="container" id="map">
   <div class="section">
-    <h2>📊 Head-to-Head Comparison</h2>
-    <p class="sub">All prices in CAD for 2 people, 7 nights, late August 2026</p>
+    <h2>🗺️ Your Amalfi Coast Map</h2>
+    <p class="sub">Every spot you'll visit — click to open full interactive map in Google Maps</p>
+    <iframe class="map-frame" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d48398.94095793!2d14.5489!3d40.6333!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x133b973add5dedab%3A0x627b5cfbf0834fa5!2sAmalfi%20Coast!5e0!3m2!1sen!2sit!4v1700000000000!5m2!1sen!2sit" allowfullscreen loading="lazy"></iframe>
+
+    <div class="maps-grid">
+      <a href="https://www.google.com/maps/dir/Naples+International+Airport,+Naples/Amalfi,+SA,+Italy/Positano,+SA,+Italy/Ravello,+SA,+Italy/Praiano,+SA,+Italy/Atrani,+SA,+Italy" target="_blank" class="map-link">🗺️ Full Trip Route (Naples→Amalfi→Positano→Ravello)</a>
+      <a href="https://www.google.com/maps/dir/Amalfi,+SA,+Italy/Positano,+SA,+Italy" target="_blank" class="map-link">🚢 Amalfi → Positano Ferry Route</a>
+      <a href="https://www.google.com/maps/dir/Amalfi,+SA,+Italy/Capri,+NA,+Italy" target="_blank" class="map-link">⛴️ Amalfi → Capri Ferry Route</a>
+      <a href="https://www.google.com/maps/dir/Bomerano,+Agerola,+NA,+Italy/Nocelle,+Positano,+SA,+Italy" target="_blank" class="map-link">🥾 Path of the Gods Hike Route</a>
+    </div>
+
+    <h4 style="margin:20px 0 10px; font-size:0.95rem;">📍 All Locations by Category</h4>
+    <div style="font-size:0.84rem; line-height:2;">
+      <strong>🏘️ Towns:</strong>
+      <a href="https://maps.google.com/?q=Amalfi+Italy" target="_blank">Amalfi</a> ·
+      <a href="https://maps.google.com/?q=Positano+Italy" target="_blank">Positano</a> ·
+      <a href="https://maps.google.com/?q=Ravello+Italy" target="_blank">Ravello</a> ·
+      <a href="https://maps.google.com/?q=Atrani+Italy" target="_blank">Atrani</a> ·
+      <a href="https://maps.google.com/?q=Praiano+Italy" target="_blank">Praiano</a> ·
+      <a href="https://maps.google.com/?q=Furore+Italy" target="_blank">Furore</a> ·
+      <a href="https://maps.google.com/?q=Minori+Italy" target="_blank">Minori</a> ·
+      <a href="https://maps.google.com/?q=Maiori+Italy" target="_blank">Maiori</a> ·
+      <a href="https://maps.google.com/?q=Cetara+Italy" target="_blank">Cetara</a> ·
+      <a href="https://maps.google.com/?q=Vietri+sul+Mare+Italy" target="_blank">Vietri sul Mare</a>
+      <br>
+      <strong>🏖️ Beaches:</strong>
+      <a href="https://maps.google.com/?q=Spiaggia+Grande+Positano" target="_blank">Spiaggia Grande</a> ·
+      <a href="https://maps.google.com/?q=Fornillo+Beach+Positano" target="_blank">Fornillo</a> ·
+      <a href="https://maps.google.com/?q=Atrani+Beach+Italy" target="_blank">Atrani Beach</a> ·
+      <a href="https://maps.google.com/?q=Marina+di+Praia+Praiano" target="_blank">Marina di Praia</a> ·
+      <a href="https://maps.google.com/?q=Marina+Grande+Beach+Amalfi" target="_blank">Marina Grande</a> ·
+      <a href="https://maps.google.com/?q=Fiordo+di+Furore" target="_blank">Fiordo di Furore</a> ·
+      <a href="https://maps.google.com/?q=Duoglio+Beach+Amalfi" target="_blank">Duoglio</a> ·
+      <a href="https://maps.google.com/?q=Santa+Croce+Beach+Amalfi" target="_blank">Santa Croce</a> ·
+      <a href="https://maps.google.com/?q=Erchie+Beach+Amalfi+Coast" target="_blank">Erchie</a> ·
+      <a href="https://maps.google.com/?q=Gavitella+Beach+Praiano" target="_blank">Gavitella</a>
+      <br>
+      <strong>🍝 Restaurants:</strong>
+      <a href="https://maps.google.com/?q=L'Antica+Pizzeria+da+Michele+Naples" target="_blank">da Michele</a> ·
+      <a href="https://maps.google.com/?q=Ristorante+Marina+Grande+Amalfi" target="_blank">Marina Grande</a> ·
+      <a href="https://maps.google.com/?q=Da+Vincenzo+Positano" target="_blank">Da Vincenzo</a> ·
+      <a href="https://maps.google.com/?q=Cumpa+Cosimo+Ravello" target="_blank">Cumpa' Cosimo</a> ·
+      <a href="https://maps.google.com/?q=Andrea+Pansa+Amalfi" target="_blank">Andrea Pansa</a> ·
+      <a href="https://maps.google.com/?q=La+Fontelina+Capri" target="_blank">La Fontelina</a> ·
+      <a href="https://maps.google.com/?q=Trattoria+da+Gemma+Amalfi" target="_blank">da Gemma</a> ·
+      <a href="https://maps.google.com/?q=Il+Pirata+Praiano" target="_blank">Il Pirata</a> ·
+      <a href="https://maps.google.com/?q=Lo+Guarracino+Positano" target="_blank">Lo Guarracino</a> ·
+      <a href="https://maps.google.com/?q=Le+Arcate+Atrani" target="_blank">Le Arcate</a> ·
+      <a href="https://maps.google.com/?q=Al+San+Vincenzo+Cetara" target="_blank">Al San Vincenzo</a>
+      <br>
+      <strong>🏛️ Sights:</strong>
+      <a href="https://maps.google.com/?q=Amalfi+Cathedral" target="_blank">Amalfi Cathedral</a> ·
+      <a href="https://maps.google.com/?q=Villa+Rufolo+Ravello" target="_blank">Villa Rufolo</a> ·
+      <a href="https://maps.google.com/?q=Villa+Cimbrone+Ravello" target="_blank">Villa Cimbrone</a> ·
+      <a href="https://maps.google.com/?q=Blue+Grotto+Capri" target="_blank">Blue Grotto</a> ·
+      <a href="https://maps.google.com/?q=Monte+Solaro+Capri" target="_blank">Monte Solaro</a> ·
+      <a href="https://maps.google.com/?q=Sentiero+degli+Dei+Amalfi" target="_blank">Path of the Gods</a> ·
+      <a href="https://maps.google.com/?q=Valle+delle+Ferriere+Amalfi" target="_blank">Valle delle Ferriere</a> ·
+      <a href="https://maps.google.com/?q=Emerald+Grotto+Amalfi" target="_blank">Emerald Grotto</a> ·
+      <a href="https://maps.google.com/?q=Cloister+of+Paradise+Amalfi" target="_blank">Cloister of Paradise</a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ BUDGET ═══════ -->
+<div class="container">
+  <div class="card">
+    <h3>💰 Full Budget Breakdown</h3>
+    <p class="card-sub">$4,500 CAD total for 2 people, 7 nights — $500 under your $5K limit</p>
+    <div class="budget-breakdown">
+      <div class="budget-row"><div class="budget-label">✈️ Flights</div><div class="budget-bar-bg"><div class="budget-bar-fill fill-flight" style="width:36%"></div></div><div class="budget-val">$1,600</div></div>
+      <div class="budget-row"><div class="budget-label">🏠 Airbnb</div><div class="budget-bar-bg"><div class="budget-bar-fill fill-stay" style="width:27%"></div></div><div class="budget-val">$1,200</div></div>
+      <div class="budget-row"><div class="budget-label">🍽️ Food</div><div class="budget-bar-bg"><div class="budget-bar-fill fill-food" style="width:19%"></div></div><div class="budget-val">$840</div></div>
+      <div class="budget-row"><div class="budget-label">🎯 Activities</div><div class="budget-bar-bg"><div class="budget-bar-fill fill-activity" style="width:10%"></div></div><div class="budget-val">$450</div></div>
+      <div class="budget-row"><div class="budget-label">🚌 Transport</div><div class="budget-bar-bg"><div class="budget-bar-fill fill-transport" style="width:8%"></div></div><div class="budget-val">$410</div></div>
+    </div>
+    <div style="text-align:right; font-weight:800; font-size:1.1rem; color:var(--sunset);">Total: ~$4,500 CAD · $500 under budget ✅</div>
+    <div class="tip tip-money" style="margin-top:16px;">
+      💡 <strong>Save $300–500:</strong> Stay in <a href="https://maps.google.com/?q=Atrani+Italy" target="_blank">Atrani</a> instead of Positano — literally 5 min walk from Amalfi, same coast views, 40% cheaper Airbnbs. Visit Positano as a day trip.
+    </div>
+    <div class="tip tip-money">
+      💡 <strong>Save on food:</strong> Eat "pranzo" (lunch) at restaurants — menus are €10–15 vs €25–40 at dinner. Grab €2 arancini and €3 sfogliatella from bakeries for snacks.
+    </div>
+    <div class="tip tip-money">
+      💡 <strong>Free activities:</strong> Path of the Gods hike (free), Amalfi Cathedral exterior (free), exploring all the towns (free), swimming at all beaches (free — just skip the €15 sunbed rental and bring a towel).
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ DAY-BY-DAY ITINERARY ═══════ -->
+<div class="container" id="itinerary">
+  <div class="section">
+    <h2>📅 Day-by-Day Itinerary</h2>
+    <p class="sub">Hour-by-hour plans, every spot mapped, every cost estimated</p>
+
+    <!-- DAY 1 -->
+    <div class="day">
+      <h4>Day 1 — Friday Aug 22 · Arrive in Naples → Transfer to Amalfi</h4>
+      <div class="schedule">
+        <div class="time-block"><div class="time">🛬 ~2pm</div><div class="activity">Land at <a href="https://maps.google.com/?q=Naples+International+Airport" target="_blank">Naples Airport (NAP)</a>. Immigration + bags ~30 min. Get SIM card at airport kiosk (TIM or Vodafone, €15 for 50GB).</div></div>
+        <div class="time-block"><div class="time">2:30pm</div><div class="activity">Taxi to Naples city center (€20, 20 min). Drop bags at left luggage at <a href="https://maps.google.com/?q=Napoli+Centrale+station" target="_blank">Napoli Centrale station</a> (€6).</div></div>
+        <div class="time-block"><div class="time">3pm</div><div class="activity">🍕 Walk 5 min to <a href="https://maps.google.com/?q=L'Antica+Pizzeria+da+Michele+Naples" target="_blank">L'Antica Pizzeria da Michele</a> — the world's most famous pizza. Get the Margherita (€5). Queue is usually 30–45 min — worth every second.</div></div>
+        <div class="time-block"><div class="time">4pm</div><div class="activity">Quick walk through <a href="https://maps.google.com/?q=Spaccanapoli+Naples" target="_blank">Spaccanapoli</a> (the "split" of Naples) — narrow alleys, street art, laundry lines, chaos. Pure Naples.</div></div>
+        <div class="time-block"><div class="time">4:45pm</div><div class="activity">🚆 Train from Napoli Centrale → <a href="https://maps.google.com/?q=Salerno+train+station" target="_blank">Salerno</a> (Trenitalia regional, 40 min, €5/pp). <a href="https://www.trenitalia.com" target="_blank">Book Trenitalia →</a></div></div>
+        <div class="time-block"><div class="time">5:30pm</div><div class="activity">⛴️ Ferry from <a href="https://maps.google.com/?q=Salerno+port+ferry+terminal" target="_blank">Salerno Port</a> → <a href="https://maps.google.com/?q=Amalfi+port" target="_blank">Amalfi</a> (Travelmar, 35 min, €10/pp). Gorgeous coastal views from the deck! <a href="https://www.travelmar.it" target="_blank">Travelmar schedule →</a></div></div>
+        <div class="time-block"><div class="time">6:15pm</div><div class="activity">🏠 Check into Airbnb in <a href="https://maps.google.com/?q=Amalfi+Italy" target="_blank">Amalfi</a> or <a href="https://maps.google.com/?q=Atrani+Italy" target="_blank">Atrani</a>. Freshen up.</div></div>
+        <div class="time-block"><div class="time">7:30pm</div><div class="activity">Evening stroll through <a href="https://maps.google.com/?q=Piazza+del+Duomo+Amalfi" target="_blank">Piazza del Duomo</a>. Gelato at <a href="https://maps.google.com/?q=Gelateria+Porto+Salvo+Amalfi" target="_blank">Gelateria Porto Salvo</a> (lemon + pistachio 🤌).</div></div>
+        <div class="time-block"><div class="time">8:30pm</div><div class="activity">🍽️ Dinner at <a href="https://maps.google.com/?q=Le+Arcate+Atrani" target="_blank">Le Arcate</a> in Atrani — tables right on the beach square, incredible pasta with local seafood.</div></div>
+      </div>
+      <div class="day-footer">
+        <span class="day-cost">~$110 CAD (excl. flights)</span>
+        <span class="day-map"><a href="https://www.google.com/maps/dir/Naples+International+Airport/L'Antica+Pizzeria+da+Michele,+Naples/Napoli+Centrale/Salerno+Station/Amalfi,+SA,+Italy" target="_blank">📍 View Day 1 Route on Maps</a></span>
+      </div>
+    </div>
+
+    <!-- DAY 2 -->
+    <div class="day highlight">
+      <h4>Day 2 — Saturday Aug 23 · Positano Day ✨</h4>
+      <div class="schedule">
+        <div class="time-block"><div class="time">8:30am</div><div class="activity">Breakfast at <a href="https://maps.google.com/?q=Andrea+Pansa+Amalfi" target="_blank">Andrea Pansa</a> (since 1830!) — sfogliatella &amp; espresso on the piazza.</div></div>
+        <div class="time-block"><div class="time">9:30am</div><div class="activity">⛴️ Ferry Amalfi → <a href="https://maps.google.com/?q=Positano+Italy" target="_blank">Positano</a> (25 min, €10/pp). The approach by sea is jaw-dropping — pastel houses cascading down the cliff.</div></div>
+        <div class="time-block"><div class="time">10am</div><div class="activity">Walk down through Positano — <a href="https://maps.google.com/?q=Via+dei+Mulini+Positano" target="_blank">Via dei Mulini</a> (main shopping street). Browse boutiques for handmade sandals (Positano is famous for them, €40–80).</div></div>
+        <div class="time-block"><div class="time">11am</div><div class="activity">🏖️ <a href="https://maps.google.com/?q=Spiaggia+Grande+Positano" target="_blank">Spiaggia Grande</a> — THE iconic Positano beach. Rent 2 sunbeds + umbrella (€25 total) or just lay your towel on the free section at the edges.</div></div>
+        <div class="time-block"><div class="time">1pm</div><div class="activity">🍝 Lunch at <a href="https://maps.google.com/?q=Da+Vincenzo+Positano" target="_blank">Da Vincenzo</a> — family-run since 1958. Get the scialatielli ai frutti di mare (handmade pasta with seafood). ~€25/pp.</div></div>
+        <div class="time-block"><div class="time">2:30pm</div><div class="activity">Walk 10 min to <a href="https://maps.google.com/?q=Fornillo+Beach+Positano" target="_blank">Fornillo Beach</a> — quieter, more local, better for swimming. Wayyy less crowded than Spiaggia Grande.</div></div>
+        <div class="time-block"><div class="time">4:30pm</div><div class="activity">Walk up to <a href="https://maps.google.com/?q=Chiesa+di+Santa+Maria+Assunta+Positano" target="_blank">Church of Santa Maria Assunta</a> — the iconic blue &amp; yellow tiled dome you see in every photo.</div></div>
+        <div class="time-block"><div class="time">5:30pm</div><div class="activity">🍹 Sunset cocktails at <a href="https://maps.google.com/?q=Franco's+Bar+Positano" target="_blank">Franco's Bar</a> at Hotel Le Sirenuse — THE most famous sunset view in Positano. Aperol Spritz ~€15 but the view is priceless.</div></div>
+        <div class="time-block"><div class="time">7pm</div><div class="activity">🍽️ Dinner at <a href="https://maps.google.com/?q=Lo+Guarracino+Positano" target="_blank">Lo Guarracino</a> — terrace restaurant perched on the cliff between Spiaggia Grande and Fornillo. Seafood with the sea literally below you. Book ahead!</div></div>
+        <div class="time-block"><div class="time">9pm</div><div class="activity">⛴️ Last ferry back to Amalfi (check schedule!) or SITA bus (runs till ~11pm).</div></div>
+      </div>
+      <div class="day-footer">
+        <span class="day-cost">~$140 CAD</span>
+        <span class="day-map"><a href="https://www.google.com/maps/dir/Amalfi+Port/Positano/Spiaggia+Grande+Positano/Fornillo+Beach/Lo+Guarracino+Positano" target="_blank">📍 View Day 2 Route on Maps</a></span>
+      </div>
+    </div>
+
+    <!-- DAY 3 -->
+    <div class="day highlight">
+      <h4>Day 3 — Sunday Aug 24 · Capri Day Trip 💎</h4>
+      <div class="schedule">
+        <div class="time-block"><div class="time">7:30am</div><div class="activity">Early breakfast (grab cornetti from a bakery). Head to <a href="https://maps.google.com/?q=Amalfi+port" target="_blank">Amalfi Port</a>.</div></div>
+        <div class="time-block"><div class="time">8:15am</div><div class="activity">⛴️ Ferry Amalfi → <a href="https://maps.google.com/?q=Marina+Grande+Capri" target="_blank">Capri, Marina Grande</a> (NLG Jet or SNAV, ~1h20, €22/pp). <a href="https://www.capri.com/en/ferry-schedule" target="_blank">Ferry schedule →</a></div></div>
+        <div class="time-block"><div class="time">9:30am</div><div class="activity">🔵 Immediately get a small boat to the <a href="https://maps.google.com/?q=Blue+Grotto+Capri" target="_blank">Blue Grotto (Grotta Azzurra)</a>. Boats from Marina Grande (€15 boat + €18 entry). GO EARLY — by 11am the line is 2+ hours.</div></div>
+        <div class="time-block"><div class="time">11am</div><div class="activity">🚡 Funicular from Marina Grande up to <a href="https://maps.google.com/?q=Piazzetta+Capri" target="_blank">Capri Town (La Piazzetta)</a> — the glamorous central square. Window-shop the luxury boutiques. €2/pp.</div></div>
+        <div class="time-block"><div class="time">12pm</div><div class="activity">Walk to <a href="https://maps.google.com/?q=Gardens+of+Augustus+Capri" target="_blank">Gardens of Augustus</a> — stunning cliffside garden with views of the iconic <a href="https://maps.google.com/?q=Faraglioni+Capri" target="_blank">Faraglioni rocks</a>. €1/pp.</div></div>
+        <div class="time-block"><div class="time">1pm</div><div class="activity">🏖️🍽️ <a href="https://maps.google.com/?q=La+Fontelina+Capri" target="_blank">La Fontelina</a> beach club — hike down from Gardens of Augustus (15 min). Swim with Faraglioni in view, seafood lunch on the rocks. ~€40/pp. BOOK AHEAD. <a href="https://www.fontelina-capri.com" target="_blank">Reserve →</a></div></div>
+        <div class="time-block"><div class="time">3:30pm</div><div class="activity">🚡 Chairlift to <a href="https://maps.google.com/?q=Monte+Solaro+Anacapri+Capri" target="_blank">Monte Solaro</a> from Anacapri (bus from Capri town, 15 min). 12-min chairlift to the summit — 360° views of the Bay of Naples, Vesuvius, and the Amalfi Coast. €12/pp round trip.</div></div>
+        <div class="time-block"><div class="time">5pm</div><div class="activity">Wander <a href="https://maps.google.com/?q=Anacapri+Capri" target="_blank">Anacapri</a> — quieter, more authentic than Capri Town. Gelato at <a href="https://maps.google.com/?q=Gelateria+Buonocore+Anacapri" target="_blank">Gelateria Buonocore</a>.</div></div>
+        <div class="time-block"><div class="time">6:30pm</div><div class="activity">⛴️ Ferry back: Capri → Amalfi. Sunset from the boat deck! Last ferries usually ~6–7pm in August.</div></div>
+        <div class="time-block"><div class="time">8:30pm</div><div class="activity">🍽️ Light dinner at <a href="https://maps.google.com/?q=Trattoria+da+Gemma+Amalfi" target="_blank">Trattoria da Gemma</a> in Amalfi — since 1872, their zuppa di pesce is legendary.</div></div>
+      </div>
+      <div class="day-footer">
+        <span class="day-cost">~$195 CAD (Capri is the priciest day)</span>
+        <span class="day-map"><a href="https://www.google.com/maps/dir/Amalfi+Port/Marina+Grande+Capri/Blue+Grotto+Capri/Piazzetta+Capri/Gardens+of+Augustus+Capri/La+Fontelina+Capri/Monte+Solaro+Capri" target="_blank">📍 View Day 3 Route on Maps</a></span>
+      </div>
+    </div>
+
+    <!-- DAY 4 -->
+    <div class="day highlight">
+      <h4>Day 4 — Monday Aug 25 · Path of the Gods 🥾 (THE day)</h4>
+      <div class="schedule">
+        <div class="time-block"><div class="time">7am</div><div class="activity">Early start! Fill water bottles. Wear good shoes (trail runners or hiking sandals — NOT flip flops). Sunscreen!</div></div>
+        <div class="time-block"><div class="time">7:30am</div><div class="activity">🚌 SITA bus from Amalfi → <a href="https://maps.google.com/?q=Agerola+Bomerano+bus+stop" target="_blank">Bomerano, Agerola</a> (~1h, €2.50). This is the start of the trail.</div></div>
+        <div class="time-block"><div class="time">8:30am</div><div class="activity">🥾 Begin the <a href="https://maps.google.com/?q=Sentiero+degli+Dei+start+Bomerano" target="_blank">Sentiero degli Dei (Path of the Gods)</a>. The trail is 7.8 km, mostly downhill, takes 3–3.5 hours. You'll walk along cliff edges 500m above the sea with jaw-dropping views of the entire coast, Li Galli islands, and Capri.</div></div>
+        <div class="time-block"><div class="time">10am</div><div class="activity">📸 Around the 45 min mark — a rocky outcrop overlooking Positano and the coast. This is THE Instagram shot.</div></div>
+        <div class="time-block"><div class="time">12pm</div><div class="activity">Trail ends at <a href="https://maps.google.com/?q=Nocelle+Positano" target="_blank">Nocelle</a>, a tiny village perched above Positano. Grab a cold Peroni at the bar on the terrace.</div></div>
+        <div class="time-block"><div class="time">12:30pm</div><div class="activity">1,700 steps down from Nocelle to <a href="https://maps.google.com/?q=Arienzo+Beach+Positano" target="_blank">Arienzo Beach</a> (or take a local bus to Positano center).</div></div>
+        <div class="time-block"><div class="time">1:30pm</div><div class="activity">🏖️ Reward yourself — swim at <a href="https://maps.google.com/?q=Fornillo+Beach+Positano" target="_blank">Fornillo Beach</a>. You earned it.</div></div>
+        <div class="time-block"><div class="time">3pm</div><div class="activity">🍽️ Late lunch at <a href="https://maps.google.com/?q=Da+Adolfo+Positano" target="_blank">Da Adolfo</a> — beach restaurant only accessible by boat (look for the red fish sign at Positano port). Grilled fish on the rocks. €20/pp.</div></div>
+        <div class="time-block"><div class="time">5pm</div><div class="activity">⛴️ Ferry back to Amalfi. Collapse with sore legs and a huge smile.</div></div>
+      </div>
+      <div class="day-footer">
+        <span class="day-cost">~$55 CAD (cheapest day!)</span>
+        <span class="day-map"><a href="https://www.google.com/maps/dir/Bomerano,+Agerola,+NA,+Italy/40.6376,14.5057/Nocelle,+Positano,+SA,+Italy/Fornillo+Beach+Positano/Positano+Port" target="_blank">📍 View Hike Route on Maps</a></span>
+      </div>
+      <div class="tip tip-pro" style="margin-top:10px;">
+        🥾 <strong>Trail tips:</strong> Start before 9am to beat the heat. Bring 1.5L water per person. Well-marked trail. Wear shoes with grip — some rocky sections. No guardrails in places. 3.5h at relaxed pace. Elevation: start 650m, end 440m (mostly downhill!).
+      </div>
+    </div>
+
+    <!-- DAY 5 -->
+    <div class="day">
+      <h4>Day 5 — Tuesday Aug 26 · Ravello — City of Music 🎵</h4>
+      <div class="schedule">
+        <div class="time-block"><div class="time">9am</div><div class="activity">Sleep in after yesterday's hike! Slow breakfast at your Airbnb.</div></div>
+        <div class="time-block"><div class="time">10am</div><div class="activity">🚌 Bus from Amalfi up to <a href="https://maps.google.com/?q=Ravello+Italy" target="_blank">Ravello</a> (25 min, €1.30, winding road!). Ravello sits 350m above the sea.</div></div>
+        <div class="time-block"><div class="time">10:30am</div><div class="activity">🏛️ <a href="https://maps.google.com/?q=Villa+Rufolo+Ravello" target="_blank">Villa Rufolo</a> — 13th century villa with the famous Infinity Terrace hanging over the coast. Wagner composed here. €10/pp. Spend 45 min in the gardens.</div></div>
+        <div class="time-block"><div class="time">11:30am</div><div class="activity">Walk to <a href="https://maps.google.com/?q=Villa+Cimbrone+Ravello" target="_blank">Villa Cimbrone</a>. The <strong>Terrace of Infinity</strong> (Terrazza dell'Infinito) — possibly the most beautiful viewpoint in all of Italy. Gore Vidal called it "the most beautiful view in the world." €10/pp.</div></div>
+        <div class="time-block"><div class="time">1pm</div><div class="activity">🍝 Lunch at <a href="https://maps.google.com/?q=Cumpa+Cosimo+Ravello" target="_blank">Cumpa' Cosimo</a> — legendary Netta Bottone's family restaurant. From Sophia Loren to Anthony Bourdain. Get the mixed pasta plate (7 types!). ~€18/pp.</div></div>
+        <div class="time-block"><div class="time">2:30pm</div><div class="activity">🍷 Wine tasting at a local vineyard. Costa d'Amalfi wines — Falanghina whites are incredible with seafood. ~€15/pp for a tasting.</div></div>
+        <div class="time-block"><div class="time">4pm</div><div class="activity">Wander <a href="https://maps.google.com/?q=Piazza+Duomo+Ravello" target="_blank">Piazza Duomo Ravello</a>. Browse ceramics shops (hand-painted ceramics — great souvenir, €10–40).</div></div>
+        <div class="time-block"><div class="time">5pm</div><div class="activity">🚌 Bus back to Amalfi. Walk to <a href="https://maps.google.com/?q=Atrani+Italy" target="_blank">Atrani</a> (5 min) for sunset on the beach square.</div></div>
+        <div class="time-block"><div class="time">7:30pm</div><div class="activity">🍽️ Dinner at <a href="https://maps.google.com/?q=Ristorante+Marina+Grande+Amalfi" target="_blank">Ristorante Marina Grande</a> — candlelit tables on Amalfi beach, catch of the day, local white wine. ~€35/pp. This is your romantic splurge dinner. Book ahead.</div></div>
+      </div>
+      <div class="day-footer">
+        <span class="day-cost">~$135 CAD</span>
+        <span class="day-map"><a href="https://www.google.com/maps/dir/Amalfi,+SA,+Italy/Villa+Rufolo+Ravello/Villa+Cimbrone+Ravello/Cumpa+Cosimo+Ravello/Atrani+Italy/Ristorante+Marina+Grande+Amalfi" target="_blank">📍 View Day 5 Route</a></span>
+      </div>
+    </div>
+
+    <!-- DAY 6 -->
+    <div class="day">
+      <h4>Day 6 — Wednesday Aug 27 · Beach + Boat + Explore 🚤</h4>
+      <div class="schedule">
+        <div class="time-block"><div class="time">9am</div><div class="activity">Sleep in. Walk 5 min to <a href="https://maps.google.com/?q=Atrani+Beach+Italy" target="_blank">Atrani Beach</a> — tiny, authentic, barely any tourists. Swim with the medieval tower above you.</div></div>
+        <div class="time-block"><div class="time">10:30am</div><div class="activity">🚤 Rent a gozzo boat from <a href="https://maps.google.com/?q=Amalfi+boat+rental" target="_blank">Amalfi port</a>. No license needed for boats under 40hp! €60–80 for half day. Fuel included.</div></div>
+        <div class="time-block"><div class="time">11am</div><div class="activity">Cruise west along the coast. Stop at the <a href="https://maps.google.com/?q=Emerald+Grotto+Conca+dei+Marini" target="_blank">Emerald Grotto (Grotta dello Smeraldo)</a> — like the Blue Grotto but green, and way fewer tourists. €5/pp entry.</div></div>
+        <div class="time-block"><div class="time">12pm</div><div class="activity">Boat to <a href="https://maps.google.com/?q=Fiordo+di+Furore" target="_blank">Fiordo di Furore</a> — dramatic hidden fjord between 30m cliffs. Anchor and swim in the turquoise water. Surreal.</div></div>
+        <div class="time-block"><div class="time">1pm</div><div class="activity">Boat to <a href="https://maps.google.com/?q=Marina+di+Praia+Praiano" target="_blank">Marina di Praia</a> — tiny cove with a beach bar. Pull the boat up, swim, grab a panini and a beer.</div></div>
+        <div class="time-block"><div class="time">2:30pm</div><div class="activity">Cruise past Positano (see it from the water — incredible). Swim at <a href="https://maps.google.com/?q=Santa+Croce+Beach+Amalfi" target="_blank">Santa Croce Beach</a> — hidden, only reachable by boat.</div></div>
+        <div class="time-block"><div class="time">4pm</div><div class="activity">Return boat. Walk up to <a href="https://maps.google.com/?q=Amalfi+Cathedral" target="_blank">Amalfi Cathedral (Duomo)</a> — climb the 62 steps. Then <a href="https://maps.google.com/?q=Cloister+of+Paradise+Amalfi" target="_blank">Cloister of Paradise</a> next door — stunning Moorish arches. €5/pp.</div></div>
+        <div class="time-block"><div class="time">5:30pm</div><div class="activity">🍋 <a href="https://maps.google.com/?q=lemon+tour+amalfi" target="_blank">Limoncello tasting</a> — visit a lemon grove above Amalfi. Learn how they make limoncello from sfusato lemons (only grown here). Buy a bottle (€8). ~€15/pp for the tour.</div></div>
+        <div class="time-block"><div class="time">7:30pm</div><div class="activity">🍽️ Last splurge dinner: <a href="https://maps.google.com/?q=Il+Pirata+Praiano" target="_blank">Il Pirata</a> in Praiano (bus 15 min) — contemporary Italian, terrace overlooking the sea, famous tuna tartare. Or <a href="https://maps.google.com/?q=Trattoria+da+Gemma+Amalfi" target="_blank">da Gemma</a> for something classic.</div></div>
+      </div>
+      <div class="day-footer">
+        <span class="day-cost">~$195 CAD</span>
+        <span class="day-map"><a href="https://www.google.com/maps/dir/Atrani+Beach/Amalfi+Port/Emerald+Grotto+Conca+dei+Marini/Fiordo+di+Furore/Marina+di+Praia+Praiano/Amalfi+Cathedral" target="_blank">📍 View Day 6 Route</a></span>
+      </div>
+    </div>
+
+    <!-- DAY 7 -->
+    <div class="day">
+      <h4>Day 7 — Thursday Aug 28 · Last Morning + Home</h4>
+      <div class="schedule">
+        <div class="time-block"><div class="time">7am</div><div class="activity">🌅 Sunrise from <a href="https://maps.google.com/?q=Atrani+Beach+Italy" target="_blank">Atrani Beach</a>. Last swim in the Mediterranean.</div></div>
+        <div class="time-block"><div class="time">8:30am</div><div class="activity">🥾 Quick walk up to <a href="https://maps.google.com/?q=Valle+delle+Ferriere+Amalfi" target="_blank">Valle delle Ferriere</a> entrance — waterfall hike through lemon terraces (1h loop).</div></div>
+        <div class="time-block"><div class="time">10am</div><div class="activity">Last espresso at <a href="https://maps.google.com/?q=Andrea+Pansa+Amalfi" target="_blank">Andrea Pansa</a> on the piazza. Buy limoncello + lemon candies as gifts (€8–15).</div></div>
+        <div class="time-block"><div class="time">11am</div><div class="activity">Walk through <a href="https://maps.google.com/?q=Ruga+Nova+Mercatorum+Amalfi" target="_blank">Ruga Nova Mercatorum</a> (medieval main street) one last time. Arrivederci. 🤌</div></div>
+        <div class="time-block"><div class="time">12pm</div><div class="activity">⛴️ Ferry Amalfi → <a href="https://maps.google.com/?q=Salerno+port+ferry+terminal" target="_blank">Salerno</a> (35 min). Train Salerno → <a href="https://maps.google.com/?q=Naples+International+Airport" target="_blank">Naples Airport</a> (90 min total).</div></div>
+        <div class="time-block"><div class="time">3pm</div><div class="activity">✈️ Check in at NAP. If spare time: last sfogliatella at the airport.</div></div>
+      </div>
+      <div class="day-footer">
+        <span class="day-cost">~$75 CAD</span>
+        <span class="day-map"><a href="https://www.google.com/maps/dir/Atrani+Italy/Valle+delle+Ferriere+Amalfi/Amalfi+Port/Salerno+Station/Naples+International+Airport" target="_blank">📍 View Day 7 Route</a></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ BEACHES ═══════ -->
+<div class="container" id="beaches">
+  <div class="section">
+    <h2>🏖️ Every Beach, Ranked</h2>
+    <p class="sub">10 beaches from best to most hidden — all mapped</p>
+    <ul class="spot-list">
+      <li>
+        <div class="spot-name">🏖️ 1. Spiaggia Grande, Positano</div>
+        <div class="spot-desc">THE iconic beach — pastel village cascading above, dark volcanic sand, crystal water. The Amalfi Coast photo. Crowded but unmissable.</div>
+        <div class="spot-meta"><a href="https://maps.google.com/?q=Spiaggia+Grande+Positano" target="_blank">📍 Maps</a> <span class="spot-cost">Sunbed €15/set · Free section at edges</span></div>
+        <div class="spot-tip">💡 Go before 10am or after 4pm to dodge the worst crowds</div>
+      </li>
+      <li>
+        <div class="spot-name">🏖️ 2. Atrani Beach</div>
+        <div class="spot-desc">Hidden gem 5 min walk from Amalfi. Tiny fishing village square leads to dark sand beach. Fraction of Positano's crowds. Feels like a secret.</div>
+        <div class="spot-meta"><a href="https://maps.google.com/?q=Atrani+Beach+Italy" target="_blank">📍 Maps</a> <span class="spot-cost">Free!</span></div>
+        <div class="spot-tip">💡 You'll spend most mornings here — quiet, authentic, right next to your Airbnb</div>
+      </li>
+      <li>
+        <div class="spot-name">🏖️ 3. Fornillo Beach, Positano</div>
+        <div class="spot-desc">10 min walk past Spiaggia Grande — smaller, rockier, more local. Better for swimming and snorkeling.</div>
+        <div class="spot-meta"><a href="https://maps.google.com/?q=Fornillo+Beach+Positano" target="_blank">📍 Maps</a> <span class="spot-cost">Sunbed €10 · Free section</span></div>
+      </li>
+      <li>
+        <div class="spot-name">💎 4. Fiordo di Furore</div>
+        <div class="spot-desc">Dramatic hidden fjord slicing between 30m cliffs — turquoise water in a narrow canyon. Surreal. Best reached by boat.</div>
+        <div class="spot-meta"><a href="https://maps.google.com/?q=Fiordo+di+Furore" target="_blank">📍 Maps</a> <span class="spot-cost">Free · Boat access recommended</span></div>
+        <div class="spot-tip">💡 Swimming here between the cliffs is the most unique experience on the coast</div>
+      </li>
+      <li>
+        <div class="spot-name">🏖️ 5. Marina di Praia, Praiano</div>
+        <div class="spot-desc">Tiny cove wedged between vertical cliffs. Fishing boats, one beach bar. Feels like a pirate village. Great snorkeling.</div>
+        <div class="spot-meta"><a href="https://maps.google.com/?q=Marina+di+Praia+Praiano" target="_blank">📍 Maps</a> <span class="spot-cost">Free · Bar on site</span></div>
+      </li>
+      <li>
+        <div class="spot-name">🏖️ 6. Santa Croce Beach</div>
+        <div class="spot-desc">Only reachable by boat or 400+ stairs — reward is secluded pebbles, crystal water, zero crowds.</div>
+        <div class="spot-meta"><a href="https://maps.google.com/?q=Santa+Croce+Beach+Amalfi" target="_blank">📍 Maps</a> <span class="spot-cost">Free · Boat access easiest</span></div>
+      </li>
+      <li>
+        <div class="spot-name">🏖️ 7. Duoglio Beach</div>
+        <div class="spot-desc">Just west of Amalfi — small pebble beach, excellent restaurant on it, quieter than Marina Grande.</div>
+        <div class="spot-meta"><a href="https://maps.google.com/?q=Duoglio+Beach+Amalfi" target="_blank">📍 Maps</a> <span class="spot-cost">Free · Stairs down from road</span></div>
+      </li>
+      <li>
+        <div class="spot-name">🌅 8. Gavitella Beach, Praiano</div>
+        <div class="spot-desc">West-facing — one of the only Amalfi coast beaches where you can watch the sunset directly into the sea. 400 steps down.</div>
+        <div class="spot-meta"><a href="https://maps.google.com/?q=Gavitella+Beach+Praiano" target="_blank">📍 Maps</a> <span class="spot-cost">Sunbed €12</span></div>
+        <div class="spot-tip">💡 The ONLY sunset beach on the coast — go on Day 5 or 6 for a magical sunset swim</div>
+      </li>
+      <li>
+        <div class="spot-name">🏖️ 9. Marina Grande, Amalfi</div>
+        <div class="spot-desc">Amalfi town's main beach — fishing boats, restaurants on the sand. Convenient but touristy.</div>
+        <div class="spot-meta"><a href="https://maps.google.com/?q=Marina+Grande+Beach+Amalfi" target="_blank">📍 Maps</a> <span class="spot-cost">Sunbed €15</span></div>
+      </li>
+      <li>
+        <div class="spot-name">🏖️ 10. Erchie Beach</div>
+        <div class="spot-desc">45 min bus east of Amalfi — actual hidden village with a beautiful crescent beach. Almost no foreign tourists.</div>
+        <div class="spot-meta"><a href="https://maps.google.com/?q=Erchie+Beach+Amalfi+Coast" target="_blank">📍 Maps</a> <span class="spot-cost">Free</span></div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- ═══════ FOOD ═══════ -->
+<div class="container" id="food">
+  <div class="section">
+    <h2>🍝 Complete Food Guide</h2>
+    <p class="sub">Every restaurant, bakery, and gelato spot — mapped and priced</p>
+
+    <h4 style="margin-bottom:10px;">🍕 Must-Eat Dishes on the Amalfi Coast</h4>
+    <div class="tip tip-pro">
+      <strong>Scialatielli ai frutti di mare</strong> — handmade thick pasta with mixed seafood (THE signature dish)<br>
+      <strong>Delizia al limone</strong> — lemon sponge cake with lemon cream. Amalfi invented this.<br>
+      <strong>Colatura di alici</strong> — ancient anchovy sauce from Cetara. Umami bomb on spaghetti.<br>
+      <strong>Sfogliatella</strong> — flaky shell-shaped pastry filled with ricotta. Naples' gift to humanity.<br>
+      <strong>Frittura di paranza</strong> — mixed fried seafood. Get it beachside. Always say yes.<br>
+      <strong>Limoncello</strong> — made from local sfusato lemons. Ice cold after dinner. Non-negotiable.
+    </div>
+
+    <h4 style="margin:20px 0 10px;">🍽️ Restaurants by Town</h4>
+    <ul class="spot-list">
+      <li>
+        <div class="spot-name">🍕 L'Antica Pizzeria da Michele — Naples</div>
+        <div class="spot-desc">World's most famous pizzeria (since 1870). Only 2 pizzas: Margherita or Marinara. Life-changing. 30–45 min queue.</div>
+        <div class="spot-meta"><span class="spot-cost">€5/pp</span> <a href="https://maps.google.com/?q=L'Antica+Pizzeria+da+Michele+Naples" target="_blank">📍 Maps</a> <a href="https://www.damichele.net" target="_blank">🌐 Site</a></div>
+      </li>
+      <li>
+        <div class="spot-name">🍝 Trattoria da Gemma — Amalfi</div>
+        <div class="spot-desc">Since 1872. Zuppa di pesce is legendary. Terrace with cathedral view. Book 2–3 days ahead.</div>
+        <div class="spot-meta"><span class="spot-cost">€25–35/pp</span> <a href="https://maps.google.com/?q=Trattoria+da+Gemma+Amalfi" target="_blank">📍 Maps</a> <a href="https://www.trattoriadagemma.com" target="_blank">🌐 Book</a></div>
+      </li>
+      <li>
+        <div class="spot-name">🐙 Ristorante Marina Grande — Amalfi</div>
+        <div class="spot-desc">Candlelit tables right on the beach. Catch of the day. Most romantic dinner on the coast. BOOK AHEAD.</div>
+        <div class="spot-meta"><span class="spot-cost">€30–40/pp</span> <a href="https://maps.google.com/?q=Ristorante+Marina+Grande+Amalfi" target="_blank">📍 Maps</a></div>
+      </li>
+      <li>
+        <div class="spot-name">🍝 Le Arcate — Atrani</div>
+        <div class="spot-desc">Tables in the Atrani beach square. Fresh pasta, friendly family service. Way cheaper than Positano for same quality.</div>
+        <div class="spot-meta"><span class="spot-cost">€15–20/pp</span> <a href="https://maps.google.com/?q=Le+Arcate+Atrani" target="_blank">📍 Maps</a></div>
+        <div class="spot-tip">💡 Best value dinner on the coast</div>
+      </li>
+      <li>
+        <div class="spot-name">🍝 Da Vincenzo — Positano</div>
+        <div class="spot-desc">Family-run since 1958. Scialatielli ai frutti di mare is unreal. Busy — book ahead.</div>
+        <div class="spot-meta"><span class="spot-cost">€25–30/pp</span> <a href="https://maps.google.com/?q=Da+Vincenzo+Positano" target="_blank">📍 Maps</a></div>
+      </li>
+      <li>
+        <div class="spot-name">🐟 Lo Guarracino — Positano</div>
+        <div class="spot-desc">Cliffside terrace between Spiaggia Grande and Fornillo. Sea literally below you. Grilled whole fish.</div>
+        <div class="spot-meta"><span class="spot-cost">€25–35/pp</span> <a href="https://maps.google.com/?q=Lo+Guarracino+Positano" target="_blank">📍 Maps</a></div>
+      </li>
+      <li>
+        <div class="spot-name">🏖️ Da Adolfo — Positano (boat-access)</div>
+        <div class="spot-desc">Beach restaurant. Shuttle boat (red fish sign). Grilled fish &amp; mozzarella on the rocks. Unforgettable.</div>
+        <div class="spot-meta"><span class="spot-cost">€20–25/pp</span> <a href="https://maps.google.com/?q=Da+Adolfo+Positano" target="_blank">📍 Maps</a></div>
+      </li>
+      <li>
+        <div class="spot-name">🍽️ Cumpa' Cosimo — Ravello</div>
+        <div class="spot-desc">Netta Bottone's legendary spot. Sophia Loren to Anthony Bourdain. Mixed pasta plate (7 types!).</div>
+        <div class="spot-meta"><span class="spot-cost">€18–25/pp</span> <a href="https://maps.google.com/?q=Cumpa+Cosimo+Ravello" target="_blank">📍 Maps</a></div>
+      </li>
+      <li>
+        <div class="spot-name">🐟 Al San Vincenzo — Cetara</div>
+        <div class="spot-desc">Side trip (30 min bus east). Cetara = anchovy capital of Italy. Spaghetti with colatura di alici — mind-blowing umami.</div>
+        <div class="spot-meta"><span class="spot-cost">€15–20/pp</span> <a href="https://maps.google.com/?q=Al+San+Vincenzo+Cetara" target="_blank">📍 Maps</a></div>
+      </li>
+      <li>
+        <div class="spot-name">🏖️ La Fontelina — Capri</div>
+        <div class="spot-desc">Beach club with Faraglioni rock views. Aperol Spritz + grilled octopus on the rocks. Book or arrive early!</div>
+        <div class="spot-meta"><span class="spot-cost">€35–45/pp</span> <a href="https://maps.google.com/?q=La+Fontelina+Capri" target="_blank">📍 Maps</a> <a href="https://www.fontelina-capri.com" target="_blank">🌐 Reserve</a></div>
+      </li>
+      <li>
+        <div class="spot-name">🍽️ Il Pirata — Praiano</div>
+        <div class="spot-desc">Contemporary Italian, terrace over the sea. Famous tuna tartare.</div>
+        <div class="spot-meta"><span class="spot-cost">€30–40/pp</span> <a href="https://maps.google.com/?q=Il+Pirata+Praiano" target="_blank">📍 Maps</a></div>
+      </li>
+    </ul>
+
+    <h4 style="margin:20px 0 10px;">🥐 Bakeries &amp; Gelato</h4>
+    <ul class="spot-list">
+      <li>
+        <div class="spot-name">🥐 Andrea Pansa — Amalfi</div>
+        <div class="spot-desc">Since 1830. Delizia al limone, sfogliatella, espresso on the piazza. Breakfast here every morning.</div>
+        <div class="spot-meta"><span class="spot-cost">€5–7/pp</span> <a href="https://maps.google.com/?q=Andrea+Pansa+Amalfi" target="_blank">📍 Maps</a></div>
+      </li>
+      <li>
+        <div class="spot-name">🍦 Gelateria Porto Salvo — Amalfi</div>
+        <div class="spot-desc">Best gelato in Amalfi. Lemon (sfusato!) + pistachio combo. €3.</div>
+        <div class="spot-meta"><span class="spot-cost">€3</span> <a href="https://maps.google.com/?q=Gelateria+Porto+Salvo+Amalfi" target="_blank">📍 Maps</a></div>
+      </li>
+      <li>
+        <div class="spot-name">🍦 Gelateria Buonocore — Capri &amp; Positano</div>
+        <div class="spot-desc">Legendary waffle cones filled with gelato. Locations in both towns.</div>
+        <div class="spot-meta"><span class="spot-cost">€4</span> <a href="https://maps.google.com/?q=Gelateria+Buonocore+Capri" target="_blank">📍 Maps</a></div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- ═══════ PHOTO SPOTS ═══════ -->
+<div class="container" id="photos">
+  <div class="section">
+    <h2>📸 Best Photo Spots</h2>
+    <p class="sub">The exact spots for your best couples photos — when &amp; where</p>
+    <div class="photo-grid">
+      <div class="photo-card">
+        <div class="pc-title">🏘️ Positano Viewpoint (SS163)</div>
+        <div class="pc-when">⏰ Golden hour (6–7pm)</div>
+        <div class="pc-desc">The classic Positano postcard shot from the coastal road above town.</div>
+        <div class="pc-link"><a href="https://maps.google.com/?q=40.6282,14.4837" target="_blank">📍 Exact spot on Maps</a></div>
+      </div>
+      <div class="photo-card">
+        <div class="pc-title">🥾 Path of the Gods Overlook</div>
+        <div class="pc-when">⏰ Morning (9–10am) best light</div>
+        <div class="pc-desc">Rocky outcrop ~45 min into the hike. Coast stretching below, Capri on the horizon.</div>
+        <div class="pc-link"><a href="https://maps.google.com/?q=40.6342,14.5221" target="_blank">📍 Approximate spot</a></div>
+      </div>
+      <div class="photo-card">
+        <div class="pc-title">🏛️ Terrace of Infinity, Ravello</div>
+        <div class="pc-when">⏰ Late morning (11am–12pm)</div>
+        <div class="pc-desc">Marble busts overlooking the coast. "Most beautiful view in the world." — Gore Vidal</div>
+        <div class="pc-link"><a href="https://maps.google.com/?q=Villa+Cimbrone+Ravello" target="_blank">📍 Villa Cimbrone</a></div>
+      </div>
+      <div class="photo-card">
+        <div class="pc-title">🔵 Blue Grotto, Capri</div>
+        <div class="pc-when">⏰ Morning (9–10am) best glow</div>
+        <div class="pc-desc">Inside the cave — electric blue water glowing. Shoot wide. Jaw will drop.</div>
+        <div class="pc-link"><a href="https://maps.google.com/?q=Blue+Grotto+Capri" target="_blank">📍 Blue Grotto</a></div>
+      </div>
+      <div class="photo-card">
+        <div class="pc-title">💎 Faraglioni from Gardens of Augustus</div>
+        <div class="pc-when">⏰ Midday (best clarity)</div>
+        <div class="pc-desc">Three iconic rock stacks rising from the sea. Classic Capri shot.</div>
+        <div class="pc-link"><a href="https://maps.google.com/?q=Gardens+of+Augustus+Capri" target="_blank">📍 Gardens of Augustus</a></div>
+      </div>
+      <div class="photo-card">
+        <div class="pc-title">🌅 Sunset from Franco's Bar</div>
+        <div class="pc-when">⏰ Sunset (7:30–8pm Aug)</div>
+        <div class="pc-desc">Positano glowing gold below you. Aperol in hand. Peak romance.</div>
+        <div class="pc-link"><a href="https://maps.google.com/?q=Franco's+Bar+Positano" target="_blank">📍 Franco's Bar</a></div>
+      </div>
+      <div class="photo-card">
+        <div class="pc-title">⛪ Amalfi Cathedral Steps</div>
+        <div class="pc-when">⏰ Early morning (8am) no crowds</div>
+        <div class="pc-desc">62 dramatic steps up to the Arab-Norman cathedral. Empty at 8am, packed by 10am.</div>
+        <div class="pc-link"><a href="https://maps.google.com/?q=Amalfi+Cathedral" target="_blank">📍 Cathedral</a></div>
+      </div>
+      <div class="photo-card">
+        <div class="pc-title">🏖️ Atrani from Above</div>
+        <div class="pc-when">⏰ Any time</div>
+        <div class="pc-desc">Tiny piazza between colorful buildings, church dome, and the sea. Italy's smallest town by area.</div>
+        <div class="pc-link"><a href="https://maps.google.com/?q=Atrani+Italy" target="_blank">📍 Atrani</a></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ TRANSPORT ═══════ -->
+<div class="container" id="transport">
+  <div class="section">
+    <h2>🚌 Getting Around — Complete Transport Guide</h2>
+    <p class="sub">Do NOT rent a car. Seriously. Here's everything else.</p>
+
+    <div class="tip tip-warn">
+      ⚠️ <strong>DO NOT RENT A CAR.</strong> The SS163 coastal road is one lane wide, buses barely fit, blind corners every 20 meters, and parking costs €5–8/hour IF you can find a spot. Every local says: bus + ferry + walk.
+    </div>
+
+    <h4 style="margin:16px 0 10px;">✈️ Getting from Toronto to the Amalfi Coast</h4>
+    <div class="transport-option">
+      <h5>Step 1: Fly YYZ → Naples (NAP)</h5>
+      <p>1 stop via Rome (FCO), London (LHR), or Frankfurt (FRA). Air Canada, ITA Airways, or Lufthansa are best options.</p>
+      <div class="to-meta"><span class="to-time">⏱️ ~11h total</span> <span class="to-cost">💰 ~$1,400–1,800 CAD for 2</span></div>
+      <div class="maps-grid" style="margin-top:6px;">
+        <a href="https://www.google.com/travel/flights?q=flights+from+YYZ+to+NAP+august+22+returning+august+29+2026" target="_blank" class="map-link" style="font-size:0.8rem;">Google Flights →</a>
+      </div>
+    </div>
+    <div class="transport-option">
+      <h5>Step 2: Naples Airport → Amalfi</h5>
+      <p><strong>Best route:</strong> Airport taxi/bus to Napoli Centrale (20 min) → Train to Salerno (40 min, €5) → Ferry to Amalfi (35 min, €10)</p>
+      <p><strong>Alt:</strong> Direct SITA bus from Naples to Amalfi (2.5h with traffic)</p>
+      <div class="to-meta"><span class="to-time">⏱️ ~2h total</span> <span class="to-cost">💰 ~€35/pp all legs</span></div>
+      <div class="maps-grid" style="margin-top:6px;">
+        <a href="https://www.google.com/maps/dir/Naples+International+Airport/Napoli+Centrale/Salerno+Station/Amalfi+Port" target="_blank" class="map-link" style="font-size:0.8rem;">📍 Full route on Maps</a>
+      </div>
+    </div>
+
+    <h4 style="margin:20px 0 10px;">🚢 Ferries (Best Way to Travel)</h4>
+    <div class="transport-option">
+      <h5>Travelmar Ferries</h5>
+      <p><strong>Salerno ↔ Amalfi ↔ Positano ↔ Minori ↔ Maiori ↔ Cetara</strong>. Every 30–60 min in August. Buy tickets at the port kiosk.</p>
+      <div class="to-meta"><span class="to-time">⏱️ 25–45 min between towns</span> <span class="to-cost">💰 €8–12/pp</span></div>
+      <div class="maps-grid" style="margin-top:6px;">
+        <a href="https://www.travelmar.it" target="_blank" class="map-link" style="font-size:0.8rem;">🚢 Travelmar schedule →</a>
+        <a href="https://www.google.com/maps/dir/Amalfi+Port/Positano+Port" target="_blank" class="map-link" style="font-size:0.8rem;">📍 Amalfi→Positano route</a>
+      </div>
+    </div>
+    <div class="transport-option">
+      <h5>Capri Ferries (NLG Jet / SNAV)</h5>
+      <p><strong>Amalfi → Capri</strong> and <strong>Positano → Capri</strong>. 2–4 per day in summer. Book day before if possible.</p>
+      <div class="to-meta"><span class="to-time">⏱️ ~1h20 from Amalfi</span> <span class="to-cost">💰 €20–25/pp</span></div>
+      <div class="maps-grid" style="margin-top:6px;">
+        <a href="https://www.capri.com/en/ferry-schedule" target="_blank" class="map-link" style="font-size:0.8rem;">🚢 Capri ferry schedule →</a>
+      </div>
+    </div>
+
+    <h4 style="margin:20px 0 10px;">🚌 SITA Buses</h4>
+    <div class="transport-option">
+      <h5>SITA Sud Buses</h5>
+      <p>Run along the entire coast: Amalfi ↔ Positano (40 min), Amalfi ↔ Ravello (25 min), Amalfi ↔ Sorrento (1.5h). Every 30 min. Buy tickets at tabacchi shops.</p>
+      <div class="to-meta"><span class="to-time">⏱️ 20–90 min</span> <span class="to-cost">💰 €1.30–5/pp 🔥</span></div>
+      <div class="tip tip-pro" style="margin-top:8px;">
+        🚌 <strong>Bus tips:</strong> Sit on RIGHT side going west (Positano direction) for best views. Buses PACKED in August — arrive 10 min early. Standing room only is normal. Last buses ~11pm.
+      </div>
+    </div>
+
+    <h4 style="margin:20px 0 10px;">🚶 Walking Paths Between Towns</h4>
+    <div class="transport-option">
+      <h5>Amalfi → Atrani: 5 min walk</h5>
+      <p>Through a short tunnel or over the headland. You'll do this walk 20 times.</p>
+      <div class="maps-grid" style="margin-top:6px;"><a href="https://www.google.com/maps/dir/Amalfi+Italy/Atrani+Italy" target="_blank" class="map-link" style="font-size:0.8rem;">📍 Walking route</a></div>
+    </div>
+    <div class="transport-option">
+      <h5>Positano: Spiaggia Grande → Fornillo: 10 min walk</h5>
+      <p>Scenic coastal path along the cliff. Easy walk, beautiful views.</p>
+      <div class="maps-grid" style="margin-top:6px;"><a href="https://www.google.com/maps/dir/Spiaggia+Grande+Positano/Fornillo+Beach+Positano" target="_blank" class="map-link" style="font-size:0.8rem;">📍 Walking route</a></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ BOOKING LINKS ═══════ -->
+<div class="container" id="book">
+  <div class="section">
+    <h2>🔗 Book Everything</h2>
+    <p class="sub">One-click links for flights, stays, transport, restaurants</p>
+
+    <h4 style="margin-bottom:10px;">✈️ Flights (YYZ → NAP, Aug 22–29, 2 adults)</h4>
+    <div class="booking-grid">
+      <a href="https://www.google.com/travel/flights?q=flights+from+YYZ+to+NAP+august+22+returning+august+29+2026" target="_blank" class="book-btn book-flights">Google Flights</a>
+      <a href="https://www.ca.kayak.com/flights/YYZ-NAP/2026-08-22/2026-08-29/2adults?sort=bestflight_a" target="_blank" class="book-btn book-flights">Kayak</a>
+      <a href="https://www.skyscanner.ca/transport/flights/yyz/nap/260822/260829/?adultsv2=2&cabinclass=economy" target="_blank" class="book-btn book-flights">Skyscanner</a>
+    </div>
+
+    <h4 style="margin:16px 0 10px;">🏠 Accommodation (Aug 22–29, 2 adults)</h4>
+    <div class="booking-grid">
+      <a href="https://www.airbnb.ca/s/Amalfi--Italy/homes?checkin=2026-08-22&checkout=2026-08-29&adults=2&price_max=200" target="_blank" class="book-btn book-stay">Airbnb Amalfi</a>
+      <a href="https://www.airbnb.ca/s/Atrani--Italy/homes?checkin=2026-08-22&checkout=2026-08-29&adults=2&price_max=180" target="_blank" class="book-btn book-stay">Airbnb Atrani (cheaper!)</a>
+      <a href="https://www.booking.com/searchresults.html?ss=Amalfi&checkin=2026-08-22&checkout=2026-08-29&group_adults=2" target="_blank" class="book-btn book-stay">Booking.com</a>
+    </div>
+
+    <h4 style="margin:16px 0 10px;">🚆 Trains &amp; Ferries</h4>
+    <div class="booking-grid">
+      <a href="https://www.trenitalia.com" target="_blank" class="book-btn book-ferry">🚆 Trenitalia (Naples→Salerno)</a>
+      <a href="https://www.travelmar.it" target="_blank" class="book-btn book-ferry">🚢 Travelmar Ferries</a>
+      <a href="https://www.capri.com/en/ferry-schedule" target="_blank" class="book-btn book-ferry">⛴️ Capri Ferry Schedule</a>
+      <a href="https://www.coopsantandrea.it" target="_blank" class="book-btn book-ferry">🚢 Coop Sant'Andrea</a>
+    </div>
+
+    <h4 style="margin:16px 0 10px;">🍽️ Restaurant Reservations</h4>
+    <div class="booking-grid">
+      <a href="https://www.trattoriadagemma.com" target="_blank" class="book-btn book-food">da Gemma</a>
+      <a href="https://www.fontelina-capri.com" target="_blank" class="book-btn book-food">La Fontelina (Capri)</a>
+    </div>
+    <p style="font-size:0.82rem; color:var(--gray); margin-top:8px;">💡 Most restaurants: call directly or book via <a href="https://www.thefork.com" target="_blank">TheFork</a> (works great in Italy). Book Marina Grande, Lo Guarracino, and Da Vincenzo 2–3 days ahead in August.</p>
+
+    <h4 style="margin:16px 0 10px;">🗺️ Maps — All Routes</h4>
+    <div class="booking-grid">
+      <a href="https://www.google.com/maps/dir/Naples+International+Airport,+Naples/Amalfi,+SA,+Italy/Positano,+SA,+Italy/Ravello,+SA,+Italy/Capri,+NA,+Italy" target="_blank" class="book-btn book-maps">🗺️ Full Trip Route</a>
+      <a href="https://www.google.com/maps/dir/Bomerano,+Agerola/Nocelle,+Positano" target="_blank" class="book-btn book-maps">🥾 Path of the Gods</a>
+      <a href="https://maps.google.com/?q=Amalfi+Coast+Italy" target="_blank" class="book-btn book-maps">📍 Amalfi Coast Overview</a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ PACKING ═══════ -->
+<div class="container">
+  <div class="section">
+    <h2>🧳 What to Pack</h2>
+    <p class="sub">Late August Amalfi — hot, sunny, lots of walking &amp; stairs</p>
+    <div class="pack-grid">
+      <div class="pack-cat">
+        <h5>👟 Shoes (CRITICAL)</h5>
+        <ul>
+          <li>Trail runners / hiking sandals (Path of Gods)</li>
+          <li>Comfortable walking sandals (cobblestones)</li>
+          <li>Water shoes (rocky beaches)</li>
+        </ul>
+      </div>
+      <div class="pack-cat">
+        <h5>👕 Clothing</h5>
+        <ul>
+          <li>Light breathable clothes (30°C+)</li>
+          <li>1 nice dinner outfit each</li>
+          <li>Swimsuits x2 (won't dry overnight)</li>
+          <li>Church cover-up (shoulders + knees)</li>
+        </ul>
+      </div>
+      <div class="pack-cat">
+        <h5>🎒 Essentials</h5>
+        <ul>
+          <li>Reef-safe sunscreen (SPF 50)</li>
+          <li>Refillable water bottle</li>
+          <li>Light daypack for hikes</li>
+          <li>Power adapter (EU Type C/F)</li>
+          <li>Beach towel (saves €5/day)</li>
+        </ul>
+      </div>
+      <div class="pack-cat">
+        <h5>📱 Tech &amp; Apps</h5>
+        <ul>
+          <li>Italian eSIM or SIM at NAP airport</li>
+          <li>Google Maps offline — Amalfi Coast</li>
+          <li>Travelmar ferry timetable PDF</li>
+          <li>Trenitalia app for trains</li>
+          <li>TheFork app for reservations</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ ALTERNATIVES ═══════ -->
+<div class="container" id="alternatives">
+  <div class="section">
+    <h2>📊 vs. Other Destinations</h2>
+    <p class="sub">Why Amalfi over the other top picks</p>
     <div style="overflow-x:auto;">
     <table class="compare">
-      <tr>
-        <th>Category</th>
-        <th>🇮🇹 Amalfi</th>
-        <th>🇲🇽 Tulum</th>
-        <th>🇦🇼 Aruba</th>
-        <th>🇬🇷 Crete</th>
-        <th>🇵🇹 Algarve</th>
-      </tr>
-      <tr>
-        <td><strong>✈️ Flight Time</strong></td>
-        <td>11h (1 stop)</td>
-        <td class="winner">4h direct</td>
-        <td>5h direct</td>
-        <td>14h (1 stop)</td>
-        <td>10h (1 stop)</td>
-      </tr>
-      <tr>
-        <td><strong>💰 Total Cost</strong></td>
-        <td>$4,500</td>
-        <td class="winner">$2,800</td>
-        <td>$3,800</td>
-        <td>$4,300</td>
-        <td>$4,200</td>
-      </tr>
-      <tr>
-        <td><strong>✈️ Flights</strong></td>
-        <td>$1,600</td>
-        <td class="winner">$1,000</td>
-        <td>$1,300</td>
-        <td>$1,800</td>
-        <td>$1,600</td>
-      </tr>
-      <tr>
-        <td><strong>🏠 7n Airbnb</strong></td>
-        <td>$1,200</td>
-        <td class="winner">$700</td>
-        <td>$910</td>
-        <td>$980</td>
-        <td>$840</td>
-      </tr>
-      <tr>
-        <td><strong>🍽️ Food Quality</strong></td>
-        <td class="winner">10/10</td>
-        <td>8/10</td>
-        <td>7/10</td>
-        <td>9/10</td>
-        <td>8/10</td>
-      </tr>
-      <tr>
-        <td><strong>🏖️ Beaches</strong></td>
-        <td>7/10</td>
-        <td>9/10</td>
-        <td>9/10</td>
-        <td class="winner">10/10</td>
-        <td>9/10</td>
-      </tr>
-      <tr>
-        <td><strong>🏛️ Culture</strong></td>
-        <td class="winner">10/10</td>
-        <td>7/10</td>
-        <td>5/10</td>
-        <td>10/10</td>
-        <td>7/10</td>
-      </tr>
-      <tr>
-        <td><strong>💑 Romance</strong></td>
-        <td class="winner">10/10</td>
-        <td>9/10</td>
-        <td>8/10</td>
-        <td>9/10</td>
-        <td>9/10</td>
-      </tr>
-      <tr>
-        <td><strong>🏔️ Scenery</strong></td>
-        <td class="winner">10/10</td>
-        <td>7/10</td>
-        <td>6/10</td>
-        <td>9/10</td>
-        <td>9/10</td>
-      </tr>
-      <tr>
-        <td><strong>🌀 Hurricane Risk</strong></td>
-        <td class="winner">None ✅</td>
-        <td>⚠️ Possible</td>
-        <td class="winner">None ✅</td>
-        <td class="winner">None ✅</td>
-        <td class="winner">None ✅</td>
-      </tr>
-      <tr>
-        <td><strong>🤿 Activities</strong></td>
-        <td>8/10</td>
-        <td class="winner">9/10</td>
-        <td>7/10</td>
-        <td>8/10</td>
-        <td>7/10</td>
-      </tr>
+      <tr><th>Category</th><th>🇮🇹 Amalfi</th><th>🇲🇽 Tulum</th><th>🇦🇼 Aruba</th><th>🇬🇷 Crete</th></tr>
+      <tr><td><strong>💰 Total</strong></td><td>$4,500</td><td class="winner">$2,800</td><td>$3,800</td><td>$4,300</td></tr>
+      <tr><td><strong>✈️ Flight</strong></td><td>11h (1 stop)</td><td class="winner">4h direct</td><td>5h direct</td><td>14h (1 stop)</td></tr>
+      <tr><td><strong>💑 Romance</strong></td><td class="winner">10/10</td><td>9/10</td><td>8/10</td><td>9/10</td></tr>
+      <tr><td><strong>🍽️ Food</strong></td><td class="winner">10/10</td><td>8/10</td><td>7/10</td><td>9/10</td></tr>
+      <tr><td><strong>🏔️ Scenery</strong></td><td class="winner">10/10</td><td>7/10</td><td>6/10</td><td>9/10</td></tr>
+      <tr><td><strong>🏛️ Culture</strong></td><td class="winner">10/10</td><td>7/10</td><td>5/10</td><td>10/10</td></tr>
+      <tr><td><strong>🏖️ Beaches</strong></td><td>7/10</td><td>9/10</td><td>9/10</td><td class="winner">10/10</td></tr>
+      <tr><td><strong>🌀 Hurricane</strong></td><td class="winner">None ✅</td><td>⚠️ Risk</td><td class="winner">None ✅</td><td class="winner">None ✅</td></tr>
     </table>
+    </div>
+    <div class="tip tip-pro" style="margin-top:12px;">
+      <strong>Bottom line:</strong> Amalfi Coast is #1 for romance, food, scenery, and "once in a lifetime" vibes. Yes, longer flight — but the Path of the Gods alone is worth the trip.
     </div>
   </div>
 </div>
@@ -673,37 +827,30 @@
 <!-- VERDICT -->
 <div class="container">
   <div class="section">
-    <h2>🏆 The Verdict</h2>
-    <div style="background: linear-gradient(135deg, var(--ocean), var(--ocean-dark)); color: white; border-radius: 16px; padding: 32px; margin-top: 16px;">
-      <h3 style="font-size: 1.5rem; margin-bottom: 12px;">Go to the Amalfi Coast. 🇮🇹</h3>
-      <p style="opacity: 0.9; line-height: 1.7;">
-        Nothing matches it for <strong>romance</strong> — cliffside villages tumbling into turquoise water, 
-        candlelit seafood dinners, Capri day trips, hiking the Path of the Gods together. The <strong>food</strong> 
-        is world-class (from €5 Neapolitan pizza to incredible fresh seafood). Yes it's tight on budget at ~$4,500 CAD, 
-        but you can bring it down by staying in Atrani instead of Positano. <strong>Zero hurricane risk</strong>, 
-        guaranteed August sun, and memories that'll last forever.
+    <div style="background: linear-gradient(135deg, #1a472a, var(--ocean-dark)); color: white; border-radius: 16px; padding: 32px;">
+      <h3 style="font-size: 1.4rem; margin-bottom: 12px;">🇮🇹 Andiamo — Let's Go.</h3>
+      <p style="opacity: 0.9; line-height: 1.7; font-size: 0.95rem;">
+        You've got the full plan. 7 days of cliffside villages, world-class pasta, secret beaches,
+        hiking above the clouds, Capri day trips, boat rides through hidden fjords, and candlelit dinners
+        on the water. All for $4,500 CAD — $500 under budget.
       </p>
-      <p style="opacity: 0.9; margin-top: 12px; line-height: 1.7;">
-        <strong>If budget matters most:</strong> Tulum ($2,200 under budget, 4h direct, still incredible).<br>
-        <strong>If you want guaranteed perfect weather + easy flight:</strong> Aruba (5h direct, outside hurricane belt).
+      <p style="opacity: 0.9; line-height: 1.7; font-size: 0.95rem; margin-top: 10px;">
+        <strong>Next steps:</strong><br>
+        1. Book flights YYZ→NAP (~6 months out for best price)<br>
+        2. Book Airbnb in Atrani or Amalfi<br>
+        3. Reserve La Fontelina (Capri) and Marina Grande (Amalfi)<br>
+        4. Download offline Google Maps for the coast<br>
+        5. Start dreaming about sfogliatelle 🤌
       </p>
     </div>
   </div>
 </div>
 
 <footer>
-  <p>Made for a Toronto couple who loves beaches ☀️ · <a href="index.html">Full 25-destination interactive tool →</a></p>
-  <p style="margin-top:8px;">Prices are estimates for late August 2026. Always check booking links for real-time pricing.</p>
+  <p>Made for a Toronto couple headed to the Amalfi Coast 🇮🇹 · Aug 2026</p>
+  <p style="margin-top:6px;">Prices are estimates in CAD for late August 2026. Check booking links for real-time pricing.</p>
+  <p style="margin-top:6px;"><a href="index.html">← Back to 25-destination interactive tool</a></p>
 </footer>
-
-<script>
-function tab(dest, pane) {
-  document.querySelectorAll(`#tabs-${dest} .tab-btn`).forEach(b => b.classList.remove('active'));
-  document.querySelectorAll(`[id^="${dest}-"]`).forEach(p => p.classList.remove('active'));
-  document.getElementById(`${dest}-${pane}`).classList.add('active');
-  event.target.classList.add('active');
-}
-</script>
 
 </body>
 </html>
