@@ -23,7 +23,7 @@
     color: white; padding: 44px 24px 32px; text-align: center;
   }
   .page-hero h1 { font-size: clamp(1.5rem, 4vw, 2rem); font-weight: 900; margin-bottom: 6px; letter-spacing: -0.5px; }
-  .page-hero p { font-size: 0.88rem; opacity: 0.7; margin-bottom: 16px; max-width: 500px; margin-left: auto; margin-right: auto; }
+  .page-hero p { font-size: 0.88rem; opacity: 0.7; margin-bottom: 16px; max-width: 520px; margin-left: auto; margin-right: auto; }
   .page-hero-nav { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
   .page-hero-nav a {
     color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.78rem;
@@ -34,10 +34,51 @@
 
   .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
 
-  /* ── #1 Pick Hero Card ── */
-  .pick-hero {
-    margin: -28px auto 0; max-width: 1100px; padding: 0 20px; position: relative; z-index: 10;
+  /* ── Weight Sliders Panel ── */
+  .weights-panel {
+    margin: -20px auto 0; max-width: 1100px; padding: 0 20px; position: relative; z-index: 20;
   }
+  .weights-card {
+    background: var(--card); border-radius: 16px; padding: 20px 24px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.08); border: 1px solid var(--border);
+  }
+  .weights-header {
+    display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;
+  }
+  .weights-title { font-size: 0.82rem; font-weight: 700; color: var(--dark); }
+  .weights-reset {
+    font-size: 0.72rem; color: var(--ocean); cursor: pointer; border: none;
+    background: none; font-family: inherit; font-weight: 600; padding: 4px 8px;
+    border-radius: 6px; transition: background 0.2s;
+  }
+  .weights-reset:hover { background: #e0f2fe; }
+  .sliders { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+  .slider-group { }
+  .slider-label {
+    display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;
+  }
+  .slider-name { font-size: 0.75rem; font-weight: 700; }
+  .slider-name.rating { color: var(--gold); }
+  .slider-name.reviews { color: var(--ocean); }
+  .slider-name.price { color: var(--palm); }
+  .slider-val { font-size: 0.72rem; font-weight: 800; color: var(--dark); }
+  input[type="range"] {
+    width: 100%; height: 6px; -webkit-appearance: none; appearance: none;
+    border-radius: 3px; outline: none; cursor: pointer;
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%;
+    border: 2px solid white; box-shadow: 0 2px 6px rgba(0,0,0,0.2); cursor: pointer;
+  }
+  #sRating { background: linear-gradient(90deg, #fef3c7, var(--gold)); }
+  #sRating::-webkit-slider-thumb { background: var(--gold); }
+  #sReviews { background: linear-gradient(90deg, #dbeafe, var(--ocean)); }
+  #sReviews::-webkit-slider-thumb { background: var(--ocean); }
+  #sPrice { background: linear-gradient(90deg, #dcfce7, var(--palm)); }
+  #sPrice::-webkit-slider-thumb { background: var(--palm); }
+
+  /* ── #1 Pick Hero Card ── */
+  .pick-hero { margin: 20px auto 0; max-width: 1100px; padding: 0 20px; }
   .pick-hero-card {
     display: grid; grid-template-columns: 1fr 1fr; border-radius: 20px; overflow: hidden;
     background: var(--card); box-shadow: 0 16px 60px rgba(0,0,0,0.12);
@@ -56,21 +97,19 @@
   .pick-hero-stats { display: flex; gap: 20px; margin-bottom: 18px; flex-wrap: wrap; }
   .pick-hero-stat { text-align: center; }
   .pick-hero-stat .val { font-size: 1.3rem; font-weight: 800; }
-  .pick-hero-stat .val.price { color: var(--palm); }
-  .pick-hero-stat .val.rating { color: var(--gold); }
-  .pick-hero-stat .val.reviews { color: var(--ocean); }
+  .pick-hero-stat .val.price-c { color: var(--palm); }
+  .pick-hero-stat .val.rating-c { color: var(--gold); }
+  .pick-hero-stat .val.reviews-c { color: var(--ocean); }
   .pick-hero-stat .lbl { font-size: 0.62rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
   .pick-hero-score {
     display: flex; align-items: center; gap: 10px;
     background: linear-gradient(135deg, #fff8f0, #fff5eb);
     border: 1px solid #fed7aa; border-radius: 12px; padding: 12px 16px;
   }
-  .score-ring {
-    width: 48px; height: 48px; position: relative;
-  }
+  .score-ring { width: 48px; height: 48px; position: relative; }
   .score-ring svg { width: 48px; height: 48px; transform: rotate(-90deg); }
   .score-ring .bg { fill: none; stroke: #f5e6d3; stroke-width: 4; }
-  .score-ring .fg { fill: none; stroke-width: 4; stroke-linecap: round; transition: stroke-dashoffset 1s ease; }
+  .score-ring .fg { fill: none; stroke-width: 4; stroke-linecap: round; transition: stroke-dashoffset 0.6s ease; }
   .score-ring .num {
     position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
     font-size: 0.82rem; font-weight: 900; color: var(--ocean-dark);
@@ -80,15 +119,14 @@
   .score-info .desc { font-size: 0.72rem; color: var(--muted); line-height: 1.4; }
 
   /* ── Section ── */
-  .section { padding: 48px 0 16px; }
-  .section-header { margin-bottom: 20px; padding: 0 20px; max-width: 1100px; margin-left: auto; margin-right: auto; }
+  .section { padding: 40px 0 16px; }
+  .section-header { margin-bottom: 18px; padding: 0 20px; max-width: 1100px; margin-left: auto; margin-right: auto; }
   .section-emoji { font-size: 1.5rem; margin-bottom: 4px; display: block; }
-  .section-title { font-size: 1.25rem; font-weight: 800; letter-spacing: -0.3px; }
+  .section-title { font-size: 1.2rem; font-weight: 800; letter-spacing: -0.3px; }
   .section-sub { font-size: 0.82rem; color: var(--muted); margin-top: 2px; }
   .section-divider {
     width: 40px; height: 3px; border-radius: 2px;
-    background: linear-gradient(90deg, var(--accent), var(--sunset));
-    margin-top: 10px;
+    background: linear-gradient(90deg, var(--accent), var(--sunset)); margin-top: 10px;
   }
 
   /* ── Horizontal scroll row ── */
@@ -124,9 +162,9 @@
     font-size: 0.68rem; font-weight: 800; color: white;
     backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
   }
-  .card-rank.mag-high { background: rgba(212,54,59,0.85); }
-  .card-rank.mag-mid { background: rgba(230,167,86,0.85); }
-  .card-rank.mag-low { background: rgba(160,174,192,0.85); }
+  .card-rank.high { background: rgba(212,54,59,0.85); }
+  .card-rank.mid { background: rgba(230,167,86,0.85); }
+  .card-rank.low { background: rgba(160,174,192,0.85); }
   .card-fav {
     position: absolute; top: 10px; right: 10px;
     background: rgba(0,0,0,0.5); color: white; font-size: 0.65rem;
@@ -151,16 +189,14 @@
   .card-total { font-size: 0.72rem; color: var(--muted); margin-left: auto; }
   .card-score-bar { display: flex; align-items: center; gap: 6px; }
   .bar-track { flex: 1; height: 5px; border-radius: 3px; background: #f0ece7; overflow: hidden; }
-  .bar-fill { height: 100%; border-radius: 3px; }
+  .bar-fill { height: 100%; border-radius: 3px; transition: width 0.4s ease; }
   .bar-fill.high { background: linear-gradient(90deg, #e87d3e, #d4363b); }
   .bar-fill.mid { background: linear-gradient(90deg, #f0c27f, #e6a756); }
   .bar-fill.low { background: #b8c9d6; }
-  .bar-num { font-size: 0.7rem; font-weight: 800; color: var(--ocean-dark); min-width: 16px; }
+  .bar-num { font-size: 0.7rem; font-weight: 800; color: var(--ocean-dark); min-width: 20px; transition: all 0.3s; }
 
   /* ── Explainer ── */
-  .explainer {
-    max-width: 1100px; margin: 40px auto 0; padding: 0 20px;
-  }
+  .explainer { max-width: 1100px; margin: 32px auto 0; padding: 0 20px; }
   .explainer-card {
     background: var(--card); border: 1px solid var(--border); border-radius: 16px;
     padding: 24px 28px; display: flex; gap: 24px; align-items: flex-start; flex-wrap: wrap;
@@ -208,7 +244,7 @@
   .m-score-label { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: #92400e; }
   .m-score-num { font-size: 1.6rem; font-weight: 900; color: var(--ocean-dark); }
   .m-score-bar { height: 8px; border-radius: 4px; background: #f5e6d3; overflow: hidden; }
-  .m-score-fill { height: 100%; border-radius: 4px; background: linear-gradient(90deg, #f0c27f, #e87d3e, #d4363b); }
+  .m-score-fill { height: 100%; border-radius: 4px; background: linear-gradient(90deg, #f0c27f, #e87d3e, #d4363b); transition: width 0.4s; }
   .m-breakdown {
     display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 4px; margin-top: 10px;
     font-size: 0.68rem; color: var(--muted); text-align: center;
@@ -217,7 +253,7 @@
   .m-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
   .m-stat { background: var(--bg); border-radius: 12px; padding: 14px; text-align: center; }
   .m-stat .v { font-size: 1.2rem; font-weight: 800; color: var(--ocean-dark); }
-  .m-stat .v.price { color: var(--palm); }
+  .m-stat .v.price-c { color: var(--palm); }
   .m-stat .l { font-size: 0.62rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
   .m-badges { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 16px; }
   .m-badge { font-size: 0.7rem; font-weight: 600; padding: 4px 10px; border-radius: 7px; }
@@ -242,6 +278,7 @@
     .pick-hero-img { height: 220px; }
     .pick-hero-body { padding: 20px; }
     .card { flex: 0 0 240px; }
+    .sliders { grid-template-columns: 1fr; gap: 12px; }
     .explainer-card { flex-direction: column; gap: 16px; }
   }
 </style>
@@ -250,25 +287,58 @@
 
 <div class="page-hero">
   <h1>🏆 Best Airbnb Picks</h1>
-  <p>Auto-ranked from 280 Amalfi Coast listings. Scored by price, rating & reviews — the best float to the top.</p>
+  <p>Auto-ranked from 280 Amalfi Coast listings. Scored by price, rating & reviews — adjust the weights below to match your priorities.</p>
   <div class="page-hero-nav">
     <a href="best-trip.html">← Itinerary</a>
     <a href="airbnbs.html">All 280 Listings</a>
   </div>
 </div>
 
+<!-- WEIGHT SLIDERS -->
+<div class="weights-panel">
+  <div class="weights-card">
+    <div class="weights-header">
+      <span class="weights-title">⚙️ Adjust What Matters to You</span>
+      <button class="weights-reset" onclick="resetWeights()">Reset</button>
+    </div>
+    <div class="sliders">
+      <div class="slider-group">
+        <div class="slider-label">
+          <span class="slider-name rating">★ Rating</span>
+          <span class="slider-val" id="vRating">35%</span>
+        </div>
+        <input type="range" id="sRating" min="0" max="100" value="35">
+      </div>
+      <div class="slider-group">
+        <div class="slider-label">
+          <span class="slider-name reviews">💬 Reviews</span>
+          <span class="slider-val" id="vReviews">35%</span>
+        </div>
+        <input type="range" id="sReviews" min="0" max="100" value="35">
+      </div>
+      <div class="slider-group">
+        <div class="slider-label">
+          <span class="slider-name price">💰 Lower Price</span>
+          <span class="slider-val" id="vPrice">30%</span>
+        </div>
+        <input type="range" id="sPrice" min="0" max="100" value="30">
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- #1 PICK -->
 <div class="pick-hero">
-  <div class="pick-hero-card" onclick="openModal(HERO.id)">
+  <div class="pick-hero-card" id="heroCard">
     <img class="pick-hero-img" src="" alt="" id="heroImg">
     <div class="pick-hero-body">
       <div class="pick-hero-badge">👑 #1 OVERALL PICK</div>
       <div class="pick-hero-name" id="heroName"></div>
       <div class="pick-hero-area" id="heroArea"></div>
       <div class="pick-hero-stats">
-        <div class="pick-hero-stat"><div class="val price" id="heroPrice"></div><div class="lbl">Per Night</div></div>
-        <div class="pick-hero-stat"><div class="val rating" id="heroRating"></div><div class="lbl">Rating</div></div>
-        <div class="pick-hero-stat"><div class="val reviews" id="heroReviews"></div><div class="lbl">Reviews</div></div>
+        <div class="pick-hero-stat"><div class="val price-c" id="heroPrice"></div><div class="lbl">Per Night</div></div>
+        <div class="pick-hero-stat"><div class="val rating-c" id="heroRating"></div><div class="lbl">Rating</div></div>
+        <div class="pick-hero-stat"><div class="val reviews-c" id="heroReviews"></div><div class="lbl">Reviews</div></div>
       </div>
       <div class="pick-hero-score">
         <div class="score-ring">
@@ -281,7 +351,7 @@
         </div>
         <div class="score-info">
           <div class="title">Value Score</div>
-          <div class="desc">Best combined rating, reviews<br>& price out of 280 listings</div>
+          <div class="desc" id="heroScoreDesc">Best combined rating, reviews<br>& price out of 280 listings</div>
         </div>
       </div>
     </div>
@@ -296,14 +366,14 @@
   <div class="explainer-card">
     <div class="explainer-item">
       <h3>🧪 How scoring works</h3>
-      <p>Each listing gets a composite score from 0–100 based on three normalized dimensions, weighted equally:</p>
-      <div class="explainer-formula">
+      <p>Each listing gets a composite score (0–100) from three normalized dimensions. Use the sliders above to adjust the weights:</p>
+      <div class="explainer-formula" id="formulaDisplay">
         Score = <span>35%</span> Rating + <span>35%</span> Reviews + <span>30%</span> Lower Price
       </div>
     </div>
     <div class="explainer-item">
       <h3>📊 What we analyzed</h3>
-      <p>280 total Airbnb listings scraped for Aug 22–29, 2026 (2 adults). Filtered to 47 with photos, then auto-sorted into curated categories. No manual selection.</p>
+      <p>280 total Airbnb listings scraped for Aug 22–29, 2026 (2 adults). 47 with photos are shown here, auto-sorted into curated categories. Rankings update live as you adjust weights.</p>
     </div>
   </div>
 </div>
@@ -329,7 +399,7 @@
         </div>
       </div>
       <div class="m-grid">
-        <div class="m-stat"><div class="v price" id="mPrice"></div><div class="l">Per Night</div></div>
+        <div class="m-stat"><div class="v price-c" id="mPrice"></div><div class="l">Per Night</div></div>
         <div class="m-stat"><div class="v" id="mTotal"></div><div class="l">7 Nights</div></div>
         <div class="m-stat"><div class="v" id="mRating"></div><div class="l">Rating</div></div>
         <div class="m-stat"><div class="v" id="mReviews"></div><div class="l">Reviews</div></div>
@@ -345,86 +415,161 @@
 </div>
 
 <script>
-const HERO = {"id": "32588731", "name": "Windows on heaven. Total sea view house!", "area": "Scala", "price": 224, "total": 1568, "rating": 4.98, "reviews": 445, "url": "https://www.airbnb.ca/rooms/32588731?check_in=2026-08-22&check_out=2026-08-29&adults=2", "img": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MzI1ODg3MzE%3D/original/38e2203b-a04c-469c-a47e-ce4dc45dc593.jpeg", "guest_fav": false, "mag": 90, "rank": 1};
-const SECTIONS = [{"id": "best-value", "emoji": "\ud83c\udfaf", "title": "Best Overall Value", "subtitle": "Highest combined score across price, rating & reviews", "cards": [{"id": "19917103", "name": "Casa Vacanze Mir\u00f2 (Airbnb), Ravello", "area": "Ravello", "price": 320, "total": 2240, "rating": 5.0, "reviews": 417, "url": "https://www.airbnb.ca/rooms/19917103?check_in=2026-08-22&check_out=2026-08-29&adults=2", "img": "https://a0.muscache.com/im/pictures/9ae3c2b8-21a5-4f18-bbeb-b6dfa43bd05f.jpg", "guest_fav": false, "mag": 87, "rank": 2}, {"id": "18457653", "name": "The home of the Gods (24/7 support) entire house", "area": "Praiano", "price": 607, "total": 4246, "rating": 4.99, "reviews": 429, "url": "https://www.airbnb.ca/rooms/18457653?check_in=2026-08-22&check_out=2026-08-29&adults=2", "img": "https://a0.muscache.com/im/pictures/ff01aa2d-36bc-4a61-b04b-85bd29200f1d.jpg", "guest_fav": false, "mag": 82, "rank": 3}, {"id": "35930217", "name": "LUCY\u2019S HOUSE - comfortable apartment in Amalfi", "area": "Pontone", "price": 348, "total": 2433, "rating": 4.92, "reviews": 438, "url": "https://www.airbnb.ca/rooms/35930217?check_in=2026-08-22&check_out=2026-08-29&adults=2", "img": "https://a0.muscache.com/im/pictures/36e419cf-a1f1-4ca9-a4c8-a494517488ce.jpg", "guest_fav": true, "mag": 81, "rank": 4}, {"id": "2938612", "name": "unbelievable new house sea view", "area": "Ravello", "price": 224, "total": 1570, "rating": 4.81, "reviews": 745, "url": "https://www.airbnb.ca/rooms/2938612?check_in=2026-08-22&check_out=2026-08-29&adults=2", "img": "https://a0.muscache.com/im/pictures/84896876/0b1113f1_original.jpg", "guest_fav": true, "mag": 81, "rank": 5}, {"id": "6690135", "name": "Full relaxation", "area": "Agerola", "price": 185, "total": 1295, "rating": 4.8, "reviews": 619, "url": "https://www.airbnb.ca/rooms/6690135?check_in=2026-08-22&check_out=2026-08-29&adults=2", "img": "https://a0.muscache.com/im/pictures/miso/Hosting-6690135/original/0c06ad47-6c8b-4d7a-89f2-ef0f16c3912a.jpeg", "guest_fav": false, "mag": 81, "rank": 6}]}, {"id": "budget", "emoji": "\ud83d\udcb0", "title": "Budget Gems", "subtitle": "Under $175/night, rated 4.85+", "cards": [{"id": "19538495", "name": "Home holiday \"Marygi\u00f2\"", "area": "Agerola", "price": 149, "total": 1041, "rating": 4.97, "reviews": 322, "url": "https://www.airbnb.ca/rooms/19538495?check_in=2026-08-22&check_out=2026-08-29&adults=2", "img": "https://a0.muscache.com/im/pictures/e7970991-75c1-4062-b2a9-dfe0c38bb9bb.jpg", "guest_fav": false, "mag": 77, "rank": null}, {"id": "44836624", "name": "PARADISE APARTMENT", "area": "Agerola", "price": 144, "total": 1007, "rating": 4.95, "reviews": 300, "url": "https://www.airbnb.ca/rooms/44836624?check_in=2026-08-22&check_out=2026-08-29&adults=2", "img": "https://a0.muscache.com/im/pictures/a497debf-0fc7-4ac2-8c79-a0efdb4ab1ec.jpg", "guest_fav": false, "mag": 73, "rank": null}, {"id": "617194", "name": "Albachiara-hiking Amalficoast-PathOfGods-Jasmine", "area": "Furore", "price": 122, "total": 852, "rating": 4.9, "reviews": 321, "url": "https://www.airbnb.ca/rooms/617194?check_in=2026-08-22&check_out=2026-08-29&adults=2", "img": "https://a0.muscache.com/im/pictures/14279174/826af118_original.jpg", "guest_fav": true, "mag": 71, "rank": null}, {"id": "47576133", "name": "Room with en-suite bathroom. Station super close!", "area": "Other", "price": 107, "total": 749, "rating": 4.94, "reviews": 281, "url": "https://www.airbnb.ca/rooms/47576133?check_in=2026-08-22&check_out=2026-08-29&adults=2", "img": "https://a0.muscache.com/im/pictures/e144da7b-75d0-4b42-9f91-e39804d4009f.jpg", "guest_fav": false, "mag": 71, "rank": null}]}, {"id": "most-loved", "emoji": "\ud83d\udcac", "title": "Most Reviewed", "subtitle": "Tried, tested & loved by hundreds of guests", "cards": [{"id": "13922336", "name": "OASI in the center with parking", "area": "Other", "price": 1673, "total": 11711, "rating": 4.83, "reviews": 510, "url": "https://www.airbnb.ca/rooms/13922336?check_in=2026-08-22&check_out=2026-08-29&adults=2", "img": "https://a0.muscache.com/im/pictures/bb6fa94b-bac5-4877-a790-cf25b618b462.jpg", "guest_fav": false, "mag": 55, "rank": null}, {"id": "21660322", "name": "Casa San Nicola, Positano", "area": "Positano", "price": 551, "total": 3854, "rating": 4.82, "reviews": 509, "url": "https://www.airbnb.ca/rooms/21660322?check_in=2026-08-22&check_out=2026-08-29&adults=2", "img": "https://a0.muscache.com/im/pictures/hosting/Hosting-21660322/original/f2d9a951-35bf-44bc-9d2e-3f1ed209d66b.jpeg", "guest_fav": true, "mag": 75, "rank": null}, {"id": "3069031", "name": "Ocean view Martida_apartment studio", "area": "Praiano", "price": 296, "total": 2069, "rating": 4.92, "reviews": 390, "url": "https://www.airbnb.ca/rooms/3069031?check_in=2026-08-22&check_out=2026-08-29&adults=2", "img": "https://a0.muscache.com/im/pictures/70476242/063d3c43_original.jpg", "guest_fav": false, "mag": 77, "rank": null}, {"id": "18071473", "name": "Alma House", "area": "Amalfi", "price": 270, "total": 1887, "rating": 4.8, "reviews": 374, "url": "https://www.airbnb.ca/rooms/18071473?check_in=2026-08-22&check_out=2026-08-29&adults=2", "img": "https://a0.muscache.com/im/pictures/3178b78a-3887-4ec4-a383-e5b5b3e8857c.jpg", "guest_fav": true, "mag": 65, "rank": null}]}, {"id": "perfect", "emoji": "\u2b50", "title": "Highest Rated", "subtitle": "Near-perfect ratings with 100+ reviews to back it up", "cards": [{"id": "19633284", "name": "Amalfi Lady Laura House", "area": "Amalfi", "price": 607, "total": 4247, "rating": 4.99, "reviews": 366, "url": "https://www.airbnb.ca/rooms/19633284?check_in=2026-08-22&check_out=2026-08-29&adults=2", "img": "https://a0.muscache.com/im/pictures/6a4be995-f696-4c7a-b67b-4987d166cdba.jpg", "guest_fav": false, "mag": 75, "rank": null}, {"id": "17631918", "name": "Villa Gio PositanoHouse", "area": "Nocelle", "price": 730, "total": 5112, "rating": 4.99, "reviews": 270, "url": "https://www.airbnb.ca/rooms/17631918?check_in=2026-08-22&check_out=2026-08-29&adults=2", "img": "https://a0.muscache.com/im/pictures/miso/Hosting-17631918/original/5f89a7a6-6280-4624-a77c-8312f8f0e194.jpeg", "guest_fav": false, "mag": 62, "rank": null}, {"id": "13671263", "name": "EXCLUSIVE APARTAMENT your piece of paradise", "area": "Furore", "price": 455, "total": 3183, "rating": 4.98, "reviews": 370, "url": "https://www.airbnb.ca/rooms/13671263?check_in=2026-08-22&check_out=2026-08-29&adults=2", "img": "https://a0.muscache.com/im/pictures/83d4e63c-140e-4b51-95bb-45147fa8ec2c.jpg", "guest_fav": false, "mag": 77, "rank": null}, {"id": "12802359", "name": "B&B la Palombara", "area": "Other", "price": 436, "total": 3055, "rating": 4.98, "reviews": 309, "url": "https://www.airbnb.ca/rooms/12802359?check_in=2026-08-22&check_out=2026-08-29&adults=2", "img": "https://a0.muscache.com/im/pictures/c9b6e849-41fe-4c4b-b86d-39b361886e06.jpg", "guest_fav": false, "mag": 71, "rank": null}]}, {"id": "hidden", "emoji": "\ud83d\udc8e", "title": "Hidden Gems", "subtitle": "Off the beaten path \u2014 lesser known areas, great value", "cards": [{"id": "43281874", "name": "Home overlooking Vesuvius on the hills of Castellammare", "area": "Other", "price": 177, "total": 1236, "rating": 4.97, "reviews": 319, "url": "https://www.airbnb.ca/rooms/43281874?check_in=2026-08-22&check_out=2026-08-29&adults=2", "img": "https://a0.muscache.com/im/pictures/dc28e98e-66ca-4db1-880b-481584d48828.jpg", "guest_fav": false, "mag": 76, "rank": null}, {"id": "41642520", "name": "My Habitat - Your home away from home", "area": "Other", "price": 150, "total": 1050, "rating": 4.96, "reviews": 217, "url": "https://www.airbnb.ca/rooms/41642520?check_in=2026-08-22&check_out=2026-08-29&adults=2", "img": "https://a0.muscache.com/im/pictures/0bb33890-fb36-4b7e-8486-c849e10b0daa.jpg", "guest_fav": true, "mag": 65, "rank": null}, {"id": "9900192", "name": "Il Pertuso B&B, Teresa Room", "area": "Nocelle", "price": 282, "total": 1977, "rating": 4.92, "reviews": 259, "url": "https://www.airbnb.ca/rooms/9900192?check_in=2026-08-22&check_out=2026-08-29&adults=2", "img": "https://a0.muscache.com/im/pictures/6471c3d0-c08a-4dc3-8d15-e39606bcb843.jpg", "guest_fav": false, "mag": 63, "rank": null}, {"id": "20491538", "name": "La Maison du Paradis B&B nel cuore di Salerno", "area": "Vietri sul Mare", "price": 270, "total": 1889, "rating": 4.96, "reviews": 223, "url": "https://www.airbnb.ca/rooms/20491538?check_in=2026-08-22&check_out=2026-08-29&adults=2", "img": "https://a0.muscache.com/im/pictures/227ea05a-4d43-4d5b-b8af-635e8deac0fb.jpg", "guest_fav": false, "mag": 63, "rank": null}]}];
-const ALL = [HERO, ...SECTIONS.flatMap(s => s.cards)];
+const DATA = [{"id": "19917103", "name": "Casa Vacanze Mir\u00f2 (Airbnb), Ravello", "area": "Ravello", "price": 320, "total": 2240, "rating": 5.0, "reviews": 417, "url": "https://www.airbnb.ca/rooms/19917103?check_in=2026-08-22&check_out=2026-08-29&adults=2", "img": "https://a0.muscache.com/im/pictures/9ae3c2b8-21a5-4f18-bbeb-b6dfa43bd05f.jpg", "gf": false, "fc": true, "nr": 1.0, "nv": 0.7422, "np": 0.864}, {"id": "18457653", "name": "The home of the Gods (24/7 support) entire house", "area": "Praiano", "price": 607, "total": 4246, "rating": 4.99, "reviews": 429, "url": "https://www.airbnb.ca/rooms/18457653?check_in=2026-08-22&check_out=2026-08-29&adults=2", "img": "https://a0.muscache.com/im/pictures/ff01aa2d-36bc-4a61-b04b-85bd29200f1d.jpg", "gf": false, "fc": true, "nr": 0.9744, "nv": 0.7795, "np": 0.6807}, {"id": "19633284", "name": "Amalfi Lady Laura House", "area": "Amalfi", "price": 607, "total": 4247, "rating": 4.99, "reviews": 366, "url": "https://www.airbnb.ca/rooms/19633284?check_in=2026-08-22&check_out=2026-08-29&adults=2", "img": "https://a0.muscache.com/im/pictures/6a4be995-f696-4c7a-b67b-4987d166cdba.jpg", "gf": false, "fc": true, "nr": 0.9744, "nv": 0.5839, "np": 0.6807}, {"id": "17631918", "name": "Villa Gio PositanoHouse", "area": "Nocelle", "price": 730, "total": 5112, "rating": 4.99, "reviews": 270, "url": "https://www.airbnb.ca/rooms/17631918?check_in=2026-08-22&check_out=2026-08-29&adults=2", "img": "https://a0.muscache.com/im/pictures/miso/Hosting-17631918/original/5f89a7a6-6280-4624-a77c-8312f8f0e194.jpeg", "gf": false, "fc": true, "nr": 0.9744, "nv": 0.2857, "np": 0.6022}, {"id": "32588731", "name": "Windows on heaven. Total sea view house!", "area": "Scala", "price": 224, "total": 1568, "rating": 4.98, "reviews": 445, "url": "https://www.airbnb.ca/rooms/32588731?check_in=2026-08-22&check_out=2026-08-29&adults=2", "img": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MzI1ODg3MzE%3D/original/38e2203b-a04c-469c-a47e-ce4dc45dc593.jpeg", "gf": false, "fc": true, "nr": 0.9487, "nv": 0.8292, "np": 0.9253}, {"id": "13671263", "name": "EXCLUSIVE APARTAMENT your piece of paradise", "area": "Furore", "price": 455, "total": 3183, "rating": 4.98, "reviews": 370, "url": "https://www.airbnb.ca/rooms/13671263?check_in=2026-08-22&check_out=2026-08-29&adults=2", "img": "https://a0.muscache.com/im/pictures/83d4e63c-140e-4b51-95bb-45147fa8ec2c.jpg", "gf": false, "fc": true, "nr": 0.9487, "nv": 0.5963, "np": 0.7778}, {"id": "12802359", "name": "B&B la Palombara", "area": "Other", "price": 436, "total": 3055, "rating": 4.98, "reviews": 309, "url": "https://www.airbnb.ca/rooms/12802359?check_in=2026-08-22&check_out=2026-08-29&adults=2", "img": "https://a0.muscache.com/im/pictures/c9b6e849-41fe-4c4b-b86d-39b361886e06.jpg", "gf": false, "fc": true, "nr": 0.9487, "nv": 0.4068, "np": 0.7899}, {"id": "12866730", "name": "The Palombara Capri room", "area": "Other", "price": 363, "total": 2540, "rating": 4.98, "reviews": 259, "url": "https://www.airbnb.ca/rooms/12866730?check_in=2026-08-22&check_out=2026-08-29&adults=2", "img": "https://a0.muscache.com/im/pictures/49d2c71d-092b-4761-9bff-e285a4058ce9.jpg", "gf": false, "fc": true, "nr": 0.9487, "nv": 0.2516, "np": 0.8365}, {"id": "5925780", "name": "a slice of paradise in Vietri on the Amalfi Coast", "area": "Vietri sul Mare", "price": 304, "total": 2129, "rating": 4.98, "reviews": 188, "url": "https://www.airbnb.ca/rooms/5925780?check_in=2026-08-22&check_out=2026-08-29&adults=2", "img": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6NTkyNTc4MA%3D%3D/original/4e4201fc-f556-4483-81e8-05ec30e497cd.jpeg", "gf": false, "fc": true, "nr": 0.9487, "nv": 0.0311, "np": 0.8742}, {"id": "35607567", "name": "GStar Flat", "area": "Other", "price": 287, "total": 2008, "rating": 4.98, "reviews": 178, "url": "https://www.airbnb.ca/rooms/35607567?check_in=2026-08-22&check_out=2026-08-29&adults=2", "img": "https://a0.muscache.com/im/pictures/2be7b1fa-ce3c-4c6e-ad0d-9881a00c0ca3.jpg", "gf": false, "fc": true, "nr": 0.9487, "nv": 0.0, "np": 0.8851}, {"id": "19538495", "name": "Home holiday \"Marygi\u00f2\"", "area": "Agerola", "price": 149, "total": 1041, "rating": 4.97, "reviews": 322, "url": "https://www.airbnb.ca/rooms/19538495?check_in=2026-08-22&check_out=2026-08-29&adults=2", "img": "https://a0.muscache.com/im/pictures/e7970991-75c1-4062-b2a9-dfe0c38bb9bb.jpg", "gf": false, "fc": true, "nr": 0.9231, "nv": 0.4472, "np": 0.9732}, {"id": "43281874", "name": "Home overlooking Vesuvius on the hills of Castellammare", "area": "Other", "price": 177, "total": 1236, "rating": 4.97, "reviews": 319, "url": "https://www.airbnb.ca/rooms/43281874?check_in=2026-08-22&check_out=2026-08-29&adults=2", "img": "https://a0.muscache.com/im/pictures/dc28e98e-66ca-4db1-880b-481584d48828.jpg", "gf": false, "fc": true, "nr": 0.9231, "nv": 0.4379, "np": 0.9553}, {"id": "628862022294633899", "name": "Accommodation in Downtown Salerno", "area": "Other", "price": 259, "total": 1812, "rating": 4.97, "reviews": 183, "url": "https://www.airbnb.ca/rooms/628862022294633899?check_in=2026-08-22&check_out=2026-08-29&adults=2", "img": "https://a0.muscache.com/im/pictures/166d07f3-a9b7-45a5-a173-ec70131783e1.jpg", "gf": false, "fc": true, "nr": 0.9231, "nv": 0.0155, "np": 0.9029}, {"id": "20491538", "name": "La Maison du Paradis B&B nel cuore di Salerno", "area": "Vietri sul Mare", "price": 270, "total": 1889, "rating": 4.96, "reviews": 223, "url": "https://www.airbnb.ca/rooms/20491538?check_in=2026-08-22&check_out=2026-08-29&adults=2", "img": "https://a0.muscache.com/im/pictures/227ea05a-4d43-4d5b-b8af-635e8deac0fb.jpg", "gf": false, "fc": true, "nr": 0.8974, "nv": 0.1398, "np": 0.8959}, {"id": "41642520", "name": "My Habitat - Your home away from home", "area": "Other", "price": 150, "total": 1050, "rating": 4.96, "reviews": 217, "url": "https://www.airbnb.ca/rooms/41642520?check_in=2026-08-22&check_out=2026-08-29&adults=2", "img": "https://a0.muscache.com/im/pictures/0bb33890-fb36-4b7e-8486-c849e10b0daa.jpg", "gf": true, "fc": true, "nr": 0.8974, "nv": 0.1211, "np": 0.9725}, {"id": "14728105", "name": "Serenity", "area": "Positano", "price": 546, "total": 3820, "rating": 4.95, "reviews": 363, "url": "https://www.airbnb.ca/rooms/14728105?check_in=2026-08-22&check_out=2026-08-29&adults=2", "img": "https://a0.muscache.com/im/pictures/airflow/Hosting-14728105/original/4acc9c33-be7f-4884-bf8b-c521cb6c4030.jpg", "gf": false, "fc": true, "nr": 0.8718, "nv": 0.5745, "np": 0.7197}, {"id": "44836624", "name": "PARADISE APARTMENT", "area": "Agerola", "price": 144, "total": 1007, "rating": 4.95, "reviews": 300, "url": "https://www.airbnb.ca/rooms/44836624?check_in=2026-08-22&check_out=2026-08-29&adults=2", "img": "https://a0.muscache.com/im/pictures/a497debf-0fc7-4ac2-8c79-a0efdb4ab1ec.jpg", "gf": false, "fc": true, "nr": 0.8718, "nv": 0.3789, "np": 0.9764}, {"id": "22923567", "name": "Casa Positamo", "area": "Positano", "price": 543, "total": 3800, "rating": 4.95, "reviews": 258, "url": "https://www.airbnb.ca/rooms/22923567?check_in=2026-08-22&check_out=2026-08-29&adults=2", "img": "https://a0.muscache.com/im/pictures/c2adc4ee-4e6c-4ab1-acd0-11e47c9594d5.jpg", "gf": true, "fc": true, "nr": 0.8718, "nv": 0.2484, "np": 0.7216}, {"id": "47306992", "name": "Cozy Penthouse with panoramic terrace", "area": "Atrani", "price": 276, "total": 1930, "rating": 4.95, "reviews": 211, "url": "https://www.airbnb.ca/rooms/47306992?check_in=2026-08-22&check_out=2026-08-29&adults=2", "img": "https://a0.muscache.com/im/pictures/21a64410-87b6-4533-8f6a-77df1dc9602c.jpg", "gf": true, "fc": true, "nr": 0.8718, "nv": 0.1025, "np": 0.8921}, {"id": "13277761", "name": "From Zio Nicola Piano di Sorrento House for Holiday", "area": "Other", "price": 357, "total": 2498, "rating": 4.94, "reviews": 289, "url": "https://www.airbnb.ca/rooms/13277761?check_in=2026-08-22&check_out=2026-08-29&adults=2", "img": "https://a0.muscache.com/im/pictures/8b9fbac0-a897-4777-ac41-af16b5ca5f71.jpg", "gf": false, "fc": true, "nr": 0.8462, "nv": 0.3447, "np": 0.8404}, {"id": "47576133", "name": "Room with en-suite bathroom. Station super close!", "area": "Other", "price": 107, "total": 749, "rating": 4.94, "reviews": 281, "url": "https://www.airbnb.ca/rooms/47576133?check_in=2026-08-22&check_out=2026-08-29&adults=2", "img": "https://a0.muscache.com/im/pictures/e144da7b-75d0-4b42-9f91-e39804d4009f.jpg", "gf": false, "fc": true, "nr": 0.8462, "nv": 0.3199, "np": 1.0}, {"id": "32690686", "name": "Capo D'acqua 1 Retreat", "area": "Positano", "price": 184, "total": 1288, "rating": 4.94, "reviews": 196, "url": "https://www.airbnb.ca/rooms/32690686?check_in=2026-08-22&check_out=2026-08-29&adults=2", "img": "https://a0.muscache.com/im/pictures/hosting/Hosting-32690686/original/9ac584eb-ddc0-4b2c-86ca-55dab46986bd.jpeg", "gf": false, "fc": true, "nr": 0.8462, "nv": 0.0559, "np": 0.9508}, {"id": "32715535", "name": "Capo D'acqua 3 Retreat", "area": "Positano", "price": 184, "total": 1288, "rating": 4.94, "reviews": 188, "url": "https://www.airbnb.ca/rooms/32715535?check_in=2026-08-22&check_out=2026-08-29&adults=2", "img": "https://a0.muscache.com/im/pictures/05308945-703e-4d4f-9e52-5a39acf79934.jpg", "gf": true, "fc": true, "nr": 0.8462, "nv": 0.0311, "np": 0.9508}, {"id": "5996171", "name": "IlPertusoB&B, Camera Luisa", "area": "Nocelle", "price": 282, "total": 1977, "rating": 4.93, "reviews": 228, "url": "https://www.airbnb.ca/rooms/5996171?check_in=2026-08-22&check_out=2026-08-29&adults=2", "img": "https://a0.muscache.com/im/pictures/74672047/4ca39f81_original.jpg", "gf": true, "fc": true, "nr": 0.8205, "nv": 0.1553, "np": 0.8883}, {"id": "35930217", "name": "LUCY\u2019S HOUSE - comfortable apartment in Amalfi", "area": "Pontone", "price": 348, "total": 2433, "rating": 4.92, "reviews": 438, "url": "https://www.airbnb.ca/rooms/35930217?check_in=2026-08-22&check_out=2026-08-29&adults=2", "img": "https://a0.muscache.com/im/pictures/36e419cf-a1f1-4ca9-a4c8-a494517488ce.jpg", "gf": true, "fc": true, "nr": 0.7949, "nv": 0.8075, "np": 0.8461}, {"id": "3069031", "name": "Ocean view Martida_apartment studio", "area": "Praiano", "price": 296, "total": 2069, "rating": 4.92, "reviews": 390, "url": "https://www.airbnb.ca/rooms/3069031?check_in=2026-08-22&check_out=2026-08-29&adults=2", "img": "https://a0.muscache.com/im/pictures/70476242/063d3c43_original.jpg", "gf": false, "fc": true, "nr": 0.7949, "nv": 0.6584, "np": 0.8793}, {"id": "9900192", "name": "Il Pertuso B&B, Teresa Room", "area": "Nocelle", "price": 282, "total": 1977, "rating": 4.92, "reviews": 259, "url": "https://www.airbnb.ca/rooms/9900192?check_in=2026-08-22&check_out=2026-08-29&adults=2", "img": "https://a0.muscache.com/im/pictures/6471c3d0-c08a-4dc3-8d15-e39606bcb843.jpg", "gf": false, "fc": true, "nr": 0.7949, "nv": 0.2516, "np": 0.8883}, {"id": "191220", "name": "Agerola Private \u2013 Easy Check-in & Bus 2 Min Walk", "area": "Conca dei Marini", "price": 161, "total": 1130, "rating": 4.91, "reviews": 244, "url": "https://www.airbnb.ca/rooms/191220?check_in=2026-08-22&check_out=2026-08-29&adults=2", "img": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTkxMjIw/original/d037bf49-b109-4a63-ba3b-e96a973f60f9.png", "gf": true, "fc": true, "nr": 0.7692, "nv": 0.205, "np": 0.9655}, {"id": "923862125538251337", "name": "Superior Double Room", "area": "Tramonti", "price": 338, "total": 2369, "rating": 4.91, "reviews": 222, "url": "https://www.airbnb.ca/rooms/923862125538251337?check_in=2026-08-22&check_out=2026-08-29&adults=2", "img": "https://a0.muscache.com/im/pictures/miso/Hosting-923862125538251337/original/33eb5ffc-c3c1-4bac-8050-8a7d4a9b2376.jpeg", "gf": false, "fc": true, "nr": 0.7692, "nv": 0.1366, "np": 0.8525}, {"id": "19488613", "name": "Amalfi Casa Mikr\u00f2", "area": "Amalfi", "price": 266, "total": 1862, "rating": 4.9, "reviews": 335, "url": "https://www.airbnb.ca/rooms/19488613?check_in=2026-08-22&check_out=2026-08-29&adults=2", "img": "https://a0.muscache.com/im/pictures/d6910670-70ea-4f1d-9a2f-774b15fb31bb.jpg", "gf": true, "fc": true, "nr": 0.7436, "nv": 0.4876, "np": 0.8985}, {"id": "617194", "name": "Albachiara-hiking Amalficoast-PathOfGods-Jasmine", "area": "Furore", "price": 122, "total": 852, "rating": 4.9, "reviews": 321, "url": "https://www.airbnb.ca/rooms/617194?check_in=2026-08-22&check_out=2026-08-29&adults=2", "img": "https://a0.muscache.com/im/pictures/14279174/826af118_original.jpg", "gf": true, "fc": true, "nr": 0.7436, "nv": 0.4441, "np": 0.9904}, {"id": "4498735", "name": "Apartment in Praiano, Amalfi Coast", "area": "Praiano", "price": 367, "total": 2570, "rating": 4.9, "reviews": 241, "url": "https://www.airbnb.ca/rooms/4498735?check_in=2026-08-22&check_out=2026-08-29&adults=2", "img": "https://a0.muscache.com/im/pictures/56485595/2aedc10e_original.jpg", "gf": true, "fc": true, "nr": 0.7436, "nv": 0.1957, "np": 0.834}, {"id": "12964626", "name": "AQUAMARINE BLUE, AMALFI COAST", "area": "Furore", "price": 210, "total": 1467, "rating": 4.89, "reviews": 324, "url": "https://www.airbnb.ca/rooms/12964626?check_in=2026-08-22&check_out=2026-08-29&adults=2", "img": "https://a0.muscache.com/im/pictures/2b61b8e6-ee2f-4963-806b-86ae324b0d50.jpg", "gf": true, "fc": true, "nr": 0.7179, "nv": 0.4534, "np": 0.9342}, {"id": "13161568", "name": "Terry\u2019s Home", "area": "Other", "price": 366, "total": 2564, "rating": 4.89, "reviews": 266, "url": "https://www.airbnb.ca/rooms/13161568?check_in=2026-08-22&check_out=2026-08-29&adults=2", "img": "https://a0.muscache.com/im/pictures/bef06df4-92cd-4446-aa18-71719537d280.jpg", "gf": true, "fc": true, "nr": 0.7179, "nv": 0.2733, "np": 0.8346}, {"id": "29621244", "name": "Nocelle, Standard room", "area": "Nocelle", "price": 244, "total": 1705, "rating": 4.89, "reviews": 222, "url": "https://www.airbnb.ca/rooms/29621244?check_in=2026-08-22&check_out=2026-08-29&adults=2", "img": "https://a0.muscache.com/im/pictures/e97dd1af-46c2-4eb4-9c02-cb1ad91b0b0b.jpg", "gf": true, "fc": true, "nr": 0.7179, "nv": 0.1366, "np": 0.9125}, {"id": "44353120", "name": "Le Tre Rose, Sorrento Peninsula", "area": "Other", "price": 229, "total": 1604, "rating": 4.88, "reviews": 193, "url": "https://www.airbnb.ca/rooms/44353120?check_in=2026-08-22&check_out=2026-08-29&adults=2", "img": "https://a0.muscache.com/im/pictures/f3b38854-8fa3-4fdd-b0c9-893ece928fe3.jpg", "gf": true, "fc": true, "nr": 0.6923, "nv": 0.0466, "np": 0.9221}, {"id": "14330246", "name": "Bomerano Apartments 50 meters from the Path of the Gods", "area": "Agerola", "price": 164, "total": 1147, "rating": 4.87, "reviews": 302, "url": "https://www.airbnb.ca/rooms/14330246?check_in=2026-08-22&check_out=2026-08-29&adults=2", "img": "https://a0.muscache.com/im/pictures/39cb85ab-d83c-4c1f-ae8f-ec47d7518adf.jpg", "gf": true, "fc": true, "nr": 0.6667, "nv": 0.3851, "np": 0.9636}, {"id": "1244910", "name": "2/4 people Cozy&Central Room in 1900's building", "area": "Other", "price": 183, "total": 1283, "rating": 4.87, "reviews": 223, "url": "https://www.airbnb.ca/rooms/1244910?check_in=2026-08-22&check_out=2026-08-29&adults=2", "img": "https://a0.muscache.com/im/pictures/61ad72b1-6648-4133-b941-d1b6fd7e26e1.jpg", "gf": true, "fc": true, "nr": 0.6667, "nv": 0.1398, "np": 0.9515}, {"id": "13922336", "name": "OASI in the center with parking", "area": "Other", "price": 1673, "total": 11711, "rating": 4.83, "reviews": 510, "url": "https://www.airbnb.ca/rooms/13922336?check_in=2026-08-22&check_out=2026-08-29&adults=2", "img": "https://a0.muscache.com/im/pictures/bb6fa94b-bac5-4877-a790-cf25b618b462.jpg", "gf": false, "fc": true, "nr": 0.5641, "nv": 1.0, "np": 0.0}, {"id": "13712315", "name": "Titina's Home in Amalfi Coast", "area": "Praiano", "price": 523, "total": 3662, "rating": 4.83, "reviews": 265, "url": "https://www.airbnb.ca/rooms/13712315?check_in=2026-08-22&check_out=2026-08-29&adults=2", "img": "https://a0.muscache.com/im/pictures/3ae03be6-c8cb-4e32-8b2a-b45e143ba25c.jpg", "gf": false, "fc": true, "nr": 0.5641, "nv": 0.2702, "np": 0.7344}, {"id": "21660322", "name": "Casa San Nicola, Positano", "area": "Positano", "price": 551, "total": 3854, "rating": 4.82, "reviews": 509, "url": "https://www.airbnb.ca/rooms/21660322?check_in=2026-08-22&check_out=2026-08-29&adults=2", "img": "https://a0.muscache.com/im/pictures/hosting/Hosting-21660322/original/f2d9a951-35bf-44bc-9d2e-3f1ed209d66b.jpeg", "gf": true, "fc": true, "nr": 0.5385, "nv": 1.0, "np": 0.7165}, {"id": "25073339", "name": "CRIS HOUSE - Mena", "area": "Atrani", "price": 307, "total": 2152, "rating": 4.82, "reviews": 261, "url": "https://www.airbnb.ca/rooms/25073339?check_in=2026-08-22&check_out=2026-08-29&adults=2", "img": "https://a0.muscache.com/im/pictures/aa136088-6d0d-4100-b3a5-a8894795eb7c.jpg", "gf": true, "fc": true, "nr": 0.5385, "nv": 0.2578, "np": 0.8723}, {"id": "2938612", "name": "unbelievable new house sea view", "area": "Ravello", "price": 224, "total": 1570, "rating": 4.81, "reviews": 745, "url": "https://www.airbnb.ca/rooms/2938612?check_in=2026-08-22&check_out=2026-08-29&adults=2", "img": "https://a0.muscache.com/im/pictures/84896876/0b1113f1_original.jpg", "gf": true, "fc": true, "nr": 0.5128, "nv": 1.0, "np": 0.9253}, {"id": "6690135", "name": "Full relaxation", "area": "Agerola", "price": 185, "total": 1295, "rating": 4.8, "reviews": 619, "url": "https://www.airbnb.ca/rooms/6690135?check_in=2026-08-22&check_out=2026-08-29&adults=2", "img": "https://a0.muscache.com/im/pictures/miso/Hosting-6690135/original/0c06ad47-6c8b-4d7a-89f2-ef0f16c3912a.jpeg", "gf": false, "fc": true, "nr": 0.4872, "nv": 1.0, "np": 0.9502}, {"id": "18071473", "name": "Alma House", "area": "Amalfi", "price": 270, "total": 1887, "rating": 4.8, "reviews": 374, "url": "https://www.airbnb.ca/rooms/18071473?check_in=2026-08-22&check_out=2026-08-29&adults=2", "img": "https://a0.muscache.com/im/pictures/3178b78a-3887-4ec4-a383-e5b5b3e8857c.jpg", "gf": true, "fc": true, "nr": 0.4872, "nv": 0.6087, "np": 0.8959}, {"id": "2580261", "name": "Lovely Loft Positano with breakfast", "area": "Positano", "price": 449, "total": 3146, "rating": 4.8, "reviews": 362, "url": "https://www.airbnb.ca/rooms/2580261?check_in=2026-08-22&check_out=2026-08-29&adults=2", "img": "https://a0.muscache.com/im/pictures/777a3fbb-58fd-4b4a-a2e7-a36953abf876.jpg", "gf": false, "fc": true, "nr": 0.4872, "nv": 0.5714, "np": 0.7816}, {"id": "3456236", "name": "Apts with an awesome view!", "area": "Atrani", "price": 253, "total": 1769, "rating": 4.61, "reviews": 265, "url": "https://www.airbnb.ca/rooms/3456236?check_in=2026-08-22&check_out=2026-08-29&adults=2", "img": "https://a0.muscache.com/im/pictures/23373cc4-7b9a-47f2-ad4b-9f83a42584e0.jpg", "gf": false, "fc": true, "nr": 0.0, "nv": 0.2702, "np": 0.9068}];
 
-/* Score color */
-function scoreColor(s) {
-  if (s >= 70) return '#d4363b';
-  if (s >= 40) return '#e6a756';
-  return '#b8c9d6';
-}
-function scoreTier(s) {
-  if (s >= 70) return 'high';
-  if (s >= 40) return 'mid';
-  return 'low';
+let wR = 35, wV = 35, wP = 30;
+
+function score(d) {
+  const total = wR + wV + wP || 1;
+  return (d.nr * wR + d.nv * wV + d.np * wP) / total * 100;
 }
 
-/* ── Render hero ── */
-document.getElementById('heroImg').src = HERO.img;
-document.getElementById('heroName').textContent = HERO.name;
-document.getElementById('heroArea').textContent = '📍 ' + HERO.area;
-document.getElementById('heroPrice').textContent = '$' + HERO.price;
-document.getElementById('heroRating').textContent = '★ ' + HERO.rating.toFixed(2);
-document.getElementById('heroReviews').textContent = HERO.reviews;
-document.getElementById('heroScoreNum').textContent = HERO.mag;
-const ring = document.getElementById('heroRing');
-ring.style.stroke = scoreColor(HERO.mag);
-setTimeout(() => { ring.style.strokeDashoffset = 125.6 * (1 - HERO.mag / 100); }, 200);
+function scoreTier(s) { return s >= 65 ? 'high' : s >= 40 ? 'mid' : 'low'; }
+function scoreColor(s) { return s >= 65 ? '#d4363b' : s >= 40 ? '#e6a756' : '#b8c9d6'; }
 
-/* ── Render sections ── */
-const sectionsEl = document.getElementById('sections');
-sectionsEl.innerHTML = SECTIONS.map(sec => `
-  <div class="section">
-    <div class="section-header">
-      <span class="section-emoji">${sec.emoji}</span>
-      <div class="section-title">${sec.title}</div>
-      <div class="section-sub">${sec.subtitle}</div>
-      <div class="section-divider"></div>
-    </div>
-    <div class="scroll-row">
-      ${sec.cards.map(c => {
-        const t = scoreTier(c.mag);
-        const rankLabel = c.rank ? '#' + c.rank : c.mag;
-        return `
-          <div class="card" onclick="openModal('${c.id}')">
-            <div class="card-img-wrap">
-              <img class="card-img" src="${c.img}" alt="${c.name}" loading="lazy">
-              <div class="card-overlay"></div>
-              <div class="card-rank mag-${t}">${rankLabel}</div>
-              ${c.guest_fav ? '<div class="card-fav">🏆 Fav</div>' : ''}
-              <div class="card-price-tag">$${c.price}/n</div>
-            </div>
-            <div class="card-body">
-              <div class="card-name">${c.name}</div>
-              <div class="card-area">📍 ${c.area}</div>
-              <div class="card-row">
-                <span class="card-rating">★ ${c.rating.toFixed(2)}</span>
-                <span class="card-reviews">${c.reviews} reviews</span>
-                <span class="card-total">$${c.total} total</span>
-              </div>
-              <div class="card-score-bar">
-                <div class="bar-track"><div class="bar-fill ${t}" style="width:${c.mag}%"></div></div>
-                <span class="bar-num">${c.mag}</span>
-              </div>
-            </div>
-          </div>
-        `;
-      }).join('')}
-    </div>
-  </div>
-`).join('');
+function makeCard(d, rank) {
+  const s = score(d);
+  const t = scoreTier(s);
+  return `
+    <div class="card" onclick="openModal('${d.id}')">
+      <div class="card-img-wrap">
+        <img class="card-img" src="${d.img}" alt="${d.name}" loading="lazy">
+        <div class="card-overlay"></div>
+        <div class="card-rank ${t}">${rank !== null ? '#'+rank : Math.round(s)}</div>
+        ${d.gf ? '<div class="card-fav">🏆 Fav</div>' : ''}
+        <div class="card-price-tag">$${d.price}/n</div>
+      </div>
+      <div class="card-body">
+        <div class="card-name">${d.name}</div>
+        <div class="card-area">📍 ${d.area}</div>
+        <div class="card-row">
+          <span class="card-rating">★ ${d.rating.toFixed(2)}</span>
+          <span class="card-reviews">${d.reviews} reviews</span>
+          <span class="card-total">$${d.total} total</span>
+        </div>
+        <div class="card-score-bar">
+          <div class="bar-track"><div class="bar-fill ${t}" style="width:${s.toFixed(0)}%"></div></div>
+          <span class="bar-num">${Math.round(s)}</span>
+        </div>
+      </div>
+    </div>`;
+}
 
-/* ── Modal ── */
+function rebuild() {
+  // Score and sort all
+  const ranked = DATA.map(d => ({...d, score: score(d)})).sort((a,b) => b.score - a.score);
+  const used = new Set();
+
+  function pick(pool, n) {
+    const result = [];
+    for (const d of pool) {
+      if (used.has(d.id)) continue;
+      result.push(d);
+      used.add(d.id);
+      if (result.length >= n) break;
+    }
+    return result;
+  }
+
+  // Hero = #1
+  const hero = ranked[0];
+  used.add(hero.id);
+  const hs = hero.score;
+
+  document.getElementById('heroImg').src = hero.img;
+  document.getElementById('heroName').textContent = hero.name;
+  document.getElementById('heroArea').textContent = '📍 ' + hero.area;
+  document.getElementById('heroPrice').textContent = '$' + hero.price;
+  document.getElementById('heroRating').textContent = '★ ' + hero.rating.toFixed(2);
+  document.getElementById('heroReviews').textContent = hero.reviews;
+  document.getElementById('heroScoreNum').textContent = Math.round(hs);
+  document.getElementById('heroCard').onclick = () => openModal(hero.id);
+  const ring = document.getElementById('heroRing');
+  ring.style.stroke = scoreColor(hs);
+  ring.style.strokeDashoffset = 125.6 * (1 - hs / 100);
+
+  // Sections with auto-curation
+  const bestValue = pick(ranked, 5);
+  const budgetPool = ranked.filter(d => d.price <= 175 && d.rating >= 4.85).sort((a,b) => b.score - a.score);
+  const budgetGems = pick(budgetPool, 4);
+  const reviewPool = [...ranked].sort((a,b) => b.reviews - a.reviews);
+  const mostLoved = pick(reviewPool, 4);
+  const perfectPool = ranked.filter(d => d.reviews >= 100).sort((a,b) => b.rating - a.rating);
+  const perfect = pick(perfectPool, 4);
+  const gemAreas = new Set(['Other','Vietri sul Mare','Tramonti','Pontone','Nocelle','Scala']);
+  const hiddenPool = ranked.filter(d => gemAreas.has(d.area) && d.price <= 350).sort((a,b) => b.score - a.score);
+  const hidden = pick(hiddenPool, 4);
+
+  const sections = [
+    { emoji: '🎯', title: 'Best Overall Value', sub: 'Highest combined score across price, rating & reviews', cards: bestValue, ranked: true },
+    { emoji: '💰', title: 'Budget Gems', sub: 'Under $175/night, rated 4.85+', cards: budgetGems },
+    { emoji: '💬', title: 'Most Reviewed', sub: 'Tried, tested & loved by hundreds of guests', cards: mostLoved },
+    { emoji: '⭐', title: 'Highest Rated', sub: 'Near-perfect ratings with 100+ reviews to back it up', cards: perfect },
+    { emoji: '💎', title: 'Hidden Gems', sub: 'Off the beaten path — lesser known areas, great value', cards: hidden },
+  ].filter(s => s.cards.length > 0);
+
+  let globalRank = 2;
+  const html = sections.map(sec => `
+    <div class="section">
+      <div class="section-header">
+        <span class="section-emoji">${sec.emoji}</span>
+        <div class="section-title">${sec.title}</div>
+        <div class="section-sub">${sec.sub}</div>
+        <div class="section-divider"></div>
+      </div>
+      <div class="scroll-row">
+        ${sec.cards.map(d => {
+          const rank = sec.ranked ? globalRank++ : null;
+          return makeCard(d, rank);
+        }).join('')}
+      </div>
+    </div>
+  `).join('');
+
+  document.getElementById('sections').innerHTML = html;
+
+  // Update formula display
+  const total = wR + wV + wP || 1;
+  const pR = Math.round(wR / total * 100);
+  const pV = Math.round(wV / total * 100);
+  const pP = 100 - pR - pV;
+  document.getElementById('formulaDisplay').innerHTML =
+    `Score = <span>${pR}%</span> Rating + <span>${pV}%</span> Reviews + <span>${pP}%</span> Lower Price`;
+}
+
+// Slider events
+const sR = document.getElementById('sRating');
+const sV = document.getElementById('sReviews');
+const sP = document.getElementById('sPrice');
+
+function updateFromSliders() {
+  wR = +sR.value; wV = +sV.value; wP = +sP.value;
+  const total = wR + wV + wP || 1;
+  document.getElementById('vRating').textContent = Math.round(wR/total*100) + '%';
+  document.getElementById('vReviews').textContent = Math.round(wV/total*100) + '%';
+  document.getElementById('vPrice').textContent = (100 - Math.round(wR/total*100) - Math.round(wV/total*100)) + '%';
+  rebuild();
+}
+
+sR.addEventListener('input', updateFromSliders);
+sV.addEventListener('input', updateFromSliders);
+sP.addEventListener('input', updateFromSliders);
+
+function resetWeights() {
+  sR.value = 35; sV.value = 35; sP.value = 30;
+  updateFromSliders();
+}
+
+// Modal
 function openModal(id) {
-  const d = ALL.find(d => d.id === id);
+  const d = DATA.find(x => x.id === id);
   if (!d) return;
+  const s = score(d);
   document.getElementById('mImg').src = d.img;
   document.getElementById('mName').textContent = d.name;
   document.getElementById('mArea').textContent = '📍 ' + d.area;
-  document.getElementById('mScore').textContent = d.mag + '/100';
-  document.getElementById('mScoreFill').style.width = d.mag + '%';
+  document.getElementById('mScore').textContent = Math.round(s) + '/100';
+  document.getElementById('mScoreFill').style.width = s.toFixed(0) + '%';
   document.getElementById('mBkR').textContent = '★ ' + d.rating.toFixed(2);
   document.getElementById('mBkRv').textContent = d.reviews;
   document.getElementById('mBkP').textContent = '$' + d.price + '/n';
@@ -434,14 +579,18 @@ function openModal(id) {
   document.getElementById('mReviews').textContent = d.reviews;
   document.getElementById('mLink').href = d.url;
   let b = '';
-  if (d.mag >= 70) b += '<span class="m-badge fire">🔥 Top Value</span>';
-  if (d.guest_fav) b += '<span class="m-badge gold">🏆 Guest Favorite</span>';
+  if (s >= 65) b += '<span class="m-badge fire">🔥 Top Value</span>';
+  if (d.gf) b += '<span class="m-badge gold">🏆 Guest Favorite</span>';
   if (d.area === 'Agerola') b += '<span class="m-badge green">🏠 Near Home Base</span>';
   document.getElementById('mBadges').innerHTML = b;
   document.getElementById('modalOverlay').classList.add('visible');
 }
+
 function closeModal() { document.getElementById('modalOverlay').classList.remove('visible'); }
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+// Initial render
+rebuild();
 </script>
 </body>
 </html>
