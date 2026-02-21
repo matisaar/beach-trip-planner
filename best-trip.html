@@ -121,6 +121,32 @@
   .compare td { padding: 10px 12px; border-bottom: 1px solid #f0f0f0; }
   .compare tr:hover td { background: #f8fafc; }
   .compare .winner { background: #dcfce7; font-weight: 700; }
+  /* Airbnb listing cards */
+  .airbnb-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin: 16px 0; }
+  .airbnb-card { background: white; border-radius: 14px; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.08); transition: transform 0.2s, box-shadow 0.2s; border: 1px solid #f0f0f0; }
+  .airbnb-card:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(0,0,0,0.14); }
+  .airbnb-img { width: 100%; height: 180px; object-fit: cover; }
+  .airbnb-body { padding: 16px 18px; }
+  .airbnb-badge { display: inline-block; font-size: 0.7rem; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-bottom: 8px; }
+  .badge-top { background: linear-gradient(135deg, var(--sunset), var(--coral)); color: white; }
+  .badge-value { background: linear-gradient(135deg, var(--palm), #40916c); color: white; }
+  .badge-dream { background: linear-gradient(135deg, var(--ocean), #7c3aed); color: white; }
+  .badge-gf { background: #f0fdf4; color: var(--palm); border: 1px solid #bbf7d0; font-size: 0.68rem; margin-left: 4px; }
+  .airbnb-name { font-weight: 800; font-size: 1rem; margin-bottom: 2px; color: var(--dark); }
+  .airbnb-location { font-size: 0.82rem; color: var(--gray); margin-bottom: 8px; }
+  .airbnb-stats { display: flex; gap: 14px; margin-bottom: 10px; font-size: 0.82rem; }
+  .airbnb-rating { font-weight: 700; color: var(--dark); }
+  .airbnb-rating .star { color: var(--coral); }
+  .airbnb-reviews { color: var(--gray); }
+  .airbnb-price { font-size: 0.88rem; margin-bottom: 10px; }
+  .airbnb-price .per-night { font-weight: 800; color: var(--dark); font-size: 1.05rem; }
+  .airbnb-price .total { color: var(--gray); font-size: 0.82rem; }
+  .airbnb-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 12px; }
+  .airbnb-tag { font-size: 0.7rem; padding: 2px 8px; border-radius: 6px; background: var(--light); color: var(--gray); }
+  .airbnb-link { display: block; text-align: center; padding: 10px; background: linear-gradient(135deg, #FF385C, #e31c5f); color: white; text-decoration: none; font-weight: 700; font-size: 0.85rem; border-radius: 10px; transition: filter 0.2s; }
+  .airbnb-link:hover { filter: brightness(1.1); }
+  .airbnb-note { background: #fef3c7; border-radius: 10px; padding: 14px 18px; font-size: 0.85rem; margin: 16px 0; border-left: 4px solid var(--gold); line-height: 1.6; }
+  .scraped-badge { display: inline-flex; align-items: center; gap: 6px; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 6px 12px; font-size: 0.78rem; color: var(--palm); font-weight: 600; margin-bottom: 16px; }
   footer { background: var(--dark); color: rgba(255,255,255,0.7); text-align: center; padding: 28px 20px; font-size: 0.82rem; }
   footer a { color: var(--ocean-light); }
   @media (max-width: 640px) {
@@ -145,6 +171,7 @@
     <a href="#food">🍝 Food</a>
     <a href="#photos">📸 Photos</a>
     <a href="#transport">🚌 Transport</a>
+    <a href="#stays">🏠 Stays</a>
     <a href="#book">🔗 Book</a>
     <a href="#alternatives">vs Others</a>
   </div>
@@ -709,6 +736,382 @@
   </div>
 </div>
 
+<!-- ═══════ WHERE TO STAY — AIRBNB PICKS ═══════ -->
+<div class="container" id="stays">
+  <div class="section">
+    <h2>🏠 Where to Stay — Our Airbnb Picks</h2>
+    <p class="sub">Scraped live from Airbnb · Aug 22–29, 2026 · 2 adults · Sorted by rating (4.9+★)</p>
+    <div class="scraped-badge">🤖 Data scraped from 280 Airbnb listings across the Amalfi Coast · Filtered for 4.95+ star ratings</div>
+
+    <div class="airbnb-note">
+      <strong>💡 Real talk on pricing:</strong> Amalfi/Atrani in late August is peak season. The average listing we found is <strong>$2,980 CAD for 7 nights</strong>. Only 15 of 280 listings are under $1,200/week. The best value 4.95+ stays are in hill towns like <strong>Agerola</strong> (15 min bus to coast) and <strong>Pianillo</strong> — same stunning views, 60% cheaper, and only a quick SITA bus ride from Amalfi. We recommend the "Best Value" picks below to keep your trip under $5K total.
+    </div>
+
+    <!-- ──── BEST VALUE PICKS ──── -->
+    <h3 style="margin: 24px 0 6px; color: var(--palm);">💚 Best Value Picks <span style="font-weight:400; font-size:0.85rem; color:var(--gray);">— 4.95+ stars, under $1,300 for 7 nights</span></h3>
+    <div class="airbnb-grid">
+
+      <!-- Pick 1: Agerola Center -->
+      <div class="airbnb-card">
+        <img src="https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1YnNjcmlwdGlvbjoxNzgxMDQ2MA%3D%3D/original/81fceead-7eab-4462-9a4c-186f44dec7e4.jpeg" alt="Agerola Center" class="airbnb-img">
+        <div class="airbnb-body">
+          <span class="airbnb-badge badge-top">🏆 #1 BEST VALUE</span>
+          <span class="airbnb-badge badge-gf">⭐ Guest Favorite</span>
+          <div class="airbnb-name">Agerola Center – Quick Check-in & Bus 2 Min Walk</div>
+          <div class="airbnb-location">Condo in Agerola · Entire place</div>
+          <div class="airbnb-stats">
+            <span class="airbnb-rating"><span class="star">★</span> 4.95</span>
+            <span class="airbnb-reviews">(228 reviews)</span>
+          </div>
+          <div class="airbnb-price">
+            <span class="per-night">$184 CAD/night</span>
+            <span class="total">· $1,288 total (7 nights)</span>
+          </div>
+          <div class="airbnb-tags">
+            <span class="airbnb-tag">Free cancellation</span>
+            <span class="airbnb-tag">WiFi</span>
+            <span class="airbnb-tag">2 min to SITA bus</span>
+            <span class="airbnb-tag">Hill town views</span>
+          </div>
+          <a href="https://www.airbnb.ca/rooms/17810460?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="airbnb-link">View on Airbnb →</a>
+        </div>
+      </div>
+
+      <!-- Pick 2: Sweet Home -->
+      <div class="airbnb-card">
+        <img src="https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1YnNjcmlwdGlvbjoxMTQ5MTcwMzU0ODEwNTk2MDk2/original/ef459580-e8a9-4edd-bad0-b0e0b3e2d0b2.jpeg" alt="Sweet Home" class="airbnb-img">
+        <div class="airbnb-body">
+          <span class="airbnb-badge badge-value">💰 CHEAPEST 4.95+ PICK</span>
+          <span class="airbnb-badge badge-gf">⭐ Guest Favorite</span>
+          <div class="airbnb-name">Sweet Home</div>
+          <div class="airbnb-location">Vacation home in Pianillo · Entire place</div>
+          <div class="airbnb-stats">
+            <span class="airbnb-rating"><span class="star">★</span> 4.97</span>
+            <span class="airbnb-reviews">(37 reviews)</span>
+          </div>
+          <div class="airbnb-price">
+            <span class="per-night">$129 CAD/night</span>
+            <span class="total">· $903 total (7 nights)</span>
+          </div>
+          <div class="airbnb-tags">
+            <span class="airbnb-tag">Free cancellation</span>
+            <span class="airbnb-tag">Saves ~$300 on budget</span>
+            <span class="airbnb-tag">Mountain views</span>
+          </div>
+          <a href="https://www.airbnb.ca/rooms/1149170354810596096?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="airbnb-link">View on Airbnb →</a>
+        </div>
+      </div>
+
+      <!-- Pick 3: Aunt Rosa's Cottage -->
+      <div class="airbnb-card">
+        <img src="https://a0.muscache.com/im/pictures/hosting/Hosting-1213628276474824322/original/d5ad2e5b-aeec-4a35-985e-c5fbe37b4d3a.jpeg" alt="Aunt Rosa's Cottage" class="airbnb-img">
+        <div class="airbnb-body">
+          <span class="airbnb-badge badge-value">💚 GREAT VALUE</span>
+          <span class="airbnb-badge badge-gf">⭐ Guest Favorite</span>
+          <div class="airbnb-name">Aunt Rosa's Cottage</div>
+          <div class="airbnb-location">Home in Agerola · Entire place</div>
+          <div class="airbnb-stats">
+            <span class="airbnb-rating"><span class="star">★</span> 4.95</span>
+            <span class="airbnb-reviews">(40 reviews)</span>
+          </div>
+          <div class="airbnb-price">
+            <span class="per-night">$177 CAD/night</span>
+            <span class="total">· $1,236 total (7 nights)</span>
+          </div>
+          <div class="airbnb-tags">
+            <span class="airbnb-tag">Free cancellation</span>
+            <span class="airbnb-tag">Cottage charm</span>
+            <span class="airbnb-tag">Near Path of Gods trailhead</span>
+          </div>
+          <a href="https://www.airbnb.ca/rooms/1213628276474824322?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="airbnb-link">View on Airbnb →</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ──── DREAM PICKS — IN AMALFI/ATRANI ──── -->
+    <h3 style="margin: 28px 0 6px; color: var(--ocean-dark);">💙 Dream Picks — Right in Amalfi & Atrani <span style="font-weight:400; font-size:0.85rem; color:var(--gray);">— 4.95+ stars, prime location</span></h3>
+    <p style="font-size:0.85rem; color:var(--gray); margin-bottom:14px;">These are over your $1,200 accommodation budget, but if you can flex or cut costs elsewhere, they're the best-rated places right in town.</p>
+    <div class="airbnb-grid">
+
+      <!-- Dream 1: Carmine's Place -->
+      <div class="airbnb-card">
+        <img src="https://a0.muscache.com/im/pictures/a4e268e2-f7b2-40b7-9dab-ac70c3fb51ce.jpg" alt="Carmine's Place" class="airbnb-img">
+        <div class="airbnb-body">
+          <span class="airbnb-badge badge-dream">💙 CLOSEST TO AMALFI</span>
+          <span class="airbnb-badge badge-gf">⭐ Guest Favorite</span>
+          <div class="airbnb-name">Carmine's Place</div>
+          <div class="airbnb-location">Apartment in Pontone · 10 min walk to Amalfi</div>
+          <div class="airbnb-stats">
+            <span class="airbnb-rating"><span class="star">★</span> 4.95</span>
+            <span class="airbnb-reviews">(177 reviews)</span>
+          </div>
+          <div class="airbnb-price">
+            <span class="per-night">$236 CAD/night</span>
+            <span class="total">· $1,651 total (7 nights)</span>
+          </div>
+          <div class="airbnb-tags">
+            <span class="airbnb-tag">Walking distance to Amalfi</span>
+            <span class="airbnb-tag">Pontone village</span>
+            <span class="airbnb-tag">+$450 over budget</span>
+          </div>
+          <a href="https://www.airbnb.ca/rooms/35996433?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="airbnb-link">View on Airbnb →</a>
+        </div>
+      </div>
+
+      <!-- Dream 2: MammaRosanna 2 -->
+      <div class="airbnb-card">
+        <img src="https://a0.muscache.com/im/pictures/airflow/Hosting-41192097/original/0da60fe2-5acc-42fe-bfc4-80dba7ea0bc4.jpg" alt="MammaRosanna 2" class="airbnb-img">
+        <div class="airbnb-body">
+          <span class="airbnb-badge badge-dream">💙 BEST IN AMALFI</span>
+          <div class="airbnb-name">MammaRosanna 2 — Studio Flat w/ Terrace</div>
+          <div class="airbnb-location">Apartment in Amalfi · In the heart of town</div>
+          <div class="airbnb-stats">
+            <span class="airbnb-rating"><span class="star">★</span> 4.99</span>
+            <span class="airbnb-reviews">(204 reviews)</span>
+          </div>
+          <div class="airbnb-price">
+            <span class="per-night">$449 CAD/night</span>
+            <span class="total">· $3,140 total (7 nights)</span>
+          </div>
+          <div class="airbnb-tags">
+            <span class="airbnb-tag">204 reviews, near-perfect</span>
+            <span class="airbnb-tag">Central Amalfi</span>
+            <span class="airbnb-tag">Terrace</span>
+            <span class="airbnb-tag">Splurge</span>
+          </div>
+          <a href="https://www.airbnb.ca/rooms/41192097?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="airbnb-link">View on Airbnb →</a>
+        </div>
+      </div>
+
+      <!-- Dream 3: Coral House Atrani -->
+      <div class="airbnb-card">
+        <img src="https://a0.muscache.com/im/pictures/d6910670-70ea-4f1d-9a2f-774b15fb31bb.jpg" alt="Coral House" class="airbnb-img">
+        <div class="airbnb-body">
+          <span class="airbnb-badge badge-dream">💙 BEST IN ATRANI</span>
+          <div class="airbnb-name">Coral House — Sea View Apartment</div>
+          <div class="airbnb-location">Condo in Atrani · Wonderful sea view</div>
+          <div class="airbnb-stats">
+            <span class="airbnb-rating"><span class="star">★</span> 5.0</span>
+            <span class="airbnb-reviews">(53 reviews)</span>
+          </div>
+          <div class="airbnb-price">
+            <span class="per-night">$479 CAD/night</span>
+            <span class="total">· $3,355 total (7 nights)</span>
+          </div>
+          <div class="airbnb-tags">
+            <span class="airbnb-tag">Perfect 5.0 rating</span>
+            <span class="airbnb-tag">Sea view</span>
+            <span class="airbnb-tag">Atrani beachfront</span>
+            <span class="airbnb-tag">Splurge</span>
+          </div>
+          <a href="https://www.airbnb.ca/rooms/51883854?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="airbnb-link">View on Airbnb →</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ──── MORE HIDDEN GEMS ──── -->
+    <h3 style="margin: 28px 0 6px; color: var(--sunset);">🔥 More Hidden Gems <span style="font-weight:400; font-size:0.85rem; color:var(--gray);">— high ratings, unique finds</span></h3>
+    <div class="airbnb-grid">
+
+      <!-- Gem 1: La Casa Al Corso -->
+      <div class="airbnb-card">
+        <img src="https://a0.muscache.com/im/pictures/airflow/Hosting-49812150/original/34e66a59-8a43-4b0b-b032-a02dbaf8cd34.jpg" alt="La Casa Al Corso" class="airbnb-img">
+        <div class="airbnb-body">
+          <span class="airbnb-badge badge-top">🏆 103 REVIEWS</span>
+          <div class="airbnb-name">La Casa Al Corso</div>
+          <div class="airbnb-location">Room in Castellammare di Stabia · Near Pompeii</div>
+          <div class="airbnb-stats">
+            <span class="airbnb-rating"><span class="star">★</span> 4.98</span>
+            <span class="airbnb-reviews">(103 reviews)</span>
+          </div>
+          <div class="airbnb-price">
+            <span class="per-night">$159 CAD/night</span>
+            <span class="total">· $1,113 total (7 nights)</span>
+          </div>
+          <div class="airbnb-tags">
+            <span class="airbnb-tag">Free cancellation</span>
+            <span class="airbnb-tag">Near Pompeii</span>
+            <span class="airbnb-tag">Great for day trips</span>
+          </div>
+          <a href="https://www.airbnb.ca/rooms/49812150?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="airbnb-link">View on Airbnb →</a>
+        </div>
+      </div>
+
+      <!-- Gem 2: Towards Maison -->
+      <div class="airbnb-card">
+        <img src="https://a0.muscache.com/im/pictures/miso/Hosting-1391313980420011968/original/bd1e74ad-3b5e-4e4c-8411-6faa397e5f2e.jpeg" alt="Towards Maison" class="airbnb-img">
+        <div class="airbnb-body">
+          <span class="airbnb-badge badge-value">💚 CHARMING</span>
+          <span class="airbnb-badge badge-gf">⭐ Guest Favorite</span>
+          <div class="airbnb-name">Towards Maison — Charming in Gragnano</div>
+          <div class="airbnb-location">Apartment in Gragnano · Pasta capital of Italy!</div>
+          <div class="airbnb-stats">
+            <span class="airbnb-rating"><span class="star">★</span> 4.96</span>
+            <span class="airbnb-reviews">(24 reviews)</span>
+          </div>
+          <div class="airbnb-price">
+            <span class="per-night">$139 CAD/night</span>
+            <span class="total">· $970 total (7 nights)</span>
+          </div>
+          <div class="airbnb-tags">
+            <span class="airbnb-tag">Free cancellation</span>
+            <span class="airbnb-tag">Home of Gragnano pasta</span>
+            <span class="airbnb-tag">Budget-friendly</span>
+          </div>
+          <a href="https://www.airbnb.ca/rooms/1391313980420011968?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="airbnb-link">View on Airbnb →</a>
+        </div>
+      </div>
+
+      <!-- Gem 3: Le Petre with terrace -->
+      <div class="airbnb-card">
+        <img src="https://a0.muscache.com/im/pictures/hosting/Hosting-1389862816467877873/original/aa3ba88f-ce20-45a2-b5ae-b91e4e6f1b21.jpeg" alt="Le Petre" class="airbnb-img">
+        <div class="airbnb-body">
+          <span class="airbnb-badge badge-value">💚 TERRACE + PARKING</span>
+          <div class="airbnb-name">Le Petre — Terrace & Private Parking</div>
+          <div class="airbnb-location">Vacation home in Tramonti · On the hills</div>
+          <div class="airbnb-stats">
+            <span class="airbnb-rating"><span class="star">★</span> 5.0</span>
+            <span class="airbnb-reviews">(10 reviews)</span>
+          </div>
+          <div class="airbnb-price">
+            <span class="per-night">$200 CAD/night</span>
+            <span class="total">· $1,398 total (7 nights)</span>
+          </div>
+          <div class="airbnb-tags">
+            <span class="airbnb-tag">Free cancellation</span>
+            <span class="airbnb-tag">Private parking</span>
+            <span class="airbnb-tag">Terrace</span>
+            <span class="airbnb-tag">Perfect 5.0</span>
+          </div>
+          <a href="https://www.airbnb.ca/rooms/1389862816467877873?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="airbnb-link">View on Airbnb →</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ──── MOST REVIEWED — AMALFI/ATRANI ──── -->
+    <h3 style="margin: 28px 0 6px; color: var(--dark);">📊 Most Reviewed in Amalfi/Atrani <span style="font-weight:400; font-size:0.85rem; color:var(--gray);">— 100+ reviews, proven picks</span></h3>
+    <p style="font-size:0.85rem; color:var(--gray); margin-bottom:14px;">These have the most reviews in the Amalfi/Atrani area. Higher price but you know exactly what you're getting.</p>
+    <div class="airbnb-grid">
+
+      <!-- Most Review 1: Casa Teresina -->
+      <div class="airbnb-card">
+        <img src="https://a0.muscache.com/im/pictures/8d14a4a2-bcf2-42a3-8765-e23f7ec6db22.jpg" alt="Casa Teresina" class="airbnb-img">
+        <div class="airbnb-body">
+          <span class="airbnb-badge badge-top">📊 467 REVIEWS</span>
+          <div class="airbnb-name">Casa Teresina — Amazing View!</div>
+          <div class="airbnb-location">Apartment in Atrani · Sea view terrace</div>
+          <div class="airbnb-stats">
+            <span class="airbnb-rating"><span class="star">★</span> 4.92</span>
+            <span class="airbnb-reviews">(467 reviews)</span>
+          </div>
+          <div class="airbnb-price">
+            <span class="per-night">$413 CAD/night</span>
+            <span class="total">· $2,890 total (7 nights)</span>
+          </div>
+          <div class="airbnb-tags">
+            <span class="airbnb-tag">Most reviewed in Atrani</span>
+            <span class="airbnb-tag">Amazing views</span>
+          </div>
+          <a href="https://www.airbnb.ca/rooms/1169708?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="airbnb-link">View on Airbnb →</a>
+        </div>
+      </div>
+
+      <!-- Most Review 2: Windows on Heaven -->
+      <div class="airbnb-card">
+        <img src="https://a0.muscache.com/im/pictures/a22fe21a-80c9-439b-9e3b-afa2f82a5cc1.jpg" alt="Windows on Heaven" class="airbnb-img">
+        <div class="airbnb-body">
+          <span class="airbnb-badge badge-top">📊 445 REVIEWS</span>
+          <div class="airbnb-name">Windows on Heaven — Total Sea View!</div>
+          <div class="airbnb-location">Home in Scala · Panoramic sea view house</div>
+          <div class="airbnb-stats">
+            <span class="airbnb-rating"><span class="star">★</span> 4.98</span>
+            <span class="airbnb-reviews">(445 reviews)</span>
+          </div>
+          <div class="airbnb-price">
+            <span class="per-night">$1,569 CAD/night</span>
+            <span class="total">· Luxury tier</span>
+          </div>
+          <div class="airbnb-tags">
+            <span class="airbnb-tag">4.98 with 445 reviews</span>
+            <span class="airbnb-tag">Dream listing</span>
+          </div>
+          <a href="https://www.airbnb.ca/rooms/32588731?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="airbnb-link">View on Airbnb →</a>
+        </div>
+      </div>
+
+      <!-- Most Review 3: Amalfi Lady Laura -->
+      <div class="airbnb-card">
+        <img src="https://a0.muscache.com/im/pictures/f42e9add-4e94-4f91-b6f1-1a3f8aa83b03.jpg" alt="Amalfi Lady Laura House" class="airbnb-img">
+        <div class="airbnb-body">
+          <span class="airbnb-badge badge-top">📊 366 REVIEWS</span>
+          <div class="airbnb-name">Amalfi Lady Laura House</div>
+          <div class="airbnb-location">Apartment in Amalfi · Central location</div>
+          <div class="airbnb-stats">
+            <span class="airbnb-rating"><span class="star">★</span> 4.99</span>
+            <span class="airbnb-reviews">(366 reviews)</span>
+          </div>
+          <div class="airbnb-price">
+            <span class="per-night">$4,247 CAD/night</span>
+            <span class="total">· Ultra luxury</span>
+          </div>
+          <div class="airbnb-tags">
+            <span class="airbnb-tag">4.99 over 366 reviews</span>
+            <span class="airbnb-tag">Bucket list</span>
+          </div>
+          <a href="https://www.airbnb.ca/rooms/19633284?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="airbnb-link">View on Airbnb →</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ──── OUR RECOMMENDATION ──── -->
+    <div class="card" style="background: linear-gradient(135deg, #f0fdf4, #dcfce7); border: 2px solid #86efac; margin-top: 24px;">
+      <h3 style="color: var(--palm);">🎯 Our Recommendation</h3>
+      <p style="font-size:0.92rem; line-height:1.7; margin-top:8px;">
+        <strong>Book "Agerola Center" ($1,288 total)</strong> — It's our #1 pick. With 228 reviews and a 4.95★ rating, it's proven, affordable, and just 2 minutes walk from the SITA bus stop that takes you straight to Amalfi in ~25 minutes. You'll save <strong>$700+</strong> compared to staying in Amalfi town, and the hilltop views from Agerola are arguably even better than from the coast. Plus, it's right near the start of the Path of the Gods hike (Day 4 on your itinerary).<br><br>
+        <strong>If you can stretch the budget (+$450):</strong> "Carmine's Place" in Pontone ($1,651) puts you 10 minutes walk from Amalfi — the best of both worlds.<br><br>
+        <strong>If money is no object:</strong> "MammaRosanna 2" ($3,140) in the heart of Amalfi with a terrace, 4.99★ across 204 reviews — near-perfection.
+      </p>
+    </div>
+
+    <!-- ──── QUICK STATS ──── -->
+    <div class="card" style="margin-top: 16px;">
+      <h3>📈 Amalfi Coast Market Data (Aug 22–29)</h3>
+      <p class="card-sub">From our scrape of 280 live listings</p>
+      <div class="info-grid">
+        <div class="info-card">
+          <div class="ic-label">Total Listings Found</div>
+          <div class="ic-value">280</div>
+        </div>
+        <div class="info-card">
+          <div class="ic-label">Avg Price (7 nights)</div>
+          <div class="ic-value">$2,980 CAD</div>
+        </div>
+        <div class="info-card">
+          <div class="ic-label">Cheapest 7-Night Stay</div>
+          <div class="ic-value">$291 CAD</div>
+        </div>
+        <div class="info-card">
+          <div class="ic-label">Under $1,200 Budget</div>
+          <div class="ic-value">15 listings</div>
+        </div>
+        <div class="info-card">
+          <div class="ic-label">4.95+ Stars</div>
+          <div class="ic-value">128 of 280 (46%)</div>
+        </div>
+        <div class="info-card">
+          <div class="ic-label">Average Rating</div>
+          <div class="ic-value">4.91 ★</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 <!-- ═══════ BOOKING LINKS ═══════ -->
 <div class="container" id="book">
   <div class="section">
@@ -722,10 +1125,12 @@
       <a href="https://www.skyscanner.ca/transport/flights/yyz/nap/260822/260829/?adultsv2=2&cabinclass=economy" target="_blank" class="book-btn book-flights">Skyscanner</a>
     </div>
 
-    <h4 style="margin:16px 0 10px;">🏠 Accommodation (Aug 22–29, 2 adults)</h4>
+    <h4 style="margin:16px 0 10px;">🏠 Accommodation (Aug 22–29, 2 adults) — <a href="#stays" style="color:var(--sunset)">See our scraped picks ↑</a></h4>
     <div class="booking-grid">
-      <a href="https://www.airbnb.ca/s/Amalfi--Italy/homes?checkin=2026-08-22&checkout=2026-08-29&adults=2&price_max=200" target="_blank" class="book-btn book-stay">Airbnb Amalfi</a>
-      <a href="https://www.airbnb.ca/s/Atrani--Italy/homes?checkin=2026-08-22&checkout=2026-08-29&adults=2&price_max=180" target="_blank" class="book-btn book-stay">Airbnb Atrani (cheaper!)</a>
+      <a href="https://www.airbnb.ca/rooms/17810460?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="book-btn book-stay">⭐ #1 Pick: Agerola Center</a>
+      <a href="https://www.airbnb.ca/rooms/35996433?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="book-btn book-stay">💙 Carmine's Place (Pontone)</a>
+      <a href="https://www.airbnb.ca/s/Amalfi--Italy/homes?checkin=2026-08-22&checkout=2026-08-29&adults=2&price_max=200" target="_blank" class="book-btn book-stay">Browse Airbnb Amalfi</a>
+      <a href="https://www.airbnb.ca/s/Atrani--Italy/homes?checkin=2026-08-22&checkout=2026-08-29&adults=2&price_max=180" target="_blank" class="book-btn book-stay">Browse Airbnb Atrani</a>
       <a href="https://www.booking.com/searchresults.html?ss=Amalfi&checkin=2026-08-22&checkout=2026-08-29&group_adults=2" target="_blank" class="book-btn book-stay">Booking.com</a>
     </div>
 
