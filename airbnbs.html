@@ -1,0 +1,3809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amalfi Coast Airbnbs — Aug 22–29, 2026</title>
+<style>
+  :root {
+    --bg: #faf8f5;
+    --card: #ffffff;
+    --text: #2c2c2c;
+    --muted: #7a7a7a;
+    --accent: #d4763c;
+    --green: #2d8a4e;
+    --gold: #c9981a;
+    --blue: #3b7dd8;
+    --border: #e8e4df;
+    --shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+  }
+  .hero {
+    background: linear-gradient(135deg, #f5e6d3 0%, #e8d5c0 50%, #dcc8b0 100%);
+    padding: 40px 20px 30px;
+    text-align: center;
+  }
+  .hero h1 { font-size: 1.6rem; font-weight: 700; margin-bottom: 6px; }
+  .hero .sub { color: var(--muted); font-size: 0.9rem; }
+  .hero .back { display: inline-block; margin-top: 12px; color: var(--accent); text-decoration: none; font-size: 0.85rem; }
+  .hero .back:hover { text-decoration: underline; }
+  .stats {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;
+    padding: 16px 20px;
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    font-size: 0.82rem;
+  }
+  .stat { text-align: center; }
+  .stat-val { font-weight: 700; font-size: 1.1rem; color: var(--accent); }
+  .stat-label { color: var(--muted); }
+  .nav {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    padding: 10px 16px;
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+  }
+  .nav a {
+    display: inline-block;
+    padding: 6px 14px;
+    margin: 2px 3px;
+    border-radius: 20px;
+    background: var(--bg);
+    color: var(--text);
+    text-decoration: none;
+    font-size: 0.78rem;
+    font-weight: 500;
+    border: 1px solid var(--border);
+    transition: all 0.2s;
+  }
+  .nav a:hover { background: var(--accent); color: white; border-color: var(--accent); }
+  .section {
+    padding: 30px 16px 10px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .section h2 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .section-sub {
+    color: var(--muted);
+    font-size: 0.82rem;
+    margin-bottom: 16px;
+  }
+  .count { opacity: 0.6; }
+  .listings {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .listing {
+    display: flex;
+    flex-direction: column;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    text-decoration: none;
+    color: var(--text);
+    transition: all 0.15s;
+    box-shadow: var(--shadow);
+  }
+  .listing:hover {
+    border-color: var(--accent);
+    box-shadow: 0 2px 12px rgba(212,118,60,0.12);
+    transform: translateY(-1px);
+  }
+  .listing-top { margin-bottom: 10px; }
+  .listing-name {
+    font-weight: 600;
+    font-size: 0.92rem;
+    line-height: 1.3;
+    margin-bottom: 2px;
+  }
+  .listing-title {
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+  .area {
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+  .listing-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .listing-stats {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .rating {
+    font-weight: 700;
+    font-size: 0.85rem;
+    padding: 2px 8px;
+    border-radius: 6px;
+  }
+  .badge-perfect { background: #fef3c7; color: #92400e; }
+  .badge-top { background: #dcfce7; color: #166534; }
+  .badge-great { background: #e0f2fe; color: #075985; }
+  .badge-good { background: #f3f4f6; color: #4b5563; }
+  .reviews {
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+  .tag {
+    font-size: 0.68rem;
+    padding: 2px 7px;
+    border-radius: 10px;
+    font-weight: 500;
+  }
+  .tag-fav { background: #fef3c7; color: #92400e; }
+  .tag-cancel { background: #dcfce7; color: #166534; }
+  .listing-price {
+    text-align: right;
+  }
+  .price-night {
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--text);
+  }
+  .price-night small {
+    font-weight: 400;
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+  .price-total {
+    display: block;
+    font-size: 0.72rem;
+    color: var(--muted);
+  }
+  .footer {
+    text-align: center;
+    padding: 30px 20px;
+    color: var(--muted);
+    font-size: 0.75rem;
+    border-top: 1px solid var(--border);
+    margin-top: 30px;
+  }
+  .footer a { color: var(--accent); }
+  @media (min-width: 600px) {
+    .listing {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .listing-top { margin-bottom: 0; flex: 1; min-width: 0; }
+    .listing-bottom { flex-shrink: 0; }
+    .listing-price { min-width: 100px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>🍋 Amalfi Coast Airbnbs</h1>
+  <p class="sub">Aug 22–29, 2026 · 7 nights · 2 adults · prices in CAD</p>
+  <a href="best-trip.html" class="back">← Back to trip itinerary</a>
+</div>
+
+<div class="stats">
+  <div class="stat"><div class="stat-val">274</div><div class="stat-label">listings</div></div>
+  <div class="stat"><div class="stat-val">★ 4.91</div><div class="stat-label">avg rating</div></div>
+  <div class="stat"><div class="stat-val">$4045</div><div class="stat-label">avg 7-night</div></div>
+  <div class="stat"><div class="stat-val">73</div><div class="stat-label">under $1,500</div></div>
+</div>
+
+<div class="nav">
+  <a href="#perfect">🌟 Perfect 5.0</a>
+  <a href="#top-rated">⭐ Top Rated</a>
+  <a href="#most-reviewed">💬 Most Reviewed</a>
+  <a href="#best-value">💰 Best Value</a>
+  <a href="#budget">🏷️ Budget</a>
+  <a href="#guest-fav">🏆 Guest Favs</a>
+  <a href="#agerola">⛰️ Agerola Area</a>
+  <a href="#amalfi">🏛️ Amalfi</a>
+  <a href="#positano">🌸 Positano</a>
+</div>
+
+
+  <div class="section" id="perfect">
+    <h2>🌟 Perfect 5.0 Stars</h2>
+    <p class="section-sub">Flawless ratings from every guest<span class="count"> · showing 20 of 48</span></p>
+    <div class="listings">
+    <a href="https://www.airbnb.ca/rooms/19917103?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Casa Vacanze Mirò (Airbnb), Ravello</div>
+        <div class="listing-title">Condo in Ravello</div>
+        <span class="area">🎹 Ravello</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(417 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$320<small>/night</small></span>
+          <span class="price-total">$2240 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/37905361?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">MIRTO SUITE- PEZZ PEZZ Amalfi Coast SUITES</div>
+        <div class="listing-title">Apartment in Praiano</div>
+        <span class="area">🌅 Praiano</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(212 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$617<small>/night</small></span>
+          <span class="price-total">$4316 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/826736752903950935?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Fefé Apartment</div>
+        <div class="listing-title">Apartment in Amalfi</div>
+        <span class="area">🏛️ Amalfi</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(207 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$604<small>/night</small></span>
+          <span class="price-total">$4230 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/27547543?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">B&B Carotto Inn
+“Amalfi” Room</div>
+        <div class="listing-title">Room in Piano di Sorrento</div>
+        <span class="area">📍 Other</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(167 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$1432<small>/night</small></span>
+          <span class="price-total">$10024 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/49743436?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Tulliole apartment-free parking- family friendly😊</div>
+        <div class="listing-title">Apartment in Vico Equense</div>
+        <span class="area">📍 Other</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(160 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$353<small>/night</small></span>
+          <span class="price-total">$2471 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/791033406995256073?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Maya's Nest - Casa Venere</div>
+        <div class="listing-title">Home in Furore</div>
+        <span class="area">🏔️ Furore</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(99 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$214<small>/night</small></span>
+          <span class="price-total">$1498 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/50110264?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Apartment in the center of Praiano, sea view</div>
+        <div class="listing-title">Home in Praiano</div>
+        <span class="area">🌅 Praiano</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(87 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$401<small>/night</small></span>
+          <span class="price-total">$2804 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/926482144483072225?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Mamma Titina Holiday House, Amalfi Coast</div>
+        <div class="listing-title">Home in San Michele</div>
+        <span class="area">🏔️ Furore</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(82 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$420<small>/night</small></span>
+          <span class="price-total">$2942 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/1149137429682119599?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Apartment Near the Sea – Sorrento Coast</div>
+        <div class="listing-title">Apartment in Castellammare di Stabia</div>
+        <span class="area">📍 Other</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(81 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$224<small>/night</small></span>
+          <span class="price-total">$1565 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/887673788427063232?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">la bougainvillea 
+ •house with a Jacuzzi and a sea view•</div>
+        <div class="listing-title">Home in Conca dei Marini</div>
+        <span class="area">⛵ Conca dei Marini</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(74 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$495<small>/night</small></span>
+          <span class="price-total">$3464 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/1381902555664764777?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">(Suite on the Coast) Your Terrace on the Coast</div>
+        <div class="listing-title">Room in Raito</div>
+        <span class="area">🎨 Vietri sul Mare</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(62 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$267<small>/night</small></span>
+          <span class="price-total">$1872 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/50670490?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Mamma Mia</div>
+        <div class="listing-title">Loft in Positano</div>
+        <span class="area">🌸 Positano</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(55 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$844<small>/night</small></span>
+          <span class="price-total">$5908 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/51883854?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Coral House - a wonderful sea view apartment</div>
+        <div class="listing-title">Condo in Atrani</div>
+        <span class="area">🏘️ Atrani</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(53 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$3355<small>/night</small></span>
+          <span class="price-total">$23485 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/1181751989998923240?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Casa Tre Cuori "Sunset,sea view and relax</div>
+        <div class="listing-title">Condo in Praiano</div>
+        <span class="area">🌅 Praiano</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(52 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$392<small>/night</small></span>
+          <span class="price-total">$2747 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/1146230035856299034?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">San Giuliano Palace app. Maria - Amalfi Coast</div>
+        <div class="listing-title">Apartment in Praiano</div>
+        <span class="area">🌅 Praiano</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(48 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$401<small>/night</small></span>
+          <span class="price-total">$2804 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/1112847856256550738?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">L'Eden di Turo (Brand New Loft)</div>
+        <div class="listing-title">Vacation home in Conca dei Marini</div>
+        <span class="area">⛵ Conca dei Marini</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(44 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$489<small>/night</small></span>
+          <span class="price-total">$3421 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/708689218907106358?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Casa Baronia Residence</div>
+        <div class="listing-title">Condo in Figlino</div>
+        <span class="area">🍷 Tramonti</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(41 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$260<small>/night</small></span>
+          <span class="price-total">$1822 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/741904199157442353?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Villa Cimea</div>
+        <div class="listing-title">Villa in Furore</div>
+        <span class="area">🏔️ Furore</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(41 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$509<small>/night</small></span>
+          <span class="price-total">$3564 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/50259728?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Villa Camomilla: a breathtaking terrace overlooking the sea</div>
+        <div class="listing-title">Villa in Positano</div>
+        <span class="area">🌸 Positano</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(36 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$7676<small>/night</small></span>
+          <span class="price-total">$53732 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/1399804150834758703?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Aladea Home Praiano Amalfi Coast</div>
+        <div class="listing-title">Home in Praiano</div>
+        <span class="area">🌅 Praiano</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(34 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$473<small>/night</small></span>
+          <span class="price-total">$3312 total</span>
+        </div>
+      </div>
+    </a>
+    </div>
+  </div>
+
+  <div class="section" id="top-rated">
+    <h2>⭐ Top Rated (4.95+)</h2>
+    <p class="section-sub">Outstanding quality with 10+ reviews<span class="count"> · showing 25 of 116</span></p>
+    <div class="listings">
+    <a href="https://www.airbnb.ca/rooms/19917103?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Casa Vacanze Mirò (Airbnb), Ravello</div>
+        <div class="listing-title">Condo in Ravello</div>
+        <span class="area">🎹 Ravello</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(417 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$320<small>/night</small></span>
+          <span class="price-total">$2240 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/37905361?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">MIRTO SUITE- PEZZ PEZZ Amalfi Coast SUITES</div>
+        <div class="listing-title">Apartment in Praiano</div>
+        <span class="area">🌅 Praiano</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(212 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$617<small>/night</small></span>
+          <span class="price-total">$4316 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/826736752903950935?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Fefé Apartment</div>
+        <div class="listing-title">Apartment in Amalfi</div>
+        <span class="area">🏛️ Amalfi</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(207 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$604<small>/night</small></span>
+          <span class="price-total">$4230 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/27547543?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">B&B Carotto Inn
+“Amalfi” Room</div>
+        <div class="listing-title">Room in Piano di Sorrento</div>
+        <span class="area">📍 Other</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(167 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$1432<small>/night</small></span>
+          <span class="price-total">$10024 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/49743436?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Tulliole apartment-free parking- family friendly😊</div>
+        <div class="listing-title">Apartment in Vico Equense</div>
+        <span class="area">📍 Other</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(160 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$353<small>/night</small></span>
+          <span class="price-total">$2471 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/791033406995256073?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Maya's Nest - Casa Venere</div>
+        <div class="listing-title">Home in Furore</div>
+        <span class="area">🏔️ Furore</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(99 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$214<small>/night</small></span>
+          <span class="price-total">$1498 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/50110264?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Apartment in the center of Praiano, sea view</div>
+        <div class="listing-title">Home in Praiano</div>
+        <span class="area">🌅 Praiano</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(87 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$401<small>/night</small></span>
+          <span class="price-total">$2804 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/926482144483072225?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Mamma Titina Holiday House, Amalfi Coast</div>
+        <div class="listing-title">Home in San Michele</div>
+        <span class="area">🏔️ Furore</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(82 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$420<small>/night</small></span>
+          <span class="price-total">$2942 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/1149137429682119599?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Apartment Near the Sea – Sorrento Coast</div>
+        <div class="listing-title">Apartment in Castellammare di Stabia</div>
+        <span class="area">📍 Other</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(81 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$224<small>/night</small></span>
+          <span class="price-total">$1565 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/887673788427063232?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">la bougainvillea 
+ •house with a Jacuzzi and a sea view•</div>
+        <div class="listing-title">Home in Conca dei Marini</div>
+        <span class="area">⛵ Conca dei Marini</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(74 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$495<small>/night</small></span>
+          <span class="price-total">$3464 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/1381902555664764777?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">(Suite on the Coast) Your Terrace on the Coast</div>
+        <div class="listing-title">Room in Raito</div>
+        <span class="area">🎨 Vietri sul Mare</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(62 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$267<small>/night</small></span>
+          <span class="price-total">$1872 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/50670490?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Mamma Mia</div>
+        <div class="listing-title">Loft in Positano</div>
+        <span class="area">🌸 Positano</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(55 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$844<small>/night</small></span>
+          <span class="price-total">$5908 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/51883854?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Coral House - a wonderful sea view apartment</div>
+        <div class="listing-title">Condo in Atrani</div>
+        <span class="area">🏘️ Atrani</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(53 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$3355<small>/night</small></span>
+          <span class="price-total">$23485 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/1181751989998923240?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Casa Tre Cuori "Sunset,sea view and relax</div>
+        <div class="listing-title">Condo in Praiano</div>
+        <span class="area">🌅 Praiano</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(52 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$392<small>/night</small></span>
+          <span class="price-total">$2747 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/1146230035856299034?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">San Giuliano Palace app. Maria - Amalfi Coast</div>
+        <div class="listing-title">Apartment in Praiano</div>
+        <span class="area">🌅 Praiano</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(48 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$401<small>/night</small></span>
+          <span class="price-total">$2804 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/1112847856256550738?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">L'Eden di Turo (Brand New Loft)</div>
+        <div class="listing-title">Vacation home in Conca dei Marini</div>
+        <span class="area">⛵ Conca dei Marini</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(44 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$489<small>/night</small></span>
+          <span class="price-total">$3421 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/708689218907106358?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Casa Baronia Residence</div>
+        <div class="listing-title">Condo in Figlino</div>
+        <span class="area">🍷 Tramonti</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(41 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$260<small>/night</small></span>
+          <span class="price-total">$1822 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/741904199157442353?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Villa Cimea</div>
+        <div class="listing-title">Villa in Furore</div>
+        <span class="area">🏔️ Furore</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(41 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$509<small>/night</small></span>
+          <span class="price-total">$3564 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/50259728?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Villa Camomilla: a breathtaking terrace overlooking the sea</div>
+        <div class="listing-title">Villa in Positano</div>
+        <span class="area">🌸 Positano</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(36 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$7676<small>/night</small></span>
+          <span class="price-total">$53732 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/1399804150834758703?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Aladea Home Praiano Amalfi Coast</div>
+        <div class="listing-title">Home in Praiano</div>
+        <span class="area">🌅 Praiano</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(34 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$473<small>/night</small></span>
+          <span class="price-total">$3312 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/1172196743951395625?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Sea View Deluxe Apartment 1</div>
+        <div class="listing-title">Apartment in Vico Equense</div>
+        <span class="area">📍 Other</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(33 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$421<small>/night</small></span>
+          <span class="price-total">$2948 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/1186022897132875544?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">New apartment in the city center</div>
+        <div class="listing-title">Apartment in Castellammare di Stabia</div>
+        <span class="area">📍 Other</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(33 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$173<small>/night</small></span>
+          <span class="price-total">$1208 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/1236800889490090855?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Trekking Lovers • 180 Steps to Climb Amazing Views</div>
+        <div class="listing-title">Home in Minori</div>
+        <span class="area">🍋 Minori</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(32 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$437<small>/night</small></span>
+          <span class="price-total">$3057 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/1173230520702366108?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">TeMaLo's House, Double Room</div>
+        <div class="listing-title">Room in Salerno</div>
+        <span class="area">🎨 Vietri sul Mare</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(29 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$167<small>/night</small></span>
+          <span class="price-total">$1170 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/1036944587280073794?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Casa Marianna - Seaview Home</div>
+        <div class="listing-title">Vacation home in Praiano</div>
+        <span class="area">🌅 Praiano</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(28 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$653<small>/night</small></span>
+          <span class="price-total">$4573 total</span>
+        </div>
+      </div>
+    </a>
+    </div>
+  </div>
+
+  <div class="section" id="most-reviewed">
+    <h2>💬 Most Reviewed</h2>
+    <p class="section-sub">50+ reviews and 4.8+ rating — tried & tested<span class="count"> · showing 25 of 187</span></p>
+    <div class="listings">
+    <a href="https://www.airbnb.ca/rooms/2938612?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">unbelievable new house sea view</div>
+        <div class="listing-title">Home in Ravello</div>
+        <span class="area">🎹 Ravello</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-good">★ 4.81</span>
+          <span class="reviews">(745 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$224<small>/night</small></span>
+          <span class="price-total">$1570 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/6690135?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Full relaxation</div>
+        <div class="listing-title">Cottage in agerola/napoli</div>
+        <span class="area">⛰️ Agerola</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-good">★ 4.8</span>
+          <span class="reviews">(619 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$185<small>/night</small></span>
+          <span class="price-total">$1295 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/13922336?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">OASI in the center with parking</div>
+        <div class="listing-title">Apartment in Salerno</div>
+        <span class="area">📍 Other</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-good">★ 4.83</span>
+          <span class="reviews">(510 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$1673<small>/night</small></span>
+          <span class="price-total">$11711 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/21660322?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Casa San Nicola, Positano</div>
+        <div class="listing-title">Home in Positano</div>
+        <span class="area">🌸 Positano</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-good">★ 4.82</span>
+          <span class="reviews">(509 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$551<small>/night</small></span>
+          <span class="price-total">$3854 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/32588731?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Windows on heaven. Total sea view house!</div>
+        <div class="listing-title">Home in Scala</div>
+        <span class="area">🌿 Scala</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-top">★ 4.98</span>
+          <span class="reviews">(445 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$224<small>/night</small></span>
+          <span class="price-total">$1568 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/35930217?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">LUCY’S HOUSE - comfortable apartment in Amalfi</div>
+        <div class="listing-title">Apartment in Amalfi</div>
+        <span class="area">🏡 Pontone</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-great">★ 4.92</span>
+          <span class="reviews">(438 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$348<small>/night</small></span>
+          <span class="price-total">$2433 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/18457653?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">The home of the Gods (24/7 support) entire house</div>
+        <div class="listing-title">Apartment in Praiano</div>
+        <span class="area">🌅 Praiano</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-top">★ 4.99</span>
+          <span class="reviews">(429 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$607<small>/night</small></span>
+          <span class="price-total">$4246 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/19917103?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Casa Vacanze Mirò (Airbnb), Ravello</div>
+        <div class="listing-title">Condo in Ravello</div>
+        <span class="area">🎹 Ravello</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(417 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$320<small>/night</small></span>
+          <span class="price-total">$2240 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/3069031?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Ocean view Martida_apartment studio</div>
+        <div class="listing-title">Room in Praiano</div>
+        <span class="area">🌅 Praiano</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-great">★ 4.92</span>
+          <span class="reviews">(390 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$296<small>/night</small></span>
+          <span class="price-total">$2069 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/18939770?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Beata Solitudo Hostel - Mixed Room</div>
+        <div class="listing-title">Shared room in Agerola</div>
+        <span class="area">⛵ Conca dei Marini</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-good">★ 4.88</span>
+          <span class="reviews">(385 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$291<small>/night</small></span>
+          <span class="price-total">$2037 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/18071473?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Alma House</div>
+        <div class="listing-title">Apartment in Amalfi</div>
+        <span class="area">🏛️ Amalfi</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-good">★ 4.8</span>
+          <span class="reviews">(374 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$270<small>/night</small></span>
+          <span class="price-total">$1887 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/13671263?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">EXCLUSIVE APARTAMENT your piece of paradise</div>
+        <div class="listing-title">Apartment in Furore</div>
+        <span class="area">🏔️ Furore</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-top">★ 4.98</span>
+          <span class="reviews">(370 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$455<small>/night</small></span>
+          <span class="price-total">$3183 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/19633284?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Amalfi Lady Laura House</div>
+        <div class="listing-title">Apartment in Amalfi</div>
+        <span class="area">🏛️ Amalfi</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-top">★ 4.99</span>
+          <span class="reviews">(366 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$607<small>/night</small></span>
+          <span class="price-total">$4247 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/14728105?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Serenity</div>
+        <div class="listing-title">Apartment in Positano</div>
+        <span class="area">🌸 Positano</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-top">★ 4.95</span>
+          <span class="reviews">(363 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$546<small>/night</small></span>
+          <span class="price-total">$3820 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/2580261?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Lovely Loft Positano with breakfast</div>
+        <div class="listing-title">Vacation home in Positano</div>
+        <span class="area">🌸 Positano</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-good">★ 4.8</span>
+          <span class="reviews">(362 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$449<small>/night</small></span>
+          <span class="price-total">$3146 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/19488613?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Amalfi Casa Mikrò</div>
+        <div class="listing-title">Apartment in Amalfi</div>
+        <span class="area">🏛️ Amalfi</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-great">★ 4.9</span>
+          <span class="reviews">(335 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$266<small>/night</small></span>
+          <span class="price-total">$1862 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/17735253?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Beata Solitudo Hostel - Female Dorm</div>
+        <div class="listing-title">Hotel room in Agerola</div>
+        <span class="area">⛵ Conca dei Marini</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-good">★ 4.83</span>
+          <span class="reviews">(332 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$42<small>/night</small></span>
+          <span class="price-total">$291 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/12964626?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">AQUAMARINE BLUE, AMALFI COAST</div>
+        <div class="listing-title">Home in San Michele</div>
+        <span class="area">🏔️ Furore</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-good">★ 4.89</span>
+          <span class="reviews">(324 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$210<small>/night</small></span>
+          <span class="price-total">$1467 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/19538495?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Home holiday "Marygiò"</div>
+        <div class="listing-title">Apartment in Agerola</div>
+        <span class="area">⛰️ Agerola</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-top">★ 4.97</span>
+          <span class="reviews">(322 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$149<small>/night</small></span>
+          <span class="price-total">$1041 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/617194?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Albachiara-hiking Amalficoast-PathOfGods-Jasmine</div>
+        <div class="listing-title">Room in Agerola</div>
+        <span class="area">🏔️ Furore</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-great">★ 4.9</span>
+          <span class="reviews">(321 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$122<small>/night</small></span>
+          <span class="price-total">$852 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/43281874?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Home overlooking Vesuvius on the hills of Castellammare</div>
+        <div class="listing-title">Apartment in Castellammare di Stabia</div>
+        <span class="area">📍 Other</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-top">★ 4.97</span>
+          <span class="reviews">(319 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$177<small>/night</small></span>
+          <span class="price-total">$1236 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/12802359?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">B&B la Palombara</div>
+        <div class="listing-title">Home in Vico Equense</div>
+        <span class="area">📍 Other</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-top">★ 4.98</span>
+          <span class="reviews">(309 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$436<small>/night</small></span>
+          <span class="price-total">$3055 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/14330246?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Bomerano Apartments 50 meters from the Path of the Gods</div>
+        <div class="listing-title">Apartment in Pianillo</div>
+        <span class="area">⛰️ Agerola</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-good">★ 4.87</span>
+          <span class="reviews">(302 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$164<small>/night</small></span>
+          <span class="price-total">$1147 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/44836624?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">PARADISE APARTMENT</div>
+        <div class="listing-title">Apartment in Agerola</div>
+        <span class="area">⛰️ Agerola</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-top">★ 4.95</span>
+          <span class="reviews">(300 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$144<small>/night</small></span>
+          <span class="price-total">$1007 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/13277761?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">From Zio Nicola Piano di Sorrento House for Holiday</div>
+        <div class="listing-title">Apartment in Piano di Sorrento</div>
+        <span class="area">📍 Other</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-great">★ 4.94</span>
+          <span class="reviews">(289 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$357<small>/night</small></span>
+          <span class="price-total">$2498 total</span>
+        </div>
+      </div>
+    </a>
+    </div>
+  </div>
+
+  <div class="section" id="best-value">
+    <h2>💰 Best Value</h2>
+    <p class="section-sub">Under $1,500 CAD for 7 nights with 4.9+ rating<span class="count"> · showing 20 of 44</span></p>
+    <div class="listings">
+    <a href="https://www.airbnb.ca/rooms/48335949?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Private room, Salerno Centre/Station</div>
+        <div class="listing-title">Room in Salerno</div>
+        <span class="area">📍 Other</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-great">★ 4.94</span>
+          <span class="reviews">(245 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$99<small>/night</small></span>
+          <span class="price-total">$693 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/860848894367643262?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Agriturismo Quisisana, Double Room 4</div>
+        <div class="listing-title">Room in Castellammare di Stabia</div>
+        <span class="area">📍 Other</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-great">★ 4.94</span>
+          <span class="reviews">(34 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$101<small>/night</small></span>
+          <span class="price-total">$709 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/47576133?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Room with en-suite bathroom. Station super close!</div>
+        <div class="listing-title">Room in Salerno</div>
+        <span class="area">📍 Other</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-great">★ 4.94</span>
+          <span class="reviews">(281 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$107<small>/night</small></span>
+          <span class="price-total">$749 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/617194?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Albachiara-hiking Amalficoast-PathOfGods-Jasmine</div>
+        <div class="listing-title">Room in Agerola</div>
+        <span class="area">🏔️ Furore</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-great">★ 4.9</span>
+          <span class="reviews">(321 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$122<small>/night</small></span>
+          <span class="price-total">$852 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/9006697?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Villa Elisa, Double Room 1</div>
+        <div class="listing-title">Room in Pianillo</div>
+        <span class="area">⛰️ Agerola</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(24 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$134<small>/night</small></span>
+          <span class="price-total">$936 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/10570238?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Al Sesto B&B Salerno, Double Room</div>
+        <div class="listing-title">Room in Salerno</div>
+        <span class="area">📍 Other</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-great">★ 4.91</span>
+          <span class="reviews">(161 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$135<small>/night</small></span>
+          <span class="price-total">$946 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/979513910969572253?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Sunset</div>
+        <div class="listing-title">Guest suite in Pianillo</div>
+        <span class="area">⛰️ Agerola</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-great">★ 4.94</span>
+          <span class="reviews">(78 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$137<small>/night</small></span>
+          <span class="price-total">$957 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/44836624?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">PARADISE APARTMENT</div>
+        <div class="listing-title">Apartment in Agerola</div>
+        <span class="area">⛰️ Agerola</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-top">★ 4.95</span>
+          <span class="reviews">(300 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$144<small>/night</small></span>
+          <span class="price-total">$1007 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/1175472377571564137?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Luendo</div>
+        <div class="listing-title">Home in Salerno</div>
+        <span class="area">🎨 Vietri sul Mare</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-great">★ 4.92</span>
+          <span class="reviews">(25 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$144<small>/night</small></span>
+          <span class="price-total">$1007 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/1474527894407755686?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">La Casetta di Sofia: terrace with a view</div>
+        <div class="listing-title">Home in Gragnano</div>
+        <span class="area">📍 Other</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(5 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$147<small>/night</small></span>
+          <span class="price-total">$1026 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/19538495?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Home holiday "Marygiò"</div>
+        <div class="listing-title">Apartment in Agerola</div>
+        <span class="area">⛰️ Agerola</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-top">★ 4.97</span>
+          <span class="reviews">(322 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$149<small>/night</small></span>
+          <span class="price-total">$1041 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/48127243?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">B&B Floor1 Interior5 - Modern two-room apartment in the center</div>
+        <div class="listing-title">Apartment in Salerno</div>
+        <span class="area">📍 Other</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-great">★ 4.93</span>
+          <span class="reviews">(130 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$149<small>/night</small></span>
+          <span class="price-total">$1041 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/28946851?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Cristina Apartment</div>
+        <div class="listing-title">Condo in Vico Equense</div>
+        <span class="area">📍 Other</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-top">★ 4.95</span>
+          <span class="reviews">(152 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$149<small>/night</small></span>
+          <span class="price-total">$1044 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/41642520?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">My Habitat - Your home away from home</div>
+        <div class="listing-title">Apartment in Santa Maria la Carità</div>
+        <span class="area">📍 Other</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-top">★ 4.96</span>
+          <span class="reviews">(217 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$150<small>/night</small></span>
+          <span class="price-total">$1050 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/53763756?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">◆ Casa Margherita ◆</div>
+        <div class="listing-title">Vacation home in Salerno</div>
+        <span class="area">📍 Other</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-great">★ 4.9</span>
+          <span class="reviews">(83 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$158<small>/night</small></span>
+          <span class="price-total">$1109 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/191220?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Agerola Private – Easy Check-in & Bus 2 Min Walk</div>
+        <div class="listing-title">Condo in Agerola</div>
+        <span class="area">⛵ Conca dei Marini</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-great">★ 4.91</span>
+          <span class="reviews">(244 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$161<small>/night</small></span>
+          <span class="price-total">$1130 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/1210846860905413153?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Capocampo Amalfi Coast</div>
+        <div class="listing-title">Home in Pucara</div>
+        <span class="area">🍷 Tramonti</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(15 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$164<small>/night</small></span>
+          <span class="price-total">$1149 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/1173230520702366108?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">TeMaLo's House, Double Room</div>
+        <div class="listing-title">Room in Salerno</div>
+        <span class="area">🎨 Vietri sul Mare</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(29 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$167<small>/night</small></span>
+          <span class="price-total">$1170 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/15430009?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Campeggio Beata Solitudo bungalow for 4 people</div>
+        <div class="listing-title">Bungalow in San Lazzaro</div>
+        <span class="area">⛵ Conca dei Marini</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-great">★ 4.94</span>
+          <span class="reviews">(16 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$168<small>/night</small></span>
+          <span class="price-total">$1175 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/1485597919885538146?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Casa Felice</div>
+        <div class="listing-title">Apartment in Salerno</div>
+        <span class="area">📍 Other</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(5 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$170<small>/night</small></span>
+          <span class="price-total">$1193 total</span>
+        </div>
+      </div>
+    </a>
+    </div>
+  </div>
+
+  <div class="section" id="budget">
+    <h2>🏷️ Budget Friendly</h2>
+    <p class="section-sub">Cheapest options with 4.8+ rating<span class="count"> · 25 listings</span></p>
+    <div class="listings">
+    <a href="https://www.airbnb.ca/rooms/17735253?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Beata Solitudo Hostel - Female Dorm</div>
+        <div class="listing-title">Hotel room in Agerola</div>
+        <span class="area">⛵ Conca dei Marini</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-good">★ 4.83</span>
+          <span class="reviews">(332 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$42<small>/night</small></span>
+          <span class="price-total">$291 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/48335949?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Private room, Salerno Centre/Station</div>
+        <div class="listing-title">Room in Salerno</div>
+        <span class="area">📍 Other</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-great">★ 4.94</span>
+          <span class="reviews">(245 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$99<small>/night</small></span>
+          <span class="price-total">$693 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/860848894367643262?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Agriturismo Quisisana, Double Room 4</div>
+        <div class="listing-title">Room in Castellammare di Stabia</div>
+        <span class="area">📍 Other</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-great">★ 4.94</span>
+          <span class="reviews">(34 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$101<small>/night</small></span>
+          <span class="price-total">$709 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/47576133?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Room with en-suite bathroom. Station super close!</div>
+        <div class="listing-title">Room in Salerno</div>
+        <span class="area">📍 Other</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-great">★ 4.94</span>
+          <span class="reviews">(281 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$107<small>/night</small></span>
+          <span class="price-total">$749 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/35229622?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Camera Santa Lucia</div>
+        <div class="listing-title">Room in Salerno</div>
+        <span class="area">🎨 Vietri sul Mare</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-good">★ 4.81</span>
+          <span class="reviews">(134 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$117<small>/night</small></span>
+          <span class="price-total">$822 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/19648228?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">La Crisalide: From the top of the Amalfi Coast</div>
+        <div class="listing-title">Home in Pianillo</div>
+        <span class="area">🏔️ Furore</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-good">★ 4.86</span>
+          <span class="reviews">(115 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$118<small>/night</small></span>
+          <span class="price-total">$828 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/35987779?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">La Terrazza sul porto</div>
+        <div class="listing-title">Room in Castellammare di Stabia</div>
+        <span class="area">📍 Other</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-good">★ 4.86</span>
+          <span class="reviews">(90 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$121<small>/night</small></span>
+          <span class="price-total">$847 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/617194?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Albachiara-hiking Amalficoast-PathOfGods-Jasmine</div>
+        <div class="listing-title">Room in Agerola</div>
+        <span class="area">🏔️ Furore</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-great">★ 4.9</span>
+          <span class="reviews">(321 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$122<small>/night</small></span>
+          <span class="price-total">$852 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/9006697?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Villa Elisa, Double Room 1</div>
+        <div class="listing-title">Room in Pianillo</div>
+        <span class="area">⛰️ Agerola</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(24 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$134<small>/night</small></span>
+          <span class="price-total">$936 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/1077719581161193778?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">4 min to Station | Heart of City + Self Check-in</div>
+        <div class="listing-title">Apartment in Cava de' Tirreni</div>
+        <span class="area">📍 Other</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-good">★ 4.89</span>
+          <span class="reviews">(82 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$135<small>/night</small></span>
+          <span class="price-total">$943 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/10570238?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Al Sesto B&B Salerno, Double Room</div>
+        <div class="listing-title">Room in Salerno</div>
+        <span class="area">📍 Other</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-great">★ 4.91</span>
+          <span class="reviews">(161 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$135<small>/night</small></span>
+          <span class="price-total">$946 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/8157286?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">La Casa Di Ale 2</div>
+        <div class="listing-title">Condo in Seiano</div>
+        <span class="area">📍 Other</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-good">★ 4.86</span>
+          <span class="reviews">(90 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$135<small>/night</small></span>
+          <span class="price-total">$948 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/979513910969572253?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Sunset</div>
+        <div class="listing-title">Guest suite in Pianillo</div>
+        <span class="area">⛰️ Agerola</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-great">★ 4.94</span>
+          <span class="reviews">(78 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$137<small>/night</small></span>
+          <span class="price-total">$957 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/44836624?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">PARADISE APARTMENT</div>
+        <div class="listing-title">Apartment in Agerola</div>
+        <span class="area">⛰️ Agerola</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-top">★ 4.95</span>
+          <span class="reviews">(300 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$144<small>/night</small></span>
+          <span class="price-total">$1007 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/1175472377571564137?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Luendo</div>
+        <div class="listing-title">Home in Salerno</div>
+        <span class="area">🎨 Vietri sul Mare</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-great">★ 4.92</span>
+          <span class="reviews">(25 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$144<small>/night</small></span>
+          <span class="price-total">$1007 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/23532797?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Casa Flora</div>
+        <div class="listing-title">Home in Vico Equense</div>
+        <span class="area">📍 Other</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-good">★ 4.82</span>
+          <span class="reviews">(158 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$145<small>/night</small></span>
+          <span class="price-total">$1013 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/1474527894407755686?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">La Casetta di Sofia: terrace with a view</div>
+        <div class="listing-title">Home in Gragnano</div>
+        <span class="area">📍 Other</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(5 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$147<small>/night</small></span>
+          <span class="price-total">$1026 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/19538495?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Home holiday "Marygiò"</div>
+        <div class="listing-title">Apartment in Agerola</div>
+        <span class="area">⛰️ Agerola</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-top">★ 4.97</span>
+          <span class="reviews">(322 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$149<small>/night</small></span>
+          <span class="price-total">$1041 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/48127243?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">B&B Floor1 Interior5 - Modern two-room apartment in the center</div>
+        <div class="listing-title">Apartment in Salerno</div>
+        <span class="area">📍 Other</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-great">★ 4.93</span>
+          <span class="reviews">(130 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$149<small>/night</small></span>
+          <span class="price-total">$1041 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/28946851?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Cristina Apartment</div>
+        <div class="listing-title">Condo in Vico Equense</div>
+        <span class="area">📍 Other</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-top">★ 4.95</span>
+          <span class="reviews">(152 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$149<small>/night</small></span>
+          <span class="price-total">$1044 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/41642520?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">My Habitat - Your home away from home</div>
+        <div class="listing-title">Apartment in Santa Maria la Carità</div>
+        <span class="area">📍 Other</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-top">★ 4.96</span>
+          <span class="reviews">(217 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$150<small>/night</small></span>
+          <span class="price-total">$1050 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/53763756?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">◆ Casa Margherita ◆</div>
+        <div class="listing-title">Vacation home in Salerno</div>
+        <span class="area">📍 Other</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-great">★ 4.9</span>
+          <span class="reviews">(83 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$158<small>/night</small></span>
+          <span class="price-total">$1109 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/191220?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Agerola Private – Easy Check-in & Bus 2 Min Walk</div>
+        <div class="listing-title">Condo in Agerola</div>
+        <span class="area">⛵ Conca dei Marini</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-great">★ 4.91</span>
+          <span class="reviews">(244 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$161<small>/night</small></span>
+          <span class="price-total">$1130 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/1193593831412177904?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Cupola: Apartment near Pompeii and Sorrento Coast</div>
+        <div class="listing-title">Apartment in Castellammare di Stabia</div>
+        <span class="area">📍 Other</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-good">★ 4.85</span>
+          <span class="reviews">(20 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$162<small>/night</small></span>
+          <span class="price-total">$1131 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/14330246?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Bomerano Apartments 50 meters from the Path of the Gods</div>
+        <div class="listing-title">Apartment in Pianillo</div>
+        <span class="area">⛰️ Agerola</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-good">★ 4.87</span>
+          <span class="reviews">(302 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$164<small>/night</small></span>
+          <span class="price-total">$1147 total</span>
+        </div>
+      </div>
+    </a>
+    </div>
+  </div>
+
+  <div class="section" id="guest-fav">
+    <h2>🏆 Guest Favorites</h2>
+    <p class="section-sub">Airbnb's own Guest Favorite badge<span class="count"> · showing 20 of 114</span></p>
+    <div class="listings">
+    <a href="https://www.airbnb.ca/rooms/1146230035856299034?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">San Giuliano Palace app. Maria - Amalfi Coast</div>
+        <div class="listing-title">Apartment in Praiano</div>
+        <span class="area">🌅 Praiano</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(48 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$401<small>/night</small></span>
+          <span class="price-total">$2804 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/9006697?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Villa Elisa, Double Room 1</div>
+        <div class="listing-title">Room in Pianillo</div>
+        <span class="area">⛰️ Agerola</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(24 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$134<small>/night</small></span>
+          <span class="price-total">$936 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/41811873?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Central Room</div>
+        <div class="listing-title">Home in Piano di Sorrento</div>
+        <span class="area">📍 Other</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(13 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$1487<small>/night</small></span>
+          <span class="price-total">$10409 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/1477307027379412229?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Blue View Furore Sea View, Camera Furore Sea Vi...</div>
+        <div class="listing-title">Room in Furore</div>
+        <span class="area">🏔️ Furore</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(11 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$212<small>/night</small></span>
+          <span class="price-total">$1487 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/1476191893519645024?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Blue View Furore Sea View, Camera Positano Sea ...</div>
+        <div class="listing-title">Room in Furore</div>
+        <span class="area">🏔️ Furore</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(10 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$212<small>/night</small></span>
+          <span class="price-total">$1487 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/1003434154424625246?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">room with balcony overlooking the sea</div>
+        <div class="listing-title">Room in San Michele</div>
+        <span class="area">🏔️ Furore</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(10 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$201<small>/night</small></span>
+          <span class="price-total">$1405 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/1593001666457782799?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Luxury Seafront Penthouse Private Terrace Mareluna</div>
+        <div class="listing-title">Boutique hotel in Salerno</div>
+        <span class="area">📍 Other</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(6 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$242<small>/night</small></span>
+          <span class="price-total">$1697 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/1409455890764512503?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Sweet Emily - Panoramic Comfort Near Sorrento!</div>
+        <div class="listing-title">Apartment in Sant'Agnello</div>
+        <span class="area">📍 Other</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(6 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$347<small>/night</small></span>
+          <span class="price-total">$2431 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/1485597919885538146?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Casa Felice</div>
+        <div class="listing-title">Apartment in Salerno</div>
+        <span class="area">📍 Other</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(5 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$170<small>/night</small></span>
+          <span class="price-total">$1193 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/1476837922584071301?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">From Rossana - to the colorful stairs</div>
+        <div class="listing-title">Vacation home in Vietri sul Mare</div>
+        <span class="area">🎨 Vietri sul Mare</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(5 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$171<small>/night</small></span>
+          <span class="price-total">$1195 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/1474527894407755686?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">La Casetta di Sofia: terrace with a view</div>
+        <div class="listing-title">Home in Gragnano</div>
+        <span class="area">📍 Other</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(5 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$147<small>/night</small></span>
+          <span class="price-total">$1026 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/1375426828948826561?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Apt_4 pax_Steps from seaside_wifi_ac_Terr</div>
+        <div class="listing-title">Apartment in Salerno</div>
+        <span class="area">🎨 Vietri sul Mare</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(5 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$229<small>/night</small></span>
+          <span class="price-total">$1604 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/28621569?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">'Il Cielo In Una Stanza' B&B</div>
+        <div class="listing-title">Room in Minori</div>
+        <span class="area">🍋 Minori</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-top">★ 4.99</span>
+          <span class="reviews">(145 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$307<small>/night</small></span>
+          <span class="price-total">$2149 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/1095682595481823512?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Da Nonno Piero</div>
+        <div class="listing-title">Home in Ravello</div>
+        <span class="area">🏘️ Atrani</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-top">★ 4.98</span>
+          <span class="reviews">(50 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$228<small>/night</small></span>
+          <span class="price-total">$1593 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/53528551?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">BLU RAITO – Amalfi Coast</div>
+        <div class="listing-title">Tiny home in Raito</div>
+        <span class="area">🎨 Vietri sul Mare</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-top">★ 4.97</span>
+          <span class="reviews">(98 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$255<small>/night</small></span>
+          <span class="price-total">$1785 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/635401563074293006?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Between Sky and Sea - Sea View Apartment in Ravello</div>
+        <div class="listing-title">Vacation home in Ravello</div>
+        <span class="area">🎹 Ravello</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-top">★ 4.97</span>
+          <span class="reviews">(90 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$918<small>/night</small></span>
+          <span class="price-total">$6426 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/617403814671752164?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">"A casa di Camilla": between the sky and the sea</div>
+        <div class="listing-title">Vacation home in Praiano</div>
+        <span class="area">🌅 Praiano</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-top">★ 4.97</span>
+          <span class="reviews">(87 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$465<small>/night</small></span>
+          <span class="price-total">$3253 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/1212098352917506762?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Rosy's Room -Furore</div>
+        <div class="listing-title">Room in Furore</div>
+        <span class="area">🏔️ Furore</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-top">★ 4.97</span>
+          <span class="reviews">(59 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$226<small>/night</small></span>
+          <span class="price-total">$1581 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/41642520?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">My Habitat - Your home away from home</div>
+        <div class="listing-title">Apartment in Santa Maria la Carità</div>
+        <span class="area">📍 Other</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-top">★ 4.96</span>
+          <span class="reviews">(217 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$150<small>/night</small></span>
+          <span class="price-total">$1050 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/31704531?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Blue Line House</div>
+        <div class="listing-title">Apartment in Positano</div>
+        <span class="area">🌸 Positano</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-top">★ 4.96</span>
+          <span class="reviews">(162 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$570<small>/night</small></span>
+          <span class="price-total">$3988 total</span>
+        </div>
+      </div>
+    </a>
+    </div>
+  </div>
+
+  <div class="section" id="agerola">
+    <h2>⛰️ Near Agerola (Home Base)</h2>
+    <p class="section-sub">Agerola, Furore, Pontone, Scala — hike country<span class="count"> · showing 20 of 36</span></p>
+    <div class="listings">
+    <a href="https://www.airbnb.ca/rooms/791033406995256073?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Maya's Nest - Casa Venere</div>
+        <div class="listing-title">Home in Furore</div>
+        <span class="area">🏔️ Furore</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(99 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$214<small>/night</small></span>
+          <span class="price-total">$1498 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/926482144483072225?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Mamma Titina Holiday House, Amalfi Coast</div>
+        <div class="listing-title">Home in San Michele</div>
+        <span class="area">🏔️ Furore</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(82 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$420<small>/night</small></span>
+          <span class="price-total">$2942 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/741904199157442353?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Villa Cimea</div>
+        <div class="listing-title">Villa in Furore</div>
+        <span class="area">🏔️ Furore</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(41 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$509<small>/night</small></span>
+          <span class="price-total">$3564 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/1044114191983519526?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Casa Maria - Furore Amalfi Coast</div>
+        <div class="listing-title">Home in San Michele</div>
+        <span class="area">🏔️ Furore</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(26 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$3179<small>/night</small></span>
+          <span class="price-total">$22253 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/9006697?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Villa Elisa, Double Room 1</div>
+        <div class="listing-title">Room in Pianillo</div>
+        <span class="area">⛰️ Agerola</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(24 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$134<small>/night</small></span>
+          <span class="price-total">$936 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/1360131131906333832?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Casa Ersilia</div>
+        <div class="listing-title">Home in Pianillo</div>
+        <span class="area">⛰️ Agerola</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(21 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$184<small>/night</small></span>
+          <span class="price-total">$1290 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/1477307027379412229?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Blue View Furore Sea View, Camera Furore Sea Vi...</div>
+        <div class="listing-title">Room in Furore</div>
+        <span class="area">🏔️ Furore</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(11 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$212<small>/night</small></span>
+          <span class="price-total">$1487 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/1476191893519645024?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Blue View Furore Sea View, Camera Positano Sea ...</div>
+        <div class="listing-title">Room in Furore</div>
+        <span class="area">🏔️ Furore</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(10 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$212<small>/night</small></span>
+          <span class="price-total">$1487 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/1003434154424625246?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">room with balcony overlooking the sea</div>
+        <div class="listing-title">Room in San Michele</div>
+        <span class="area">🏔️ Furore</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(10 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$201<small>/night</small></span>
+          <span class="price-total">$1405 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/32588731?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Windows on heaven. Total sea view house!</div>
+        <div class="listing-title">Home in Scala</div>
+        <span class="area">🌿 Scala</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-top">★ 4.98</span>
+          <span class="reviews">(445 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$224<small>/night</small></span>
+          <span class="price-total">$1568 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/13671263?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">EXCLUSIVE APARTAMENT your piece of paradise</div>
+        <div class="listing-title">Apartment in Furore</div>
+        <span class="area">🏔️ Furore</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-top">★ 4.98</span>
+          <span class="reviews">(370 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$455<small>/night</small></span>
+          <span class="price-total">$3183 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/572331423652995602?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">The home of Venus</div>
+        <div class="listing-title">Vacation home in Pianillo</div>
+        <span class="area">🏔️ Furore</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-top">★ 4.98</span>
+          <span class="reviews">(128 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$195<small>/night</small></span>
+          <span class="price-total">$1367 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/19538495?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Home holiday "Marygiò"</div>
+        <div class="listing-title">Apartment in Agerola</div>
+        <span class="area">⛰️ Agerola</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-top">★ 4.97</span>
+          <span class="reviews">(322 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$149<small>/night</small></span>
+          <span class="price-total">$1041 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/1212098352917506762?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Rosy's Room -Furore</div>
+        <div class="listing-title">Room in Furore</div>
+        <span class="area">🏔️ Furore</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-top">★ 4.97</span>
+          <span class="reviews">(59 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$226<small>/night</small></span>
+          <span class="price-total">$1581 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/35571922?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Casalena: Villa with large terrace and  sea view</div>
+        <div class="listing-title">Vacation home in Furore</div>
+        <span class="area">🏔️ Furore</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-top">★ 4.96</span>
+          <span class="reviews">(150 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$343<small>/night</small></span>
+          <span class="price-total">$2398 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/938222119209736105?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Maltese</div>
+        <div class="listing-title">Home in Furore</div>
+        <span class="area">🏔️ Furore</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-top">★ 4.96</span>
+          <span class="reviews">(45 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$265<small>/night</small></span>
+          <span class="price-total">$1855 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/44836624?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">PARADISE APARTMENT</div>
+        <div class="listing-title">Apartment in Agerola</div>
+        <span class="area">⛰️ Agerola</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-top">★ 4.95</span>
+          <span class="reviews">(300 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$144<small>/night</small></span>
+          <span class="price-total">$1007 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/26955479?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Il Petrale, wonderful view of Amalfi</div>
+        <div class="listing-title">Apartment in Pontone</div>
+        <span class="area">🏡 Pontone</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-top">★ 4.95</span>
+          <span class="reviews">(162 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$274<small>/night</small></span>
+          <span class="price-total">$1915 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/54101063?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">The nest of Maya -Panoramic terrace house.</div>
+        <div class="listing-title">Home in Furore</div>
+        <span class="area">🏔️ Furore</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-top">★ 4.95</span>
+          <span class="reviews">(154 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$231<small>/night</small></span>
+          <span class="price-total">$1615 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/28009214?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">For o Petral , an overview of Amalfi</div>
+        <div class="listing-title">Apartment in Pontone</div>
+        <span class="area">🏡 Pontone</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-great">★ 4.94</span>
+          <span class="reviews">(159 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$257<small>/night</small></span>
+          <span class="price-total">$1800 total</span>
+        </div>
+      </div>
+    </a>
+    </div>
+  </div>
+
+  <div class="section" id="amalfi">
+    <h2>🏛️ Amalfi & Atrani</h2>
+    <p class="section-sub">The classic towns — walking distance to everything<span class="count"> · showing 20 of 26</span></p>
+    <div class="listings">
+    <a href="https://www.airbnb.ca/rooms/826736752903950935?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Fefé Apartment</div>
+        <div class="listing-title">Apartment in Amalfi</div>
+        <span class="area">🏛️ Amalfi</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(207 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$604<small>/night</small></span>
+          <span class="price-total">$4230 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/51883854?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Coral House - a wonderful sea view apartment</div>
+        <div class="listing-title">Condo in Atrani</div>
+        <span class="area">🏘️ Atrani</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(53 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$3355<small>/night</small></span>
+          <span class="price-total">$23485 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/1376760272842269318?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Amalfully Boutique Apartment - A seaview gem</div>
+        <div class="listing-title">Home in Amalfi</div>
+        <span class="area">🏛️ Amalfi</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(18 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$788<small>/night</small></span>
+          <span class="price-total">$5517 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/1451878052519787440?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Panoramic Views • Amalfi Seafront • Terrace w/BBQ</div>
+        <div class="listing-title">Home in Amalfi</div>
+        <span class="area">🏛️ Amalfi</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(18 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$883<small>/night</small></span>
+          <span class="price-total">$6179 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/19633284?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Amalfi Lady Laura House</div>
+        <div class="listing-title">Apartment in Amalfi</div>
+        <span class="area">🏛️ Amalfi</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-top">★ 4.99</span>
+          <span class="reviews">(366 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$607<small>/night</small></span>
+          <span class="price-total">$4247 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/670837206777469416?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Lovely place for 2 guests: Amalfi</div>
+        <div class="listing-title">Vacation home in Amalfi</div>
+        <span class="area">🏛️ Amalfi</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-top">★ 4.99</span>
+          <span class="reviews">(152 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$396<small>/night</small></span>
+          <span class="price-total">$2770 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/673137460704541001?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Accommodation with panoramic terrace: Amalfi</div>
+        <div class="listing-title">Condo in Amalfi</div>
+        <span class="area">🏛️ Amalfi</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-top">★ 4.98</span>
+          <span class="reviews">(112 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$377<small>/night</small></span>
+          <span class="price-total">$2639 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/1095682595481823512?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Da Nonno Piero</div>
+        <div class="listing-title">Home in Ravello</div>
+        <span class="area">🏘️ Atrani</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-top">★ 4.98</span>
+          <span class="reviews">(50 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$228<small>/night</small></span>
+          <span class="price-total">$1593 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/1174823012564634119?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Ruby House</div>
+        <div class="listing-title">Condo in Atrani</div>
+        <span class="area">🏘️ Atrani</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-top">★ 4.96</span>
+          <span class="reviews">(53 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$424<small>/night</small></span>
+          <span class="price-total">$2965 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/1406469427360032396?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Cozy Beachside Art House • Newly Renovated Home!</div>
+        <div class="listing-title">Vacation home in Amalfi</div>
+        <span class="area">🏛️ Amalfi</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-top">★ 4.96</span>
+          <span class="reviews">(25 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$437<small>/night</small></span>
+          <span class="price-total">$3057 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/47306992?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Cozy Penthouse with panoramic terrace</div>
+        <div class="listing-title">Vacation home in SA</div>
+        <span class="area">🏘️ Atrani</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-top">★ 4.95</span>
+          <span class="reviews">(211 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$276<small>/night</small></span>
+          <span class="price-total">$1930 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/28797782?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">The parfect romantic spot on the Amalfi Coast!</div>
+        <div class="listing-title">Vacation home in Amalfi</div>
+        <span class="area">🏛️ Amalfi</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-top">★ 4.95</span>
+          <span class="reviews">(154 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$472<small>/night</small></span>
+          <span class="price-total">$3306 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/41123689?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Emerald House</div>
+        <div class="listing-title">Apartment in Atrani</div>
+        <span class="area">🏘️ Atrani</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-top">★ 4.95</span>
+          <span class="reviews">(88 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$516<small>/night</small></span>
+          <span class="price-total">$3615 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/13146857?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">CASA TORRICELLA, AMALFI</div>
+        <div class="listing-title">Vacation home in Atrani</div>
+        <span class="area">🏘️ Atrani</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-great">★ 4.94</span>
+          <span class="reviews">(122 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$250<small>/night</small></span>
+          <span class="price-total">$1750 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/19488613?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Amalfi Casa Mikrò</div>
+        <div class="listing-title">Apartment in Amalfi</div>
+        <span class="area">🏛️ Amalfi</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-great">★ 4.9</span>
+          <span class="reviews">(335 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$266<small>/night</small></span>
+          <span class="price-total">$1862 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/22916229?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Donna Giulia - Sea View Apartment Annex</div>
+        <div class="listing-title">Home in Amalfi</div>
+        <span class="area">🏛️ Amalfi</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-great">★ 4.9</span>
+          <span class="reviews">(72 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$548<small>/night</small></span>
+          <span class="price-total">$3835 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/1463577367751702075?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Eva Rooms, Room with a double bed</div>
+        <div class="listing-title">Room in Atrani</div>
+        <span class="area">🏘️ Atrani</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-good">★ 4.89</span>
+          <span class="reviews">(9 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$335<small>/night</small></span>
+          <span class="price-total">$2342 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/43272425?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Casa Spicy - private house.</div>
+        <div class="listing-title">Cottage in Amalfi</div>
+        <span class="area">🏛️ Amalfi</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-good">★ 4.85</span>
+          <span class="reviews">(110 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$257<small>/night</small></span>
+          <span class="price-total">$1798 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/25073339?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">CRIS HOUSE - Mena</div>
+        <div class="listing-title">Apartment in Atrani</div>
+        <span class="area">🏘️ Atrani</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-good">★ 4.82</span>
+          <span class="reviews">(261 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$307<small>/night</small></span>
+          <span class="price-total">$2152 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/51086025?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">La loggia di Tittina, vacation home</div>
+        <div class="listing-title">Vacation home in Amalfi</div>
+        <span class="area">🏛️ Amalfi</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-good">★ 4.82</span>
+          <span class="reviews">(178 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$266<small>/night</small></span>
+          <span class="price-total">$1860 total</span>
+        </div>
+      </div>
+    </a>
+    </div>
+  </div>
+
+  <div class="section" id="positano">
+    <h2>🌸 Positano & Nocelle</h2>
+    <p class="section-sub">Pastel cliffs and Path of the Gods endpoint<span class="count"> · showing 20 of 40</span></p>
+    <div class="listings">
+    <a href="https://www.airbnb.ca/rooms/50670490?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Mamma Mia</div>
+        <div class="listing-title">Loft in Positano</div>
+        <span class="area">🌸 Positano</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(55 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$844<small>/night</small></span>
+          <span class="price-total">$5908 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/50259728?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Villa Camomilla: a breathtaking terrace overlooking the sea</div>
+        <div class="listing-title">Villa in Positano</div>
+        <span class="area">🌸 Positano</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(36 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$7676<small>/night</small></span>
+          <span class="price-total">$53732 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/1405545987508678592?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Coral Room</div>
+        <div class="listing-title">Room in Positano</div>
+        <span class="area">🌸 Positano</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(24 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$376<small>/night</small></span>
+          <span class="price-total">$2630 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/1415343921850108441?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Casa Rosetta, Positano</div>
+        <div class="listing-title">Home in Positano</div>
+        <span class="area">🌸 Positano</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(22 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$836<small>/night</small></span>
+          <span class="price-total">$5854 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/1066612343774476151?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Pigolina Blue</div>
+        <div class="listing-title">Apartment in Positano</div>
+        <span class="area">🌸 Positano</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-perfect">★ 5.0</span>
+          <span class="reviews">(20 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$584<small>/night</small></span>
+          <span class="price-total">$4089 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/17631918?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Villa Gio PositanoHouse</div>
+        <div class="listing-title">Vacation home in Positano</div>
+        <span class="area">🥾 Nocelle</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-top">★ 4.99</span>
+          <span class="reviews">(270 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$730<small>/night</small></span>
+          <span class="price-total">$5112 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/2416328?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Charming Flat with Amazing Views</div>
+        <div class="listing-title">Apartment in Positano</div>
+        <span class="area">🌸 Positano</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-top">★ 4.99</span>
+          <span class="reviews">(134 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$604<small>/night</small></span>
+          <span class="price-total">$4229 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/16129703?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">stunning view by elegant loft apartment Le Sirene</div>
+        <div class="listing-title">Vacation home in Positano</div>
+        <span class="area">🌸 Positano</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-top">★ 4.99</span>
+          <span class="reviews">(115 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$746<small>/night</small></span>
+          <span class="price-total">$5225 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/680947567926052873?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Casa La Cisterna, between the sky and sea.</div>
+        <div class="listing-title">Home in Positano</div>
+        <span class="area">🥾 Nocelle</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-top">★ 4.99</span>
+          <span class="reviews">(110 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$494<small>/night</small></span>
+          <span class="price-total">$3460 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/35935703?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Casa Francesca  spectacular home in Positano</div>
+        <div class="listing-title">Home in Positano</div>
+        <span class="area">🥾 Nocelle</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-top">★ 4.99</span>
+          <span class="reviews">(97 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$929<small>/night</small></span>
+          <span class="price-total">$6505 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/2185074?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Casa Bella 2</div>
+        <div class="listing-title">Loft in Positano</div>
+        <span class="area">🌸 Positano</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-top">★ 4.97</span>
+          <span class="reviews">(178 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$372<small>/night</small></span>
+          <span class="price-total">$2602 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/15250119?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Breathtaking view - Casa Caldiero Villa Il Riccio #1</div>
+        <div class="listing-title">Vacation home in Positano</div>
+        <span class="area">🌸 Positano</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-top">★ 4.97</span>
+          <span class="reviews">(140 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$1517<small>/night</small></span>
+          <span class="price-total">$10616 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/31704531?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Blue Line House</div>
+        <div class="listing-title">Apartment in Positano</div>
+        <span class="area">🌸 Positano</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-top">★ 4.96</span>
+          <span class="reviews">(162 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$570<small>/night</small></span>
+          <span class="price-total">$3988 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/34668840?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">La Chicca ~private beach~</div>
+        <div class="listing-title">Home in Positano</div>
+        <span class="area">🥾 Nocelle</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-top">★ 4.96</span>
+          <span class="reviews">(137 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$748<small>/night</small></span>
+          <span class="price-total">$5235 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/41921415?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Sea views, roof deck, 1 BR w/ AC, pool + beach</div>
+        <div class="listing-title">Apartment in Positano</div>
+        <span class="area">🌸 Positano</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-top">★ 4.96</span>
+          <span class="reviews">(122 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$3983<small>/night</small></span>
+          <span class="price-total">$27881 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/1344117421106519180?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Positano - away from the crowds</div>
+        <div class="listing-title">Apartment in Positano</div>
+        <span class="area">🌸 Positano</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-top">★ 4.96</span>
+          <span class="reviews">(26 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$387<small>/night</small></span>
+          <span class="price-total">$2710 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/14728105?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Serenity</div>
+        <div class="listing-title">Apartment in Positano</div>
+        <span class="area">🌸 Positano</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-top">★ 4.95</span>
+          <span class="reviews">(363 reviews)</span>
+          <span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$546<small>/night</small></span>
+          <span class="price-total">$3820 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/22923567?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Casa Positamo</div>
+        <div class="listing-title">Apartment in Positano</div>
+        <span class="area">🌸 Positano</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-top">★ 4.95</span>
+          <span class="reviews">(258 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$543<small>/night</small></span>
+          <span class="price-total">$3800 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/27252159?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Casa DALIA</div>
+        <div class="listing-title">Home in Positano</div>
+        <span class="area">🌸 Positano</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-top">★ 4.95</span>
+          <span class="reviews">(222 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$4703<small>/night</small></span>
+          <span class="price-total">$32921 total</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.airbnb.ca/rooms/36952091?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" class="listing">
+      <div class="listing-top">
+        <div class="listing-name">Casa Leucosia, Positano center</div>
+        <div class="listing-title">Apartment in Positano</div>
+        <span class="area">🌸 Positano</span>
+      </div>
+      <div class="listing-bottom">
+        <div class="listing-stats">
+          <span class="rating badge-top">★ 4.95</span>
+          <span class="reviews">(81 reviews)</span>
+          <span class="tag tag-fav">★ Guest Favorite</span><span class="tag tag-cancel">Free cancel</span>
+        </div>
+        <div class="listing-price">
+          <span class="price-night">$570<small>/night</small></span>
+          <span class="price-total">$3987 total</span>
+        </div>
+      </div>
+    </a>
+    </div>
+  </div>
+
+<div class="footer">
+  <p>Scraped from Airbnb · 280 total listings · Prices may change</p>
+  <p style="margin-top:4px;">Click any listing to view on Airbnb with your dates pre-filled</p>
+  <p style="margin-top:8px;"><a href="best-trip.html">← Back to trip itinerary</a></p>
+</div>
+
+</body>
+</html>
