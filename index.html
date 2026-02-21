@@ -1,0 +1,2172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beach Trip Planner 🏖️ Toronto → Paradise</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+  :root {
+    --sand: #f5e6d3;
+    --ocean: #0077b6;
+    --ocean-light: #00b4d8;
+    --ocean-dark: #023e8a;
+    --sunset: #ff6b35;
+    --sunset-light: #ff9f1c;
+    --palm: #2d6a4f;
+    --coral: #e63946;
+    --white: #ffffff;
+    --dark: #1a1a2e;
+    --gray: #6b7280;
+    --light-gray: #f3f4f6;
+    --card-bg: rgba(255,255,255,0.95);
+    --shadow: 0 10px 40px rgba(0,0,0,0.1);
+    --shadow-lg: 0 20px 60px rgba(0,0,0,0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: linear-gradient(135deg, #0077b6 0%, #023e8a 30%, #1a1a2e 100%);
+    color: var(--dark);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    padding: 60px 20px 40px;
+    text-align: center;
+    color: white;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff10" d="M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,170.7C960,160,1056,192,1152,197.3C1248,203,1344,181,1392,170.7L1440,160L1440,320L0,320Z"/></svg>') no-repeat bottom;
+    background-size: cover;
+    opacity: 0.3;
+  }
+  .hero h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    margin-bottom: 8px;
+    position: relative;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+  }
+  .hero p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    position: relative;
+    font-weight: 300;
+  }
+  .hero .tag {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    margin-top: 12px;
+    position: relative;
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+
+  /* ── CONTAINER ── */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px 60px;
+  }
+
+  /* ── SECTIONS ── */
+  .section {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 32px;
+    margin-bottom: 24px;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.8);
+  }
+  .section h2 {
+    font-size: 1.4rem;
+    font-weight: 800;
+    margin-bottom: 6px;
+    color: var(--ocean-dark);
+  }
+  .section .subtitle {
+    font-size: 0.9rem;
+    color: var(--gray);
+    margin-bottom: 20px;
+  }
+
+  /* ── PREFERENCES GRID ── */
+  .pref-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+  }
+  .pref-item {
+    background: var(--light-gray);
+    border-radius: 14px;
+    padding: 18px 20px;
+    transition: all 0.2s;
+  }
+  .pref-item:hover { background: #e8f4f8; }
+  .pref-item label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 10px;
+  }
+  .pref-item label .emoji { font-size: 1.3rem; }
+  .pref-item label .val {
+    background: var(--ocean);
+    color: white;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    min-width: 30px;
+    text-align: center;
+  }
+  .pref-item input[type="range"] {
+    width: 100%;
+    -webkit-appearance: none;
+    height: 6px;
+    border-radius: 3px;
+    background: #d1d5db;
+    outline: none;
+  }
+  .pref-item input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: var(--ocean);
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,119,182,0.4);
+  }
+
+  /* ── BUDGET SECTION ── */
+  .budget-row {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+  }
+  .budget-input {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .budget-input label { font-weight: 600; font-size: 0.95rem; }
+  .budget-input input[type="number"] {
+    width: 120px;
+    padding: 10px 14px;
+    border: 2px solid #d1d5db;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    font-family: inherit;
+    color: var(--ocean-dark);
+    transition: border 0.2s;
+  }
+  .budget-input input[type="number"]:focus {
+    outline: none;
+    border-color: var(--ocean);
+  }
+  .date-inputs { display: flex; gap: 12px; flex-wrap: wrap; }
+  .date-inputs label { font-weight: 600; font-size: 0.85rem; color: var(--gray); }
+  .date-inputs input[type="date"] {
+    padding: 8px 12px;
+    border: 2px solid #d1d5db;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    transition: border 0.2s;
+  }
+  .date-inputs input[type="date"]:focus { outline: none; border-color: var(--ocean); }
+
+  .travelers-row {
+    display: flex; gap: 16px; align-items: center; margin-top: 12px; flex-wrap: wrap;
+  }
+  .traveler-btn {
+    padding: 10px 20px;
+    border: 2px solid #d1d5db;
+    border-radius: 12px;
+    background: white;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+  }
+  .traveler-btn:hover { border-color: var(--ocean); }
+  .traveler-btn.active {
+    background: var(--ocean);
+    color: white;
+    border-color: var(--ocean);
+  }
+
+  /* ── CALCULATE BUTTON ── */
+  .calc-btn {
+    display: block;
+    width: 100%;
+    padding: 18px;
+    background: linear-gradient(135deg, var(--sunset), var(--coral));
+    color: white;
+    border: none;
+    border-radius: 14px;
+    font-family: inherit;
+    font-size: 1.2rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 8px 30px rgba(230,57,70,0.3);
+    letter-spacing: 0.5px;
+  }
+  .calc-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(230,57,70,0.4);
+  }
+  .calc-btn:active { transform: translateY(0); }
+
+  /* ── RESULTS ── */
+  #results { display: none; }
+  #results.visible { display: block; animation: fadeUp 0.6s ease; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .winner-banner {
+    background: linear-gradient(135deg, var(--ocean-dark), var(--ocean));
+    color: white;
+    border-radius: 20px;
+    padding: 32px;
+    text-align: center;
+    margin-bottom: 24px;
+    box-shadow: var(--shadow-lg);
+    position: relative;
+    overflow: hidden;
+  }
+  .winner-banner::after {
+    content: '🏆';
+    position: absolute;
+    top: 10px; right: 20px;
+    font-size: 3rem;
+    opacity: 0.3;
+  }
+  .winner-banner h2 { font-size: 1rem; font-weight: 500; opacity: 0.85; margin-bottom: 4px; color: white; }
+  .winner-banner .dest-name { font-size: 2.2rem; font-weight: 900; margin-bottom: 6px; }
+  .winner-banner .score-bar {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    border-radius: 20px;
+    padding: 6px 20px;
+    font-weight: 700; font-size: 1rem;
+  }
+
+  /* ── DESTINATION CARDS ── */
+  .dest-card {
+    background: var(--card-bg);
+    border-radius: 20px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(255,255,255,0.8);
+    transition: all 0.3s;
+  }
+  .dest-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+  .dest-card.rank-1 { border: 2px solid var(--sunset); }
+
+  .dest-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 28px;
+    cursor: pointer;
+    user-select: none;
+  }
+  .dest-header:hover { background: #f8fafc; }
+  .dest-rank {
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--ocean);
+    min-width: 50px;
+  }
+  .dest-card.rank-1 .dest-rank { color: var(--sunset); }
+  .dest-info { flex: 1; margin: 0 16px; }
+  .dest-info h3 { font-size: 1.3rem; font-weight: 800; }
+  .dest-info .dest-tagline { color: var(--gray); font-size: 0.85rem; }
+  .dest-meta { text-align: right; }
+  .dest-meta .price { font-size: 1.5rem; font-weight: 800; color: var(--ocean-dark); }
+  .dest-meta .price-label { font-size: 0.75rem; color: var(--gray); }
+  .dest-meta .match-score {
+    display: inline-block;
+    background: var(--palm);
+    color: white;
+    padding: 3px 12px;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin-top: 4px;
+  }
+  .dest-meta .match-score.high { background: var(--palm); }
+  .dest-meta .match-score.medium { background: var(--sunset); }
+  .dest-meta .match-score.low { background: var(--coral); }
+
+  .dest-body { display: none; padding: 0 28px 28px; }
+  .dest-body.open { display: block; animation: fadeUp 0.3s ease; }
+
+  .expand-arrow {
+    font-size: 1.2rem;
+    transition: transform 0.3s;
+    color: var(--gray);
+  }
+  .expand-arrow.open { transform: rotate(180deg); }
+
+  /* ── TABS INSIDE CARDS ── */
+  .tab-bar {
+    display: flex;
+    gap: 4px;
+    background: var(--light-gray);
+    padding: 4px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    overflow-x: auto;
+  }
+  .tab-btn {
+    padding: 8px 16px;
+    border: none;
+    background: transparent;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
+    color: var(--gray);
+  }
+  .tab-btn:hover { background: rgba(255,255,255,0.5); }
+  .tab-btn.active { background: white; color: var(--ocean-dark); box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+
+  .tab-content { display: none; }
+  .tab-content.active { display: block; animation: fadeUp 0.2s ease; }
+
+  /* ── BUDGET BREAKDOWN BARS ── */
+  .budget-bar-container { margin-bottom: 14px; }
+  .budget-bar-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    margin-bottom: 4px;
+  }
+  .budget-bar-label span:first-child { font-weight: 600; }
+  .budget-bar-label span:last-child { color: var(--gray); }
+  .budget-bar {
+    height: 10px;
+    background: #e5e7eb;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  .budget-bar-fill {
+    height: 100%;
+    border-radius: 5px;
+    transition: width 0.8s ease;
+  }
+  .budget-bar-fill.flights { background: var(--ocean); }
+  .budget-bar-fill.accom { background: var(--sunset); }
+  .budget-bar-fill.food { background: var(--palm); }
+  .budget-bar-fill.activities { background: var(--coral); }
+  .budget-bar-fill.transport { background: var(--ocean-light); }
+
+  /* ── LINKS / ITEMS ── */
+  .item-list { list-style: none; }
+  .item-list li {
+    padding: 12px 0;
+    border-bottom: 1px solid #f0f0f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .item-list li:last-child { border: none; }
+  .item-name { font-weight: 600; font-size: 0.9rem; }
+  .item-desc { color: var(--gray); font-size: 0.8rem; margin-top: 2px; }
+  .item-cost {
+    font-weight: 700;
+    color: var(--ocean-dark);
+    white-space: nowrap;
+    font-size: 0.85rem;
+  }
+  a.item-link {
+    color: var(--ocean);
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 500;
+  }
+  a.item-link:hover { text-decoration: underline; }
+
+  .book-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background: var(--ocean);
+    color: white;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.85rem;
+    margin: 4px;
+    transition: all 0.2s;
+  }
+  .book-btn:hover { background: var(--ocean-dark); transform: translateY(-1px); }
+  .book-btn.secondary { background: var(--sunset); }
+  .book-btn.secondary:hover { background: #e65a2a; }
+
+  .booking-links { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 6px; }
+
+  /* ── ITINERARY ── */
+  .day-card {
+    background: var(--light-gray);
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 10px;
+  }
+  .day-card h4 {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--ocean-dark);
+    margin-bottom: 4px;
+  }
+  .day-card p { font-size: 0.85rem; color: #444; line-height: 1.5; }
+  .day-card .day-cost { font-weight: 700; color: var(--sunset); font-size: 0.8rem; margin-top: 6px; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    .section { padding: 20px; border-radius: 16px; }
+    .dest-header { padding: 16px; flex-wrap: wrap; }
+    .dest-body { padding: 0 16px 16px; }
+    .dest-rank { font-size: 1.5rem; min-width: 36px; }
+    .dest-info h3 { font-size: 1.1rem; }
+    .hero h1 { font-size: 1.8rem; }
+    .pref-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ── LOADING ── */
+  .spinner {
+    display: none;
+    text-align: center;
+    padding: 40px;
+    color: white;
+    font-size: 1.2rem;
+  }
+  .spinner.visible { display: block; }
+  .spinner .dots::after {
+    content: '';
+    animation: dots 1.5s infinite;
+  }
+  @keyframes dots {
+    0%, 20% { content: '.'; }
+    40% { content: '..'; }
+    60%, 100% { content: '...'; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ════════ HERO ════════ -->
+<div class="hero">
+  <h1>🏖️ Beach Trip Planner</h1>
+  <p>Toronto → Paradise · Late August 2026 · Couple's Getaway</p>
+  <div class="tag">✨ Tell us what matters to you and we'll find your perfect beach trip</div>
+</div>
+
+<div class="container">
+
+  <!-- ════════ TRIP BASICS ════════ -->
+  <div class="section">
+    <h2>✈️ Trip Basics</h2>
+    <p class="subtitle">Set your budget, dates, and group size</p>
+
+    <div class="budget-row">
+      <div class="budget-input">
+        <label>💰 Max Budget (CAD)</label>
+        <input type="number" id="budget" value="5000" min="1500" max="20000" step="100">
+      </div>
+    </div>
+
+    <div class="date-inputs">
+      <div>
+        <label>Depart</label><br>
+        <input type="date" id="date-start" value="2026-08-22">
+      </div>
+      <div>
+        <label>Return</label><br>
+        <input type="date" id="date-end" value="2026-08-29">
+      </div>
+    </div>
+
+    <div class="travelers-row">
+      <span style="font-weight:600; font-size:0.9rem;">👫 Travelers:</span>
+      <button class="traveler-btn active" data-val="2">Couple (2)</button>
+      <button class="traveler-btn" data-val="1">Solo (1)</button>
+      <button class="traveler-btn" data-val="3">3 People</button>
+      <button class="traveler-btn" data-val="4">4 People</button>
+    </div>
+  </div>
+
+  <!-- ════════ PREFERENCES ════════ -->
+  <div class="section">
+    <h2>🎯 What Matters to You?</h2>
+    <p class="subtitle">Drag sliders to prioritize what's important — we'll score each destination</p>
+
+    <div class="pref-grid">
+      <div class="pref-item">
+        <label><span><span class="emoji">🏖️</span> Beach Quality</span><span class="val" id="val-beach">8</span></label>
+        <input type="range" id="pref-beach" min="0" max="10" value="8" data-key="beach">
+      </div>
+      <div class="pref-item">
+        <label><span><span class="emoji">💸</span> Budget Friendly</span><span class="val" id="val-budget-pref">7</span></label>
+        <input type="range" id="pref-budget" min="0" max="10" value="7" data-key="budgetFriendly">
+      </div>
+      <div class="pref-item">
+        <label><span><span class="emoji">🍽️</span> Food & Dining</span><span class="val" id="val-food">6</span></label>
+        <input type="range" id="pref-food" min="0" max="10" value="6" data-key="food">
+      </div>
+      <div class="pref-item">
+        <label><span><span class="emoji">🏛️</span> Culture & History</span><span class="val" id="val-culture">5</span></label>
+        <input type="range" id="pref-culture" min="0" max="10" value="5" data-key="culture">
+      </div>
+      <div class="pref-item">
+        <label><span><span class="emoji">🤿</span> Adventure & Activities</span><span class="val" id="val-adventure">6</span></label>
+        <input type="range" id="pref-adventure" min="0" max="10" value="6" data-key="adventure">
+      </div>
+      <div class="pref-item">
+        <label><span><span class="emoji">💆</span> Relaxation & Spa</span><span class="val" id="val-relax">7</span></label>
+        <input type="range" id="pref-relax" min="0" max="10" value="7" data-key="relaxation">
+      </div>
+      <div class="pref-item">
+        <label><span><span class="emoji">🌅</span> Romance Factor</span><span class="val" id="val-romance">8</span></label>
+        <input type="range" id="pref-romance" min="0" max="10" value="8" data-key="romance">
+      </div>
+      <div class="pref-item">
+        <label><span><span class="emoji">🍹</span> Nightlife & Bars</span><span class="val" id="val-nightlife">4</span></label>
+        <input type="range" id="pref-nightlife" min="0" max="10" value="4" data-key="nightlife">
+      </div>
+      <div class="pref-item">
+        <label><span><span class="emoji">📱</span> Easy Travel (short flight)</span><span class="val" id="val-ease">6</span></label>
+        <input type="range" id="pref-ease" min="0" max="10" value="6" data-key="easeOfTravel">
+      </div>
+      <div class="pref-item">
+        <label><span><span class="emoji">📸</span> Instagram-worthy</span><span class="val" id="val-insta">5</span></label>
+        <input type="range" id="pref-insta" min="0" max="10" value="5" data-key="instagrammable">
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════ CALCULATE ════════ -->
+  <button class="calc-btn" onclick="calculate()">🔍 Find My Perfect Beach Trip</button>
+
+  <div class="spinner" id="spinner">
+    <p>🌊 Analyzing destinations based on your preferences<span class="dots"></span></p>
+  </div>
+
+  <!-- ════════ RESULTS ════════ -->
+  <div id="results"></div>
+
+</div>
+
+<script>
+// ── SLIDER LIVE UPDATE ──
+document.querySelectorAll('input[type="range"]').forEach(s => {
+  s.addEventListener('input', () => {
+    const id = s.id.replace('pref-', 'val-');
+    const el = document.getElementById(id);
+    if (el) el.textContent = s.value;
+  });
+});
+
+// ── TRAVELER BUTTONS ──
+document.querySelectorAll('.traveler-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.traveler-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  });
+});
+
+// ══════════════════════════════════════════════════════════════════════════════
+// DESTINATION DATA — 25 beach destinations from Toronto
+// ══════════════════════════════════════════════════════════════════════════════
+const DESTINATIONS = {
+
+// ─────────────── CARIBBEAN & MEXICO ───────────────
+  tulum: {
+    name: "Tulum, Mexico",
+    flag: "🇲🇽",
+    tagline: "Bohemian-chic Caribbean coast with Mayan ruins",
+    airport: "CUN (Cancún)",
+    flightHours: 4,
+    directFlight: true,
+    visa: "No visa needed (Canadian passport)",
+    weatherAug: "Hot & humid, 82-92°F, occasional brief tropical showers",
+
+    // Scores out of 10
+    scores: {
+      beach: 9, budgetFriendly: 8, food: 8, culture: 7, adventure: 9,
+      relaxation: 8, romance: 9, nightlife: 7, easeOfTravel: 9, instagrammable: 10
+    },
+
+    costs: {
+      flightPerPerson: { low: 400, mid: 550, high: 750 },
+      airbnbPerNight: { low: 60, mid: 100, high: 150 },
+      foodPerDayCouple: { low: 40, mid: 70, high: 120 },
+      activitiesTotal: { low: 150, mid: 300, high: 500 },
+      transportTotal: { low: 120, mid: 200, high: 300 },
+    },
+
+    beaches: [
+      { name: "Playa Paraiso", desc: "#1 beach — powdery white sand, turquoise shallow water", link: "https://maps.google.com/?q=Playa+Paraiso+Tulum" },
+      { name: "Playa Ruinas", desc: "Beach below the Mayan ruins — iconic clifftop temple view", link: "https://maps.google.com/?q=Playa+Ruinas+Tulum" },
+      { name: "Playa Pescadores", desc: "Quiet beach with fishing boats, great for sunset walks", link: "https://maps.google.com/?q=Playa+Pescadores+Tulum" },
+    ],
+
+    activities: [
+      { name: "Gran Cenote", desc: "Crystal-clear underground swimming in the jungle", cost: 25, link: "https://maps.google.com/?q=Gran+Cenote+Tulum" },
+      { name: "Cenote Suytun", desc: "Underground cave with a dramatic light beam", cost: 15, link: "https://maps.google.com/?q=Cenote+Suytun" },
+      { name: "Tulum Ruins", desc: "Only Mayan ruins overlooking the Caribbean Sea", cost: 5, link: "https://maps.google.com/?q=Tulum+Archaeological+Zone" },
+      { name: "Sian Ka'an Biosphere", desc: "UNESCO site — float through mangrove channels", cost: 50, link: "https://maps.google.com/?q=Sian+Ka'an+Biosphere" },
+      { name: "Papaya Playa Project", desc: "Sunset cocktails & Saturday fire shows", cost: 20, link: "https://www.papayaplayaproject.com/" },
+      { name: "Bike the Beach Road", desc: "Rent bikes & cruise the jungle-lined hotel zone", cost: 10, link: "https://maps.google.com/?q=Tulum+Beach+Road" },
+    ],
+
+    restaurants: [
+      { name: "Taqueria Honorio", type: "Tacos", cost2: 10, desc: "James Beard-nominated — legendary carnitas", link: "https://maps.google.com/?q=Taqueria+Honorio+Tulum" },
+      { name: "Burrito Amor", type: "Casual", cost2: 15, desc: "Best cheap eats, huge portions", link: "https://maps.google.com/?q=Burrito+Amor+Tulum" },
+      { name: "La Coqueta", type: "Seafood", cost2: 35, desc: "Fresh ceviche & grilled fish on the beach", link: "https://maps.google.com/?q=La+Coqueta+Tulum" },
+      { name: "Matcha Mama", type: "Smoothies", cost2: 18, desc: "Insta-famous treethouse smoothie bar", link: "https://maps.google.com/?q=Matcha+Mama+Tulum" },
+      { name: "Arca", type: "Fine Dining 🌟", cost2: 120, desc: "Open-fire cooking — one of Latin America's best (book ahead!)", link: "https://arcatulum.com/" },
+    ],
+
+    bookingLinks: {
+      flights: [
+        { label: "Google Flights", url: "https://www.google.com/travel/flights?q=flights+from+YYZ+to+CUN+august+22+returning+august+29+2026" },
+        { label: "Kayak", url: "https://www.ca.kayak.com/flights/YYZ-CUN/2026-08-22/2026-08-29/2adults?sort=bestflight_a" },
+        { label: "Skyscanner", url: "https://www.skyscanner.ca/transport/flights/yyz/cun/260822/260829/?adultsv2=2&cabinclass=economy" },
+      ],
+      airbnb: "https://www.airbnb.ca/s/Tulum--Mexico/homes?checkin=2026-08-22&checkout=2026-08-29&adults=2&price_max=150",
+      foodDelivery: { app: "Uber Eats + Rappi", url: "https://www.ubereats.com/mx/city/tulum-qr" },
+      transport: { desc: "ADO Bus Cancún→Tulum (2h)", url: "https://www.ado.com.mx/" },
+    },
+
+    itinerary: [
+      { day: 1, title: "Arrive & Beach Chill", desc: "Shuttle from Cancún (2h). Check in. Playa Paraiso sunset. Dinner at Burrito Amor.", cost: "$100" },
+      { day: 2, title: "Ruins + Beach Day", desc: "Tulum Ruins at 8am. Playa Ruinas below. Snorkel. Sunset drinks at Papaya Playa.", cost: "$45" },
+      { day: 3, title: "Cenote Day", desc: "Bike to Gran Cenote (AM). Cenote Suytun for the light beam. Dinner at Taqueria Honorio.", cost: "$65" },
+      { day: 4, title: "Sian Ka'an Adventure", desc: "Full-day biosphere tour — mangroves, floating, dolphins, turtles.", cost: "$130" },
+      { day: 5, title: "Lazy Beach Day", desc: "Sleep in. Playa Pescadores. Matcha Mama smoothies. Couples massage. La Coqueta dinner.", cost: "$90" },
+      { day: 6, title: "Explore + Splurge", desc: "Tulum Pueblo markets. Beach afternoon. Splurge dinner at Arca.", cost: "$170" },
+      { day: 7, title: "Last Beach & Depart", desc: "Sunrise walk. Beach brunch. Shuttle to Cancún airport.", cost: "$105" },
+    ],
+  },
+
+  crete: {
+    name: "Crete, Greece",
+    flag: "🇬🇷",
+    tagline: "Pink sand beaches, ancient ruins, incredible Mediterranean food",
+    airport: "HER (Heraklion)",
+    flightHours: 14,
+    directFlight: false,
+    visa: "No visa needed (Canadian passport, Schengen zone)",
+    weatherAug: "Hot & sunny, 78-90°F, almost no rain",
+
+    scores: {
+      beach: 10, budgetFriendly: 5, food: 10, culture: 10, adventure: 7,
+      relaxation: 8, romance: 10, nightlife: 5, easeOfTravel: 4, instagrammable: 9
+    },
+
+    costs: {
+      flightPerPerson: { low: 800, mid: 1100, high: 1400 },
+      airbnbPerNight: { low: 70, mid: 120, high: 180 },
+      foodPerDayCouple: { low: 50, mid: 85, high: 140 },
+      activitiesTotal: { low: 100, mid: 250, high: 450 },
+      transportTotal: { low: 200, mid: 300, high: 420 },
+    },
+
+    beaches: [
+      { name: "Elafonissi Beach", desc: "Pink sand lagoon — one of Europe's best beaches", link: "https://maps.google.com/?q=Elafonissi+Beach+Crete" },
+      { name: "Balos Lagoon", desc: "Surreal turquoise water, looks like the Caribbean", link: "https://maps.google.com/?q=Balos+Beach+Crete" },
+      { name: "Preveli Beach", desc: "Palm forest meets the sea — tropical vibes in Europe", link: "https://maps.google.com/?q=Preveli+Beach+Crete" },
+      { name: "Vai Beach", desc: "Europe's largest natural palm forest", link: "https://maps.google.com/?q=Vai+Beach+Crete" },
+    ],
+
+    activities: [
+      { name: "Elafonissi day trip", desc: "Free — just drive, pink sand paradise", cost: 0, link: "https://maps.google.com/?q=Elafonissi+Beach" },
+      { name: "Balos Lagoon boat", desc: "Boat from Kissamos, stunning sea approach", cost: 30, link: "https://maps.google.com/?q=Kissamos+Port+Crete" },
+      { name: "Chania Old Town sunset", desc: "Venetian harbor — most romantic spot in Crete", cost: 0, link: "https://maps.google.com/?q=Old+Venetian+Harbor+Chania" },
+      { name: "Knossos Palace", desc: "3500-year-old Minoan palace", cost: 18, link: "https://maps.google.com/?q=Knossos+Palace+Crete" },
+      { name: "Manousakis Winery", desc: "Cretan wine tasting, beautiful vineyard", cost: 25, link: "https://maps.google.com/?q=Manousakis+Winery+Crete" },
+      { name: "Samaria Gorge hike", desc: "Europe's longest gorge — 16km canyon", cost: 10, link: "https://maps.google.com/?q=Samaria+Gorge" },
+    ],
+
+    restaurants: [
+      { name: "Bougatsa Iordanis", type: "Bakery", cost2: 6, desc: "Iconic custard pastry, best breakfast in Crete", link: "https://maps.google.com/?q=Bougatsa+Iordanis+Chania" },
+      { name: "Taverna Strata", type: "Cretan", cost2: 30, desc: "Hidden courtyard in old Chania, incredible lamb", link: "https://maps.google.com/?q=Taverna+Strata+Chania" },
+      { name: "Thalassino Ageri", type: "Seafood", cost2: 50, desc: "Waterfront seafood on the Venetian harbor", link: "https://maps.google.com/?q=Thalassino+Ageri+Chania" },
+      { name: "Kountoura Sunset", type: "Taverna", cost2: 25, desc: "Village taverna with sunset views & grilled meats", link: "https://maps.google.com/?q=Kountoura+Crete" },
+      { name: "Peskesi", type: "Fine Dining 🌟", cost2: 60, desc: "Farm-to-table Cretan fine dining", link: "https://maps.google.com/?q=Peskesi+Heraklion" },
+    ],
+
+    bookingLinks: {
+      flights: [
+        { label: "Google Flights", url: "https://www.google.com/travel/flights?q=flights+from+YYZ+to+HER+august+22+returning+august+29+2026" },
+        { label: "Kayak", url: "https://www.ca.kayak.com/flights/YYZ-HER/2026-08-22/2026-08-29/2adults?sort=bestflight_a" },
+        { label: "Skyscanner", url: "https://www.skyscanner.ca/transport/flights/yyz/her/260822/260829/?adultsv2=2&cabinclass=economy" },
+      ],
+      airbnb: "https://www.airbnb.ca/s/Crete--Greece/homes?checkin=2026-08-22&checkout=2026-08-29&adults=2&price_max=150",
+      foodDelivery: { app: "Wolt + efood (no Uber Eats)", url: "https://www.wolt.com/en/grc/heraklion" },
+      transport: { desc: "Rental Car recommended", url: "https://www.discovercars.com/greece/crete" },
+    },
+
+    itinerary: [
+      { day: 1, title: "Arrive in Chania", desc: "Fly to Heraklion, rent car, drive to Chania. Venetian Harbor dinner.", cost: "$80" },
+      { day: 2, title: "Elafonissi Beach", desc: "Drive to pink sand paradise. Full day in the lagoon. Village taverna dinner.", cost: "$70" },
+      { day: 3, title: "Balos Lagoon", desc: "Morning boat from Kissamos. Jaw-dropping water. Dinner at Taverna Strata.", cost: "$95" },
+      { day: 4, title: "Chania + Wine", desc: "Harbor walk, market, Manousakis Winery. Sunset at lighthouse. Thalassino Ageri.", cost: "$110" },
+      { day: 5, title: "South Coast", desc: "Preveli palm beach. Swim where river meets sea. Mountain village lunch.", cost: "$70" },
+      { day: 6, title: "Knossos + Splurge", desc: "3500-year-old Minoan palace. Heraklion old town. Peskesi dinner.", cost: "$138" },
+      { day: 7, title: "Final Beach & Depart", desc: "Beach swim. Bougatsa pastry. Drive to airport.", cost: "$50" },
+    ],
+  },
+
+  bali: {
+    name: "Bali, Indonesia",
+    flag: "🇮🇩",
+    tagline: "Tropical paradise — private pool villas, temples & rice terraces",
+    airport: "DPS (Ngurah Rai)",
+    flightHours: 22,
+    directFlight: false,
+    visa: "Visa on arrival ($35 USD, Canadian passport)",
+    weatherAug: "Dry season, 80-88°F, perfect beach weather",
+
+    scores: {
+      beach: 8, budgetFriendly: 9, food: 9, culture: 9, adventure: 9,
+      relaxation: 10, romance: 9, nightlife: 7, easeOfTravel: 3, instagrammable: 10
+    },
+
+    costs: {
+      flightPerPerson: { low: 1000, mid: 1300, high: 1600 },
+      airbnbPerNight: { low: 35, mid: 85, high: 140 },
+      foodPerDayCouple: { low: 20, mid: 45, high: 90 },
+      activitiesTotal: { low: 120, mid: 250, high: 400 },
+      transportTotal: { low: 80, mid: 120, high: 200 },
+    },
+
+    beaches: [
+      { name: "Nusa Dua Beach", desc: "Calm turquoise water, white sand — perfect for couples", link: "https://maps.google.com/?q=Nusa+Dua+Beach+Bali" },
+      { name: "Padang Padang Beach", desc: "Hidden cove through a rock cave (Eat Pray Love spot)", link: "https://maps.google.com/?q=Padang+Padang+Beach+Bali" },
+      { name: "Jimbaran Beach", desc: "Famous for sunset seafood dinners on the sand", link: "https://maps.google.com/?q=Jimbaran+Beach+Bali" },
+      { name: "Uluwatu Cliffs", desc: "Dramatic clifftop temple + world-class surf breaks", link: "https://maps.google.com/?q=Uluwatu+Temple+Bali" },
+    ],
+
+    activities: [
+      { name: "Tegallalang Rice Terraces", desc: "Iconic Instagram rice paddies & jungle swing", cost: 3, link: "https://maps.google.com/?q=Tegallalang+Rice+Terrace" },
+      { name: "Uluwatu Kecak Fire Dance", desc: "Fire dance on a cliff edge at sunset", cost: 10, link: "https://maps.google.com/?q=Uluwatu+Temple+Bali" },
+      { name: "Couple's Spa Day", desc: "2-hour Balinese massage for ~$40 total", cost: 40, link: "https://maps.google.com/?q=Spa+Seminyak+Bali" },
+      { name: "Nusa Penida Day Trip", desc: "T-Rex cliff, crystal water — boat from Sanur", cost: 55, link: "https://maps.google.com/?q=Kelingking+Beach+Nusa+Penida" },
+      { name: "Ubud Monkey Forest", desc: "Ancient temple forest with macaques", cost: 5, link: "https://maps.google.com/?q=Sacred+Monkey+Forest+Ubud" },
+      { name: "Jimbaran Seafood Sunset", desc: "Grilled lobster on the beach at sunset", cost: 25, link: "https://maps.google.com/?q=Jimbaran+Seafood+Bali" },
+    ],
+
+    restaurants: [
+      { name: "Warung Local", type: "Street Food", cost2: 4, desc: "Nasi goreng ~$2, authentic warungs everywhere", link: "https://maps.google.com/?q=Warung+Local+Seminyak+Bali" },
+      { name: "Ibu Oka", type: "Balinese", cost2: 8, desc: "Anthony Bourdain favorite — suckling pig", link: "https://maps.google.com/?q=Babi+Guling+Ibu+Oka+Ubud" },
+      { name: "Naughty Nuri's", type: "BBQ Ribs", cost2: 20, desc: "Legendary pork ribs & dirty martinis", link: "https://maps.google.com/?q=Naughty+Nuri's+Seminyak" },
+      { name: "La Brisa", type: "Beach Club", cost2: 40, desc: "Stunning driftwood beach club, sunset drinks", link: "https://labrisa.com/" },
+      { name: "LOCAVORE", type: "Fine Dining 🌟", cost2: 100, desc: "Asia's 50 Best Restaurants — book weeks ahead", link: "https://locavore.co.id/" },
+    ],
+
+    bookingLinks: {
+      flights: [
+        { label: "Google Flights", url: "https://www.google.com/travel/flights?q=flights+from+YYZ+to+DPS+august+22+returning+august+29+2026" },
+        { label: "Kayak", url: "https://www.ca.kayak.com/flights/YYZ-DPS/2026-08-22/2026-08-29/2adults?sort=bestflight_a" },
+        { label: "Skyscanner", url: "https://www.skyscanner.ca/transport/flights/yyz/dps/260822/260829/?adultsv2=2&cabinclass=economy" },
+      ],
+      airbnb: "https://www.airbnb.ca/s/Bali--Indonesia/homes?checkin=2026-08-22&checkout=2026-08-29&adults=2&price_max=150",
+      foodDelivery: { app: "Grab Food + GoFood (no Uber Eats)", url: "https://www.grab.com/id/food/" },
+      transport: { desc: "Grab taxi / scooter rental", url: "https://www.grab.com/id/" },
+    },
+
+    itinerary: [
+      { day: 1, title: "Arrive in Seminyak", desc: "Grab to villa. Seminyak Beach sunset. Naughty Nuri's ribs.", cost: "$45" },
+      { day: 2, title: "Uluwatu Day", desc: "Padang Padang cove. Uluwatu Temple. Kecak fire dance. Jimbaran seafood.", cost: "$55" },
+      { day: 3, title: "Ubud Culture", desc: "Rice terraces + swing. Monkey Forest. Ibu Oka lunch. Art market.", cost: "$43" },
+      { day: 4, title: "Nusa Penida Island", desc: "Fast boat. Kelingking T-Rex cliff. Angel's Billabong. Broken Beach.", cost: "$75" },
+      { day: 5, title: "Spa & Beach Day", desc: "Couple's massage. Nusa Dua Beach. La Brisa sunset cocktails.", cost: "$90" },
+      { day: 6, title: "Waterfalls + Splurge", desc: "Tegenungan Waterfall. Villa pool afternoon. LOCAVORE dinner.", cost: "$155" },
+      { day: 7, title: "Final Beach & Depart", desc: "Last private pool swim. Canggu brunch. Grab to airport.", cost: "$30" },
+    ],
+  },
+
+  algarve: {
+    name: "Algarve, Portugal",
+    flag: "🇵🇹",
+    tagline: "Dramatic sea cliffs, golden grottoes, charming fishing towns",
+    airport: "FAO (Faro)",
+    flightHours: 10,
+    directFlight: false,
+    visa: "No visa needed (Canadian passport, Schengen zone)",
+    weatherAug: "Warm & dry, 75-88°F, perfect conditions",
+
+    scores: {
+      beach: 9, budgetFriendly: 6, food: 8, culture: 7, adventure: 7,
+      relaxation: 9, romance: 9, nightlife: 6, easeOfTravel: 5, instagrammable: 9
+    },
+
+    costs: {
+      flightPerPerson: { low: 600, mid: 900, high: 1200 },
+      airbnbPerNight: { low: 70, mid: 110, high: 170 },
+      foodPerDayCouple: { low: 45, mid: 75, high: 130 },
+      activitiesTotal: { low: 100, mid: 220, high: 400 },
+      transportTotal: { low: 150, mid: 260, high: 380 },
+    },
+
+    beaches: [
+      { name: "Praia da Marinha", desc: "Iconic limestone arches — top 10 beach in the world", link: "https://maps.google.com/?q=Praia+da+Marinha" },
+      { name: "Benagil Cave", desc: "Sea cave with a skylight — boat tour or kayak in", link: "https://maps.google.com/?q=Benagil+Cave" },
+      { name: "Praia do Camilo", desc: "Hidden gem down steep stairs between golden cliffs", link: "https://maps.google.com/?q=Praia+do+Camilo" },
+      { name: "Praia da Falésia", desc: "Endless red-orange cliffs & wide golden sand", link: "https://maps.google.com/?q=Praia+da+Falesia" },
+    ],
+
+    activities: [
+      { name: "Benagil Cave kayak", desc: "Paddle into the famous sea cave with skylight", cost: 35, link: "https://maps.google.com/?q=Benagil+Cave" },
+      { name: "Ponta da Piedade boat", desc: "Dramatic rock formations from the water", cost: 20, link: "https://maps.google.com/?q=Ponta+da+Piedade" },
+      { name: "Lagos old town", desc: "Cobblestone streets, fortress, sunset cocktails", cost: 0, link: "https://maps.google.com/?q=Lagos+Portugal+Old+Town" },
+      { name: "Wine tasting Algarve", desc: "Local Portuguese wines at vineyards", cost: 25, link: "https://maps.google.com/?q=Wine+tasting+Algarve" },
+      { name: "Dolphin watching", desc: "Spot dolphins off the Algarve coast", cost: 40, link: "https://maps.google.com/?q=Dolphin+watching+Algarve" },
+      { name: "Seven Hanging Valleys trail", desc: "Cliff-top walk — best coastal hike in Europe", cost: 0, link: "https://maps.google.com/?q=Seven+Hanging+Valleys+Trail" },
+    ],
+
+    restaurants: [
+      { name: "A Taska", type: "Petiscos", cost2: 25, desc: "Portuguese tapas, grilled sardines, local wines", link: "https://maps.google.com/?q=A+Taska+Lagos" },
+      { name: "Restaurante O Camilo", type: "Seafood", cost2: 40, desc: "Clifftop restaurant with ocean views", link: "https://maps.google.com/?q=Restaurante+O+Camilo+Lagos" },
+      { name: "Pastelaria in Faro", type: "Pastéis", cost2: 6, desc: "Pastel de nata & espresso breakfast", link: "https://maps.google.com/?q=Pastelaria+Faro" },
+      { name: "NoSoloÁgua", type: "Beach Bar", cost2: 30, desc: "Sunset cocktails on Portimão beach", link: "https://maps.google.com/?q=NoSoloAgua+Portimao" },
+      { name: "Vila Joya", type: "Fine Dining 🌟", cost2: 150, desc: "2 Michelin star — ultimate splurge on the Algarve", link: "https://maps.google.com/?q=Vila+Joya+Albufeira" },
+    ],
+
+    bookingLinks: {
+      flights: [
+        { label: "Google Flights", url: "https://www.google.com/travel/flights?q=flights+from+YYZ+to+FAO+august+22+returning+august+29+2026" },
+        { label: "Kayak", url: "https://www.ca.kayak.com/flights/YYZ-FAO/2026-08-22/2026-08-29/2adults?sort=bestflight_a" },
+        { label: "Skyscanner", url: "https://www.skyscanner.ca/transport/flights/yyz/fao/260822/260829/?adultsv2=2&cabinclass=economy" },
+      ],
+      airbnb: "https://www.airbnb.ca/s/Algarve--Portugal/homes?checkin=2026-08-22&checkout=2026-08-29&adults=2&price_max=170",
+      foodDelivery: { app: "Uber Eats + Glovo", url: "https://www.ubereats.com/pt/city/faro" },
+      transport: { desc: "Rental car recommended", url: "https://www.discovercars.com/portugal/faro-airport" },
+    },
+
+    itinerary: [
+      { day: 1, title: "Arrive in Lagos", desc: "Fly to Faro, rent car, drive to Lagos. Old town sunset walk & dinner.", cost: "$70" },
+      { day: 2, title: "Praia da Marinha", desc: "Morning at the iconic beach. Afternoon cliff walk. Fresh fish dinner.", cost: "$65" },
+      { day: 3, title: "Benagil Cave", desc: "Kayak into the sea cave. Afternoon at Praia do Camilo.", cost: "$80" },
+      { day: 4, title: "Lagos + Wine", desc: "Old town markets. Wine tasting. Ponta da Piedade boat tour sunset.", cost: "$85" },
+      { day: 5, title: "Seven Valleys Hike", desc: "Cliff-top coastal hike. Beach afternoon. NoSoloÁgua sunset cocktails.", cost: "$60" },
+      { day: 6, title: "Dolphins + Splurge", desc: "Morning dolphin watch. Beach chill. Splurge dinner.", cost: "$150" },
+      { day: 7, title: "Last Beach & Depart", desc: "Pastéis de nata breakfast. Final beach swim. Drive to Faro airport.", cost: "$40" },
+    ],
+  },
+
+  zanzibar: {
+    name: "Zanzibar, Tanzania",
+    flag: "🇹🇿",
+    tagline: "Spice island — untouched white sand, turquoise Indian Ocean",
+    airport: "ZNZ (Zanzibar)",
+    flightHours: 18,
+    directFlight: false,
+    visa: "Visa on arrival ($50 USD)",
+    weatherAug: "Dry & warm, 77-84°F, ideal beach season",
+
+    scores: {
+      beach: 10, budgetFriendly: 7, food: 7, culture: 8, adventure: 8,
+      relaxation: 10, romance: 10, nightlife: 4, easeOfTravel: 3, instagrammable: 9
+    },
+
+    costs: {
+      flightPerPerson: { low: 900, mid: 1200, high: 1500 },
+      airbnbPerNight: { low: 40, mid: 80, high: 140 },
+      foodPerDayCouple: { low: 25, mid: 50, high: 90 },
+      activitiesTotal: { low: 100, mid: 200, high: 350 },
+      transportTotal: { low: 80, mid: 150, high: 250 },
+    },
+
+    beaches: [
+      { name: "Nungwi Beach", desc: "Pristine white sand, no seaweed, sunset side of island", link: "https://maps.google.com/?q=Nungwi+Beach+Zanzibar" },
+      { name: "Kendwa Beach", desc: "Crystal clear swimming at all tides, full moon parties", link: "https://maps.google.com/?q=Kendwa+Beach+Zanzibar" },
+      { name: "Paje Beach", desc: "Kitesurfing capital, turquoise shallow water at low tide", link: "https://maps.google.com/?q=Paje+Beach+Zanzibar" },
+      { name: "Nakupenda Sandbank", desc: "Disappearing sandbank — emerge at low tide", link: "https://maps.google.com/?q=Nakupenda+Sandbank+Zanzibar" },
+    ],
+
+    activities: [
+      { name: "Stone Town walking tour", desc: "UNESCO-listed old town, spice markets, history", cost: 15, link: "https://maps.google.com/?q=Stone+Town+Zanzibar" },
+      { name: "Spice Farm tour", desc: "Taste cinnamon, vanilla, cloves fresh from the plant", cost: 20, link: "https://maps.google.com/?q=Spice+Farm+Zanzibar" },
+      { name: "Mnemba Atoll snorkeling", desc: "World-class reef, dolphins, sea turtles", cost: 40, link: "https://maps.google.com/?q=Mnemba+Atoll" },
+      { name: "Sunset dhow cruise", desc: "Traditional wooden sailboat at sunset", cost: 25, link: "https://maps.google.com/?q=Dhow+cruise+Zanzibar" },
+      { name: "Jozani Forest", desc: "Red colobus monkeys in mangrove forest", cost: 10, link: "https://maps.google.com/?q=Jozani+Forest+Zanzibar" },
+      { name: "The Rock Restaurant", desc: "Dine on a rock in the Indian Ocean", cost: 35, link: "https://maps.google.com/?q=The+Rock+Restaurant+Zanzibar" },
+    ],
+
+    restaurants: [
+      { name: "Forodhani Night Market", type: "Street Food", cost2: 8, desc: "Legendary seafood market on the waterfront at sunset", link: "https://maps.google.com/?q=Forodhani+Gardens+Zanzibar" },
+      { name: "Lukmaan", type: "Local", cost2: 6, desc: "Best local Zanzibari food, huge portions", link: "https://maps.google.com/?q=Lukmaan+Zanzibar" },
+      { name: "The Rock Restaurant", type: "Seafood", cost2: 70, desc: "Iconic restaurant on a rock in the ocean", link: "https://maps.google.com/?q=The+Rock+Restaurant+Zanzibar" },
+      { name: "Emerson Spice rooftop", type: "Rooftop", cost2: 40, desc: "Rooftop dinner overlooking Stone Town", link: "https://maps.google.com/?q=Emerson+Spice+Zanzibar" },
+      { name: "Tea House Restaurant", type: "Fine Dining 🌟", cost2: 50, desc: "Multi-course Swahili tasting menu", link: "https://maps.google.com/?q=Emerson+on+Hurumzi+Zanzibar" },
+    ],
+
+    bookingLinks: {
+      flights: [
+        { label: "Google Flights", url: "https://www.google.com/travel/flights?q=flights+from+YYZ+to+ZNZ+august+22+returning+august+29+2026" },
+        { label: "Kayak", url: "https://www.ca.kayak.com/flights/YYZ-ZNZ/2026-08-22/2026-08-29/2adults?sort=bestflight_a" },
+        { label: "Skyscanner", url: "https://www.skyscanner.ca/transport/flights/yyz/znz/260822/260829/?adultsv2=2&cabinclass=economy" },
+      ],
+      airbnb: "https://www.airbnb.ca/s/Zanzibar/homes?checkin=2026-08-22&checkout=2026-08-29&adults=2&price_max=140",
+      foodDelivery: { app: "No major delivery apps — eat local!", url: "" },
+      transport: { desc: "Taxi or hotel transfers", url: "" },
+    },
+
+    itinerary: [
+      { day: 1, title: "Arrive in Stone Town", desc: "Fly in. Check into boutique hotel. Explore Stone Town. Forodhani Night Market.", cost: "$50" },
+      { day: 2, title: "Spice Tour + Beach", desc: "Morning spice farm. Afternoon transfer to Nungwi Beach. Sunset swim.", cost: "$60" },
+      { day: 3, title: "Nungwi Beach Day", desc: "Full day on pristine beach. Snorkeling. Seafood dinner.", cost: "$40" },
+      { day: 4, title: "Mnemba Snorkeling", desc: "Boat to Mnemba Atoll. Dolphins, turtles, reef. Kendwa beach afternoon.", cost: "$80" },
+      { day: 5, title: "Dhow Cruise + Relax", desc: "Beach morning. Sunset traditional dhow cruise. Beachfront dinner.", cost: "$65" },
+      { day: 6, title: "The Rock + Explore", desc: "Jozani Forest monkeys. Lunch at The Rock Restaurant in the ocean.", cost: "$80" },
+      { day: 7, title: "Final Beach & Depart", desc: "Last swim in the Indian Ocean. Lukmaan lunch. Airport.", cost: "$30" },
+    ],
+  },
+
+// ─────────────── MORE CARIBBEAN & CENTRAL AMERICA ───────────────
+
+  puntaCana: {
+    name: "Punta Cana, Dominican Republic", flag: "🇩🇴",
+    tagline: "All-inclusive paradise with 30 km of white sand",
+    airport: "PUJ (Punta Cana)", flightHours: 4.5, directFlight: true,
+    visa: "Tourist card on arrival ($10 USD)", weatherAug: "Hot, 82-90°F, brief afternoon showers",
+    scores: { beach: 9, budgetFriendly: 8, food: 6, culture: 4, adventure: 6, relaxation: 9, romance: 8, nightlife: 7, easeOfTravel: 9, instagrammable: 7 },
+    costs: { flightPerPerson: { low: 350, mid: 500, high: 700 }, airbnbPerNight: { low: 55, mid: 95, high: 160 }, foodPerDayCouple: { low: 35, mid: 60, high: 110 }, activitiesTotal: { low: 120, mid: 250, high: 450 }, transportTotal: { low: 80, mid: 150, high: 250 } },
+    beaches: [
+      { name: "Bávaro Beach", desc: "30 km of coconut palm-lined white sand", link: "https://maps.google.com/?q=Bavaro+Beach+Punta+Cana" },
+      { name: "Playa Macao", desc: "Wild, undeveloped golden beach — great bodysurf", link: "https://maps.google.com/?q=Playa+Macao+Punta+Cana" },
+      { name: "Isla Saona", desc: "Paradise island with natural pools & starfish", link: "https://maps.google.com/?q=Isla+Saona+Dominican+Republic" },
+    ],
+    activities: [
+      { name: "Isla Saona catamaran", desc: "Day trip to a Caribbean paradise island", cost: 70, link: "https://maps.google.com/?q=Isla+Saona" },
+      { name: "Hoyo Azul cenote", desc: "Swim in a turquoise sinkhole in the jungle", cost: 25, link: "https://maps.google.com/?q=Hoyo+Azul+Punta+Cana" },
+      { name: "Zip-line over jungle", desc: "Adventure park zip lines & hanging bridges", cost: 60, link: "https://maps.google.com/?q=Scape+Park+Punta+Cana" },
+      { name: "Snorkeling reef trip", desc: "Coral reef, tropical fish, rum boat ride", cost: 45, link: "https://maps.google.com/?q=Snorkeling+Punta+Cana" },
+    ],
+    restaurants: [
+      { name: "La Yola", type: "Seafood", cost2: 50, desc: "Overwater restaurant at Puntacana Resort", link: "https://maps.google.com/?q=La+Yola+Punta+Cana" },
+      { name: "Jellyfish Beach Restaurant", type: "Beach", cost2: 35, desc: "Feet in the sand, fresh grilled catch", link: "https://maps.google.com/?q=Jellyfish+Beach+Restaurant" },
+      { name: "Citrus Restaurant", type: "Caribbean", cost2: 40, desc: "Open-air dining, fusion Caribbean-Asian", link: "https://maps.google.com/?q=Citrus+Punta+Cana" },
+      { name: "Colmado Tipico", type: "Local", cost2: 12, desc: "Authentic Dominican — rice, beans, chicken", link: "https://maps.google.com/?q=Colmado+Punta+Cana" },
+    ],
+    bookingLinks: {
+      flights: [
+        { label: "Google Flights", url: "https://www.google.com/travel/flights?q=flights+from+YYZ+to+PUJ+august+22+returning+august+29+2026" },
+        { label: "Kayak", url: "https://www.ca.kayak.com/flights/YYZ-PUJ/2026-08-22/2026-08-29/2adults?sort=bestflight_a" },
+        { label: "Skyscanner", url: "https://www.skyscanner.ca/transport/flights/yyz/puj/260822/260829/?adultsv2=2&cabinclass=economy" },
+      ],
+      airbnb: "https://www.airbnb.ca/s/Punta-Cana--Dominican-Republic/homes?checkin=2026-08-22&checkout=2026-08-29&adults=2&price_max=160",
+      foodDelivery: { app: "PedidosYa", url: "https://www.pedidosya.com.do/" },
+      transport: { desc: "Taxi or shuttle from airport", url: "" },
+    },
+    itinerary: [
+      { day: 1, title: "Arrive & Beach", desc: "Direct flight. Transfer to hotel/Airbnb. Bávaro Beach sunset.", cost: "$60" },
+      { day: 2, title: "Isla Saona", desc: "Catamaran to paradise island, natural pool, starfish, rum.", cost: "$90" },
+      { day: 3, title: "Beach & Cenote", desc: "Morning at Playa Macao. Afternoon Hoyo Azul cenote swim.", cost: "$55" },
+      { day: 4, title: "Adventure Day", desc: "Zip-line through jungle canopy. Pool afternoon. Seafood dinner.", cost: "$85" },
+      { day: 5, title: "Lazy Beach Day", desc: "All-day Bávaro Beach. Cocktails. Couples massage.", cost: "$70" },
+      { day: 6, title: "Snorkel & Splurge", desc: "Morning reef snorkel. La Yola overwater dinner.", cost: "$95" },
+      { day: 7, title: "Final Swim & Depart", desc: "Beach brunch. Last swim. Airport transfer.", cost: "$40" },
+    ],
+  },
+
+  aruba: {
+    name: "Aruba", flag: "🇦🇼",
+    tagline: "One Happy Island — guaranteed sun, no hurricanes in August",
+    airport: "AUA (Queen Beatrix)", flightHours: 5, directFlight: true,
+    visa: "No visa needed (Canadian passport)", weatherAug: "Dry & sunny, 84-90°F, outside hurricane belt!",
+    scores: { beach: 9, budgetFriendly: 5, food: 7, culture: 5, adventure: 7, relaxation: 9, romance: 9, nightlife: 7, easeOfTravel: 8, instagrammable: 8 },
+    costs: { flightPerPerson: { low: 450, mid: 650, high: 900 }, airbnbPerNight: { low: 80, mid: 130, high: 200 }, foodPerDayCouple: { low: 50, mid: 80, high: 140 }, activitiesTotal: { low: 120, mid: 250, high: 400 }, transportTotal: { low: 100, mid: 180, high: 280 } },
+    beaches: [
+      { name: "Eagle Beach", desc: "Widest beach on the island, fofoti trees, voted world's best", link: "https://maps.google.com/?q=Eagle+Beach+Aruba" },
+      { name: "Palm Beach", desc: "Bustling resort strip, crystal clear water", link: "https://maps.google.com/?q=Palm+Beach+Aruba" },
+      { name: "Baby Beach", desc: "Shallow lagoon, calm water, like a natural pool", link: "https://maps.google.com/?q=Baby+Beach+Aruba" },
+      { name: "Mangel Halto", desc: "Hidden snorkel spot with mangroves", link: "https://maps.google.com/?q=Mangel+Halto+Aruba" },
+    ],
+    activities: [
+      { name: "Natural Pool hike", desc: "Hike to Conchi — volcanic rock pool in the wild coast", cost: 0, link: "https://maps.google.com/?q=Natural+Pool+Aruba" },
+      { name: "Flamingo Beach", desc: "Private island beach with pink flamingos", cost: 100, link: "https://maps.google.com/?q=Renaissance+Island+Aruba" },
+      { name: "Arikok National Park", desc: "Desert & caves with Arawak cave paintings", cost: 15, link: "https://maps.google.com/?q=Arikok+National+Park" },
+      { name: "Sunset catamaran sail", desc: "Open bar sunset cruise along the coast", cost: 60, link: "https://maps.google.com/?q=Catamaran+Aruba" },
+    ],
+    restaurants: [
+      { name: "Zeerovers", type: "Seafood", cost2: 25, desc: "Locals' favorite — fresh fish by the pound, ocean view", link: "https://maps.google.com/?q=Zeerovers+Aruba" },
+      { name: "The West Deck", type: "Caribbean", cost2: 35, desc: "Waterfront dining at sunset, grilled catch of the day", link: "https://maps.google.com/?q=The+West+Deck+Aruba" },
+      { name: "Eduardo's Beach Shack", type: "Smoothies", cost2: 15, desc: "Best acai bowls & smoothies on the island", link: "https://maps.google.com/?q=Eduardo's+Beach+Shack+Aruba" },
+      { name: "Papiamento Restaurant", type: "Fine Dining 🌟", cost2: 80, desc: "Cunucu house fine dining, romantic courtyard", link: "https://maps.google.com/?q=Papiamento+Restaurant+Aruba" },
+    ],
+    bookingLinks: {
+      flights: [
+        { label: "Google Flights", url: "https://www.google.com/travel/flights?q=flights+from+YYZ+to+AUA+august+22+returning+august+29+2026" },
+        { label: "Kayak", url: "https://www.ca.kayak.com/flights/YYZ-AUA/2026-08-22/2026-08-29/2adults?sort=bestflight_a" },
+        { label: "Skyscanner", url: "https://www.skyscanner.ca/transport/flights/yyz/aua/260822/260829/?adultsv2=2&cabinclass=economy" },
+      ],
+      airbnb: "https://www.airbnb.ca/s/Aruba/homes?checkin=2026-08-22&checkout=2026-08-29&adults=2&price_max=200",
+      foodDelivery: { app: "No major apps — eat out!", url: "" },
+      transport: { desc: "Rental car or bus", url: "https://www.discovercars.com/aruba" },
+    },
+    itinerary: [
+      { day: 1, title: "Arrive & Eagle Beach", desc: "Direct flight. Check in. Eagle Beach sunset. Zeerovers dinner.", cost: "$70" },
+      { day: 2, title: "Palm & Snorkel", desc: "Palm Beach morning. Mangel Halto snorkel. West Deck dinner.", cost: "$65" },
+      { day: 3, title: "Flamingo Beach", desc: "Renaissance Island flamingos. Afternoon pool. Eduardo's smoothies.", cost: "$130" },
+      { day: 4, title: "Arikok Adventure", desc: "National park hike to Natural Pool. Cave paintings.", cost: "$50" },
+      { day: 5, title: "Baby Beach & Relax", desc: "Drive to Baby Beach lagoon. All-day chill. Sunset catamaran.", cost: "$100" },
+      { day: 6, title: "Beach & Splurge", desc: "Eagle Beach morning. Papiamento fine dining evening.", cost: "$120" },
+      { day: 7, title: "Last Swim & Depart", desc: "Final beach time. Brunch. Airport.", cost: "$40" },
+    ],
+  },
+
+  jamaica: {
+    name: "Negril, Jamaica", flag: "🇯🇲",
+    tagline: "Seven Mile Beach, cliff diving & reggae vibes",
+    airport: "MBJ (Montego Bay)", flightHours: 4, directFlight: true,
+    visa: "No visa needed (Canadian passport)", weatherAug: "Hot & tropical, 82-90°F, brief showers",
+    scores: { beach: 9, budgetFriendly: 7, food: 8, culture: 8, adventure: 7, relaxation: 8, romance: 8, nightlife: 9, easeOfTravel: 8, instagrammable: 8 },
+    costs: { flightPerPerson: { low: 350, mid: 500, high: 700 }, airbnbPerNight: { low: 55, mid: 90, high: 150 }, foodPerDayCouple: { low: 30, mid: 55, high: 100 }, activitiesTotal: { low: 100, mid: 220, high: 380 }, transportTotal: { low: 80, mid: 150, high: 250 } },
+    beaches: [
+      { name: "Seven Mile Beach", desc: "Iconic long white sand stretch — the main draw", link: "https://maps.google.com/?q=Seven+Mile+Beach+Negril" },
+      { name: "Bloody Bay", desc: "Quieter, clearer water north of Seven Mile", link: "https://maps.google.com/?q=Bloody+Bay+Negril" },
+      { name: "Rick's Café Cliffs", desc: "Legendary cliff jumping into turquoise Caribbean", link: "https://maps.google.com/?q=Rick's+Cafe+Negril" },
+    ],
+    activities: [
+      { name: "Rick's Café cliff jump", desc: "Iconic sunset cliff diving & drinks", cost: 0, link: "https://maps.google.com/?q=Rick's+Cafe+Negril" },
+      { name: "Blue Hole mineral spring", desc: "Jump into a blue mineral pool in the jungle", cost: 15, link: "https://maps.google.com/?q=Blue+Hole+Mineral+Spring+Negril" },
+      { name: "Mayfield Falls", desc: "21 pools & cascades in the rainforest", cost: 20, link: "https://maps.google.com/?q=Mayfield+Falls+Jamaica" },
+      { name: "Glass-bottom boat", desc: "See the reef without getting wet", cost: 25, link: "https://maps.google.com/?q=Glass+Bottom+Boat+Negril" },
+    ],
+    restaurants: [
+      { name: "Kuyaba", type: "Jamaican", cost2: 30, desc: "Beach-side jerk chicken & seafood under the stars", link: "https://maps.google.com/?q=Kuyaba+Negril" },
+      { name: "Pushcart Restaurant", type: "Rum Bar", cost2: 25, desc: "Roadside jerk & rum punch, amazing vibe", link: "https://maps.google.com/?q=Pushcart+Restaurant+Negril" },
+      { name: "Ivan's Bar", type: "Beach Bar", cost2: 20, desc: "Chill drinks on the cliffs, watch divers", link: "https://maps.google.com/?q=Ivan's+Bar+Negril" },
+      { name: "Rockhouse Restaurant", type: "Fine Dining 🌟", cost2: 60, desc: "Cliff-edge fine dining at boutique hotel", link: "https://maps.google.com/?q=Rockhouse+Hotel+Negril" },
+    ],
+    bookingLinks: {
+      flights: [
+        { label: "Google Flights", url: "https://www.google.com/travel/flights?q=flights+from+YYZ+to+MBJ+august+22+returning+august+29+2026" },
+        { label: "Kayak", url: "https://www.ca.kayak.com/flights/YYZ-MBJ/2026-08-22/2026-08-29/2adults?sort=bestflight_a" },
+        { label: "Skyscanner", url: "https://www.skyscanner.ca/transport/flights/yyz/mbj/260822/260829/?adultsv2=2&cabinclass=economy" },
+      ],
+      airbnb: "https://www.airbnb.ca/s/Negril--Jamaica/homes?checkin=2026-08-22&checkout=2026-08-29&adults=2&price_max=150",
+      foodDelivery: { app: "No major delivery apps", url: "" },
+      transport: { desc: "Shared shuttle MBJ→Negril (1.5h)", url: "" },
+    },
+    itinerary: [
+      { day: 1, title: "Arrive & Beach", desc: "Fly to MBJ, shuttle to Negril. Seven Mile Beach sunset.", cost: "$55" },
+      { day: 2, title: "Beach & Rick's Café", desc: "Full beach day. Sunset cliff diving at Rick's. Jerk dinner.", cost: "$40" },
+      { day: 3, title: "Waterfalls", desc: "Mayfield Falls excursion. Afternoon beach. Kuyaba dinner.", cost: "$60" },
+      { day: 4, title: "Glass Boat & Chill", desc: "Morning reef tour. Afternoon hammock. Pushcart rum punch.", cost: "$50" },
+      { day: 5, title: "Blue Hole", desc: "Mineral spring plunge. Beach afternoon. Reggae night.", cost: "$45" },
+      { day: 6, title: "Bloody Bay & Splurge", desc: "Quiet beach morning. Rockhouse cliff-edge dinner.", cost: "$85" },
+      { day: 7, title: "Final Beach & Depart", desc: "Last swim. Jerk chicken lunch. Shuttle to MBJ.", cost: "$40" },
+    ],
+  },
+
+  turksAndCaicos: {
+    name: "Turks & Caicos", flag: "🇹🇨",
+    tagline: "Grace Bay — world's #1 rated beach, ultra-turquoise water",
+    airport: "PLS (Providenciales)", flightHours: 4, directFlight: true,
+    visa: "No visa needed (Canadian passport)", weatherAug: "Hot, 84-90°F, brief showers possible",
+    scores: { beach: 10, budgetFriendly: 3, food: 7, culture: 3, adventure: 6, relaxation: 10, romance: 10, nightlife: 4, easeOfTravel: 8, instagrammable: 10 },
+    costs: { flightPerPerson: { low: 450, mid: 650, high: 900 }, airbnbPerNight: { low: 120, mid: 200, high: 350 }, foodPerDayCouple: { low: 60, mid: 100, high: 180 }, activitiesTotal: { low: 150, mid: 300, high: 500 }, transportTotal: { low: 80, mid: 150, high: 250 } },
+    beaches: [
+      { name: "Grace Bay Beach", desc: "#1 beach in the world — 12 miles of perfection", link: "https://maps.google.com/?q=Grace+Bay+Beach+Turks+and+Caicos" },
+      { name: "Taylor Bay", desc: "Shallow calm lagoon, barely any people", link: "https://maps.google.com/?q=Taylor+Bay+Beach+Turks+and+Caicos" },
+      { name: "Long Bay Beach", desc: "Kitesurfing paradise, shallow turquoise water for miles", link: "https://maps.google.com/?q=Long+Bay+Beach+Providenciales" },
+    ],
+    activities: [
+      { name: "Snorkeling at the reef", desc: "Coral garden just off Grace Bay", cost: 40, link: "https://maps.google.com/?q=Grace+Bay+Snorkeling" },
+      { name: "Glow worm cruise", desc: "Bio-luminescent glow worms at sunset (seasonal!)", cost: 80, link: "https://maps.google.com/?q=Turks+and+Caicos+Glow+Worm" },
+      { name: "Iguana Island visit", desc: "Boat to Little Water Cay to see rock iguanas", cost: 50, link: "https://maps.google.com/?q=Little+Water+Cay+Turks+and+Caicos" },
+      { name: "Paddleboard at Taylor Bay", desc: "Glass-calm water paddleboarding", cost: 30, link: "https://maps.google.com/?q=Taylor+Bay+Turks+and+Caicos" },
+    ],
+    restaurants: [
+      { name: "Da Conch Shack", type: "Beach Shack", cost2: 35, desc: "Fresh conch straight from the sea, feet in sand", link: "https://maps.google.com/?q=Da+Conch+Shack+Providenciales" },
+      { name: "Cocovan", type: "Food Truck", cost2: 25, desc: "Gourmet food truck — fusion tacos & cocktails", link: "https://maps.google.com/?q=Cocovan+Providenciales" },
+      { name: "Coco Bistro", type: "Fine Dining 🌟", cost2: 100, desc: "Candlelit garden dining under palm trees", link: "https://maps.google.com/?q=Coco+Bistro+Providenciales" },
+    ],
+    bookingLinks: {
+      flights: [
+        { label: "Google Flights", url: "https://www.google.com/travel/flights?q=flights+from+YYZ+to+PLS+august+22+returning+august+29+2026" },
+        { label: "Kayak", url: "https://www.ca.kayak.com/flights/YYZ-PLS/2026-08-22/2026-08-29/2adults?sort=bestflight_a" },
+        { label: "Skyscanner", url: "https://www.skyscanner.ca/transport/flights/yyz/pls/260822/260829/?adultsv2=2&cabinclass=economy" },
+      ],
+      airbnb: "https://www.airbnb.ca/s/Turks-and-Caicos/homes?checkin=2026-08-22&checkout=2026-08-29&adults=2&price_max=350",
+      foodDelivery: { app: "No major delivery apps", url: "" },
+      transport: { desc: "Rental car or taxi", url: "https://www.discovercars.com/turks-and-caicos" },
+    },
+    itinerary: [
+      { day: 1, title: "Arrive & Grace Bay", desc: "Direct flight. Check in. Grace Bay Beach until sunset.", cost: "$80" },
+      { day: 2, title: "Snorkel Day", desc: "Morning reef snorkel. Afternoon Grace Bay chill. Da Conch Shack.", cost: "$75" },
+      { day: 3, title: "Taylor Bay", desc: "Calm lagoon morning. Paddleboard. Cocovan food truck.", cost: "$65" },
+      { day: 4, title: "Island Explorer", desc: "Iguana Island boat tour. Long Bay kitesurfing. Beach bar.", cost: "$80" },
+      { day: 5, title: "Glow Worm Cruise", desc: "Beach day. Evening glow worm bio-luminescent cruise.", cost: "$110" },
+      { day: 6, title: "Beach & Splurge", desc: "Grace Bay all day. Coco Bistro garden dinner.", cost: "$130" },
+      { day: 7, title: "Final Swim & Depart", desc: "Sunrise beach walk. Brunch. Airport.", cost: "$50" },
+    ],
+  },
+
+  barbados: {
+    name: "Barbados", flag: "🇧🇧",
+    tagline: "Rum punch, surf, catamaran turtle swims & Bajan culture",
+    airport: "BGI (Grantley Adams)", flightHours: 5, directFlight: true,
+    visa: "No visa needed (Canadian passport)", weatherAug: "Tropical, 82-88°F, brief rain showers",
+    scores: { beach: 8, budgetFriendly: 6, food: 8, culture: 7, adventure: 7, relaxation: 8, romance: 8, nightlife: 8, easeOfTravel: 8, instagrammable: 7 },
+    costs: { flightPerPerson: { low: 400, mid: 600, high: 850 }, airbnbPerNight: { low: 65, mid: 110, high: 180 }, foodPerDayCouple: { low: 40, mid: 70, high: 120 }, activitiesTotal: { low: 120, mid: 250, high: 400 }, transportTotal: { low: 80, mid: 150, high: 240 } },
+    beaches: [
+      { name: "Crane Beach", desc: "Pink-tinged sand, dramatic cliffs, bodysurfing waves", link: "https://maps.google.com/?q=Crane+Beach+Barbados" },
+      { name: "Carlisle Bay", desc: "Calm west coast, turtles, shipwreck snorkeling", link: "https://maps.google.com/?q=Carlisle+Bay+Barbados" },
+      { name: "Bathsheba Beach", desc: "Wild east coast with dramatic mushroom rocks", link: "https://maps.google.com/?q=Bathsheba+Beach+Barbados" },
+    ],
+    activities: [
+      { name: "Swim with turtles", desc: "Catamaran cruise with turtle & shipwreck snorkeling", cost: 70, link: "https://maps.google.com/?q=Turtle+Snorkeling+Barbados" },
+      { name: "Harrison's Cave", desc: "Tram through underground crystal limestone cavern", cost: 35, link: "https://maps.google.com/?q=Harrison's+Cave+Barbados" },
+      { name: "Mount Gay Rum tour", desc: "World's oldest rum distillery since 1703", cost: 20, link: "https://maps.google.com/?q=Mount+Gay+Rum+Barbados" },
+      { name: "Oistins Fish Fry (Friday)", desc: "Famous weekly fish fry street party", cost: 15, link: "https://maps.google.com/?q=Oistins+Fish+Fry+Barbados" },
+    ],
+    restaurants: [
+      { name: "Oistins Fish Fry", type: "Street Food", cost2: 15, desc: "Friday night — grilled mahi, rum punch, dancing", link: "https://maps.google.com/?q=Oistins+Fish+Fry" },
+      { name: "Cutters Deli", type: "Sandwich", cost2: 8, desc: "Legendary Bajan fish cutter sandwich", link: "https://maps.google.com/?q=Cutters+Deli+Barbados" },
+      { name: "The Cliff", type: "Fine Dining 🌟", cost2: 120, desc: "Torch-lit cliff-edge dining over the sea", link: "https://maps.google.com/?q=The+Cliff+Barbados" },
+    ],
+    bookingLinks: {
+      flights: [
+        { label: "Google Flights", url: "https://www.google.com/travel/flights?q=flights+from+YYZ+to+BGI+august+22+returning+august+29+2026" },
+        { label: "Kayak", url: "https://www.ca.kayak.com/flights/YYZ-BGI/2026-08-22/2026-08-29/2adults?sort=bestflight_a" },
+        { label: "Skyscanner", url: "https://www.skyscanner.ca/transport/flights/yyz/bgi/260822/260829/?adultsv2=2&cabinclass=economy" },
+      ],
+      airbnb: "https://www.airbnb.ca/s/Barbados/homes?checkin=2026-08-22&checkout=2026-08-29&adults=2&price_max=180",
+      foodDelivery: { app: "No major delivery apps", url: "" },
+      transport: { desc: "Rental car or ZR minibus", url: "" },
+    },
+    itinerary: [
+      { day: 1, title: "Arrive & West Coast", desc: "Direct flight. Carlisle Bay sunset swim. Rum punch.", cost: "$50" },
+      { day: 2, title: "Turtle Catamaran", desc: "Morning catamaran — turtles, snorkel, rum. Beach afternoon.", cost: "$90" },
+      { day: 3, title: "East Coast", desc: "Bathsheba mushroom rocks. Surfer's Bay. Harrison's Cave.", cost: "$65" },
+      { day: 4, title: "Crane Beach", desc: "Iconic pink beach all day. Bodysurfing waves.", cost: "$40" },
+      { day: 5, title: "Rum & Oistins", desc: "Mount Gay Rum distillery. Evening: Oistins Fish Fry!", cost: "$55" },
+      { day: 6, title: "Beach & Splurge", desc: "Carlisle Bay snorkel. The Cliff cliff-edge dinner.", cost: "$145" },
+      { day: 7, title: "Final Beach & Depart", desc: "Morning beach. Fish cutter sandwich. Airport.", cost: "$30" },
+    ],
+  },
+
+  curacao: {
+    name: "Curaçao", flag: "🇨🇼",
+    tagline: "Colorful Willemstad, hidden cove beaches & superb diving",
+    airport: "CUR (Hato)", flightHours: 5, directFlight: false,
+    visa: "No visa needed (Canadian passport)", weatherAug: "Dry, 84-90°F, outside hurricane belt",
+    scores: { beach: 8, budgetFriendly: 6, food: 7, culture: 7, adventure: 8, relaxation: 8, romance: 8, nightlife: 6, easeOfTravel: 6, instagrammable: 9 },
+    costs: { flightPerPerson: { low: 450, mid: 650, high: 900 }, airbnbPerNight: { low: 60, mid: 100, high: 170 }, foodPerDayCouple: { low: 40, mid: 70, high: 120 }, activitiesTotal: { low: 100, mid: 220, high: 380 }, transportTotal: { low: 100, mid: 170, high: 260 } },
+    beaches: [
+      { name: "Playa Kenepa Grandi", desc: "Stunning cliff-backed turquoise cove", link: "https://maps.google.com/?q=Playa+Kenepa+Grandi+Curacao" },
+      { name: "Cas Abao Beach", desc: "White sand, palm trees, great snorkeling", link: "https://maps.google.com/?q=Cas+Abao+Beach+Curacao" },
+      { name: "Playa Porto Mari", desc: "Double reef for amazing shore snorkeling", link: "https://maps.google.com/?q=Playa+Porto+Mari+Curacao" },
+    ],
+    activities: [
+      { name: "Willemstad walking tour", desc: "UNESCO colorful buildings & floating bridge", cost: 0, link: "https://maps.google.com/?q=Willemstad+Curacao" },
+      { name: "Shore diving", desc: "World-class dive sites right from the beach", cost: 50, link: "https://maps.google.com/?q=Diving+Curacao" },
+      { name: "Hato Caves", desc: "Walk through ancient limestone caves", cost: 10, link: "https://maps.google.com/?q=Hato+Caves+Curacao" },
+      { name: "Shete Boka cliff waves", desc: "Dramatic blowhole waves crashing into sea caves", cost: 5, link: "https://maps.google.com/?q=Shete+Boka+National+Park" },
+    ],
+    restaurants: [
+      { name: "Plasa Bieu", type: "Local Market", cost2: 10, desc: "Cheapest local lunch — stewed goat, fried plantain", link: "https://maps.google.com/?q=Plasa+Bieu+Curacao" },
+      { name: "Saint Tropez", type: "Dutch-Caribbean", cost2: 40, desc: "Waterfront fine dining in Pietermaai", link: "https://maps.google.com/?q=Bistro+Le+Clochard+Curacao" },
+      { name: "Gouverneur de Rouville", type: "Dutch", cost2: 50, desc: "Beautiful harbor terrace dining", link: "https://maps.google.com/?q=Gouverneur+de+Rouville+Curacao" },
+    ],
+    bookingLinks: {
+      flights: [
+        { label: "Google Flights", url: "https://www.google.com/travel/flights?q=flights+from+YYZ+to+CUR+august+22+returning+august+29+2026" },
+        { label: "Kayak", url: "https://www.ca.kayak.com/flights/YYZ-CUR/2026-08-22/2026-08-29/2adults?sort=bestflight_a" },
+        { label: "Skyscanner", url: "https://www.skyscanner.ca/transport/flights/yyz/cur/260822/260829/?adultsv2=2&cabinclass=economy" },
+      ],
+      airbnb: "https://www.airbnb.ca/s/Curacao/homes?checkin=2026-08-22&checkout=2026-08-29&adults=2&price_max=170",
+      foodDelivery: { app: "No major delivery apps", url: "" },
+      transport: { desc: "Rental car essential", url: "https://www.discovercars.com/curacao" },
+    },
+    itinerary: [
+      { day: 1, title: "Arrive & Willemstad", desc: "Fly in. Walk the colorful UNESCO waterfront. Plasa Bieu dinner.", cost: "$45" },
+      { day: 2, title: "Kenepa Beach", desc: "Drive to stunning Kenepa Grandi. Cliff views & snorkel.", cost: "$40" },
+      { day: 3, title: "Dive Day", desc: "Shore diving at top sites. Afternoon Cas Abao Beach.", cost: "$75" },
+      { day: 4, title: "Shete Boka + Caves", desc: "Blowhole cliffs. Hato Caves. Pietermaai dinner.", cost: "$50" },
+      { day: 5, title: "Porto Mari Beach", desc: "Double reef snorkel. All-day beach. Cocktails.", cost: "$45" },
+      { day: 6, title: "Beach & Splurge", desc: "Morning swim. Gouverneur de Rouville harbor dinner.", cost: "$80" },
+      { day: 7, title: "Final Swim & Depart", desc: "Beach brunch. Last dip. Airport.", cost: "$35" },
+    ],
+  },
+
+  costaRica: {
+    name: "Guanacaste, Costa Rica", flag: "🇨🇷",
+    tagline: "Pura Vida — Pacific jungle beaches, howler monkeys & volcanoes",
+    airport: "LIR (Liberia)", flightHours: 5.5, directFlight: true,
+    visa: "No visa needed (Canadian passport)", weatherAug: "Warm, 80-88°F, green season (brief afternoon rains)",
+    scores: { beach: 8, budgetFriendly: 7, food: 7, culture: 6, adventure: 10, relaxation: 8, romance: 8, nightlife: 5, easeOfTravel: 7, instagrammable: 9 },
+    costs: { flightPerPerson: { low: 400, mid: 600, high: 850 }, airbnbPerNight: { low: 55, mid: 95, high: 160 }, foodPerDayCouple: { low: 35, mid: 65, high: 110 }, activitiesTotal: { low: 150, mid: 300, high: 500 }, transportTotal: { low: 100, mid: 180, high: 300 } },
+    beaches: [
+      { name: "Playa Conchal", desc: "Beach made of crushed seashells, crystal water", link: "https://maps.google.com/?q=Playa+Conchal+Costa+Rica" },
+      { name: "Playa Flamingo", desc: "White sand, calm water, luxury boats in the bay", link: "https://maps.google.com/?q=Playa+Flamingo+Costa+Rica" },
+      { name: "Tamarindo Beach", desc: "Best surfing beach, lively beach town", link: "https://maps.google.com/?q=Tamarindo+Beach+Costa+Rica" },
+    ],
+    activities: [
+      { name: "Zip-line over canopy", desc: "Fly over the jungle canopy on zip lines", cost: 50, link: "https://maps.google.com/?q=Zip+Line+Guanacaste+Costa+Rica" },
+      { name: "Rincón de la Vieja volcano", desc: "Hot springs, mud baths, volcanic hike", cost: 25, link: "https://maps.google.com/?q=Rincon+de+la+Vieja+National+Park" },
+      { name: "Surf lesson Tamarindo", desc: "Learn to surf on gentle Pacific waves", cost: 40, link: "https://maps.google.com/?q=Surf+Lesson+Tamarindo" },
+      { name: "Howler monkey tour", desc: "Guided wildlife walk — monkeys, toucans, sloths", cost: 35, link: "https://maps.google.com/?q=Wildlife+Tour+Guanacaste" },
+    ],
+    restaurants: [
+      { name: "Soda típica", type: "Local", cost2: 10, desc: "Casado lunch — rice, beans, plantain, meat", link: "https://maps.google.com/?q=Soda+Tamarindo+Costa+Rica" },
+      { name: "El Huerto", type: "Healthy", cost2: 25, desc: "Farm-to-table bowls & smoothies", link: "https://maps.google.com/?q=El+Huerto+Tamarindo" },
+      { name: "Ceviche del Rey", type: "Seafood", cost2: 30, desc: "Best ceviche on the coast", link: "https://maps.google.com/?q=Ceviche+del+Rey+Tamarindo" },
+      { name: "Pangas Beach Club", type: "Fine Dining 🌟", cost2: 60, desc: "Sunset dining on the sand", link: "https://maps.google.com/?q=Pangas+Beach+Club+Tamarindo" },
+    ],
+    bookingLinks: {
+      flights: [
+        { label: "Google Flights", url: "https://www.google.com/travel/flights?q=flights+from+YYZ+to+LIR+august+22+returning+august+29+2026" },
+        { label: "Kayak", url: "https://www.ca.kayak.com/flights/YYZ-LIR/2026-08-22/2026-08-29/2adults?sort=bestflight_a" },
+        { label: "Skyscanner", url: "https://www.skyscanner.ca/transport/flights/yyz/lir/260822/260829/?adultsv2=2&cabinclass=economy" },
+      ],
+      airbnb: "https://www.airbnb.ca/s/Guanacaste--Costa-Rica/homes?checkin=2026-08-22&checkout=2026-08-29&adults=2&price_max=160",
+      foodDelivery: { app: "Uber Eats", url: "https://www.ubereats.com/cr" },
+      transport: { desc: "Rental car recommended", url: "https://www.discovercars.com/costa-rica" },
+    },
+    itinerary: [
+      { day: 1, title: "Arrive & Beach", desc: "Fly to Liberia. Drive to Tamarindo. Sunset drinks on the beach.", cost: "$50" },
+      { day: 2, title: "Surf Day", desc: "Morning surf lesson. Afternoon Playa Conchal snorkel.", cost: "$65" },
+      { day: 3, title: "Volcano & Hot Springs", desc: "Rincón de la Vieja hike. Hot springs & mud baths.", cost: "$60" },
+      { day: 4, title: "Jungle Adventure", desc: "Zip-line canopy tour. Wildlife walk — monkeys & sloths.", cost: "$85" },
+      { day: 5, title: "Beach Day", desc: "Playa Flamingo all day. Ceviche lunch. Sunset cocktails.", cost: "$50" },
+      { day: 6, title: "Beach & Splurge", desc: "Morning beach. Pangas Beach Club sunset dinner.", cost: "$90" },
+      { day: 7, title: "Final Beach & Depart", desc: "Last swim. Casado lunch. Drive to Liberia airport.", cost: "$35" },
+    ],
+  },
+
+  stLucia: {
+    name: "St. Lucia", flag: "🇱🇨",
+    tagline: "The Pitons, volcanic beaches, luxury romance on a budget",
+    airport: "UVF (Hewanorra)", flightHours: 5, directFlight: true,
+    visa: "No visa needed (Canadian passport)", weatherAug: "Warm, 80-88°F, brief tropical showers",
+    scores: { beach: 8, budgetFriendly: 5, food: 7, culture: 5, adventure: 8, relaxation: 9, romance: 10, nightlife: 5, easeOfTravel: 7, instagrammable: 10 },
+    costs: { flightPerPerson: { low: 400, mid: 600, high: 850 }, airbnbPerNight: { low: 80, mid: 130, high: 220 }, foodPerDayCouple: { low: 45, mid: 80, high: 140 }, activitiesTotal: { low: 120, mid: 260, high: 450 }, transportTotal: { low: 100, mid: 180, high: 280 } },
+    beaches: [
+      { name: "Sugar Beach", desc: "Between the two Pitons — most iconic beach in the Caribbean", link: "https://maps.google.com/?q=Sugar+Beach+St+Lucia" },
+      { name: "Anse Chastanet", desc: "World-class reef snorkeling right off the beach", link: "https://maps.google.com/?q=Anse+Chastanet+St+Lucia" },
+      { name: "Reduit Beach", desc: "Long golden sand in Rodney Bay, lively area", link: "https://maps.google.com/?q=Reduit+Beach+St+Lucia" },
+    ],
+    activities: [
+      { name: "Gros Piton hike", desc: "Climb the iconic 2619ft volcanic peak", cost: 50, link: "https://maps.google.com/?q=Gros+Piton+St+Lucia" },
+      { name: "Sulphur Springs drive-in volcano", desc: "World's only drive-in volcano + mud baths", cost: 10, link: "https://maps.google.com/?q=Sulphur+Springs+St+Lucia" },
+      { name: "Snorkel Anse Chastanet", desc: "Reef right off the beach, no boat needed", cost: 15, link: "https://maps.google.com/?q=Anse+Chastanet+Snorkeling" },
+      { name: "Piton sunset catamaran", desc: "Sail past the Pitons at golden hour", cost: 70, link: "https://maps.google.com/?q=Catamaran+St+Lucia" },
+    ],
+    restaurants: [
+      { name: "The Coal Pot", type: "French-Creole", cost2: 55, desc: "Waterfront fine dining in Castries", link: "https://maps.google.com/?q=The+Coal+Pot+St+Lucia" },
+      { name: "Orlando's", type: "Local", cost2: 15, desc: "Authentic Creole lunch, family-run", link: "https://maps.google.com/?q=Orlando's+Restaurant+Soufriere" },
+      { name: "Boucan by Jade Mtn", type: "Fine Dining 🌟", cost2: 80, desc: "Cocoa-infused cuisine with Pitons view", link: "https://maps.google.com/?q=Boucan+Jade+Mountain+St+Lucia" },
+    ],
+    bookingLinks: {
+      flights: [
+        { label: "Google Flights", url: "https://www.google.com/travel/flights?q=flights+from+YYZ+to+UVF+august+22+returning+august+29+2026" },
+        { label: "Kayak", url: "https://www.ca.kayak.com/flights/YYZ-UVF/2026-08-22/2026-08-29/2adults?sort=bestflight_a" },
+        { label: "Skyscanner", url: "https://www.skyscanner.ca/transport/flights/yyz/uvf/260822/260829/?adultsv2=2&cabinclass=economy" },
+      ],
+      airbnb: "https://www.airbnb.ca/s/St-Lucia/homes?checkin=2026-08-22&checkout=2026-08-29&adults=2&price_max=220",
+      foodDelivery: { app: "No major delivery apps", url: "" },
+      transport: { desc: "Taxi or rental car (winding roads)", url: "" },
+    },
+    itinerary: [
+      { day: 1, title: "Arrive & Rodney Bay", desc: "Fly in. Transfer to Rodney Bay. Reduit Beach sunset.", cost: "$60" },
+      { day: 2, title: "Sugar Beach", desc: "Drive south. Sugar Beach between the Pitons. Iconic views.", cost: "$65" },
+      { day: 3, title: "Gros Piton Hike", desc: "Morning climb to summit. Afternoon mud baths at Sulphur Springs.", cost: "$75" },
+      { day: 4, title: "Snorkel & Catamaran", desc: "Anse Chastanet reef. Sunset catamaran past the Pitons.", cost: "$95" },
+      { day: 5, title: "Beach Day", desc: "Reduit Beach all day. Couples massage. Orlando's for lunch.", cost: "$60" },
+      { day: 6, title: "Beach & Splurge", desc: "Morning swim. Boucan cocoa dinner with Pitons view.", cost: "$110" },
+      { day: 7, title: "Final Beach & Depart", desc: "Last beach walk. Brunch. Airport.", cost: "$40" },
+    ],
+  },
+
+// ─────────────── SOUTHEAST ASIA ───────────────
+
+  kohSamui: {
+    name: "Koh Samui, Thailand", flag: "🇹🇭",
+    tagline: "Tropical island with jungle waterfalls, cheap massages & pad thai",
+    airport: "USM (Samui)", flightHours: 19, directFlight: false,
+    visa: "Visa exempt 30 days (Canadian passport)", weatherAug: "Warm, 80-88°F, occasional showers, mostly sunny",
+    scores: { beach: 8, budgetFriendly: 9, food: 10, culture: 8, adventure: 8, relaxation: 10, romance: 9, nightlife: 8, easeOfTravel: 4, instagrammable: 8 },
+    costs: { flightPerPerson: { low: 900, mid: 1200, high: 1500 }, airbnbPerNight: { low: 30, mid: 70, high: 120 }, foodPerDayCouple: { low: 15, mid: 35, high: 70 }, activitiesTotal: { low: 80, mid: 180, high: 320 }, transportTotal: { low: 50, mid: 100, high: 180 } },
+    beaches: [
+      { name: "Chaweng Beach", desc: "Main beach — long white sand, lively nightlife strip", link: "https://maps.google.com/?q=Chaweng+Beach+Koh+Samui" },
+      { name: "Lamai Beach", desc: "Quieter, great for couples, rock formations", link: "https://maps.google.com/?q=Lamai+Beach+Koh+Samui" },
+      { name: "Silver Beach", desc: "Tiny hidden cove between boulders, crystal water", link: "https://maps.google.com/?q=Silver+Beach+Koh+Samui" },
+    ],
+    activities: [
+      { name: "Ang Thong Marine Park", desc: "Kayak through emerald lagoons & jungle islands", cost: 50, link: "https://maps.google.com/?q=Ang+Thong+National+Marine+Park" },
+      { name: "Na Muang Waterfall", desc: "Jungle waterfall with swimming pool at base", cost: 0, link: "https://maps.google.com/?q=Na+Muang+Waterfall+Koh+Samui" },
+      { name: "Thai cooking class", desc: "Learn pad thai, curry, mango sticky rice", cost: 30, link: "https://maps.google.com/?q=Cooking+Class+Koh+Samui" },
+      { name: "Couple's spa day", desc: "2-hour traditional Thai massage ~$25 total", cost: 25, link: "https://maps.google.com/?q=Spa+Koh+Samui" },
+    ],
+    restaurants: [
+      { name: "Night market street food", type: "Street Food", cost2: 5, desc: "Pad thai $1.50, mango sticky rice $1", link: "https://maps.google.com/?q=Lamai+Night+Market+Koh+Samui" },
+      { name: "The Hut Café", type: "Thai", cost2: 10, desc: "Authentic curries on the beach, dirt cheap", link: "https://maps.google.com/?q=The+Hut+Cafe+Koh+Samui" },
+      { name: "Dining on the Rocks", type: "Fine Dining 🌟", cost2: 80, desc: "Multi-course tasting menu on granite boulders", link: "https://maps.google.com/?q=Dining+on+the+Rocks+Koh+Samui" },
+    ],
+    bookingLinks: {
+      flights: [
+        { label: "Google Flights", url: "https://www.google.com/travel/flights?q=flights+from+YYZ+to+USM+august+22+returning+august+29+2026" },
+        { label: "Kayak", url: "https://www.ca.kayak.com/flights/YYZ-USM/2026-08-22/2026-08-29/2adults?sort=bestflight_a" },
+        { label: "Skyscanner", url: "https://www.skyscanner.ca/transport/flights/yyz/usm/260822/260829/?adultsv2=2&cabinclass=economy" },
+      ],
+      airbnb: "https://www.airbnb.ca/s/Koh-Samui--Thailand/homes?checkin=2026-08-22&checkout=2026-08-29&adults=2&price_max=120",
+      foodDelivery: { app: "Grab Food", url: "https://www.grab.com/th/food/" },
+      transport: { desc: "Songthaew or scooter rental", url: "" },
+    },
+    itinerary: [
+      { day: 1, title: "Arrive & Beach", desc: "Fly in. Check into villa. Chaweng Beach sunset. Night market dinner.", cost: "$25" },
+      { day: 2, title: "Ang Thong Park", desc: "Full-day island hopping, kayaking emerald lagoons.", cost: "$65" },
+      { day: 3, title: "Waterfall & Spa", desc: "Na Muang waterfall hike. Afternoon couple's Thai massage.", cost: "$35" },
+      { day: 4, title: "Cooking Class", desc: "Learn Thai cooking. Silver Beach afternoon.", cost: "$45" },
+      { day: 5, title: "Lamai Beach Day", desc: "All-day beach. Rock formations. Hut Café lunch.", cost: "$20" },
+      { day: 6, title: "Beach & Splurge", desc: "Beach morning. Dining on the Rocks sunset dinner.", cost: "$95" },
+      { day: 7, title: "Final Beach & Depart", desc: "Last swim. Street food brunch. Airport.", cost: "$15" },
+    ],
+  },
+
+  phuket: {
+    name: "Phuket, Thailand", flag: "🇹🇭",
+    tagline: "Thailand's largest island — Phi Phi day trips, epic nightlife",
+    airport: "HKT (Phuket)", flightHours: 18, directFlight: false,
+    visa: "Visa exempt 30 days (Canadian passport)", weatherAug: "Warm, 80-86°F, some rain but mostly fine",
+    scores: { beach: 8, budgetFriendly: 9, food: 9, culture: 7, adventure: 9, relaxation: 8, romance: 7, nightlife: 10, easeOfTravel: 4, instagrammable: 9 },
+    costs: { flightPerPerson: { low: 850, mid: 1100, high: 1400 }, airbnbPerNight: { low: 25, mid: 60, high: 110 }, foodPerDayCouple: { low: 12, mid: 30, high: 60 }, activitiesTotal: { low: 80, mid: 200, high: 380 }, transportTotal: { low: 50, mid: 90, high: 160 } },
+    beaches: [
+      { name: "Kata Beach", desc: "Great for swimming, surf, sunset views", link: "https://maps.google.com/?q=Kata+Beach+Phuket" },
+      { name: "Freedom Beach", desc: "Hidden jungle beach — boat access, pristine", link: "https://maps.google.com/?q=Freedom+Beach+Phuket" },
+      { name: "Phi Phi Islands", desc: "Iconic Maya Bay (The Beach movie), day trip", link: "https://maps.google.com/?q=Maya+Bay+Phi+Phi" },
+    ],
+    activities: [
+      { name: "Phi Phi Island day trip", desc: "Speedboat to Maya Bay, snorkel, Monkey Beach", cost: 60, link: "https://maps.google.com/?q=Phi+Phi+Islands" },
+      { name: "Big Buddha viewpoint", desc: "45m marble Buddha with panoramic views", cost: 0, link: "https://maps.google.com/?q=Big+Buddha+Phuket" },
+      { name: "Old Town Phuket walk", desc: "Street art, Sino-Portuguese architecture, cheap eats", cost: 0, link: "https://maps.google.com/?q=Old+Town+Phuket" },
+      { name: "James Bond Island", desc: "Phang Nga Bay — karst islands from the movie", cost: 45, link: "https://maps.google.com/?q=James+Bond+Island+Thailand" },
+    ],
+    restaurants: [
+      { name: "Street food on Bangla", type: "Street Food", cost2: 4, desc: "Pad thai, satay, mango rice — all under $2 each", link: "https://maps.google.com/?q=Patong+Night+Market+Phuket" },
+      { name: "Raya Restaurant", type: "Thai", cost2: 15, desc: "Famous Phuket-style curries in a colonial house", link: "https://maps.google.com/?q=Raya+Restaurant+Phuket" },
+      { name: "Baan Rim Pa", type: "Fine Dining 🌟", cost2: 60, desc: "Cliff-top Thai fine dining, ocean views", link: "https://maps.google.com/?q=Baan+Rim+Pa+Phuket" },
+    ],
+    bookingLinks: {
+      flights: [
+        { label: "Google Flights", url: "https://www.google.com/travel/flights?q=flights+from+YYZ+to+HKT+august+22+returning+august+29+2026" },
+        { label: "Kayak", url: "https://www.ca.kayak.com/flights/YYZ-HKT/2026-08-22/2026-08-29/2adults?sort=bestflight_a" },
+        { label: "Skyscanner", url: "https://www.skyscanner.ca/transport/flights/yyz/hkt/260822/260829/?adultsv2=2&cabinclass=economy" },
+      ],
+      airbnb: "https://www.airbnb.ca/s/Phuket--Thailand/homes?checkin=2026-08-22&checkout=2026-08-29&adults=2&price_max=110",
+      foodDelivery: { app: "Grab Food", url: "https://www.grab.com/th/food/" },
+      transport: { desc: "Grab taxi or scooter", url: "" },
+    },
+    itinerary: [
+      { day: 1, title: "Arrive & Kata", desc: "Fly in. Kata Beach sunset. Night market street food.", cost: "$20" },
+      { day: 2, title: "Phi Phi Islands", desc: "Speedboat to Maya Bay, snorkel, Monkey Beach. Iconic.", cost: "$75" },
+      { day: 3, title: "Old Town + Big Buddha", desc: "Morning street art walk. Big Buddha panoramic views.", cost: "$15" },
+      { day: 4, title: "James Bond Island", desc: "Phang Nga Bay tour — limestone karsts from the movie.", cost: "$60" },
+      { day: 5, title: "Freedom Beach", desc: "Boat to hidden jungle beach. Spa afternoon.", cost: "$30" },
+      { day: 6, title: "Beach & Splurge", desc: "Kata Beach all day. Baan Rim Pa cliff dinner.", cost: "$75" },
+      { day: 7, title: "Final Beach & Depart", desc: "Last swim. Raya Restaurant lunch. Airport.", cost: "$25" },
+    ],
+  },
+
+  vietnam: {
+    name: "Da Nang / Hoi An, Vietnam", flag: "🇻🇳",
+    tagline: "Lantern-lit ancient town, incredible $1 street food, marble mountains",
+    airport: "DAD (Da Nang)", flightHours: 20, directFlight: false,
+    visa: "E-visa required ($25 USD)", weatherAug: "Hot, 82-95°F, mostly dry with some afternoon showers",
+    scores: { beach: 7, budgetFriendly: 10, food: 10, culture: 10, adventure: 8, relaxation: 7, romance: 8, nightlife: 6, easeOfTravel: 4, instagrammable: 10 },
+    costs: { flightPerPerson: { low: 900, mid: 1150, high: 1450 }, airbnbPerNight: { low: 20, mid: 45, high: 80 }, foodPerDayCouple: { low: 10, mid: 25, high: 50 }, activitiesTotal: { low: 60, mid: 150, high: 280 }, transportTotal: { low: 40, mid: 80, high: 140 } },
+    beaches: [
+      { name: "My Khe Beach", desc: "6km of golden sand in Da Nang, top beach in Asia", link: "https://maps.google.com/?q=My+Khe+Beach+Da+Nang" },
+      { name: "An Bang Beach", desc: "Chill beach near Hoi An, beach bars & seafood", link: "https://maps.google.com/?q=An+Bang+Beach+Hoi+An" },
+      { name: "Cham Islands", desc: "Snorkel coral reefs off Hoi An, UNESCO biosphere", link: "https://maps.google.com/?q=Cham+Islands+Vietnam" },
+    ],
+    activities: [
+      { name: "Hoi An Ancient Town", desc: "Lantern-lit UNESCO old town, tailor shops, temples", cost: 5, link: "https://maps.google.com/?q=Hoi+An+Ancient+Town" },
+      { name: "Ba Na Hills / Golden Bridge", desc: "Giant hands holding a bridge in the clouds", cost: 30, link: "https://maps.google.com/?q=Golden+Bridge+Ba+Na+Hills" },
+      { name: "Marble Mountains", desc: "Climb marble karsts with caves & pagodas", cost: 3, link: "https://maps.google.com/?q=Marble+Mountains+Da+Nang" },
+      { name: "Cooking class Hoi An", desc: "Market tour then cook pho, banh mi, spring rolls", cost: 20, link: "https://maps.google.com/?q=Cooking+Class+Hoi+An" },
+    ],
+    restaurants: [
+      { name: "Bánh mì Phượng", type: "Street Food", cost2: 2, desc: "Anthony Bourdain's #1 banh mi — $1 each", link: "https://maps.google.com/?q=Banh+Mi+Phuong+Hoi+An" },
+      { name: "Cao Lầu stall", type: "Noodles", cost2: 3, desc: "Hoi An specialty noodles, unique to this city", link: "https://maps.google.com/?q=Cao+Lau+Hoi+An" },
+      { name: "Morning Glory", type: "Vietnamese", cost2: 15, desc: "Famous Hoi An restaurant by Ms. Vy", link: "https://maps.google.com/?q=Morning+Glory+Hoi+An" },
+      { name: "The Deck House", type: "Fine Dining 🌟", cost2: 40, desc: "Riverside fine dining with lantern views", link: "https://maps.google.com/?q=The+Deck+House+Hoi+An" },
+    ],
+    bookingLinks: {
+      flights: [
+        { label: "Google Flights", url: "https://www.google.com/travel/flights?q=flights+from+YYZ+to+DAD+august+22+returning+august+29+2026" },
+        { label: "Kayak", url: "https://www.ca.kayak.com/flights/YYZ-DAD/2026-08-22/2026-08-29/2adults?sort=bestflight_a" },
+        { label: "Skyscanner", url: "https://www.skyscanner.ca/transport/flights/yyz/dad/260822/260829/?adultsv2=2&cabinclass=economy" },
+      ],
+      airbnb: "https://www.airbnb.ca/s/Hoi-An--Vietnam/homes?checkin=2026-08-22&checkout=2026-08-29&adults=2&price_max=80",
+      foodDelivery: { app: "Grab Food", url: "https://www.grab.com/vn/food/" },
+      transport: { desc: "Grab taxi or scooter", url: "" },
+    },
+    itinerary: [
+      { day: 1, title: "Arrive Da Nang", desc: "Fly in. My Khe Beach sunset. Seafood dinner on the beach.", cost: "$15" },
+      { day: 2, title: "Hoi An Ancient Town", desc: "Lantern-lit streets. Temples. Banh mi Phuong. Tailor fitting.", cost: "$15" },
+      { day: 3, title: "Golden Bridge", desc: "Ba Na Hills giant hands bridge in the clouds.", cost: "$40" },
+      { day: 4, title: "Cooking Class", desc: "Market tour + cooking class. An Bang Beach afternoon.", cost: "$30" },
+      { day: 5, title: "Marble Mountains", desc: "Climb caves & pagodas. My Khe Beach afternoon.", cost: "$10" },
+      { day: 6, title: "Cham Islands", desc: "Boat to coral reef snorkeling. Deck House dinner.", cost: "$55" },
+      { day: 7, title: "Final Beach & Depart", desc: "Last beach swim. Cao Lau noodles. Airport.", cost: "$10" },
+    ],
+  },
+
+  philippines: {
+    name: "El Nido, Philippines", flag: "🇵🇭",
+    tagline: "Secret lagoons, limestone cliffs & the most beautiful islands on Earth",
+    airport: "USU (Palawan) + ELN", flightHours: 22, directFlight: false,
+    visa: "Visa free 30 days (Canadian passport)", weatherAug: "Warm, 80-86°F, some rain but island hopping still great",
+    scores: { beach: 10, budgetFriendly: 9, food: 7, culture: 6, adventure: 10, relaxation: 9, romance: 9, nightlife: 5, easeOfTravel: 2, instagrammable: 10 },
+    costs: { flightPerPerson: { low: 1000, mid: 1300, high: 1600 }, airbnbPerNight: { low: 25, mid: 60, high: 110 }, foodPerDayCouple: { low: 12, mid: 30, high: 60 }, activitiesTotal: { low: 80, mid: 200, high: 350 }, transportTotal: { low: 60, mid: 120, high: 200 } },
+    beaches: [
+      { name: "Nacpan Beach", desc: "4km of golden sand, almost empty, palm trees", link: "https://maps.google.com/?q=Nacpan+Beach+El+Nido" },
+      { name: "Big Lagoon", desc: "Kayak through towering limestone into turquoise lagoon", link: "https://maps.google.com/?q=Big+Lagoon+El+Nido" },
+      { name: "Secret Lagoon", desc: "Swim through a rock hole into a hidden paradise", link: "https://maps.google.com/?q=Secret+Lagoon+El+Nido" },
+      { name: "Seven Commandos Beach", desc: "White sand, calm water, coconut palms", link: "https://maps.google.com/?q=Seven+Commandos+Beach+El+Nido" },
+    ],
+    activities: [
+      { name: "Island Hopping Tour A", desc: "Big Lagoon, Secret Lagoon, Shimizu Island — the classic", cost: 25, link: "https://maps.google.com/?q=El+Nido+Tour+A" },
+      { name: "Island Hopping Tour C", desc: "Hidden Beach, Matinloc Shrine, Secret Beach", cost: 25, link: "https://maps.google.com/?q=El+Nido+Tour+C" },
+      { name: "Kayak the lagoons", desc: "Paddle through limestone karsts at your own pace", cost: 5, link: "https://maps.google.com/?q=Kayak+El+Nido" },
+      { name: "Nacpan Beach day", desc: "Ride a tricycle to the endless golden beach", cost: 5, link: "https://maps.google.com/?q=Nacpan+Beach" },
+    ],
+    restaurants: [
+      { name: "Trattoria Altrove", type: "Italian", cost2: 15, desc: "Best pizza in El Nido, wood-fired", link: "https://maps.google.com/?q=Trattoria+Altrove+El+Nido" },
+      { name: "Happiness Beach Bar", type: "Beach Bar", cost2: 10, desc: "Cheap cocktails & Filipino food on the sand", link: "https://maps.google.com/?q=Happiness+Beach+Bar+El+Nido" },
+      { name: "Republica Sunset Bar", type: "Sunset", cost2: 20, desc: "Best sunset views with cocktails", link: "https://maps.google.com/?q=Republica+Sunset+Bar+El+Nido" },
+    ],
+    bookingLinks: {
+      flights: [
+        { label: "Google Flights", url: "https://www.google.com/travel/flights?q=flights+from+YYZ+to+ELN+august+22+returning+august+29+2026" },
+        { label: "Kayak", url: "https://www.ca.kayak.com/flights/YYZ-PPS/2026-08-22/2026-08-29/2adults?sort=bestflight_a" },
+        { label: "Skyscanner", url: "https://www.skyscanner.ca/transport/flights/yyz/pps/260822/260829/?adultsv2=2&cabinclass=economy" },
+      ],
+      airbnb: "https://www.airbnb.ca/s/El-Nido--Philippines/homes?checkin=2026-08-22&checkout=2026-08-29&adults=2&price_max=110",
+      foodDelivery: { app: "No delivery apps", url: "" },
+      transport: { desc: "Van from Puerto Princesa (5h) or direct flight", url: "" },
+    },
+    itinerary: [
+      { day: 1, title: "Arrive El Nido", desc: "Fly to Palawan, transfer to El Nido. Beach sunset.", cost: "$20" },
+      { day: 2, title: "Tour A — Lagoons", desc: "Big Lagoon kayak, Secret Lagoon swim, Shimizu Island.", cost: "$35" },
+      { day: 3, title: "Nacpan Beach", desc: "All day on 4km golden sand paradise. Cheap cocktails.", cost: "$15" },
+      { day: 4, title: "Tour C — Secret Beach", desc: "Swim through a cliff to Hidden Beach. Matinloc Shrine.", cost: "$35" },
+      { day: 5, title: "Kayak & Chill", desc: "Morning lagoon kayak. Afternoon beach. Hammock time.", cost: "$15" },
+      { day: 6, title: "Beach & Sunset", desc: "Seven Commandos Beach. Republica sunset cocktails.", cost: "$30" },
+      { day: 7, title: "Final Beach & Depart", desc: "Last swim in the lagoon. Pizza lunch. Airport.", cost: "$20" },
+    ],
+  },
+
+// ─────────────── EUROPE ───────────────
+
+  sardinia: {
+    name: "Sardinia, Italy", flag: "🇮🇹",
+    tagline: "Caribbean-like beaches in the Mediterranean, Italian food & wine",
+    airport: "CAG (Cagliari)", flightHours: 12, directFlight: false,
+    visa: "No visa needed (Canadian passport, Schengen zone)", weatherAug: "Hot & sunny, 80-95°F, zero rain",
+    scores: { beach: 10, budgetFriendly: 5, food: 10, culture: 8, adventure: 6, relaxation: 9, romance: 10, nightlife: 5, easeOfTravel: 5, instagrammable: 9 },
+    costs: { flightPerPerson: { low: 800, mid: 1100, high: 1400 }, airbnbPerNight: { low: 70, mid: 120, high: 200 }, foodPerDayCouple: { low: 50, mid: 85, high: 150 }, activitiesTotal: { low: 80, mid: 200, high: 380 }, transportTotal: { low: 180, mid: 300, high: 420 } },
+    beaches: [
+      { name: "La Pelosa", desc: "Stunningly clear shallow turquoise water, white sand", link: "https://maps.google.com/?q=La+Pelosa+Beach+Sardinia" },
+      { name: "Cala Goloritzé", desc: "Natural limestone arch, emerald water (hike in)", link: "https://maps.google.com/?q=Cala+Goloritz%C3%A9+Sardinia" },
+      { name: "Costa Smeralda", desc: "Exclusive emerald coastline, celebrity playground", link: "https://maps.google.com/?q=Costa+Smeralda+Sardinia" },
+      { name: "Cala Mariolu", desc: "White pebble beach, voted Italy's most beautiful", link: "https://maps.google.com/?q=Cala+Mariolu+Sardinia" },
+    ],
+    activities: [
+      { name: "Boat tour Cala Goloritzé", desc: "See dramatic arches & coves by boat", cost: 40, link: "https://maps.google.com/?q=Boat+Tour+Cala+Gonone" },
+      { name: "Hike to Cala Goloritzé", desc: "1.5h trail down to pristine natural arch beach", cost: 0, link: "https://maps.google.com/?q=Cala+Goloritz%C3%A9+Trail" },
+      { name: "Wine tasting Cannonau", desc: "Sardinian wine (one of the Blue Zone secrets)", cost: 25, link: "https://maps.google.com/?q=Wine+Tasting+Sardinia" },
+      { name: "Nuraghe Su Nuraxi", desc: "3500-year-old stone towers, UNESCO site", cost: 15, link: "https://maps.google.com/?q=Su+Nuraxi+Barumini" },
+    ],
+    restaurants: [
+      { name: "Su Cumbidu", type: "Sardinian", cost2: 30, desc: "Traditional Sardinian home cooking, huge portions", link: "https://maps.google.com/?q=Su+Cumbidu+Cagliari" },
+      { name: "Trattoria any village", type: "Italian", cost2: 25, desc: "Fresh pasta, seafood, local wine — hard to go wrong", link: "https://maps.google.com/?q=Trattoria+Sardinia" },
+      { name: "Ristorante Dal Corsaro", type: "Fine Dining 🌟", cost2: 80, desc: "Michelin-starred Sardinian fine dining", link: "https://maps.google.com/?q=Dal+Corsaro+Cagliari" },
+    ],
+    bookingLinks: {
+      flights: [
+        { label: "Google Flights", url: "https://www.google.com/travel/flights?q=flights+from+YYZ+to+CAG+august+22+returning+august+29+2026" },
+        { label: "Kayak", url: "https://www.ca.kayak.com/flights/YYZ-CAG/2026-08-22/2026-08-29/2adults?sort=bestflight_a" },
+        { label: "Skyscanner", url: "https://www.skyscanner.ca/transport/flights/yyz/cag/260822/260829/?adultsv2=2&cabinclass=economy" },
+      ],
+      airbnb: "https://www.airbnb.ca/s/Sardinia--Italy/homes?checkin=2026-08-22&checkout=2026-08-29&adults=2&price_max=200",
+      foodDelivery: { app: "Glovo", url: "https://glovoapp.com/it/" },
+      transport: { desc: "Rental car essential", url: "https://www.discovercars.com/italy/sardinia" },
+    },
+    itinerary: [
+      { day: 1, title: "Arrive Cagliari", desc: "Fly in. Rent car. Poetto Beach. Dinner in old town.", cost: "$70" },
+      { day: 2, title: "La Pelosa", desc: "Drive north to La Pelosa — Caribbean-clear water. Village dinner.", cost: "$75" },
+      { day: 3, title: "Cala Goloritzé", desc: "Hike or boat to natural arch beach. Swim in emerald water.", cost: "$60" },
+      { day: 4, title: "Wine & History", desc: "Cannonau wine tasting. Nuraghe ruins. Trattoria dinner.", cost: "$65" },
+      { day: 5, title: "Beach Hopping", desc: "Cala Mariolu by boat. Costa Smeralda drive.", cost: "$70" },
+      { day: 6, title: "Beach & Splurge", desc: "Lazy beach day. Dal Corsaro Michelin dinner.", cost: "$110" },
+      { day: 7, title: "Final Beach & Depart", desc: "Morning swim. Espresso & cornetto. Airport.", cost: "$40" },
+    ],
+  },
+
+  croatia: {
+    name: "Dubrovnik & Hvar, Croatia", flag: "🇭🇷",
+    tagline: "Game of Thrones old town, island hopping & Adriatic sunsets",
+    airport: "DBV (Dubrovnik)", flightHours: 12, directFlight: false,
+    visa: "No visa needed (Canadian passport, Schengen zone)", weatherAug: "Hot & sunny, 80-90°F, dry",
+    scores: { beach: 7, budgetFriendly: 5, food: 8, culture: 10, adventure: 7, relaxation: 8, romance: 9, nightlife: 7, easeOfTravel: 5, instagrammable: 10 },
+    costs: { flightPerPerson: { low: 750, mid: 1050, high: 1350 }, airbnbPerNight: { low: 70, mid: 120, high: 200 }, foodPerDayCouple: { low: 45, mid: 80, high: 140 }, activitiesTotal: { low: 100, mid: 250, high: 420 }, transportTotal: { low: 150, mid: 280, high: 400 } },
+    beaches: [
+      { name: "Banje Beach", desc: "Main Dubrovnik beach — old town backdrop", link: "https://maps.google.com/?q=Banje+Beach+Dubrovnik" },
+      { name: "Hvar island beaches", desc: "Boat to Pakleni Islands for secluded coves", link: "https://maps.google.com/?q=Pakleni+Islands+Hvar" },
+      { name: "Lokrum Island", desc: "10-min ferry to forested island with swimming rocks", link: "https://maps.google.com/?q=Lokrum+Island+Dubrovnik" },
+    ],
+    activities: [
+      { name: "Walk the City Walls", desc: "2km walk atop Dubrovnik's medieval walls", cost: 30, link: "https://maps.google.com/?q=Dubrovnik+City+Walls" },
+      { name: "Kayak around old town", desc: "Sea kayak with Lokrum & cave stops", cost: 35, link: "https://maps.google.com/?q=Kayak+Dubrovnik" },
+      { name: "Ferry to Hvar", desc: "Catamaran to the lavender island — bars & beaches", cost: 40, link: "https://maps.google.com/?q=Ferry+Dubrovnik+Hvar" },
+      { name: "Game of Thrones tour", desc: "Filming locations in King's Landing!", cost: 35, link: "https://maps.google.com/?q=Game+of+Thrones+Tour+Dubrovnik" },
+    ],
+    restaurants: [
+      { name: "Konoba Ribar", type: "Seafood", cost2: 35, desc: "Hidden alley restaurant, fresh Adriatic catch", link: "https://maps.google.com/?q=Konoba+Ribar+Dubrovnik" },
+      { name: "Buza Bar", type: "Cliff Bar", cost2: 15, desc: "Drinks on the cliff through a hole in the wall", link: "https://maps.google.com/?q=Buza+Bar+Dubrovnik" },
+      { name: "Restaurant 360", type: "Fine Dining 🌟", cost2: 100, desc: "Michelin-starred on the old town walls", link: "https://maps.google.com/?q=Restaurant+360+Dubrovnik" },
+    ],
+    bookingLinks: {
+      flights: [
+        { label: "Google Flights", url: "https://www.google.com/travel/flights?q=flights+from+YYZ+to+DBV+august+22+returning+august+29+2026" },
+        { label: "Kayak", url: "https://www.ca.kayak.com/flights/YYZ-DBV/2026-08-22/2026-08-29/2adults?sort=bestflight_a" },
+        { label: "Skyscanner", url: "https://www.skyscanner.ca/transport/flights/yyz/dbv/260822/260829/?adultsv2=2&cabinclass=economy" },
+      ],
+      airbnb: "https://www.airbnb.ca/s/Dubrovnik--Croatia/homes?checkin=2026-08-22&checkout=2026-08-29&adults=2&price_max=200",
+      foodDelivery: { app: "Wolt", url: "https://wolt.com/en/hrv/dubrovnik" },
+      transport: { desc: "Walk + ferry to islands", url: "" },
+    },
+    itinerary: [
+      { day: 1, title: "Arrive Dubrovnik", desc: "Fly in. Walk the Stradun. Sunset at Buza cliff bar.", cost: "$50" },
+      { day: 2, title: "City Walls & Kayak", desc: "Morning wall walk. Afternoon sea kayak around old town.", cost: "$80" },
+      { day: 3, title: "Lokrum Island", desc: "Ferry to Lokrum. Swim in Dead Sea salt lake. GoT Iron Throne.", cost: "$40" },
+      { day: 4, title: "Hvar Island", desc: "Catamaran to Hvar. Beach club. Lavender fields. Sunset.", cost: "$85" },
+      { day: 5, title: "Hvar Beaches", desc: "Boat to Pakleni Islands secret coves. Wine & olive oil.", cost: "$70" },
+      { day: 6, title: "Return & Splurge", desc: "Ferry back to Dubrovnik. Restaurant 360 on the walls.", cost: "$130" },
+      { day: 7, title: "Final Walk & Depart", desc: "Sunrise old town walk. Konoba Ribar lunch. Airport.", cost: "$50" },
+    ],
+  },
+
+  canaryIslands: {
+    name: "Canary Islands (Tenerife), Spain", flag: "🇪🇸",
+    tagline: "Volcanic island with year‑round sun, black & golden beaches",
+    airport: "TFS (Tenerife South)", flightHours: 10, directFlight: false,
+    visa: "No visa needed (Canadian passport, Schengen zone)", weatherAug: "Sunny, 75-85°F, minimal rain",
+    scores: { beach: 8, budgetFriendly: 6, food: 8, culture: 6, adventure: 8, relaxation: 8, romance: 7, nightlife: 7, easeOfTravel: 5, instagrammable: 8 },
+    costs: { flightPerPerson: { low: 700, mid: 950, high: 1250 }, airbnbPerNight: { low: 50, mid: 90, high: 150 }, foodPerDayCouple: { low: 35, mid: 65, high: 110 }, activitiesTotal: { low: 80, mid: 200, high: 350 }, transportTotal: { low: 120, mid: 220, high: 340 } },
+    beaches: [
+      { name: "Playa de las Teresitas", desc: "Golden Saharan sand imported to create a paradise", link: "https://maps.google.com/?q=Playa+de+las+Teresitas+Tenerife" },
+      { name: "Playa de los Cristianos", desc: "Calm bay, great for swimming & sunbathing", link: "https://maps.google.com/?q=Playa+de+los+Cristianos+Tenerife" },
+      { name: "Playa de Benijo", desc: "Wild black sand, dramatic cliffs & waves", link: "https://maps.google.com/?q=Playa+de+Benijo+Tenerife" },
+    ],
+    activities: [
+      { name: "Mount Teide (volcano)", desc: "Spain's highest peak — cable car to 3718m", cost: 35, link: "https://maps.google.com/?q=Mount+Teide+Tenerife" },
+      { name: "Whale & dolphin watching", desc: "Pilot whales & bottlenose dolphins year-round", cost: 40, link: "https://maps.google.com/?q=Whale+Watching+Tenerife" },
+      { name: "Masca Valley hike", desc: "Dramatic gorge hike to a hidden beach", cost: 0, link: "https://maps.google.com/?q=Masca+Valley+Tenerife" },
+      { name: "Anaga UNESCO forest", desc: "Ancient laurel cloud forest hikes", cost: 0, link: "https://maps.google.com/?q=Anaga+Rural+Park+Tenerife" },
+    ],
+    restaurants: [
+      { name: "Guachinche", type: "Local Canarian", cost2: 20, desc: "Underground wine houses with home-cooked food", link: "https://maps.google.com/?q=Guachinche+Tenerife" },
+      { name: "La Cofradía de Pescadores", type: "Seafood", cost2: 30, desc: "Fishermen's cooperative — freshest seafood", link: "https://maps.google.com/?q=Cofradia+de+Pescadores+Tenerife" },
+      { name: "Nub Restaurant", type: "Fine Dining 🌟", cost2: 70, desc: "Michelin-starred fusion cuisine", link: "https://maps.google.com/?q=Nub+Restaurant+Tenerife" },
+    ],
+    bookingLinks: {
+      flights: [
+        { label: "Google Flights", url: "https://www.google.com/travel/flights?q=flights+from+YYZ+to+TFS+august+22+returning+august+29+2026" },
+        { label: "Kayak", url: "https://www.ca.kayak.com/flights/YYZ-TFS/2026-08-22/2026-08-29/2adults?sort=bestflight_a" },
+        { label: "Skyscanner", url: "https://www.skyscanner.ca/transport/flights/yyz/tfs/260822/260829/?adultsv2=2&cabinclass=economy" },
+      ],
+      airbnb: "https://www.airbnb.ca/s/Tenerife--Spain/homes?checkin=2026-08-22&checkout=2026-08-29&adults=2&price_max=150",
+      foodDelivery: { app: "Glovo + Uber Eats", url: "https://glovoapp.com/es/" },
+      transport: { desc: "Rental car recommended", url: "https://www.discovercars.com/spain/tenerife" },
+    },
+    itinerary: [
+      { day: 1, title: "Arrive & Beach", desc: "Fly in. Las Teresitas golden beach. Guachinche wine dinner.", cost: "$50" },
+      { day: 2, title: "Mount Teide", desc: "Cable car to Spain's highest peak. Volcanic landscapes.", cost: "$55" },
+      { day: 3, title: "Whale Watching", desc: "Morning boat — pilot whales & dolphins. Beach afternoon.", cost: "$65" },
+      { day: 4, title: "Masca Valley", desc: "Hike the dramatic gorge. Black sand beach at Benijo.", cost: "$30" },
+      { day: 5, title: "Cloud Forest", desc: "Anaga laurel forest hike. Los Cristianos beach afternoon.", cost: "$25" },
+      { day: 6, title: "Beach & Splurge", desc: "Beach day. Nub Michelin dinner.", cost: "$100" },
+      { day: 7, title: "Final Beach & Depart", desc: "Morning swim. Seafood lunch. Airport.", cost: "$40" },
+    ],
+  },
+
+// ─────────────── AFRICA & INDIAN OCEAN ───────────────
+
+  mauritius: {
+    name: "Mauritius", flag: "🇲🇺",
+    tagline: "Tropical island nirvana — reef lagoons, rum, exotic food fusion",
+    airport: "MRU (Sir Seewoosagur)", flightHours: 20, directFlight: false,
+    visa: "No visa needed (Canadian passport, 90 days)", weatherAug: "Cool dry season, 70-78°F, pleasant & sunny",
+    scores: { beach: 10, budgetFriendly: 6, food: 8, culture: 7, adventure: 8, relaxation: 10, romance: 10, nightlife: 4, easeOfTravel: 3, instagrammable: 10 },
+    costs: { flightPerPerson: { low: 1000, mid: 1350, high: 1700 }, airbnbPerNight: { low: 50, mid: 100, high: 180 }, foodPerDayCouple: { low: 30, mid: 55, high: 100 }, activitiesTotal: { low: 100, mid: 230, high: 400 }, transportTotal: { low: 80, mid: 150, high: 250 } },
+    beaches: [
+      { name: "Le Morne", desc: "UNESCO mountain backdrop, turquoise lagoon, kitesurf mecca", link: "https://maps.google.com/?q=Le+Morne+Beach+Mauritius" },
+      { name: "Trou aux Biches", desc: "Calm, shallow lagoon with white sand — best snorkeling", link: "https://maps.google.com/?q=Trou+aux+Biches+Mauritius" },
+      { name: "Ile aux Cerfs", desc: "Island paradise — boat trip to white sand perfection", link: "https://maps.google.com/?q=Ile+aux+Cerfs+Mauritius" },
+    ],
+    activities: [
+      { name: "Chamarel 7-coloured earth", desc: "Surreal multi-coloured volcanic sand dunes", cost: 8, link: "https://maps.google.com/?q=Chamarel+Seven+Coloured+Earths" },
+      { name: "Catamaran to Ile aux Cerfs", desc: "Full day snorkel, BBQ, waterfall, island paradise", cost: 50, link: "https://maps.google.com/?q=Ile+aux+Cerfs" },
+      { name: "Black River Gorges hike", desc: "Tropical forest hike with endemic birds", cost: 0, link: "https://maps.google.com/?q=Black+River+Gorges+Mauritius" },
+      { name: "Underwater waterfall look", desc: "Helicopter view of the underwater waterfall illusion", cost: 120, link: "https://maps.google.com/?q=Underwater+Waterfall+Mauritius" },
+    ],
+    restaurants: [
+      { name: "Dholl puri street stall", type: "Street Food", cost2: 3, desc: "Mauritius' national street food — $0.75 each", link: "https://maps.google.com/?q=Dholl+Puri+Port+Louis" },
+      { name: "Chez Tino", type: "Creole", cost2: 25, desc: "Seafood & Creole at Trou aux Biches", link: "https://maps.google.com/?q=Chez+Tino+Mauritius" },
+      { name: "The Château de Bel Ombre", type: "Fine Dining 🌟", cost2: 70, desc: "Colonial estate fine dining, sugar plantation", link: "https://maps.google.com/?q=Chateau+de+Bel+Ombre" },
+    ],
+    bookingLinks: {
+      flights: [
+        { label: "Google Flights", url: "https://www.google.com/travel/flights?q=flights+from+YYZ+to+MRU+august+22+returning+august+29+2026" },
+        { label: "Kayak", url: "https://www.ca.kayak.com/flights/YYZ-MRU/2026-08-22/2026-08-29/2adults?sort=bestflight_a" },
+        { label: "Skyscanner", url: "https://www.skyscanner.ca/transport/flights/yyz/mru/260822/260829/?adultsv2=2&cabinclass=economy" },
+      ],
+      airbnb: "https://www.airbnb.ca/s/Mauritius/homes?checkin=2026-08-22&checkout=2026-08-29&adults=2&price_max=180",
+      foodDelivery: { app: "No major delivery apps", url: "" },
+      transport: { desc: "Rental car or taxi", url: "https://www.discovercars.com/mauritius" },
+    },
+    itinerary: [
+      { day: 1, title: "Arrive & Beach", desc: "Fly in. Trou aux Biches lagoon swim. Creole dinner.", cost: "$40" },
+      { day: 2, title: "Ile aux Cerfs", desc: "Catamaran day trip — snorkel, BBQ, island paradise.", cost: "$65" },
+      { day: 3, title: "Chamarel & Le Morne", desc: "7-coloured earth. Rum distillery. Le Morne beach sunset.", cost: "$40" },
+      { day: 4, title: "Black River Gorges", desc: "Tropical forest hike. Waterfall swim. Village dinner.", cost: "$20" },
+      { day: 5, title: "Beach Day", desc: "Trou aux Biches all day. Snorkeling. Dholl puri lunch.", cost: "$15" },
+      { day: 6, title: "Beach & Splurge", desc: "Le Morne morning. Château de Bel Ombre dinner.", cost: "$85" },
+      { day: 7, title: "Final Beach & Depart", desc: "Last lagoon swim. Airport.", cost: "$20" },
+    ],
+  },
+
+  hurghada: {
+    name: "Hurghada, Egypt", flag: "🇪🇬",
+    tagline: "Red Sea diving, desert safaris & pharaonic history for cheap",
+    airport: "HRG (Hurghada)", flightHours: 13, directFlight: false,
+    visa: "E-visa required ($25 USD)", weatherAug: "Very hot, 85-100°F, zero rain, warm sea",
+    scores: { beach: 7, budgetFriendly: 9, food: 7, culture: 8, adventure: 8, relaxation: 8, romance: 6, nightlife: 5, easeOfTravel: 5, instagrammable: 7 },
+    costs: { flightPerPerson: { low: 700, mid: 950, high: 1250 }, airbnbPerNight: { low: 25, mid: 50, high: 90 }, foodPerDayCouple: { low: 15, mid: 30, high: 60 }, activitiesTotal: { low: 80, mid: 180, high: 320 }, transportTotal: { low: 50, mid: 100, high: 180 } },
+    beaches: [
+      { name: "Mahmya Island", desc: "Pristine island in the Giftun archipelago", link: "https://maps.google.com/?q=Mahmya+Island+Hurghada" },
+      { name: "Paradise Beach", desc: "White sand resort beach, calm Red Sea", link: "https://maps.google.com/?q=Paradise+Beach+Hurghada" },
+      { name: "Orange Bay Island", desc: "Turquoise bay accessible by speedboat", link: "https://maps.google.com/?q=Orange+Bay+Hurghada" },
+    ],
+    activities: [
+      { name: "Scuba diving Red Sea", desc: "World-class coral reefs & shipwrecks", cost: 35, link: "https://maps.google.com/?q=Diving+Hurghada" },
+      { name: "Desert quad biking", desc: "ATV ride through the Sahara with Bedouin BBQ", cost: 25, link: "https://maps.google.com/?q=Desert+Safari+Hurghada" },
+      { name: "Day trip to Luxor", desc: "Valley of the Kings + Karnak Temple", cost: 60, link: "https://maps.google.com/?q=Luxor+Egypt" },
+      { name: "Snorkeling at Giftun", desc: "Boat to pristine reef island", cost: 20, link: "https://maps.google.com/?q=Giftun+Island+Hurghada" },
+    ],
+    restaurants: [
+      { name: "Street koshary", type: "Street Food", cost2: 3, desc: "Egypt's national dish — $1.50 a plate", link: "https://maps.google.com/?q=Koshary+Hurghada" },
+      { name: "Moby Dick", type: "Seafood", cost2: 20, desc: "Fresh Red Sea fish, local favorite", link: "https://maps.google.com/?q=Moby+Dick+Hurghada" },
+      { name: "The Lodge", type: "International", cost2: 30, desc: "Upscale marina dining", link: "https://maps.google.com/?q=The+Lodge+Hurghada" },
+    ],
+    bookingLinks: {
+      flights: [
+        { label: "Google Flights", url: "https://www.google.com/travel/flights?q=flights+from+YYZ+to+HRG+august+22+returning+august+29+2026" },
+        { label: "Kayak", url: "https://www.ca.kayak.com/flights/YYZ-HRG/2026-08-22/2026-08-29/2adults?sort=bestflight_a" },
+        { label: "Skyscanner", url: "https://www.skyscanner.ca/transport/flights/yyz/hrg/260822/260829/?adultsv2=2&cabinclass=economy" },
+      ],
+      airbnb: "https://www.airbnb.ca/s/Hurghada--Egypt/homes?checkin=2026-08-22&checkout=2026-08-29&adults=2&price_max=90",
+      foodDelivery: { app: "Talabat", url: "https://www.talabat.com/egypt" },
+      transport: { desc: "Taxi or hotel shuttle", url: "" },
+    },
+    itinerary: [
+      { day: 1, title: "Arrive & Beach", desc: "Fly in. Resort beach swim. Koshary dinner.", cost: "$15" },
+      { day: 2, title: "Dive Day", desc: "2-tank scuba dive on coral reef. Beach afternoon.", cost: "$50" },
+      { day: 3, title: "Giftun Island", desc: "Boat to pristine reef island. Snorkel all day.", cost: "$30" },
+      { day: 4, title: "Desert Safari", desc: "Quad bikes, camel ride, Bedouin BBQ under stars.", cost: "$35" },
+      { day: 5, title: "Luxor Day Trip", desc: "Valley of the Kings, Karnak Temple. Mind-blowing.", cost: "$75" },
+      { day: 6, title: "Beach & Chill", desc: "Orange Bay speedboat. Moby Dick seafood dinner.", cost: "$35" },
+      { day: 7, title: "Final Beach & Depart", desc: "Last Red Sea swim. Airport.", cost: "$15" },
+    ],
+  },
+
+// ─────────────── PACIFIC & OTHERS ───────────────
+
+  fiji: {
+    name: "Fiji", flag: "🇫🇯",
+    tagline: "Bula! Private island vibes, coral reefs & the friendliest people",
+    airport: "NAN (Nadi)", flightHours: 22, directFlight: false,
+    visa: "No visa needed (Canadian passport, 4 months)", weatherAug: "Dry season, 75-82°F, perfect weather",
+    scores: { beach: 10, budgetFriendly: 5, food: 6, culture: 7, adventure: 8, relaxation: 10, romance: 10, nightlife: 3, easeOfTravel: 2, instagrammable: 10 },
+    costs: { flightPerPerson: { low: 1100, mid: 1450, high: 1800 }, airbnbPerNight: { low: 60, mid: 120, high: 220 }, foodPerDayCouple: { low: 35, mid: 65, high: 110 }, activitiesTotal: { low: 120, mid: 250, high: 420 }, transportTotal: { low: 80, mid: 160, high: 280 } },
+    beaches: [
+      { name: "Natadola Beach", desc: "Fiji's best mainland beach — white sand, horseback riding", link: "https://maps.google.com/?q=Natadola+Beach+Fiji" },
+      { name: "Yasawa Islands", desc: "Remote island chain with crystal lagoons", link: "https://maps.google.com/?q=Yasawa+Islands+Fiji" },
+      { name: "Cloud 9 floating bar", desc: "Floating pontoon bar in the middle of the ocean", link: "https://maps.google.com/?q=Cloud+9+Fiji" },
+    ],
+    activities: [
+      { name: "Island hopping Yasawas", desc: "Ferry between paradise islands, snorkel & swim", cost: 80, link: "https://maps.google.com/?q=Yasawa+Flyer+Fiji" },
+      { name: "Shark dive Beqa Lagoon", desc: "Dive with bull sharks (cage-free!)", cost: 120, link: "https://maps.google.com/?q=Shark+Dive+Beqa+Lagoon" },
+      { name: "Kava ceremony", desc: "Traditional Fijian welcome ritual — drink kava root", cost: 0, link: "https://maps.google.com/?q=Kava+Ceremony+Fiji" },
+      { name: "Cloud 9 day trip", desc: "Boat to floating bar, swim, pizza, cocktails", cost: 45, link: "https://maps.google.com/?q=Cloud+9+Fiji" },
+    ],
+    restaurants: [
+      { name: "Denarau seafood", type: "Seafood", cost2: 30, desc: "Waterfront dining at Port Denarau marina", link: "https://maps.google.com/?q=Port+Denarau+Marina" },
+      { name: "Lovo feast", type: "Traditional", cost2: 25, desc: "Earth oven-cooked meats & root vegetables", link: "https://maps.google.com/?q=Lovo+Feast+Fiji" },
+      { name: "Navo at InterContinental", type: "Fine Dining 🌟", cost2: 70, desc: "Overwater fine dining on the reef", link: "https://maps.google.com/?q=Navo+InterContinental+Fiji" },
+    ],
+    bookingLinks: {
+      flights: [
+        { label: "Google Flights", url: "https://www.google.com/travel/flights?q=flights+from+YYZ+to+NAN+august+22+returning+august+29+2026" },
+        { label: "Kayak", url: "https://www.ca.kayak.com/flights/YYZ-NAN/2026-08-22/2026-08-29/2adults?sort=bestflight_a" },
+        { label: "Skyscanner", url: "https://www.skyscanner.ca/transport/flights/yyz/nan/260822/260829/?adultsv2=2&cabinclass=economy" },
+      ],
+      airbnb: "https://www.airbnb.ca/s/Fiji/homes?checkin=2026-08-22&checkout=2026-08-29&adults=2&price_max=220",
+      foodDelivery: { app: "No delivery apps", url: "" },
+      transport: { desc: "Yasawa Flyer ferry or small plane", url: "" },
+    },
+    itinerary: [
+      { day: 1, title: "Arrive Nadi", desc: "Fly in. Transfer to Denarau. Kava welcome ceremony.", cost: "$40" },
+      { day: 2, title: "Yasawa Islands", desc: "Ferry to remote island. White sand paradise. Lovo feast.", cost: "$100" },
+      { day: 3, title: "Island Beach Day", desc: "Snorkeling reef. Hammock. Crystal water all day.", cost: "$30" },
+      { day: 4, title: "Cloud 9", desc: "Floating bar in the ocean. Pizza, cocktails, swim.", cost: "$65" },
+      { day: 5, title: "Beach & Snorkel", desc: "Island hopping. Coral reef. Village visit.", cost: "$50" },
+      { day: 6, title: "Natadola & Splurge", desc: "Mainland beach. Horseback riding. Navo overwater dinner.", cost: "$90" },
+      { day: 7, title: "Final Beach & Depart", desc: "Last swim in Fiji waters. Bula goodbye. Airport.", cost: "$30" },
+    ],
+  },
+
+  hawaii: {
+    name: "Maui, Hawaii", flag: "🇺🇸",
+    tagline: "Volcanic craters, whale watching (maybe!), epic sunsets & Aloha vibes",
+    airport: "OGG (Kahului)", flightHours: 10, directFlight: false,
+    visa: "Need valid passport, no visa needed (eTA-like)", weatherAug: "Perfect, 80-88°F, dry season, warm ocean",
+    scores: { beach: 9, budgetFriendly: 3, food: 8, culture: 6, adventure: 9, relaxation: 9, romance: 10, nightlife: 4, easeOfTravel: 6, instagrammable: 10 },
+    costs: { flightPerPerson: { low: 600, mid: 900, high: 1250 }, airbnbPerNight: { low: 120, mid: 200, high: 350 }, foodPerDayCouple: { low: 60, mid: 100, high: 180 }, activitiesTotal: { low: 150, mid: 300, high: 550 }, transportTotal: { low: 200, mid: 350, high: 500 } },
+    beaches: [
+      { name: "Ka'anapali Beach", desc: "Golden sand, cliff diving from Black Rock, snorkel", link: "https://maps.google.com/?q=Kaanapali+Beach+Maui" },
+      { name: "Big Beach (Makena)", desc: "Huge golden sand, bodysurfing waves, wild", link: "https://maps.google.com/?q=Big+Beach+Makena+Maui" },
+      { name: "Red Sand Beach", desc: "Hidden volcanic red sand cove — surreal colors", link: "https://maps.google.com/?q=Red+Sand+Beach+Hana+Maui" },
+    ],
+    activities: [
+      { name: "Road to Hana", desc: "Famous 600-curve drive — waterfalls, beaches, bamboo forest", cost: 0, link: "https://maps.google.com/?q=Road+to+Hana+Maui" },
+      { name: "Haleakala sunrise", desc: "Watch sunrise from 10,000ft volcanic crater", cost: 1, link: "https://maps.google.com/?q=Haleakala+National+Park" },
+      { name: "Snorkel Molokini crater", desc: "Boat trip to volcanic crater — 150ft visibility", cost: 80, link: "https://maps.google.com/?q=Molokini+Crater+Maui" },
+      { name: "Sunset from Lahaina", desc: "Historic whaling town, banyan tree, sunset cocktails", cost: 0, link: "https://maps.google.com/?q=Lahaina+Maui" },
+    ],
+    restaurants: [
+      { name: "Mama's Fish House", type: "Seafood 🌟", cost2: 100, desc: "Most famous restaurant on Maui — book months ahead", link: "https://maps.google.com/?q=Mama's+Fish+House+Maui" },
+      { name: "Tin Roof", type: "Hawaiian", cost2: 18, desc: "Sheldon Simeon's (Top Chef) casual lunch spot", link: "https://maps.google.com/?q=Tin+Roof+Maui" },
+      { name: "Leoda's Kitchen", type: "Pies", cost2: 15, desc: "Best banana cream pie in Hawaii", link: "https://maps.google.com/?q=Leoda's+Kitchen+Maui" },
+    ],
+    bookingLinks: {
+      flights: [
+        { label: "Google Flights", url: "https://www.google.com/travel/flights?q=flights+from+YYZ+to+OGG+august+22+returning+august+29+2026" },
+        { label: "Kayak", url: "https://www.ca.kayak.com/flights/YYZ-OGG/2026-08-22/2026-08-29/2adults?sort=bestflight_a" },
+        { label: "Skyscanner", url: "https://www.skyscanner.ca/transport/flights/yyz/ogg/260822/260829/?adultsv2=2&cabinclass=economy" },
+      ],
+      airbnb: "https://www.airbnb.ca/s/Maui--Hawaii/homes?checkin=2026-08-22&checkout=2026-08-29&adults=2&price_max=350",
+      foodDelivery: { app: "Uber Eats + DoorDash", url: "https://www.ubereats.com/city/maui" },
+      transport: { desc: "Rental car essential", url: "https://www.discovercars.com/usa/maui" },
+    },
+    itinerary: [
+      { day: 1, title: "Arrive & Ka'anapali", desc: "Fly in. Rent car. Ka'anapali Beach sunset. Shave ice.", cost: "$80" },
+      { day: 2, title: "Haleakala Sunrise", desc: "2am drive to 10,000ft crater sunrise. Afternoon Big Beach.", cost: "$40" },
+      { day: 3, title: "Road to Hana", desc: "Epic drive — waterfalls, Red Sand Beach, bamboo forest.", cost: "$50" },
+      { day: 4, title: "Molokini Snorkel", desc: "Boat to volcanic crater. 150ft viz. Sea turtles.", cost: "$100" },
+      { day: 5, title: "Beach Day", desc: "Big Beach bodysurfing. Lahaina sunset. Tin Roof lunch.", cost: "$55" },
+      { day: 6, title: "Beach & Mama's", desc: "Morning snorkel. Mama's Fish House — bucket list dinner.", cost: "$135" },
+      { day: 7, title: "Final Beach & Depart", desc: "Last swim. Leoda's pie. Airport.", cost: "$40" },
+    ],
+  },
+
+  cancun: {
+    name: "Cancún, Mexico", flag: "🇲🇽",
+    tagline: "Hotel zone beaches, cenotes, Chichén Itzá & all-night clubs",
+    airport: "CUN (Cancún)", flightHours: 4, directFlight: true,
+    visa: "No visa needed (Canadian passport)", weatherAug: "Hot & humid, 84-92°F, brief tropical showers",
+    scores: { beach: 8, budgetFriendly: 8, food: 8, culture: 6, adventure: 8, relaxation: 8, romance: 7, nightlife: 10, easeOfTravel: 10, instagrammable: 8 },
+    costs: { flightPerPerson: { low: 350, mid: 480, high: 650 }, airbnbPerNight: { low: 50, mid: 90, high: 160 }, foodPerDayCouple: { low: 30, mid: 55, high: 100 }, activitiesTotal: { low: 100, mid: 240, high: 400 }, transportTotal: { low: 60, mid: 120, high: 200 } },
+    beaches: [
+      { name: "Playa Delfines", desc: "Iconic Cancún sign, huge waves, wide sand", link: "https://maps.google.com/?q=Playa+Delfines+Cancun" },
+      { name: "Isla Mujeres", desc: "Ferry to chill island with Playa Norte — one of Mexico's best", link: "https://maps.google.com/?q=Playa+Norte+Isla+Mujeres" },
+      { name: "Puerto Morelos", desc: "Quiet fishing village, reef snorkel from shore", link: "https://maps.google.com/?q=Puerto+Morelos+Beach" },
+    ],
+    activities: [
+      { name: "Isla Mujeres day trip", desc: "Ferry to island, rent golf cart, Playa Norte, seafood", cost: 20, link: "https://maps.google.com/?q=Isla+Mujeres+Ferry" },
+      { name: "Xcaret eco-park", desc: "Underground rivers, snorkel, cultural shows", cost: 80, link: "https://maps.google.com/?q=Xcaret+Park" },
+      { name: "Chichén Itzá day trip", desc: "One of 7 Wonders — Mayan pyramid", cost: 50, link: "https://maps.google.com/?q=Chichen+Itza" },
+      { name: "MUSA underwater museum", desc: "Snorkel over 500+ underwater sculptures", cost: 35, link: "https://maps.google.com/?q=MUSA+Underwater+Museum" },
+    ],
+    restaurants: [
+      { name: "Taco stands downtown", type: "Street Food", cost2: 6, desc: "Al pastor tacos — $0.50 each in el centro", link: "https://maps.google.com/?q=Parque+de+las+Palapas+Cancun" },
+      { name: "Puerto Madero", type: "Seafood", cost2: 40, desc: "Lagoon-front seafood, great sunset views", link: "https://maps.google.com/?q=Puerto+Madero+Cancun" },
+      { name: "Harry's Prime Steakhouse", type: "Fine Dining 🌟", cost2: 100, desc: "Top-tier steakhouse in the hotel zone", link: "https://maps.google.com/?q=Harry's+Prime+Steakhouse+Cancun" },
+    ],
+    bookingLinks: {
+      flights: [
+        { label: "Google Flights", url: "https://www.google.com/travel/flights?q=flights+from+YYZ+to+CUN+august+22+returning+august+29+2026" },
+        { label: "Kayak", url: "https://www.ca.kayak.com/flights/YYZ-CUN/2026-08-22/2026-08-29/2adults?sort=bestflight_a" },
+        { label: "Skyscanner", url: "https://www.skyscanner.ca/transport/flights/yyz/cun/260822/260829/?adultsv2=2&cabinclass=economy" },
+      ],
+      airbnb: "https://www.airbnb.ca/s/Cancun--Mexico/homes?checkin=2026-08-22&checkout=2026-08-29&adults=2&price_max=160",
+      foodDelivery: { app: "Uber Eats + Rappi", url: "https://www.ubereats.com/mx/city/cancun" },
+      transport: { desc: "R-1 bus ($1) or ADO", url: "" },
+    },
+    itinerary: [
+      { day: 1, title: "Arrive & Beach", desc: "Direct flight. Playa Delfines sunset. Downtown tacos.", cost: "$30" },
+      { day: 2, title: "Isla Mujeres", desc: "Ferry to island. Golf cart. Playa Norte. Seafood lunch.", cost: "$45" },
+      { day: 3, title: "Chichén Itzá", desc: "Day trip to one of the 7 Wonders of the World.", cost: "$65" },
+      { day: 4, title: "Xcaret", desc: "Underground rivers, snorkel, evening cultural show.", cost: "$95" },
+      { day: 5, title: "Beach & Underwater", desc: "MUSA underwater museum snorkel. Beach afternoon.", cost: "$50" },
+      { day: 6, title: "Beach & Nightlife", desc: "All-day beach. Puerto Madero dinner. Hotel zone clubs.", cost: "$70" },
+      { day: 7, title: "Final Beach & Depart", desc: "Last swim. Taco breakfast. Airport.", cost: "$25" },
+    ],
+  },
+
+  maldives: {
+    name: "Maldives", flag: "🇲🇻",
+    tagline: "Overwater villas, bioluminescent beaches & ultimate honeymoon vibes",
+    airport: "MLE (Malé)", flightHours: 19, directFlight: false,
+    visa: "Visa on arrival (free, 30 days)", weatherAug: "Warm, 80-86°F, some rain but warm water year-round",
+    scores: { beach: 10, budgetFriendly: 2, food: 7, culture: 4, adventure: 7, relaxation: 10, romance: 10, nightlife: 2, easeOfTravel: 3, instagrammable: 10 },
+    costs: { flightPerPerson: { low: 1000, mid: 1400, high: 1800 }, airbnbPerNight: { low: 80, mid: 180, high: 400 }, foodPerDayCouple: { low: 50, mid: 100, high: 200 }, activitiesTotal: { low: 120, mid: 280, high: 500 }, transportTotal: { low: 50, mid: 120, high: 250 } },
+    beaches: [
+      { name: "Fulhadhoo Island", desc: "Local island with untouched white sand, budget-friendly", link: "https://maps.google.com/?q=Fulhadhoo+Island+Maldives" },
+      { name: "Veligandu Sandbank", desc: "Sandbank that disappears at high tide", link: "https://maps.google.com/?q=Veligandu+Island+Maldives" },
+      { name: "Biyadhoo reef", desc: "House reef for shore snorkeling — manta rays & turtles", link: "https://maps.google.com/?q=Biyadhoo+Island+Maldives" },
+    ],
+    activities: [
+      { name: "Snorkel with mantas", desc: "Manta ray snorkeling in Baa Atoll (UNESCO)", cost: 60, link: "https://maps.google.com/?q=Hanifaru+Bay+Maldives" },
+      { name: "Sunset dolphin cruise", desc: "Spinner dolphins jumping at sunset", cost: 40, link: "https://maps.google.com/?q=Dolphin+Cruise+Maldives" },
+      { name: "Bioluminescent beach", desc: "Sea sparkles at night — natural glow", cost: 0, link: "https://maps.google.com/?q=Bioluminescent+Beach+Maldives" },
+      { name: "Overwater villa stay", desc: "Sleep above turquoise water (splurge night)", cost: 200, link: "https://maps.google.com/?q=Overwater+Villa+Maldives" },
+    ],
+    restaurants: [
+      { name: "Local island café", type: "Local", cost2: 8, desc: "Tuna curry, roshi flatbread — $4 per person", link: "https://maps.google.com/?q=Local+Cafe+Maafushi+Maldives" },
+      { name: "Ithaa Undersea", type: "Underwater 🌟", cost2: 150, desc: "Dine 16ft below the ocean surface (once in a lifetime)", link: "https://maps.google.com/?q=Ithaa+Undersea+Restaurant" },
+      { name: "Guesthouse BBQ", type: "BBQ", cost2: 25, desc: "Beach BBQ at a guesthouse — grilled fish & lobster", link: "https://maps.google.com/?q=Beach+BBQ+Maafushi+Maldives" },
+    ],
+    bookingLinks: {
+      flights: [
+        { label: "Google Flights", url: "https://www.google.com/travel/flights?q=flights+from+YYZ+to+MLE+august+22+returning+august+29+2026" },
+        { label: "Kayak", url: "https://www.ca.kayak.com/flights/YYZ-MLE/2026-08-22/2026-08-29/2adults?sort=bestflight_a" },
+        { label: "Skyscanner", url: "https://www.skyscanner.ca/transport/flights/yyz/mle/260822/260829/?adultsv2=2&cabinclass=economy" },
+      ],
+      airbnb: "https://www.airbnb.ca/s/Maldives/homes?checkin=2026-08-22&checkout=2026-08-29&adults=2&price_max=400",
+      foodDelivery: { app: "No delivery apps", url: "" },
+      transport: { desc: "Speedboat or seaplane to islands", url: "" },
+    },
+    itinerary: [
+      { day: 1, title: "Arrive Malé", desc: "Fly in. Speedboat to island guesthouse. Beach sunset.", cost: "$50" },
+      { day: 2, title: "Snorkel Day", desc: "House reef snorkel — turtles, rays. Beach hammock.", cost: "$20" },
+      { day: 3, title: "Manta Rays", desc: "Boat to Hanifaru Bay — swim with giant manta rays.", cost: "$75" },
+      { day: 4, title: "Sandbank Picnic", desc: "Private sandbank lunch. Afternoon snorkel.", cost: "$45" },
+      { day: 5, title: "Dolphin Cruise", desc: "Beach day. Sunset spinner dolphin cruise.", cost: "$55" },
+      { day: 6, title: "Bio Beach Night", desc: "Lazy day. Night: bioluminescent beach glow!", cost: "$25" },
+      { day: 7, title: "Final Beach & Depart", desc: "Last swim in the Indian Ocean. Speedboat to Malé.", cost: "$30" },
+    ],
+  },
+
+};
+
+// ══════════════════════════════════════════════════════════════════════════════
+// CALCULATION ENGINE
+// ══════════════════════════════════════════════════════════════════════════════
+
+function getPreferences() {
+  const prefs = {};
+  document.querySelectorAll('input[type="range"]').forEach(s => {
+    prefs[s.dataset.key] = parseInt(s.value);
+  });
+  return prefs;
+}
+
+function getTravelers() {
+  const active = document.querySelector('.traveler-btn.active');
+  return active ? parseInt(active.dataset.val) : 2;
+}
+
+function getNights() {
+  const s = document.getElementById('date-start').value;
+  const e = document.getElementById('date-end').value;
+  if (!s || !e) return 7;
+  const diff = (new Date(e) - new Date(s)) / (1000 * 60 * 60 * 24);
+  return Math.max(1, Math.min(30, diff));
+}
+
+function calculateScore(dest, prefs) {
+  const keys = Object.keys(prefs);
+  let totalWeight = 0;
+  let weightedScore = 0;
+
+  keys.forEach(key => {
+    const weight = prefs[key];
+    const score = dest.scores[key] || 5;
+    weightedScore += weight * score;
+    totalWeight += weight;
+  });
+
+  return totalWeight > 0 ? Math.round((weightedScore / totalWeight) * 10) / 10 : 5;
+}
+
+function calculateCost(dest, travelers, nights) {
+  const c = dest.costs;
+  const flights = c.flightPerPerson.mid * travelers;
+  const accom = c.airbnbPerNight.mid * nights;
+  const food = c.foodPerDayCouple.mid * nights * (travelers / 2);
+  const activities = c.activitiesTotal.mid * (travelers / 2);
+  const transport = c.transportTotal.mid;
+  const total = flights + accom + food + activities + transport;
+
+  return { flights, accom, food, activities, transport, total: Math.round(total) };
+}
+
+function calculate() {
+  const budget = parseInt(document.getElementById('budget').value) || 5000;
+  const prefs = getPreferences();
+  const travelers = getTravelers();
+  const nights = getNights();
+  const startDate = document.getElementById('date-start').value;
+  const endDate = document.getElementById('date-end').value;
+
+  // Show spinner
+  document.getElementById('spinner').classList.add('visible');
+  document.getElementById('results').classList.remove('visible');
+
+  setTimeout(() => {
+    // Score and cost each destination
+    let results = [];
+    Object.entries(DESTINATIONS).forEach(([key, dest]) => {
+      const score = calculateScore(dest, prefs);
+      const cost = calculateCost(dest, travelers, nights);
+      const underBudget = cost.total <= budget;
+
+      // Penalize if over budget
+      let finalScore = score;
+      if (!underBudget) {
+        const overBy = (cost.total - budget) / budget;
+        finalScore = Math.max(1, score - overBy * 5);
+      }
+      // Bonus if way under budget and budget-friendliness matters
+      if (underBudget && prefs.budgetFriendly > 5) {
+        const savings = (budget - cost.total) / budget;
+        finalScore += savings * (prefs.budgetFriendly / 10) * 1.5;
+      }
+
+      results.push({ key, dest, score: Math.round(finalScore * 10) / 10, rawScore: score, cost, underBudget });
+    });
+
+    // Sort by score
+    results.sort((a, b) => b.score - a.score);
+
+    // Update all booking links with user's dates
+    results.forEach(r => {
+      updateBookingDates(r.dest, startDate, endDate, travelers);
+    });
+
+    renderResults(results, budget, travelers, nights);
+
+    document.getElementById('spinner').classList.remove('visible');
+    document.getElementById('results').classList.add('visible');
+    document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 1200);
+}
+
+function updateBookingDates(dest, start, end, travelers) {
+  // Update Airbnb link with actual dates
+  if (start && end) {
+    const base = dest.bookingLinks.airbnb.split('?')[0];
+    dest.bookingLinks.airbnb = `${base}?checkin=${start}&checkout=${end}&adults=${travelers}&price_max=200`;
+  }
+}
+
+// ══════════════════════════════════════════════════════════════════════════════
+// RENDER
+// ══════════════════════════════════════════════════════════════════════════════
+
+function renderResults(results, budget, travelers, nights) {
+  const container = document.getElementById('results');
+  const winner = results[0];
+
+  let html = `
+    <div class="winner-banner">
+      <h2>YOUR #1 MATCH</h2>
+      <div class="dest-name">${winner.dest.flag} ${winner.dest.name}</div>
+      <div class="score-bar">Score: ${winner.score}/10 · Est. $${winner.cost.total.toLocaleString()} CAD · ${winner.underBudget ? '✅ Under budget' : '⚠️ Over budget'}</div>
+    </div>
+  `;
+
+  results.forEach((r, i) => {
+    const rank = i + 1;
+    const matchClass = r.score >= 8 ? 'high' : r.score >= 6 ? 'medium' : 'low';
+    const rankClass = rank === 1 ? 'rank-1' : '';
+    const cardId = `card-${r.key}`;
+    const remaining = budget - r.cost.total;
+
+    html += `
+      <div class="dest-card ${rankClass}" id="${cardId}">
+        <div class="dest-header" onclick="toggleCard('${cardId}')">
+          <div class="dest-rank">#${rank}</div>
+          <div class="dest-info">
+            <h3>${r.dest.flag} ${r.dest.name}</h3>
+            <div class="dest-tagline">${r.dest.tagline}</div>
+          </div>
+          <div class="dest-meta">
+            <div class="price">$${r.cost.total.toLocaleString()}</div>
+            <div class="price-label">CAD total est.</div>
+            <div class="match-score ${matchClass}">${r.score}/10 match</div>
+          </div>
+          <div class="expand-arrow" id="arrow-${cardId}">▼</div>
+        </div>
+
+        <div class="dest-body" id="body-${cardId}">
+          <div class="tab-bar" id="tabs-${r.key}">
+            <button class="tab-btn active" onclick="switchTab('${r.key}', 'budget')">💰 Budget</button>
+            <button class="tab-btn" onclick="switchTab('${r.key}', 'book')">🔗 Book Now</button>
+            <button class="tab-btn" onclick="switchTab('${r.key}', 'beaches')">🏖️ Beaches</button>
+            <button class="tab-btn" onclick="switchTab('${r.key}', 'activities')">🎯 Activities</button>
+            <button class="tab-btn" onclick="switchTab('${r.key}', 'food')">🍽️ Food</button>
+            <button class="tab-btn" onclick="switchTab('${r.key}', 'itinerary')">📅 Itinerary</button>
+          </div>
+
+          <!-- BUDGET TAB -->
+          <div class="tab-content active" id="tab-${r.key}-budget">
+            <div style="display:flex; justify-content:space-between; margin-bottom:16px; flex-wrap:wrap; gap:8px;">
+              <div><strong>Total:</strong> $${r.cost.total.toLocaleString()} CAD</div>
+              <div style="color:${remaining >= 0 ? 'var(--palm)' : 'var(--coral)'}; font-weight:700;">
+                ${remaining >= 0 ? `✅ $${remaining.toLocaleString()} under budget` : `⚠️ $${Math.abs(remaining).toLocaleString()} over budget`}
+              </div>
+            </div>
+            ${budgetBar('✈️ Flights', r.cost.flights, r.cost.total, 'flights')}
+            ${budgetBar('🏠 Accommodation', r.cost.accom, r.cost.total, 'accom')}
+            ${budgetBar('🍽️ Food & Drink', r.cost.food, r.cost.total, 'food')}
+            ${budgetBar('🎯 Activities', r.cost.activities, r.cost.total, 'activities')}
+            ${budgetBar('🚗 Transport', r.cost.transport, r.cost.total, 'transport')}
+            <div style="margin-top:16px; padding:12px; background:var(--light-gray); border-radius:10px; font-size:0.85rem;">
+              <strong>ℹ️ Trip info:</strong> ${r.dest.flightHours}h flight ${r.dest.directFlight ? '(direct!)' : '(1+ stop)'} · ${r.dest.visa} · ${r.dest.weatherAug}
+            </div>
+          </div>
+
+          <!-- BOOK TAB -->
+          <div class="tab-content" id="tab-${r.key}-book">
+            <h4 style="margin-bottom:10px;">✈️ Flights from Toronto (YYZ → ${r.dest.airport})</h4>
+            <div class="booking-links">
+              ${r.dest.bookingLinks.flights.map(f => `<a href="${f.url}" target="_blank" class="book-btn">${f.label}</a>`).join('')}
+            </div>
+            <h4 style="margin:16px 0 10px;">🏠 Accommodation</h4>
+            <a href="${r.dest.bookingLinks.airbnb}" target="_blank" class="book-btn secondary">Search Airbnb</a>
+            <h4 style="margin:16px 0 10px;">📱 Food Delivery</h4>
+            <p style="font-size:0.9rem;">${r.dest.bookingLinks.foodDelivery.app}
+              ${r.dest.bookingLinks.foodDelivery.url ? ` — <a href="${r.dest.bookingLinks.foodDelivery.url}" target="_blank" class="item-link">Open App</a>` : ''}</p>
+            <h4 style="margin:16px 0 10px;">🚗 Getting Around</h4>
+            <p style="font-size:0.9rem;">${r.dest.bookingLinks.transport.desc}
+              ${r.dest.bookingLinks.transport.url ? ` — <a href="${r.dest.bookingLinks.transport.url}" target="_blank" class="item-link">Book</a>` : ''}</p>
+          </div>
+
+          <!-- BEACHES TAB -->
+          <div class="tab-content" id="tab-${r.key}-beaches">
+            <ul class="item-list">
+              ${r.dest.beaches.map(b => `<li>
+                <div><div class="item-name">🏖️ ${b.name}</div><div class="item-desc">${b.desc}</div>
+                <a href="${b.link}" target="_blank" class="item-link">📍 Open in Maps</a></div>
+              </li>`).join('')}
+            </ul>
+          </div>
+
+          <!-- ACTIVITIES TAB -->
+          <div class="tab-content" id="tab-${r.key}-activities">
+            <ul class="item-list">
+              ${r.dest.activities.map(a => `<li>
+                <div><div class="item-name">${a.name}</div><div class="item-desc">${a.desc}</div>
+                <a href="${a.link}" target="_blank" class="item-link">📍 Open in Maps</a></div>
+                <div class="item-cost">${a.cost === 0 ? 'Free' : '~$' + a.cost + ' USD'}</div>
+              </li>`).join('')}
+            </ul>
+          </div>
+
+          <!-- FOOD TAB -->
+          <div class="tab-content" id="tab-${r.key}-food">
+            <ul class="item-list">
+              ${r.dest.restaurants.map(f => `<li>
+                <div><div class="item-name">${f.name} <span style="color:var(--gray);font-weight:400;font-size:0.8rem;">${f.type}</span></div>
+                <div class="item-desc">${f.desc}</div>
+                <a href="${f.link}" target="_blank" class="item-link">📍 Open in Maps / Book</a></div>
+                <div class="item-cost">~$${f.cost2} USD<br><span style="font-weight:400;font-size:0.7rem;">for 2</span></div>
+              </li>`).join('')}
+            </ul>
+          </div>
+
+          <!-- ITINERARY TAB -->
+          <div class="tab-content" id="tab-${r.key}-itinerary">
+            ${r.dest.itinerary.map(d => `<div class="day-card">
+              <h4>Day ${d.day}: ${d.title}</h4>
+              <p>${d.desc}</p>
+              <div class="day-cost">Est: ${d.cost} USD</div>
+            </div>`).join('')}
+          </div>
+        </div>
+      </div>
+    `;
+  });
+
+  container.innerHTML = html;
+}
+
+function budgetBar(label, amount, total, cls) {
+  const pct = Math.round((amount / total) * 100);
+  return `<div class="budget-bar-container">
+    <div class="budget-bar-label"><span>${label}</span><span>$${amount.toLocaleString()} CAD (${pct}%)</span></div>
+    <div class="budget-bar"><div class="budget-bar-fill ${cls}" style="width:${pct}%"></div></div>
+  </div>`;
+}
+
+function toggleCard(cardId) {
+  const body = document.getElementById('body-' + cardId);
+  const arrow = document.getElementById('arrow-' + cardId);
+  body.classList.toggle('open');
+  arrow.classList.toggle('open');
+}
+
+function switchTab(destKey, tabName) {
+  // Deactivate all tabs for this dest
+  document.querySelectorAll(`#tabs-${destKey} .tab-btn`).forEach(b => b.classList.remove('active'));
+  document.querySelectorAll(`[id^="tab-${destKey}-"]`).forEach(t => t.classList.remove('active'));
+
+  // Activate clicked
+  document.getElementById(`tab-${destKey}-${tabName}`).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
+
+</body>
+</html>
