@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Best Beach Trip 2026 — Toronto Couple's Guide</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+  :root {
+    --ocean: #0077b6; --ocean-dark: #023e8a; --ocean-light: #00b4d8;
+    --sand: #f5e6d3; --sunset: #ff6b35; --coral: #e63946;
+    --palm: #2d6a4f; --dark: #1a1a2e; --gray: #6b7280;
+    --light: #f8fafc; --white: #ffffff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: var(--light); color: var(--dark); line-height: 1.6; }
+
+  /* NAV */
+  nav { background: var(--ocean-dark); padding: 14px 24px; position: sticky; top: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; }
+  nav a { color: white; text-decoration: none; font-weight: 600; font-size: 0.85rem; padding: 6px 14px; border-radius: 8px; transition: background 0.2s; }
+  nav a:hover { background: rgba(255,255,255,0.15); }
+  nav .logo { font-weight: 900; font-size: 1.1rem; }
+  .nav-links { display: flex; gap: 4px; }
+
+  /* HERO */
+  .hero { background: linear-gradient(135deg, var(--ocean) 0%, var(--ocean-dark) 100%); color: white; padding: 60px 24px 50px; text-align: center; }
+  .hero h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 900; margin-bottom: 10px; }
+  .hero p { font-size: 1.1rem; opacity: 0.9; max-width: 650px; margin: 0 auto 20px; }
+  .hero-stats { display: flex; gap: 32px; justify-content: center; flex-wrap: wrap; margin-top: 20px; }
+  .hero-stat { text-align: center; }
+  .hero-stat .num { font-size: 1.8rem; font-weight: 900; }
+  .hero-stat .label { font-size: 0.8rem; opacity: 0.75; }
+
+  /* CONTAINER */
+  .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+
+  /* SECTION */
+  .section { padding: 48px 0; }
+  .section h2 { font-size: 1.6rem; font-weight: 800; margin-bottom: 6px; color: var(--ocean-dark); }
+  .section .sub { color: var(--gray); font-size: 0.9rem; margin-bottom: 24px; }
+
+  /* TLDR CARD */
+  .tldr { background: linear-gradient(135deg, var(--sunset), var(--coral)); color: white; border-radius: 16px; padding: 28px 32px; margin: -30px auto 0; position: relative; z-index: 10; max-width: 900px; box-shadow: 0 12px 40px rgba(230,57,70,0.25); }
+  .tldr h2 { color: white; font-size: 1.2rem; margin-bottom: 12px; }
+  .tldr-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; }
+  .tldr-item { background: rgba(255,255,255,0.15); border-radius: 12px; padding: 14px 16px; backdrop-filter: blur(5px); }
+  .tldr-item .label { font-size: 0.75rem; opacity: 0.8; text-transform: uppercase; letter-spacing: 0.5px; }
+  .tldr-item .value { font-size: 1.1rem; font-weight: 800; margin-top: 2px; }
+
+  /* RANKING TABLE */
+  .rank-table { width: 100%; border-collapse: separate; border-spacing: 0 8px; }
+  .rank-table th { text-align: left; font-size: 0.75rem; text-transform: uppercase; color: var(--gray); padding: 0 12px 8px; letter-spacing: 0.5px; }
+  .rank-table td { padding: 16px 12px; background: white; }
+  .rank-table tr td:first-child { border-radius: 12px 0 0 12px; }
+  .rank-table tr td:last-child { border-radius: 0 12px 12px 0; }
+  .rank-table tr { box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+  .rank-num { font-size: 1.4rem; font-weight: 900; color: var(--ocean); width: 50px; }
+  .rank-table tr:first-child .rank-num { color: var(--sunset); }
+  .dest-cell h3 { font-size: 1rem; font-weight: 700; }
+  .dest-cell .tagline { color: var(--gray); font-size: 0.8rem; }
+  .price-cell { font-weight: 800; font-size: 1.1rem; color: var(--ocean-dark); text-align: right; white-space: nowrap; }
+  .price-cell .price-sub { font-weight: 400; font-size: 0.7rem; color: var(--gray); }
+  .badge { display: inline-block; padding: 3px 10px; border-radius: 8px; font-size: 0.7rem; font-weight: 700; }
+  .badge-best { background: #dcfce7; color: #166534; }
+  .badge-cheap { background: #fef3c7; color: #92400e; }
+  .badge-romance { background: #fce7f3; color: #9d174d; }
+  .badge-beach { background: #dbeafe; color: #1e40af; }
+  .badge-warn { background: #fef2f2; color: #991b1b; }
+
+  /* DESTINATION DEEP DIVE */
+  .dest-section { background: white; border-radius: 16px; padding: 32px; margin-bottom: 24px; box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
+  .dest-section h3 { font-size: 1.3rem; font-weight: 800; margin-bottom: 4px; }
+  .dest-section .dest-tag { color: var(--gray); font-size: 0.9rem; margin-bottom: 20px; }
+
+  .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 24px; }
+  .info-card { background: var(--light); border-radius: 10px; padding: 14px 16px; }
+  .info-card .ic-label { font-size: 0.75rem; color: var(--gray); text-transform: uppercase; }
+  .info-card .ic-value { font-weight: 700; font-size: 0.95rem; margin-top: 2px; }
+
+  /* BUDGET BAR */
+  .budget-breakdown { margin: 20px 0; }
+  .budget-row { display: flex; align-items: center; margin-bottom: 10px; gap: 12px; }
+  .budget-label { width: 100px; font-size: 0.82rem; font-weight: 600; flex-shrink: 0; }
+  .budget-bar-bg { flex: 1; height: 10px; background: #e5e7eb; border-radius: 5px; overflow: hidden; }
+  .budget-bar-fill { height: 100%; border-radius: 5px; transition: width 0.6s ease; }
+  .budget-val { width: 80px; text-align: right; font-size: 0.82rem; font-weight: 600; color: var(--ocean-dark); flex-shrink: 0; }
+  .fill-flight { background: var(--ocean); }
+  .fill-stay { background: var(--sunset); }
+  .fill-food { background: var(--palm); }
+  .fill-activity { background: var(--coral); }
+  .fill-transport { background: var(--ocean-light); }
+
+  /* TABS */
+  .tab-row { display: flex; gap: 4px; background: var(--light); border-radius: 10px; padding: 4px; margin-bottom: 20px; overflow-x: auto; }
+  .tab-btn { padding: 8px 16px; border: none; background: transparent; border-radius: 8px; font-family: inherit; font-weight: 600; font-size: 0.8rem; cursor: pointer; color: var(--gray); white-space: nowrap; transition: all 0.2s; }
+  .tab-btn:hover { background: rgba(0,119,182,0.08); }
+  .tab-btn.active { background: white; color: var(--ocean-dark); box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+  .tab-pane { display: none; }
+  .tab-pane.active { display: block; }
+
+  /* ITINERARY */
+  .day { background: var(--light); border-radius: 12px; padding: 16px 20px; margin-bottom: 10px; border-left: 4px solid var(--ocean); }
+  .day h4 { font-size: 0.95rem; font-weight: 700; color: var(--ocean-dark); }
+  .day p { font-size: 0.85rem; color: #444; margin-top: 4px; }
+  .day .day-meta { display: flex; gap: 16px; margin-top: 6px; font-size: 0.78rem; }
+  .day .day-cost { color: var(--sunset); font-weight: 700; }
+  .day .day-links a { color: var(--ocean); text-decoration: none; font-weight: 500; }
+  .day .day-links a:hover { text-decoration: underline; }
+
+  /* LISTS */
+  .spot-list { list-style: none; }
+  .spot-list li { padding: 12px 0; border-bottom: 1px solid #f0f0f0; }
+  .spot-list li:last-child { border: none; }
+  .spot-name { font-weight: 700; font-size: 0.9rem; }
+  .spot-desc { color: var(--gray); font-size: 0.82rem; margin-top: 2px; }
+  .spot-meta { display: flex; gap: 12px; margin-top: 4px; font-size: 0.78rem; }
+  .spot-meta a { color: var(--ocean); text-decoration: none; font-weight: 500; }
+  .spot-meta a:hover { text-decoration: underline; }
+  .spot-cost { color: var(--sunset); font-weight: 700; }
+
+  /* BOOKING CTA */
+  .booking-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .book-btn { display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 0.85rem; color: white; transition: all 0.2s; }
+  .book-btn:hover { transform: translateY(-1px); filter: brightness(1.1); }
+  .book-flights { background: var(--ocean); }
+  .book-stay { background: var(--sunset); }
+  .book-maps { background: var(--palm); }
+
+  /* COMPARISON TABLE */
+  .compare { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+  .compare th { text-align: left; padding: 10px 12px; background: var(--ocean-dark); color: white; font-weight: 600; }
+  .compare th:first-child { border-radius: 8px 0 0 0; }
+  .compare th:last-child { border-radius: 0 8px 0 0; }
+  .compare td { padding: 10px 12px; border-bottom: 1px solid #f0f0f0; }
+  .compare tr:hover td { background: #f8fafc; }
+  .compare .winner { background: #dcfce7; font-weight: 700; }
+
+  /* FOOTER */
+  footer { background: var(--dark); color: rgba(255,255,255,0.7); text-align: center; padding: 32px 20px; font-size: 0.82rem; }
+  footer a { color: var(--ocean-light); }
+
+  /* RESPONSIVE */
+  @media (max-width: 640px) {
+    .hero h1 { font-size: 1.8rem; }
+    .tldr-grid { grid-template-columns: 1fr 1fr; }
+    .dest-section { padding: 20px; }
+    .rank-table td { padding: 10px 8px; }
+    .nav-links { display: none; }
+    .info-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="logo">🏖️ Beach Trip 2026</a>
+  <div class="nav-links">
+    <a href="#ranking">Ranking</a>
+    <a href="#tulum">🥇 Tulum</a>
+    <a href="#aruba">🥈 Aruba</a>
+    <a href="#crete">🥉 Crete</a>
+    <a href="#compare">Compare</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <h1>🏖️ Your Perfect Beach Trip</h1>
+  <p>The definitive plan for a couple from Toronto · Late August 2026 · $5,000 CAD max · No Asian countries</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="num">5</div><div class="label">Destinations Compared</div></div>
+    <div class="hero-stat"><div class="num">$2,800</div><div class="label">Cheapest Total</div></div>
+    <div class="hero-stat"><div class="num">7</div><div class="label">Nights</div></div>
+    <div class="hero-stat"><div class="num">4h</div><div class="label">Shortest Flight</div></div>
+  </div>
+</div>
+
+<!-- TLDR -->
+<div class="container">
+  <div class="tldr">
+    <h2>⚡ TL;DR — Just Tell Me Where to Go</h2>
+    <div class="tldr-grid">
+      <div class="tldr-item">
+        <div class="label">🏆 Best Overall</div>
+        <div class="value">Tulum, Mexico</div>
+      </div>
+      <div class="tldr-item">
+        <div class="label">💰 Best Budget</div>
+        <div class="value">Punta Cana, DR</div>
+      </div>
+      <div class="tldr-item">
+        <div class="label">💑 Most Romantic</div>
+        <div class="value">Crete, Greece</div>
+      </div>
+      <div class="tldr-item">
+        <div class="label">☀️ Best Weather</div>
+        <div class="value">Aruba (no rain!)</div>
+      </div>
+      <div class="tldr-item">
+        <div class="label">✈️ Easiest Travel</div>
+        <div class="value">Cancún (4h direct)</div>
+      </div>
+      <div class="tldr-item">
+        <div class="label">🏖️ Best Beaches</div>
+        <div class="value">Crete (pink sand!)</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RANKING -->
+<div class="container">
+  <div class="section" id="ranking">
+    <h2>🏅 Final Ranking</h2>
+    <p class="sub">Scored on: beaches, value for money, food, romance, ease of travel from Toronto, August weather</p>
+
+    <table class="rank-table">
+      <tr>
+        <th>#</th><th>Destination</th><th>Why</th><th style="text-align:right">Est. Total</th>
+      </tr>
+      <tr>
+        <td class="rank-num">1</td>
+        <td class="dest-cell"><h3>🇲🇽 Tulum, Mexico</h3><div class="tagline">Cenotes, ruins, beach — 4h direct</div></td>
+        <td><span class="badge badge-best">Best Overall</span> <span class="badge badge-cheap">Budget King</span></td>
+        <td class="price-cell">$2,800<br><span class="price-sub">CAD for 2</span></td>
+      </tr>
+      <tr>
+        <td class="rank-num">2</td>
+        <td class="dest-cell"><h3>🇦🇼 Aruba</h3><div class="tagline">Guaranteed sun, no hurricane risk</div></td>
+        <td><span class="badge badge-beach">Best Weather</span></td>
+        <td class="price-cell">$3,800<br><span class="price-sub">CAD for 2</span></td>
+      </tr>
+      <tr>
+        <td class="rank-num">3</td>
+        <td class="dest-cell"><h3>🇬🇷 Crete, Greece</h3><div class="tagline">Pink sand, ancient ruins, Mediterranean food</div></td>
+        <td><span class="badge badge-romance">Most Romantic</span> <span class="badge badge-beach">Best Beaches</span></td>
+        <td class="price-cell">$4,300<br><span class="price-sub">CAD for 2</span></td>
+      </tr>
+      <tr>
+        <td class="rank-num">4</td>
+        <td class="dest-cell"><h3>🇩🇴 Punta Cana, DR</h3><div class="tagline">All-inclusive vibes, Isla Saona</div></td>
+        <td><span class="badge badge-cheap">Cheapest</span></td>
+        <td class="price-cell">$2,600<br><span class="price-sub">CAD for 2</span></td>
+      </tr>
+      <tr>
+        <td class="rank-num">5</td>
+        <td class="dest-cell"><h3>🇵🇹 Algarve, Portugal</h3><div class="tagline">Sea caves, cliffs, wine & pastéis</div></td>
+        <td><span class="badge badge-romance">Romantic</span></td>
+        <td class="price-cell">$4,200<br><span class="price-sub">CAD for 2</span></td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<!-- ═══════════ #1 TULUM ═══════════ -->
+<div class="container" id="tulum">
+  <div class="dest-section">
+    <h3>🥇 #1 — Tulum, Mexico 🇲🇽</h3>
+    <p class="dest-tag">Bohemian Caribbean coast · Cenotes · Mayan ruins · Incredible food</p>
+
+    <div class="info-grid">
+      <div class="info-card"><div class="ic-label">✈️ Flight</div><div class="ic-value">4h direct YYZ→CUN</div></div>
+      <div class="info-card"><div class="ic-label">💰 Est. Total</div><div class="ic-value">~$2,800 CAD / couple</div></div>
+      <div class="info-card"><div class="ic-label">🛂 Visa</div><div class="ic-value">None needed 🇨🇦</div></div>
+      <div class="info-card"><div class="ic-label">🌡️ August</div><div class="ic-value">82-92°F, brief showers</div></div>
+      <div class="info-card"><div class="ic-label">💵 Exchange</div><div class="ic-value">1 CAD ≈ 15 MXN</div></div>
+      <div class="info-card"><div class="ic-label">🚌 Getting There</div><div class="ic-value">ADO Bus CUN→Tulum 2h</div></div>
+    </div>
+
+    <!-- BUDGET -->
+    <h4 style="margin-bottom:12px;">💰 Budget Breakdown (7 nights, 2 people)</h4>
+    <div class="budget-breakdown">
+      <div class="budget-row">
+        <div class="budget-label">✈️ Flights</div>
+        <div class="budget-bar-bg"><div class="budget-bar-fill fill-flight" style="width:36%"></div></div>
+        <div class="budget-val">$1,000</div>
+      </div>
+      <div class="budget-row">
+        <div class="budget-label">🏠 Airbnb</div>
+        <div class="budget-bar-bg"><div class="budget-bar-fill fill-stay" style="width:25%"></div></div>
+        <div class="budget-val">$700</div>
+      </div>
+      <div class="budget-row">
+        <div class="budget-label">🍽️ Food</div>
+        <div class="budget-bar-bg"><div class="budget-bar-fill fill-food" style="width:18%"></div></div>
+        <div class="budget-val">$490</div>
+      </div>
+      <div class="budget-row">
+        <div class="budget-label">🎯 Activities</div>
+        <div class="budget-bar-bg"><div class="budget-bar-fill fill-activity" style="width:11%"></div></div>
+        <div class="budget-val">$310</div>
+      </div>
+      <div class="budget-row">
+        <div class="budget-label">🚗 Transport</div>
+        <div class="budget-bar-bg"><div class="budget-bar-fill fill-transport" style="width:10%"></div></div>
+        <div class="budget-val">$300</div>
+      </div>
+      <div style="text-align:right; font-weight:800; font-size:1.1rem; color:var(--palm); margin-top:8px;">Total: ~$2,800 CAD · ✅ $2,200 under budget</div>
+    </div>
+
+    <!-- TABS -->
+    <div class="tab-row" id="tabs-tulum">
+      <button class="tab-btn active" onclick="tab('tulum','itin')">📅 7-Day Plan</button>
+      <button class="tab-btn" onclick="tab('tulum','beaches')">🏖️ Beaches</button>
+      <button class="tab-btn" onclick="tab('tulum','activities')">🎯 Activities</button>
+      <button class="tab-btn" onclick="tab('tulum','food')">🍽️ Food</button>
+      <button class="tab-btn" onclick="tab('tulum','book')">🔗 Book</button>
+    </div>
+
+    <div class="tab-pane active" id="tulum-itin">
+      <div class="day"><h4>Day 1 (Fri Aug 22) — Arrive & Settle</h4><p>Direct flight YYZ→CUN. ADO bus to Tulum (2h, $30). Check into Airbnb. Walk to Playa Paraiso for sunset. Dinner at Burrito Amor.</p><div class="day-meta"><span class="day-cost">~$140</span><span class="day-links"><a href="https://maps.google.com/?q=Playa+Paraiso+Tulum" target="_blank">📍 Playa Paraiso</a> · <a href="https://maps.google.com/?q=Burrito+Amor+Tulum" target="_blank">📍 Burrito Amor</a></span></div></div>
+      <div class="day"><h4>Day 2 (Sat) — Ruins + Beach</h4><p>Tulum Ruins at 8am (arrive early, beat the heat). Swim at Playa Ruinas below. Afternoon snorkel. Sunset drinks at Papaya Playa Project (Saturday fire show!).</p><div class="day-meta"><span class="day-cost">~$45</span><span class="day-links"><a href="https://maps.google.com/?q=Tulum+Archaeological+Zone" target="_blank">📍 Ruins</a> · <a href="https://www.papayaplayaproject.com" target="_blank">📍 Papaya Playa</a></span></div></div>
+      <div class="day"><h4>Day 3 (Sun) — Cenote Day</h4><p>Bike to Gran Cenote (crystal-clear underground swim). Cenote Suytun (dramatic light beam). Lunch at Taqueria Honorio (James Beard-nominated tacos). Beach afternoon.</p><div class="day-meta"><span class="day-cost">~$65</span><span class="day-links"><a href="https://maps.google.com/?q=Gran+Cenote+Tulum" target="_blank">📍 Gran Cenote</a> · <a href="https://maps.google.com/?q=Cenote+Suytun" target="_blank">📍 Cenote Suytun</a> · <a href="https://maps.google.com/?q=Taqueria+Honorio+Tulum" target="_blank">📍 Honorio</a></span></div></div>
+      <div class="day"><h4>Day 4 (Mon) — Sian Ka'an Biosphere</h4><p>Full-day UNESCO biosphere tour — float through mangrove channels, spot dolphins & sea turtles. One of the most magical nature experiences in Mexico.</p><div class="day-meta"><span class="day-cost">~$130</span><span class="day-links"><a href="https://maps.google.com/?q=Sian+Ka'an+Biosphere" target="_blank">📍 Sian Ka'an</a></span></div></div>
+      <div class="day"><h4>Day 5 (Tue) — Lazy Beach Day</h4><p>Sleep in. Playa Pescadores for a quiet morning. Matcha Mama smoothies (the treehouse one). Couples massage ($50 for 2). Seafood dinner at La Coqueta.</p><div class="day-meta"><span class="day-cost">~$90</span><span class="day-links"><a href="https://maps.google.com/?q=Matcha+Mama+Tulum" target="_blank">📍 Matcha Mama</a> · <a href="https://maps.google.com/?q=La+Coqueta+Tulum" target="_blank">📍 La Coqueta</a></span></div></div>
+      <div class="day"><h4>Day 6 (Wed) — Explore + Splurge</h4><p>Tulum Pueblo morning markets (cheap souvenirs). Beach Road bike ride. Afternoon beach. Splurge dinner at Arca — open-fire cooking, one of Latin America's best (book ahead!).</p><div class="day-meta"><span class="day-cost">~$170</span><span class="day-links"><a href="https://maps.google.com/?q=Tulum+Pueblo" target="_blank">📍 Pueblo</a> · <a href="https://arcatulum.com" target="_blank">📍 Arca (book!)</a></span></div></div>
+      <div class="day"><h4>Day 7 (Thu Aug 28) — Last Beach & Fly Home</h4><p>Sunrise walk on the beach. Brunch at Burrito Amor. ADO bus to Cancún airport. Evening flight home.</p><div class="day-meta"><span class="day-cost">~$105</span></div></div>
+    </div>
+
+    <div class="tab-pane" id="tulum-beaches">
+      <ul class="spot-list">
+        <li><div class="spot-name">🏖️ Playa Paraiso</div><div class="spot-desc">#1 beach — powdery white sand, shallow turquoise water, palm trees</div><div class="spot-meta"><a href="https://maps.google.com/?q=Playa+Paraiso+Tulum" target="_blank">📍 Google Maps</a></div></li>
+        <li><div class="spot-name">🏖️ Playa Ruinas</div><div class="spot-desc">Beach directly below the Mayan ruins — iconic clifftop temple view while you swim</div><div class="spot-meta"><a href="https://maps.google.com/?q=Playa+Ruinas+Tulum" target="_blank">📍 Google Maps</a></div></li>
+        <li><div class="spot-name">🏖️ Playa Pescadores</div><div class="spot-desc">Quiet fishing beach, colorful boats, great for sunset walks without crowds</div><div class="spot-meta"><a href="https://maps.google.com/?q=Playa+Pescadores+Tulum" target="_blank">📍 Google Maps</a></div></li>
+      </ul>
+    </div>
+
+    <div class="tab-pane" id="tulum-activities">
+      <ul class="spot-list">
+        <li><div class="spot-name">💎 Gran Cenote</div><div class="spot-desc">Crystal-clear underground swimming hole surrounded by jungle</div><div class="spot-meta"><span class="spot-cost">~$25 USD</span><a href="https://maps.google.com/?q=Gran+Cenote+Tulum" target="_blank">📍 Maps</a></div></li>
+        <li><div class="spot-name">💎 Cenote Suytun</div><div class="spot-desc">Underground cave with a single dramatic light beam — incredible photos</div><div class="spot-meta"><span class="spot-cost">~$15 USD</span><a href="https://maps.google.com/?q=Cenote+Suytun" target="_blank">📍 Maps</a></div></li>
+        <li><div class="spot-name">🏛️ Tulum Ruins</div><div class="spot-desc">Only Mayan ruins overlooking the Caribbean Sea</div><div class="spot-meta"><span class="spot-cost">~$5 USD</span><a href="https://maps.google.com/?q=Tulum+Archaeological+Zone" target="_blank">📍 Maps</a></div></li>
+        <li><div class="spot-name">🌿 Sian Ka'an Biosphere</div><div class="spot-desc">UNESCO site — float through mangrove channels, dolphins, turtles</div><div class="spot-meta"><span class="spot-cost">~$50 USD</span><a href="https://maps.google.com/?q=Sian+Ka'an+Biosphere" target="_blank">📍 Maps</a></div></li>
+        <li><div class="spot-name">🚲 Bike the Beach Road</div><div class="spot-desc">Rent bikes ($10/day) & cruise the jungle-lined hotel zone</div><div class="spot-meta"><span class="spot-cost">~$10 USD</span><a href="https://maps.google.com/?q=Tulum+Beach+Road" target="_blank">📍 Maps</a></div></li>
+      </ul>
+    </div>
+
+    <div class="tab-pane" id="tulum-food">
+      <ul class="spot-list">
+        <li><div class="spot-name">🌮 Taqueria Honorio</div><div class="spot-desc">James Beard-nominated — legendary carnitas tacos</div><div class="spot-meta"><span class="spot-cost">~$5 USD/pp</span><a href="https://maps.google.com/?q=Taqueria+Honorio+Tulum" target="_blank">📍 Maps</a></div></li>
+        <li><div class="spot-name">🌯 Burrito Amor</div><div class="spot-desc">Best cheap eats in Tulum, huge burritos & bowls</div><div class="spot-meta"><span class="spot-cost">~$8 USD/pp</span><a href="https://maps.google.com/?q=Burrito+Amor+Tulum" target="_blank">📍 Maps</a></div></li>
+        <li><div class="spot-name">🥥 Matcha Mama</div><div class="spot-desc">Insta-famous treehouse smoothie bar</div><div class="spot-meta"><span class="spot-cost">~$9 USD/pp</span><a href="https://maps.google.com/?q=Matcha+Mama+Tulum" target="_blank">📍 Maps</a></div></li>
+        <li><div class="spot-name">🐟 La Coqueta</div><div class="spot-desc">Fresh ceviche & grilled fish on the beach</div><div class="spot-meta"><span class="spot-cost">~$18 USD/pp</span><a href="https://maps.google.com/?q=La+Coqueta+Tulum" target="_blank">📍 Maps</a></div></li>
+        <li><div class="spot-name">🔥 Arca (splurge!)</div><div class="spot-desc">Open-fire cooking — one of Latin America's best restaurants (BOOK AHEAD)</div><div class="spot-meta"><span class="spot-cost">~$60 USD/pp</span><a href="https://arcatulum.com" target="_blank">🌐 Book</a> · <a href="https://maps.google.com/?q=Arca+Tulum" target="_blank">📍 Maps</a></div></li>
+      </ul>
+      <p style="margin-top:12px; font-size:0.82rem; color:var(--gray);">📱 <strong>Food Delivery:</strong> Uber Eats + Rappi work in Tulum — <a href="https://www.ubereats.com/mx/city/tulum-qr" target="_blank">Uber Eats</a></p>
+    </div>
+
+    <div class="tab-pane" id="tulum-book">
+      <h4 style="margin-bottom:12px;">✈️ Flights (YYZ → CUN, Aug 22-29)</h4>
+      <div class="booking-grid">
+        <a href="https://www.google.com/travel/flights?q=flights+from+YYZ+to+CUN+august+22+returning+august+29+2026" target="_blank" class="book-btn book-flights">Google Flights</a>
+        <a href="https://www.ca.kayak.com/flights/YYZ-CUN/2026-08-22/2026-08-29/2adults?sort=bestflight_a" target="_blank" class="book-btn book-flights">Kayak</a>
+        <a href="https://www.skyscanner.ca/transport/flights/yyz/cun/260822/260829/?adultsv2=2&cabinclass=economy" target="_blank" class="book-btn book-flights">Skyscanner</a>
+      </div>
+      <h4 style="margin:16px 0 12px;">🏠 Accommodation</h4>
+      <div class="booking-grid">
+        <a href="https://www.airbnb.ca/s/Tulum--Mexico/homes?checkin=2026-08-22&checkout=2026-08-29&adults=2&price_max=150" target="_blank" class="book-btn book-stay">Airbnb Tulum</a>
+      </div>
+      <h4 style="margin:16px 0 12px;">🚌 Getting There</h4>
+      <p style="font-size:0.85rem;">ADO Bus from CUN airport → Tulum (2h, ~$30 CAD) — <a href="https://www.ado.com.mx" target="_blank">ado.com.mx</a></p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ #2 ARUBA ═══════════ -->
+<div class="container" id="aruba">
+  <div class="dest-section">
+    <h3>🥈 #2 — Aruba 🇦🇼</h3>
+    <p class="dest-tag">One Happy Island · Outside hurricane belt · Guaranteed sun in August</p>
+
+    <div class="info-grid">
+      <div class="info-card"><div class="ic-label">✈️ Flight</div><div class="ic-value">5h direct YYZ→AUA</div></div>
+      <div class="info-card"><div class="ic-label">💰 Est. Total</div><div class="ic-value">~$3,800 CAD / couple</div></div>
+      <div class="info-card"><div class="ic-label">🛂 Visa</div><div class="ic-value">None needed 🇨🇦</div></div>
+      <div class="info-card"><div class="ic-label">🌡️ August</div><div class="ic-value">84-90°F, DRY! No rain!</div></div>
+      <div class="info-card"><div class="ic-label">🌀 Hurricanes</div><div class="ic-value">OUTSIDE the belt ✅</div></div>
+      <div class="info-card"><div class="ic-label">🚗 Transport</div><div class="ic-value">Rental car or bus</div></div>
+    </div>
+
+    <h4 style="margin-bottom:12px;">💰 Budget Breakdown</h4>
+    <div class="budget-breakdown">
+      <div class="budget-row"><div class="budget-label">✈️ Flights</div><div class="budget-bar-bg"><div class="budget-bar-fill fill-flight" style="width:34%"></div></div><div class="budget-val">$1,300</div></div>
+      <div class="budget-row"><div class="budget-label">🏠 Airbnb</div><div class="budget-bar-bg"><div class="budget-bar-fill fill-stay" style="width:24%"></div></div><div class="budget-val">$910</div></div>
+      <div class="budget-row"><div class="budget-label">🍽️ Food</div><div class="budget-bar-bg"><div class="budget-bar-fill fill-food" style="width:20%"></div></div><div class="budget-val">$770</div></div>
+      <div class="budget-row"><div class="budget-label">🎯 Activities</div><div class="budget-bar-bg"><div class="budget-bar-fill fill-activity" style="width:13%"></div></div><div class="budget-val">$500</div></div>
+      <div class="budget-row"><div class="budget-label">🚗 Transport</div><div class="budget-bar-bg"><div class="budget-bar-fill fill-transport" style="width:9%"></div></div><div class="budget-val">$320</div></div>
+      <div style="text-align:right; font-weight:800; font-size:1.1rem; color:var(--palm); margin-top:8px;">Total: ~$3,800 CAD · ✅ $1,200 under budget</div>
+    </div>
+
+    <div class="tab-row" id="tabs-aruba">
+      <button class="tab-btn active" onclick="tab('aruba','itin')">📅 7-Day Plan</button>
+      <button class="tab-btn" onclick="tab('aruba','beaches')">🏖️ Beaches</button>
+      <button class="tab-btn" onclick="tab('aruba','food')">🍽️ Food</button>
+      <button class="tab-btn" onclick="tab('aruba','book')">🔗 Book</button>
+    </div>
+
+    <div class="tab-pane active" id="aruba-itin">
+      <div class="day"><h4>Day 1 — Arrive & Eagle Beach</h4><p>Direct flight. Rent car. Eagle Beach sunset (world's best!). Zeerovers fresh fish dinner.</p><div class="day-meta"><span class="day-cost">~$80</span><span class="day-links"><a href="https://maps.google.com/?q=Eagle+Beach+Aruba" target="_blank">📍 Eagle Beach</a> · <a href="https://maps.google.com/?q=Zeerovers+Aruba" target="_blank">📍 Zeerovers</a></span></div></div>
+      <div class="day"><h4>Day 2 — Palm Beach & Snorkel</h4><p>Palm Beach morning. Mangel Halto snorkeling (hidden gem). West Deck waterfront dinner.</p><div class="day-meta"><span class="day-cost">~$65</span><span class="day-links"><a href="https://maps.google.com/?q=Mangel+Halto+Aruba" target="_blank">📍 Mangel Halto</a></span></div></div>
+      <div class="day"><h4>Day 3 — Flamingo Beach</h4><p>Renaissance Island — hang out with pink flamingos on the beach! Afternoon pool. Eduardo's smoothies.</p><div class="day-meta"><span class="day-cost">~$130</span><span class="day-links"><a href="https://maps.google.com/?q=Renaissance+Island+Aruba" target="_blank">📍 Flamingo Beach</a></span></div></div>
+      <div class="day"><h4>Day 4 — Arikok Adventure</h4><p>National park jeep tour. Natural Pool hike. Arawak cave paintings. Local dinner.</p><div class="day-meta"><span class="day-cost">~$55</span><span class="day-links"><a href="https://maps.google.com/?q=Arikok+National+Park" target="_blank">📍 Arikok</a></span></div></div>
+      <div class="day"><h4>Day 5 — Baby Beach</h4><p>Drive to Baby Beach lagoon — natural pool, crystal calm water. All-day chill.</p><div class="day-meta"><span class="day-cost">~$45</span><span class="day-links"><a href="https://maps.google.com/?q=Baby+Beach+Aruba" target="_blank">📍 Baby Beach</a></span></div></div>
+      <div class="day"><h4>Day 6 — Catamaran & Splurge</h4><p>Sunset catamaran sail (open bar!). Papiamento fine dining in a colonial house.</p><div class="day-meta"><span class="day-cost">~$160</span><span class="day-links"><a href="https://maps.google.com/?q=Papiamento+Restaurant+Aruba" target="_blank">📍 Papiamento</a></span></div></div>
+      <div class="day"><h4>Day 7 — Final Beach & Depart</h4><p>Eagle Beach sunrise. Eduardo's acai bowl. Return car. Fly home.</p><div class="day-meta"><span class="day-cost">~$45</span></div></div>
+    </div>
+
+    <div class="tab-pane" id="aruba-beaches">
+      <ul class="spot-list">
+        <li><div class="spot-name">🏖️ Eagle Beach</div><div class="spot-desc">World's best beach — wide white sand, fofoti trees, stunning sunsets</div><div class="spot-meta"><a href="https://maps.google.com/?q=Eagle+Beach+Aruba" target="_blank">📍 Maps</a></div></li>
+        <li><div class="spot-name">🏖️ Palm Beach</div><div class="spot-desc">Resort strip — crystal water, beach bars, watersports</div><div class="spot-meta"><a href="https://maps.google.com/?q=Palm+Beach+Aruba" target="_blank">📍 Maps</a></div></li>
+        <li><div class="spot-name">🏖️ Baby Beach</div><div class="spot-desc">Shallow lagoon — calm as a pool, perfect for lazy floating</div><div class="spot-meta"><a href="https://maps.google.com/?q=Baby+Beach+Aruba" target="_blank">📍 Maps</a></div></li>
+        <li><div class="spot-name">🤿 Mangel Halto</div><div class="spot-desc">Hidden snorkel spot with mangroves — locals' secret</div><div class="spot-meta"><a href="https://maps.google.com/?q=Mangel+Halto+Aruba" target="_blank">📍 Maps</a></div></li>
+      </ul>
+    </div>
+
+    <div class="tab-pane" id="aruba-food">
+      <ul class="spot-list">
+        <li><div class="spot-name">🐟 Zeerovers</div><div class="spot-desc">Fresh fish by the pound, ocean view — locals' #1 pick</div><div class="spot-meta"><span class="spot-cost">~$13 USD/pp</span><a href="https://maps.google.com/?q=Zeerovers+Aruba" target="_blank">📍 Maps</a></div></li>
+        <li><div class="spot-name">🥣 Eduardo's Beach Shack</div><div class="spot-desc">Best acai bowls & smoothies on the island</div><div class="spot-meta"><span class="spot-cost">~$8 USD/pp</span><a href="https://maps.google.com/?q=Eduardo's+Beach+Shack+Aruba" target="_blank">📍 Maps</a></div></li>
+        <li><div class="spot-name">🍽️ Papiamento</div><div class="spot-desc">Fine dining in a 200-year-old cunucu house, romantic courtyard</div><div class="spot-meta"><span class="spot-cost">~$40 USD/pp</span><a href="https://maps.google.com/?q=Papiamento+Restaurant+Aruba" target="_blank">📍 Maps</a></div></li>
+      </ul>
+    </div>
+
+    <div class="tab-pane" id="aruba-book">
+      <h4 style="margin-bottom:12px;">✈️ Flights (YYZ → AUA, Aug 22-29)</h4>
+      <div class="booking-grid">
+        <a href="https://www.google.com/travel/flights?q=flights+from+YYZ+to+AUA+august+22+returning+august+29+2026" target="_blank" class="book-btn book-flights">Google Flights</a>
+        <a href="https://www.ca.kayak.com/flights/YYZ-AUA/2026-08-22/2026-08-29/2adults?sort=bestflight_a" target="_blank" class="book-btn book-flights">Kayak</a>
+        <a href="https://www.skyscanner.ca/transport/flights/yyz/aua/260822/260829/?adultsv2=2&cabinclass=economy" target="_blank" class="book-btn book-flights">Skyscanner</a>
+      </div>
+      <h4 style="margin:16px 0 12px;">🏠 Accommodation</h4>
+      <div class="booking-grid">
+        <a href="https://www.airbnb.ca/s/Aruba/homes?checkin=2026-08-22&checkout=2026-08-29&adults=2&price_max=200" target="_blank" class="book-btn book-stay">Airbnb Aruba</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ #3 CRETE ═══════════ -->
+<div class="container" id="crete">
+  <div class="dest-section">
+    <h3>🥉 #3 — Crete, Greece 🇬🇷</h3>
+    <p class="dest-tag">Pink sand beaches · Ancient Minoan ruins · Best food in the Mediterranean</p>
+
+    <div class="info-grid">
+      <div class="info-card"><div class="ic-label">✈️ Flight</div><div class="ic-value">14h (1 stop) YYZ→HER</div></div>
+      <div class="info-card"><div class="ic-label">💰 Est. Total</div><div class="ic-value">~$4,300 CAD / couple</div></div>
+      <div class="info-card"><div class="ic-label">🛂 Visa</div><div class="ic-value">None needed (Schengen) 🇨🇦</div></div>
+      <div class="info-card"><div class="ic-label">🌡️ August</div><div class="ic-value">78-90°F, zero rain ☀️</div></div>
+      <div class="info-card"><div class="ic-label">🚗 Transport</div><div class="ic-value">Rental car (essential)</div></div>
+      <div class="info-card"><div class="ic-label">⚠️ Note</div><div class="ic-value">Close to budget limit</div></div>
+    </div>
+
+    <h4 style="margin-bottom:12px;">💰 Budget Breakdown</h4>
+    <div class="budget-breakdown">
+      <div class="budget-row"><div class="budget-label">✈️ Flights</div><div class="budget-bar-bg"><div class="budget-bar-fill fill-flight" style="width:42%"></div></div><div class="budget-val">$1,800</div></div>
+      <div class="budget-row"><div class="budget-label">🏠 Airbnb</div><div class="budget-bar-bg"><div class="budget-bar-fill fill-stay" style="width:23%"></div></div><div class="budget-val">$980</div></div>
+      <div class="budget-row"><div class="budget-label">🍽️ Food</div><div class="budget-bar-bg"><div class="budget-bar-fill fill-food" style="width:17%"></div></div><div class="budget-val">$735</div></div>
+      <div class="budget-row"><div class="budget-label">🎯 Activities</div><div class="budget-bar-bg"><div class="budget-bar-fill fill-activity" style="width:8%"></div></div><div class="budget-val">$350</div></div>
+      <div class="budget-row"><div class="budget-label">🚗 Rental Car</div><div class="budget-bar-bg"><div class="budget-bar-fill fill-transport" style="width:10%"></div></div><div class="budget-val">$435</div></div>
+      <div style="text-align:right; font-weight:800; font-size:1.1rem; color:var(--sunset); margin-top:8px;">Total: ~$4,300 CAD · ⚠️ $700 under budget (tight)</div>
+    </div>
+
+    <div class="tab-row" id="tabs-crete">
+      <button class="tab-btn active" onclick="tab('crete','itin')">📅 7-Day Plan</button>
+      <button class="tab-btn" onclick="tab('crete','beaches')">🏖️ Beaches</button>
+      <button class="tab-btn" onclick="tab('crete','food')">🍽️ Food</button>
+      <button class="tab-btn" onclick="tab('crete','book')">🔗 Book</button>
+    </div>
+
+    <div class="tab-pane active" id="crete-itin">
+      <div class="day"><h4>Day 1 — Arrive in Chania</h4><p>Fly to Heraklion, rent car, drive to Chania (2h). Walk the stunning Venetian Harbor at sunset. Dinner at Taverna Strata in a hidden courtyard.</p><div class="day-meta"><span class="day-cost">~$80</span><span class="day-links"><a href="https://maps.google.com/?q=Old+Venetian+Harbor+Chania" target="_blank">📍 Venetian Harbor</a></span></div></div>
+      <div class="day"><h4>Day 2 — Elafonissi (Pink Sand!)</h4><p>Drive to Elafonissi — the famous pink sand lagoon. One of Europe's top beaches. Full day in paradise. Village taverna dinner on the drive back.</p><div class="day-meta"><span class="day-cost">~$70</span><span class="day-links"><a href="https://maps.google.com/?q=Elafonissi+Beach+Crete" target="_blank">📍 Elafonissi</a></span></div></div>
+      <div class="day"><h4>Day 3 — Balos Lagoon</h4><p>Morning boat from Kissamos to Balos Lagoon — jaw-dropping turquoise water, Caribbean vibes in Greece. Dinner at Thalassino Ageri on the harbor.</p><div class="day-meta"><span class="day-cost">~$95</span><span class="day-links"><a href="https://maps.google.com/?q=Balos+Beach+Crete" target="_blank">📍 Balos</a> · <a href="https://maps.google.com/?q=Thalassino+Ageri+Chania" target="_blank">📍 Thalassino Ageri</a></span></div></div>
+      <div class="day"><h4>Day 4 — Chania + Wine</h4><p>Harbor walk & Agora market. Manousakis Winery tour (local Cretan wines). Sunset at Venetian Lighthouse. Seafood dinner.</p><div class="day-meta"><span class="day-cost">~$110</span><span class="day-links"><a href="https://maps.google.com/?q=Manousakis+Winery+Crete" target="_blank">📍 Winery</a></span></div></div>
+      <div class="day"><h4>Day 5 — South Coast</h4><p>Preveli Beach — palm forest meets the sea, surreal tropical vibes in Europe. Swim where river meets ocean. Mountain village lunch.</p><div class="day-meta"><span class="day-cost">~$70</span><span class="day-links"><a href="https://maps.google.com/?q=Preveli+Beach+Crete" target="_blank">📍 Preveli</a></span></div></div>
+      <div class="day"><h4>Day 6 — Knossos + Splurge</h4><p>Drive to Heraklion. 3,500-year-old Minoan palace at Knossos. Old town wander. Splurge dinner at Peskesi (farm-to-table Cretan).</p><div class="day-meta"><span class="day-cost">~$138</span><span class="day-links"><a href="https://maps.google.com/?q=Knossos+Palace+Crete" target="_blank">📍 Knossos</a> · <a href="https://maps.google.com/?q=Peskesi+Heraklion" target="_blank">📍 Peskesi</a></span></div></div>
+      <div class="day"><h4>Day 7 — Final Beach & Depart</h4><p>Beach swim. Bougatsa Iordanis (legendary custard pastry). Drive to Heraklion airport.</p><div class="day-meta"><span class="day-cost">~$50</span><span class="day-links"><a href="https://maps.google.com/?q=Bougatsa+Iordanis+Chania" target="_blank">📍 Bougatsa</a></span></div></div>
+    </div>
+
+    <div class="tab-pane" id="crete-beaches">
+      <ul class="spot-list">
+        <li><div class="spot-name">🏖️ Elafonissi Beach (PINK SAND)</div><div class="spot-desc">Pink sand lagoon — one of Europe's absolute best beaches</div><div class="spot-meta"><a href="https://maps.google.com/?q=Elafonissi+Beach+Crete" target="_blank">📍 Maps</a></div></li>
+        <li><div class="spot-name">🏖️ Balos Lagoon</div><div class="spot-desc">Surreal turquoise water that looks like the Caribbean</div><div class="spot-meta"><a href="https://maps.google.com/?q=Balos+Beach+Crete" target="_blank">📍 Maps</a></div></li>
+        <li><div class="spot-name">🌴 Preveli Beach</div><div class="spot-desc">Palm forest meets the sea — tropical vibes in Europe</div><div class="spot-meta"><a href="https://maps.google.com/?q=Preveli+Beach+Crete" target="_blank">📍 Maps</a></div></li>
+        <li><div class="spot-name">🏖️ Vai Beach</div><div class="spot-desc">Europe's largest natural palm forest on a beach</div><div class="spot-meta"><a href="https://maps.google.com/?q=Vai+Beach+Crete" target="_blank">📍 Maps</a></div></li>
+      </ul>
+    </div>
+
+    <div class="tab-pane" id="crete-food">
+      <ul class="spot-list">
+        <li><div class="spot-name">🥐 Bougatsa Iordanis</div><div class="spot-desc">Iconic custard pastry — best breakfast in all of Crete</div><div class="spot-meta"><span class="spot-cost">~$3 EUR/pp</span><a href="https://maps.google.com/?q=Bougatsa+Iordanis+Chania" target="_blank">📍 Maps</a></div></li>
+        <li><div class="spot-name">🍖 Taverna Strata</div><div class="spot-desc">Hidden courtyard in old Chania, incredible lamb</div><div class="spot-meta"><span class="spot-cost">~$15 EUR/pp</span><a href="https://maps.google.com/?q=Taverna+Strata+Chania" target="_blank">📍 Maps</a></div></li>
+        <li><div class="spot-name">🐙 Thalassino Ageri</div><div class="spot-desc">Waterfront seafood right on the Venetian harbor</div><div class="spot-meta"><span class="spot-cost">~$25 EUR/pp</span><a href="https://maps.google.com/?q=Thalassino+Ageri+Chania" target="_blank">📍 Maps</a></div></li>
+        <li><div class="spot-name">🌿 Peskesi (splurge!)</div><div class="spot-desc">Farm-to-table Cretan fine dining — stunning</div><div class="spot-meta"><span class="spot-cost">~$30 EUR/pp</span><a href="https://maps.google.com/?q=Peskesi+Heraklion" target="_blank">📍 Maps</a></div></li>
+      </ul>
+      <p style="margin-top:12px; font-size:0.82rem; color:var(--gray);">📱 <strong>Food Delivery:</strong> Wolt + efood (no Uber Eats) — <a href="https://www.wolt.com/en/grc/heraklion" target="_blank">Wolt Crete</a></p>
+    </div>
+
+    <div class="tab-pane" id="crete-book">
+      <h4 style="margin-bottom:12px;">✈️ Flights (YYZ → HER, Aug 22-29)</h4>
+      <div class="booking-grid">
+        <a href="https://www.google.com/travel/flights?q=flights+from+YYZ+to+HER+august+22+returning+august+29+2026" target="_blank" class="book-btn book-flights">Google Flights</a>
+        <a href="https://www.ca.kayak.com/flights/YYZ-HER/2026-08-22/2026-08-29/2adults?sort=bestflight_a" target="_blank" class="book-btn book-flights">Kayak</a>
+        <a href="https://www.skyscanner.ca/transport/flights/yyz/her/260822/260829/?adultsv2=2&cabinclass=economy" target="_blank" class="book-btn book-flights">Skyscanner</a>
+      </div>
+      <h4 style="margin:16px 0 12px;">🏠 Accommodation</h4>
+      <div class="booking-grid">
+        <a href="https://www.airbnb.ca/s/Crete--Greece/homes?checkin=2026-08-22&checkout=2026-08-29&adults=2&price_max=160" target="_blank" class="book-btn book-stay">Airbnb Crete</a>
+      </div>
+      <h4 style="margin:16px 0 12px;">🚗 Rental Car</h4>
+      <div class="booking-grid">
+        <a href="https://www.discovercars.com/greece/crete" target="_blank" class="book-btn book-maps">DiscoverCars</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ COMPARISON TABLE ═══════════ -->
+<div class="container" id="compare">
+  <div class="section">
+    <h2>📊 Head-to-Head Comparison</h2>
+    <p class="sub">All prices in CAD for 2 people, 7 nights, late August 2026</p>
+    <div style="overflow-x:auto;">
+    <table class="compare">
+      <tr>
+        <th>Category</th>
+        <th>🇲🇽 Tulum</th>
+        <th>🇦🇼 Aruba</th>
+        <th>🇬🇷 Crete</th>
+        <th>🇩🇴 Punta Cana</th>
+        <th>🇵🇹 Algarve</th>
+      </tr>
+      <tr>
+        <td><strong>✈️ Flight Time</strong></td>
+        <td class="winner">4h direct</td>
+        <td>5h direct</td>
+        <td>14h (1 stop)</td>
+        <td>4.5h direct</td>
+        <td>10h (1 stop)</td>
+      </tr>
+      <tr>
+        <td><strong>💰 Total Cost</strong></td>
+        <td class="winner">$2,800</td>
+        <td>$3,800</td>
+        <td>$4,300</td>
+        <td class="winner">$2,600</td>
+        <td>$4,200</td>
+      </tr>
+      <tr>
+        <td><strong>✈️ Flights</strong></td>
+        <td class="winner">$1,000</td>
+        <td>$1,300</td>
+        <td>$1,800</td>
+        <td class="winner">$1,000</td>
+        <td>$1,600</td>
+      </tr>
+      <tr>
+        <td><strong>🏠 7n Airbnb</strong></td>
+        <td class="winner">$700</td>
+        <td>$910</td>
+        <td>$980</td>
+        <td>$665</td>
+        <td>$840</td>
+      </tr>
+      <tr>
+        <td><strong>🍽️ Food (7 days)</strong></td>
+        <td class="winner">$490</td>
+        <td>$770</td>
+        <td>$735</td>
+        <td>$420</td>
+        <td>$595</td>
+      </tr>
+      <tr>
+        <td><strong>🏖️ Beaches</strong></td>
+        <td>9/10</td>
+        <td>9/10</td>
+        <td class="winner">10/10</td>
+        <td>8/10</td>
+        <td>9/10</td>
+      </tr>
+      <tr>
+        <td><strong>🍽️ Food Quality</strong></td>
+        <td>8/10</td>
+        <td>7/10</td>
+        <td class="winner">10/10</td>
+        <td>6/10</td>
+        <td>8/10</td>
+      </tr>
+      <tr>
+        <td><strong>🏛️ Culture</strong></td>
+        <td>7/10</td>
+        <td>5/10</td>
+        <td class="winner">10/10</td>
+        <td>4/10</td>
+        <td>7/10</td>
+      </tr>
+      <tr>
+        <td><strong>💑 Romance</strong></td>
+        <td>9/10</td>
+        <td>9/10</td>
+        <td class="winner">10/10</td>
+        <td>7/10</td>
+        <td>9/10</td>
+      </tr>
+      <tr>
+        <td><strong>🌀 Hurricane Risk</strong></td>
+        <td>⚠️ Possible</td>
+        <td class="winner">None ✅</td>
+        <td class="winner">None ✅</td>
+        <td>⚠️ Possible</td>
+        <td class="winner">None ✅</td>
+      </tr>
+      <tr>
+        <td><strong>🛂 Visa</strong></td>
+        <td>None</td>
+        <td>None</td>
+        <td>None</td>
+        <td>$10 card</td>
+        <td>None</td>
+      </tr>
+      <tr>
+        <td><strong>🤿 Activities</strong></td>
+        <td class="winner">9/10</td>
+        <td>7/10</td>
+        <td>8/10</td>
+        <td>6/10</td>
+        <td>7/10</td>
+      </tr>
+    </table>
+    </div>
+  </div>
+</div>
+
+<!-- VERDICT -->
+<div class="container">
+  <div class="section">
+    <h2>🏆 The Verdict</h2>
+    <div style="background: linear-gradient(135deg, var(--ocean), var(--ocean-dark)); color: white; border-radius: 16px; padding: 32px; margin-top: 16px;">
+      <h3 style="font-size: 1.5rem; margin-bottom: 12px;">Go to Tulum. 🇲🇽</h3>
+      <p style="opacity: 0.9; line-height: 1.7;">
+        It wins on <strong>value</strong> ($2,200 under budget), <strong>ease of travel</strong> (4h direct from Toronto), 
+        <strong>beaches</strong>, <strong>activities</strong> (cenotes are once-in-a-lifetime), and <strong>food</strong> 
+        (from $1 tacos to world-class dining). The only risk is August hurricanes — but statistically August is 
+        usually fine for the Riviera Maya, and you'd save enough budget to reschedule if needed.
+      </p>
+      <p style="opacity: 0.9; margin-top: 12px; line-height: 1.7;">
+        <strong>If you want zero weather risk:</strong> Aruba (outside the hurricane belt, guaranteed sun).<br>
+        <strong>If you want the most romantic/beautiful trip and can stretch budget:</strong> Crete (pink beaches + insane food).
+      </p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>Made for a Toronto couple who loves beaches ☀️ · <a href="index.html">Full 25-destination interactive tool →</a></p>
+  <p style="margin-top:8px;">Prices are estimates for late August 2026. Always check booking links for real-time pricing.</p>
+</footer>
+
+<script>
+function tab(dest, pane) {
+  // Deactivate all for this dest
+  document.querySelectorAll(`#tabs-${dest} .tab-btn`).forEach(b => b.classList.remove('active'));
+  document.querySelectorAll(`[id^="${dest}-"]`).forEach(p => p.classList.remove('active'));
+  // Activate
+  document.getElementById(`${dest}-${pane}`).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
+
+</body>
+</html>
