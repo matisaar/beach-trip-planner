@@ -56,7 +56,27 @@
   .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 10px; }
   footer { background: var(--dark); color: rgba(255,255,255,0.6); text-align: center; padding: 24px 20px; font-size: 0.78rem; margin-top: 20px; }
   footer a { color: var(--ocean-light); }
-  @media (max-width: 640px) { .hero h1 { font-size: 1.7rem; } .island-card .island-body { padding: 16px; } }
+  .listing-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 0.8rem; margin: 12px 0 6px; }
+  .listing-table thead th { background: var(--ocean-dark); color: white; padding: 8px 10px; text-align: left; font-weight: 700; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.5px; }
+  .listing-table thead th:first-child { border-radius: 8px 0 0 0; }
+  .listing-table thead th:last-child { border-radius: 0 8px 0 0; }
+  .listing-table tbody td { padding: 8px 10px; border-bottom: 1px solid #f0f0f0; vertical-align: middle; }
+  .listing-table tbody tr:last-child td { border-bottom: none; }
+  .listing-table .name a { color: var(--ocean); font-weight: 600; text-decoration: none; }
+  .listing-table .name a:hover { text-decoration: underline; }
+  .listing-table .price { font-weight: 700; color: var(--palm); white-space: nowrap; }
+  .listing-table .rating { white-space: nowrap; }
+  .listing-table .reviews { color: var(--gray); font-size: 0.72rem; }
+  .listing-table .badge { display: inline-block; font-size: 0.6rem; font-weight: 800; padding: 1px 6px; border-radius: 5px; margin-left: 4px; }
+  .badge-fav { background: #dbeafe; color: var(--ocean-dark); }
+  .badge-top { background: #dcfce7; color: var(--palm); }
+  .badge-budget { background: #fef3c7; color: #92400e; }
+  .ab-picks { margin-top: 14px; padding-top: 12px; border-top: 1px dashed #e5e7eb; }
+  .ab-picks h4 { font-size: 0.85rem; font-weight: 700; margin-bottom: 4px; color: var(--ocean-dark); }
+  .ab-browse { display: inline-block; font-size: 0.78rem; color: var(--ocean); font-weight: 600; text-decoration: none; margin-top: 4px; }
+  .ab-browse:hover { text-decoration: underline; }
+  .map-pin { text-decoration: none; margin-left: 3px; }
+  @media (max-width: 640px) { .hero h1 { font-size: 1.7rem; } .island-card .island-body { padding: 16px; } .listing-table { font-size: 0.74rem; } }
 </style>
 </head>
 <body>
@@ -92,6 +112,20 @@
         <strong>Why we didn&rsquo;t pick it:</strong> Massively overpriced in August ($300+/night minimums). Overcrowded &mdash; cruise ships dump 10,000 people/day. Very small, limited to 3&ndash;4 days of activities. Food is mediocre-to-good at high prices. Not enough variety for 7 nights. <strong>Budget: would blow past $7K easily.</strong>
       </div>
       <a href="https://maps.google.com/?q=Santorini+Greece" target="_blank" class="map-link">&#128205; View on Google Maps</a>
+      <div class="ab-picks">
+        <h4>&#127968; Airbnb Picks &mdash; Imerovigli / Fira</h4>
+        <div class="table-wrap">
+        <table class="listing-table">
+          <thead><tr><th>Listing</th><th>/Night</th><th>Rating</th></tr></thead>
+          <tbody>
+            <tr><td class="name"><a href="https://www.airbnb.ca/rooms/675109723540652184?adults=2" target="_blank">Breakfast Dome &mdash; Caldera View</a><a class="map-pin" href="https://maps.google.com/?q=Imerovigli+Santorini+Greece" target="_blank">&#128205;</a></td><td class="price">$278</td><td class="rating">4.97 <span class="reviews">(36)</span> <span class="badge badge-fav">FAV</span></td></tr>
+            <tr><td class="name"><a href="https://www.airbnb.ca/rooms/4393550?adults=2" target="_blank">Doho I &mdash; Earth Home</a><a class="map-pin" href="https://maps.google.com/?q=Fira+Santorini+Greece" target="_blank">&#128205;</a></td><td class="price">$228</td><td class="rating">4.86 <span class="reviews">(120)</span></td></tr>
+            <tr><td class="name"><a href="https://www.airbnb.ca/rooms/958636260486324812?adults=2" target="_blank">BeSanto Imerovigli</a><a class="map-pin" href="https://maps.google.com/?q=Imerovigli+Santorini+Greece" target="_blank">&#128205;</a></td><td class="price">$218</td><td class="rating">4.84 <span class="reviews">(37)</span> <span class="badge badge-budget">VALUE</span></td></tr>
+          </tbody>
+        </table>
+        </div>
+        <a class="ab-browse" href="https://www.airbnb.ca/s/Imerovigli--Santorini--Greece/homes?checkin=2026-08-22&checkout=2026-08-29&adults=2&price_max=350&min_bedrooms=1" target="_blank">Browse all Santorini Airbnbs &rarr;</a>
+      </div>
     </div>
   </div>
 
@@ -109,6 +143,20 @@
         <strong>Why we didn&rsquo;t pick it:</strong> Less variety than Crete &mdash; no gorges, fewer world-class beaches. Hard to fill 7 full days without island-hopping. Still pricier than Crete.
       </div>
       <a href="https://maps.google.com/?q=Naxos+Greece" target="_blank" class="map-link">&#128205; View on Google Maps</a>
+      <div class="ab-picks">
+        <h4>&#127968; Airbnb Picks &mdash; Naxos Town &amp; Beaches</h4>
+        <div class="table-wrap">
+        <table class="listing-table">
+          <thead><tr><th>Listing</th><th>/Night</th><th>Rating</th></tr></thead>
+          <tbody>
+            <tr><td class="name"><a href="https://www.airbnb.ca/rooms/897615989910232736?checkin=2026-08-22&checkout=2026-08-29&adults=2" target="_blank">Amaranto Naxos 2</a><a class="map-pin" href="https://maps.google.com/?q=Naxos+Town+Greece" target="_blank">&#128205;</a></td><td class="price">$190</td><td class="rating">4.97 <span class="reviews">(31)</span> <span class="badge badge-top">TOP</span></td></tr>
+            <tr><td class="name"><a href="https://www.airbnb.ca/rooms/12908085?checkin=2026-08-22&checkout=2026-08-29&adults=2" target="_blank">Cozy Studio 3 &mdash; Near Centre</a><a class="map-pin" href="https://maps.google.com/?q=Naxos+Centre+Greece" target="_blank">&#128205;</a></td><td class="price">$182</td><td class="rating">4.98 <span class="reviews">(45)</span> <span class="badge badge-fav">FAV</span></td></tr>
+            <tr><td class="name"><a href="https://www.airbnb.ca/rooms/50546334?checkin=2026-08-22&checkout=2026-08-29&adults=2" target="_blank">Natural Life</a><a class="map-pin" href="https://maps.google.com/?q=Naxos+Greece" target="_blank">&#128205;</a></td><td class="price">$167</td><td class="rating">4.95 <span class="reviews">(22)</span> <span class="badge badge-budget">VALUE</span></td></tr>
+          </tbody>
+        </table>
+        </div>
+        <a class="ab-browse" href="https://www.airbnb.ca/s/Naxos--Greece/homes?checkin=2026-08-22&checkout=2026-08-29&adults=2&price_max=200&min_bedrooms=1" target="_blank">Browse all Naxos Airbnbs &rarr;</a>
+      </div>
     </div>
   </div>
 
@@ -126,6 +174,20 @@
         <strong>Why we didn&rsquo;t pick it:</strong> Small island &mdash; 3&ndash;4 days max. August accommodation books up fast and prices spike. Need a car, limited public transit. No major towns for evening walks.
       </div>
       <a href="https://maps.google.com/?q=Milos+Greece" target="_blank" class="map-link">&#128205; View on Google Maps</a>
+      <div class="ab-picks">
+        <h4>&#127968; Airbnb Picks &mdash; Adamas &amp; Milos</h4>
+        <div class="table-wrap">
+        <table class="listing-table">
+          <thead><tr><th>Listing</th><th>/Night</th><th>Rating</th></tr></thead>
+          <tbody>
+            <tr><td class="name"><a href="https://www.airbnb.ca/rooms/18958527?checkin=2026-08-22&checkout=2026-08-29&adults=2" target="_blank">Villa Tasoula Couple Studio</a><a class="map-pin" href="https://maps.google.com/?q=Milos+Greece" target="_blank">&#128205;</a></td><td class="price">$245</td><td class="rating">4.99 <span class="reviews">(243)</span> <span class="badge badge-top">TOP</span></td></tr>
+            <tr><td class="name"><a href="https://www.airbnb.ca/rooms/41229702?checkin=2026-08-22&checkout=2026-08-29&adults=2" target="_blank">Aelias House &mdash; Livadi</a><a class="map-pin" href="https://maps.google.com/?q=Livadi+Milos+Greece" target="_blank">&#128205;</a></td><td class="price">$194</td><td class="rating">4.95 <span class="reviews">(43)</span> <span class="badge badge-fav">FAV</span></td></tr>
+            <tr><td class="name"><a href="https://www.airbnb.ca/rooms/51461387?checkin=2026-08-22&checkout=2026-08-29&adults=2" target="_blank">Markos Rooms &mdash; By the Sea</a><a class="map-pin" href="https://maps.google.com/?q=Kinio+Milos+Greece" target="_blank">&#128205;</a></td><td class="price">$129</td><td class="rating">4.97 <span class="reviews">(35)</span> <span class="badge badge-budget">VALUE</span></td></tr>
+          </tbody>
+        </table>
+        </div>
+        <a class="ab-browse" href="https://www.airbnb.ca/s/Milos--Greece/homes?checkin=2026-08-22&checkout=2026-08-29&adults=2&price_max=250&min_bedrooms=1" target="_blank">Browse all Milos Airbnbs &rarr;</a>
+      </div>
     </div>
   </div>
 
@@ -143,6 +205,20 @@
         <strong>Why we didn&rsquo;t pick it:</strong> Not enough for 7 days solo. Best as part of a 2&ndash;3 island itinerary. Getting there from Toronto adds complexity and cost.
       </div>
       <a href="https://maps.google.com/?q=Paros+Greece" target="_blank" class="map-link">&#128205; View on Google Maps</a>
+      <div class="ab-picks">
+        <h4>&#127968; Airbnb Picks &mdash; Parikia &amp; Villages</h4>
+        <div class="table-wrap">
+        <table class="listing-table">
+          <thead><tr><th>Listing</th><th>/Night</th><th>Rating</th></tr></thead>
+          <tbody>
+            <tr><td class="name"><a href="https://www.airbnb.ca/rooms/31943039?checkin=2026-08-22&checkout=2026-08-29&adults=2" target="_blank">Kalami Friends</a><a class="map-pin" href="https://maps.google.com/?q=Paros+Greece" target="_blank">&#128205;</a></td><td class="price">$175</td><td class="rating">4.96 <span class="reviews">(72)</span> <span class="badge badge-top">TOP</span></td></tr>
+            <tr><td class="name"><a href="https://www.airbnb.ca/rooms/35866501?checkin=2026-08-22&checkout=2026-08-29&adults=2" target="_blank">Graphic House &mdash; Cycladic Scenery</a><a class="map-pin" href="https://maps.google.com/?q=Prodromos+Paros+Greece" target="_blank">&#128205;</a></td><td class="price">$170</td><td class="rating">4.9 <span class="reviews">(69)</span> <span class="badge badge-fav">FAV</span></td></tr>
+            <tr><td class="name"><a href="https://www.airbnb.ca/rooms/38999228?checkin=2026-08-22&checkout=2026-08-29&adults=2" target="_blank">Studio with Garden View</a><a class="map-pin" href="https://maps.google.com/?q=Parikia+Paros+Greece" target="_blank">&#128205;</a></td><td class="price">$152</td><td class="rating">4.78 <span class="reviews">(69)</span> <span class="badge badge-budget">VALUE</span></td></tr>
+          </tbody>
+        </table>
+        </div>
+        <a class="ab-browse" href="https://www.airbnb.ca/s/Paros--Greece/homes?checkin=2026-08-22&checkout=2026-08-29&adults=2&price_max=200&min_bedrooms=1" target="_blank">Browse all Paros Airbnbs &rarr;</a>
+      </div>
     </div>
   </div>
 </div>
@@ -166,6 +242,20 @@
         <strong>Why we didn&rsquo;t pick it:</strong> Can be quite resort-touristy outside Old Town. Beaches are nice but don&rsquo;t compete with Balos/Elafonissi. Food scene is decent but not Chania-level.
       </div>
       <a href="https://maps.google.com/?q=Rhodes+Old+Town+Greece" target="_blank" class="map-link">&#128205; View on Google Maps</a>
+      <div class="ab-picks">
+        <h4>&#127968; Airbnb Picks &mdash; Rhodes Town &amp; Coast</h4>
+        <div class="table-wrap">
+        <table class="listing-table">
+          <thead><tr><th>Listing</th><th>/Night</th><th>Rating</th></tr></thead>
+          <tbody>
+            <tr><td class="name"><a href="https://www.airbnb.ca/rooms/591978243698141048?checkin=2026-08-22&checkout=2026-08-29&adults=2" target="_blank">Brand New Cozy B2 Studio</a><a class="map-pin" href="https://maps.google.com/?q=Rhodes+Town+Greece" target="_blank">&#128205;</a></td><td class="price">$129</td><td class="rating">4.97 <span class="reviews">(75)</span> <span class="badge badge-top">TOP</span></td></tr>
+            <tr><td class="name"><a href="https://www.airbnb.ca/rooms/3385456?checkin=2026-08-22&checkout=2026-08-29&adults=2" target="_blank">&ldquo;Tsampika&rdquo; Traditional Home</a><a class="map-pin" href="https://maps.google.com/?q=Archangelos+Rhodes+Greece" target="_blank">&#128205;</a></td><td class="price">$162</td><td class="rating">5.0 <span class="reviews">(70)</span> <span class="badge badge-fav">5.0</span></td></tr>
+            <tr><td class="name"><a href="https://www.airbnb.ca/rooms/607804697466880053?checkin=2026-08-22&checkout=2026-08-29&adults=2" target="_blank">City Apartment 2</a><a class="map-pin" href="https://maps.google.com/?q=Rhodes+City+Greece" target="_blank">&#128205;</a></td><td class="price">$130</td><td class="rating">4.9 <span class="reviews">(41)</span> <span class="badge badge-budget">VALUE</span></td></tr>
+          </tbody>
+        </table>
+        </div>
+        <a class="ab-browse" href="https://www.airbnb.ca/s/Rhodes-Town--Rhodes--Greece/homes?checkin=2026-08-22&checkout=2026-08-29&adults=2&price_max=150&min_bedrooms=1" target="_blank">Browse all Rhodes Airbnbs &rarr;</a>
+      </div>
     </div>
   </div>
 
@@ -183,6 +273,20 @@
         <strong>Why we didn&rsquo;t pick it:</strong> Less &ldquo;Greek island&rdquo; feeling. Beaches can&rsquo;t match Crete&rsquo;s world-famous ones. More rain in August than Crete (still rare). Food is good but not exceptional.
       </div>
       <a href="https://maps.google.com/?q=Corfu+Old+Town+Greece" target="_blank" class="map-link">&#128205; View on Google Maps</a>
+      <div class="ab-picks">
+        <h4>&#127968; Airbnb Picks &mdash; Corfu Island</h4>
+        <div class="table-wrap">
+        <table class="listing-table">
+          <thead><tr><th>Listing</th><th>/Night</th><th>Rating</th></tr></thead>
+          <tbody>
+            <tr><td class="name"><a href="https://www.airbnb.ca/rooms/781019352053114523?checkin=2026-08-22&checkout=2026-08-29&adults=2" target="_blank">The Apartment &mdash; Corfu</a><a class="map-pin" href="https://maps.google.com/?q=Corfu+Greece" target="_blank">&#128205;</a></td><td class="price">$124</td><td class="rating">4.97 <span class="reviews">(61)</span> <span class="badge badge-top">TOP</span></td></tr>
+            <tr><td class="name"><a href="https://www.airbnb.ca/rooms/691014225830750716?checkin=2026-08-22&checkout=2026-08-29&adults=2" target="_blank">Studio C5 with a View</a><a class="map-pin" href="https://maps.google.com/?q=Kassiopi+Corfu+Greece" target="_blank">&#128205;</a></td><td class="price">$143</td><td class="rating">5.0 <span class="reviews">(29)</span> <span class="badge badge-fav">5.0</span></td></tr>
+            <tr><td class="name"><a href="https://www.airbnb.ca/rooms/1387768634156286216?checkin=2026-08-22&checkout=2026-08-29&adults=2" target="_blank">Spiro&rsquo;s Nest &mdash; Pelekas</a><a class="map-pin" href="https://maps.google.com/?q=Pelekas+Corfu+Greece" target="_blank">&#128205;</a></td><td class="price">$98</td><td class="rating">4.76 <span class="reviews">(17)</span> <span class="badge badge-budget">CHEAP</span></td></tr>
+          </tbody>
+        </table>
+        </div>
+        <a class="ab-browse" href="https://www.airbnb.ca/s/Corfu--Greece/homes?checkin=2026-08-22&checkout=2026-08-29&adults=2&price_max=150&min_bedrooms=1" target="_blank">Browse all Corfu Airbnbs &rarr;</a>
+      </div>
     </div>
   </div>
 </div>
@@ -206,6 +310,20 @@
         <strong>Why Chania is better:</strong> Chania has a bigger harbour, more restaurant variety, closer to Balos/Elafonissi/Samaria, and the Venetian Quarter is more atmospheric.
       </div>
       <a href="https://maps.google.com/?q=Rethymno+Old+Town+Crete" target="_blank" class="map-link">&#128205; View on Google Maps</a>
+      <div class="ab-picks">
+        <h4>&#127968; Airbnb Picks &mdash; Rethymno Old Town</h4>
+        <div class="table-wrap">
+        <table class="listing-table">
+          <thead><tr><th>Listing</th><th>/Night</th><th>Rating</th></tr></thead>
+          <tbody>
+            <tr><td class="name"><a href="https://www.airbnb.ca/rooms/12130724?checkin=2026-08-22&checkout=2026-08-29&adults=2" target="_blank">Artemis Seafront Apartments</a><a class="map-pin" href="https://maps.google.com/?q=Petres+Rethymno+Crete" target="_blank">&#128205;</a></td><td class="price">$140</td><td class="rating">4.96 <span class="reviews">(73)</span> <span class="badge badge-top">TOP</span></td></tr>
+            <tr><td class="name"><a href="https://www.airbnb.ca/rooms/43290543?checkin=2026-08-22&checkout=2026-08-29&adults=2" target="_blank">Cookie in the Yard</a><a class="map-pin" href="https://maps.google.com/?q=Rethymno+Crete+Greece" target="_blank">&#128205;</a></td><td class="price">$98</td><td class="rating">4.93 <span class="reviews">(74)</span> <span class="badge badge-fav">FAV</span></td></tr>
+            <tr><td class="name"><a href="https://www.airbnb.ca/rooms/18953502?checkin=2026-08-22&checkout=2026-08-29&adults=2" target="_blank">New Apartment in Centre</a><a class="map-pin" href="https://maps.google.com/?q=Rethymno+Centre+Crete" target="_blank">&#128205;</a></td><td class="price">$104</td><td class="rating">4.87 <span class="reviews">(103)</span> <span class="badge badge-budget">VALUE</span></td></tr>
+          </tbody>
+        </table>
+        </div>
+        <a class="ab-browse" href="https://www.airbnb.ca/s/Rethymno--Crete--Greece/homes?checkin=2026-08-22&checkout=2026-08-29&adults=2&price_max=150&min_bedrooms=1" target="_blank">Browse all Rethymno Airbnbs &rarr;</a>
+      </div>
     </div>
   </div>
 
@@ -223,6 +341,9 @@
         <strong>Why Chania is better:</strong> Heraklion city is not charming &mdash; it&rsquo;s a working city, not a vacation destination. Far from western Crete&rsquo;s best beaches. You can visit Knossos as a day trip from Chania if you want.
       </div>
       <a href="https://maps.google.com/?q=Heraklion+Crete" target="_blank" class="map-link">&#128205; View on Google Maps</a>
+      <div class="ab-picks">
+        <a class="ab-browse" href="https://www.airbnb.ca/s/Heraklion--Crete--Greece/homes?checkin=2026-08-22&checkout=2026-08-29&adults=2&price_max=130&min_bedrooms=1" target="_blank">&#127968; Browse Heraklion Airbnbs from $80/night &rarr;</a>
+      </div>
     </div>
   </div>
 
@@ -240,6 +361,9 @@
         <strong>Why Chania is better:</strong> Much less restaurant/nightlife variety. Eastern Crete beaches are nice but not world-class like Balos/Elafonissi. Far from Samaria Gorge. Harder to get to from Toronto (fly to HER then drive).
       </div>
       <a href="https://maps.google.com/?q=Agios+Nikolaos+Crete" target="_blank" class="map-link">&#128205; View on Google Maps</a>
+      <div class="ab-picks">
+        <a class="ab-browse" href="https://www.airbnb.ca/s/Agios-Nikolaos--Crete--Greece/homes?checkin=2026-08-22&checkout=2026-08-29&adults=2&price_max=120&min_bedrooms=1" target="_blank">&#127968; Browse Agios Nikolaos Airbnbs from $80/night &rarr;</a>
+      </div>
     </div>
   </div>
 </div>
@@ -262,6 +386,9 @@
         Only accessible by boat or on foot &mdash; this is what Greek islands felt like 30 years ago. Crystal-clear water, whitewashed buildings, zero cars, zero noise. Kayak to Sweetwater Beach (<a href="https://maps.google.com/?q=Sweetwater+Beach+Crete" target="_blank">Maps</a>). Hike to Marmara Beach. Perfect for 2&ndash;3 nights of total disconnection.
       </div>
       <a href="https://maps.google.com/?q=Loutro+Crete" target="_blank" class="map-link">&#128205; View on Google Maps</a>
+      <div class="ab-picks">
+        <a class="ab-browse" href="https://www.airbnb.ca/s/Loutro--Crete--Greece/homes?checkin=2026-08-22&checkout=2026-08-29&adults=2&min_bedrooms=1" target="_blank">&#127968; Browse Loutro Airbnbs &rarr;</a>
+      </div>
     </div>
   </div>
 
@@ -278,6 +405,9 @@
         Plakias has a long sandy beach, good tavernas, and a relaxed hippie feel. Preveli Beach (<a href="https://maps.google.com/?q=Preveli+Beach+Crete" target="_blank">Maps</a>) has a river lined with palm trees flowing into the sea &mdash; otherworldly. Damnoni Beach nearby is excellent. Good for budget-minded travellers.
       </div>
       <a href="https://maps.google.com/?q=Plakias+Crete" target="_blank" class="map-link">&#128205; View on Google Maps</a>
+      <div class="ab-picks">
+        <a class="ab-browse" href="https://www.airbnb.ca/s/Plakias--Crete--Greece/homes?checkin=2026-08-22&checkout=2026-08-29&adults=2&price_max=90&min_bedrooms=1" target="_blank">&#127968; Browse Plakias Airbnbs from $50/night &rarr;</a>
+      </div>
     </div>
   </div>
 
@@ -294,6 +424,9 @@
         Famous caves in the cliff where hippies lived in the 1960s&ndash;70s (Joni Mitchell wrote &ldquo;Carey&rdquo; here). Red Beach is a short hike over the headland. Annual beach festival in June. Very relaxed, cheap, and authentically weird. Not for everyone, but memorable.
       </div>
       <a href="https://maps.google.com/?q=Matala+Crete" target="_blank" class="map-link">&#128205; View on Google Maps</a>
+      <div class="ab-picks">
+        <a class="ab-browse" href="https://www.airbnb.ca/s/Matala--Crete--Greece/homes?checkin=2026-08-22&checkout=2026-08-29&adults=2&price_max=80&min_bedrooms=1" target="_blank">&#127968; Browse Matala Airbnbs from $50/night &rarr;</a>
+      </div>
     </div>
   </div>
 </div>
@@ -320,6 +453,19 @@
         <a href="https://maps.google.com/?q=Plaka+Athens" target="_blank" class="map-link">&#128205; Plaka</a>
         <a href="https://maps.google.com/?q=Monastiraki+Athens" target="_blank" class="map-link">&#128205; Monastiraki</a>
         <a href="https://maps.google.com/?q=Anafiotika+Athens" target="_blank" class="map-link">&#128205; Anafiotika</a>
+      </div>
+      <div class="ab-picks">
+        <h4>&#127968; Airbnb Picks &mdash; Plaka / Monastiraki</h4>
+        <div class="table-wrap">
+        <table class="listing-table">
+          <thead><tr><th>Listing</th><th>/Night</th><th>Rating</th></tr></thead>
+          <tbody>
+            <tr><td class="name"><a href="https://www.airbnb.ca/rooms/54368883?checkin=2026-08-22&checkout=2026-08-24&adults=2" target="_blank">Sunny Studio Near Metro</a><a class="map-pin" href="https://maps.google.com/?q=Glyfada+Athens+Greece" target="_blank">&#128205;</a></td><td class="price">$116</td><td class="rating">4.97 <span class="reviews">(31)</span> <span class="badge badge-top">TOP</span></td></tr>
+            <tr><td class="name"><a href="https://www.airbnb.ca/rooms/35278899?checkin=2026-08-22&checkout=2026-08-24&adults=2" target="_blank">Kalliopi&rsquo;s Apartment</a><a class="map-pin" href="https://maps.google.com/?q=Ilioupoli+Athens+Greece" target="_blank">&#128205;</a></td><td class="price">$93</td><td class="rating">4.87 <span class="reviews">(171)</span> <span class="badge badge-budget">VALUE</span></td></tr>
+          </tbody>
+        </table>
+        </div>
+        <a class="ab-browse" href="https://www.airbnb.ca/s/Athens--Greece/homes?checkin=2026-08-22&checkout=2026-08-24&adults=2&price_max=150&min_bedrooms=1" target="_blank">Browse all Athens Airbnbs &rarr;</a>
       </div>
     </div>
   </div>
