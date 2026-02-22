@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Restaurant Guide — Where to Eat Near Scala — Amalfi Coast 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+  :root {
+    --ocean: #0077b6; --ocean-dark: #023e8a; --ocean-light: #00b4d8;
+    --sand: #f5e6d3; --sunset: #ff6b35; --coral: #e63946;
+    --palm: #2d6a4f; --dark: #1a1a2e; --gray: #6b7280;
+    --light: #f8fafc; --white: #ffffff; --gold: #f59e0b;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: var(--light); color: var(--dark); line-height: 1.7; }
+
+  .hero { background: linear-gradient(135deg, #1a472a 0%, #023e8a 50%, var(--ocean) 100%); color: white; padding: 60px 24px 50px; text-align: center; }
+  .hero h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 900; margin-bottom: 8px; }
+  .hero p { font-size: 1rem; opacity: 0.85; max-width: 640px; margin: 0 auto 20px; }
+  .hero-stats { display: flex; gap: 28px; justify-content: center; flex-wrap: wrap; margin-top: 16px; }
+  .hero-stat { text-align: center; }
+  .hero-stat .num { font-size: 1.5rem; font-weight: 900; }
+  .hero-stat .label { font-size: 0.72rem; opacity: 0.7; }
+
+  .container { max-width: 860px; margin: 0 auto; padding: 0 20px; }
+  .section { padding: 32px 0; }
+  .section h2 { font-size: 1.35rem; font-weight: 800; margin-bottom: 4px; color: var(--ocean-dark); }
+  .section .sub { color: var(--gray); font-size: 0.85rem; margin-bottom: 16px; }
+
+  .verdict-bar { background: linear-gradient(135deg, var(--sunset), var(--coral)); color: white; border-radius: 14px; padding: 24px; margin: -28px auto 0; position: relative; z-index: 10; max-width: 860px; box-shadow: 0 10px 30px rgba(230,57,70,0.2); text-align: center; }
+  .verdict-bar h2 { color: white; font-size: 1.3rem; font-weight: 900; margin-bottom: 6px; }
+  .verdict-bar p { font-size: 0.92rem; opacity: 0.92; margin: 0; }
+
+  .card { background: white; border-radius: 14px; padding: 24px; margin-bottom: 16px; box-shadow: 0 3px 12px rgba(0,0,0,0.05); }
+  .card h3 { font-size: 1.1rem; font-weight: 800; margin-bottom: 4px; }
+  .card .card-sub { color: var(--gray); font-size: 0.82rem; margin-bottom: 12px; }
+
+  .tip { border-radius: 10px; padding: 12px 14px; font-size: 0.82rem; margin: 10px 0; line-height: 1.5; }
+  .tip-money { background: #dcfce7; border-left: 4px solid var(--palm); }
+  .tip-warn { background: #fef3c7; border-left: 4px solid var(--gold); }
+  .tip-pro { background: #dbeafe; border-left: 4px solid var(--ocean); }
+  .tip-info { background: #dbeafe; border-left: 4px solid var(--ocean); }
+  .tip strong { font-weight: 700; }
+
+  /* Restaurant table */
+  .rest-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 0.82rem; margin: 14px 0; }
+  .rest-table thead th { background: var(--ocean-dark); color: white; padding: 10px 12px; text-align: left; font-weight: 700; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.5px; }
+  .rest-table thead th:first-child { border-radius: 10px 0 0 0; }
+  .rest-table thead th:last-child { border-radius: 0 10px 0 0; }
+  .rest-table tbody td { padding: 10px 12px; border-bottom: 1px solid #f0f0f0; vertical-align: middle; }
+  .rest-table tbody tr:last-child td { border-bottom: none; }
+  .rest-table tbody tr:hover { background: #f0f7ff; }
+  .rest-table .name { font-weight: 800; }
+  .rest-table .cuisine { font-size: 0.78rem; color: var(--gray); }
+  .rest-table .price { font-weight: 800; color: var(--ocean-dark); white-space: nowrap; }
+  .rest-table .reviews { font-size: 0.78rem; color: var(--gray); font-weight: 600; }
+  .rest-table .badge { display: inline-block; font-size: 0.62rem; font-weight: 800; padding: 2px 7px; border-radius: 6px; margin-left: 4px; vertical-align: middle; white-space: nowrap; }
+  .badge-michelin { background: #fce7f3; color: #9d174d; }
+  .badge-tc { background: #dcfce7; color: var(--palm); }
+  .badge-budget { background: #dbeafe; color: var(--ocean-dark); }
+  .badge-top { background: #fef3c7; color: #92400e; }
+  .badge-splurge { background: #fce7f3; color: #9d174d; }
+
+  /* Pick cards */
+  .pick-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin: 16px 0; }
+  .pick { background: white; border-radius: 14px; padding: 20px; box-shadow: 0 3px 12px rgba(0,0,0,0.05); border-top: 4px solid var(--ocean); }
+  .pick.budget { border-top-color: var(--palm); }
+  .pick.splurge { border-top-color: var(--coral); }
+  .pick.local { border-top-color: var(--gold); }
+  .pick .pick-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 800; margin-bottom: 6px; }
+  .pick.budget .pick-label { color: var(--palm); }
+  .pick.splurge .pick-label { color: var(--coral); }
+  .pick.local .pick-label { color: var(--gold); }
+  .pick .pick-name { font-size: 1rem; font-weight: 800; margin-bottom: 2px; }
+  .pick .pick-detail { font-size: 0.82rem; color: #555; margin-bottom: 2px; }
+  .pick .pick-price { font-size: 0.92rem; font-weight: 700; color: var(--ocean-dark); }
+  .pick .pick-order { font-size: 0.78rem; color: var(--gray); margin-top: 4px; font-style: italic; }
+
+  /* Town sections */
+  .town-header { display: flex; align-items: baseline; gap: 12px; margin-bottom: 4px; flex-wrap: wrap; }
+  .town-header h2 { margin-bottom: 0; }
+  .town-badge { font-size: 0.72rem; font-weight: 700; background: var(--ocean-dark); color: white; padding: 3px 10px; border-radius: 20px; white-space: nowrap; }
+
+  /* Dish cards */
+  .dish-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin: 16px 0; }
+  .dish { background: white; border-radius: 14px; padding: 18px; box-shadow: 0 3px 12px rgba(0,0,0,0.05); }
+  .dish .dish-emoji { font-size: 1.6rem; margin-bottom: 6px; }
+  .dish .dish-name { font-size: 0.95rem; font-weight: 800; margin-bottom: 2px; }
+  .dish .dish-desc { font-size: 0.8rem; color: #555; margin-bottom: 4px; }
+  .dish .dish-where { font-size: 0.75rem; color: var(--ocean); font-weight: 600; }
+
+  /* Walk list */
+  .walk-list { list-style: none; }
+  .walk-list li { padding: 8px 0; border-bottom: 1px solid #f0f0f0; font-size: 0.85rem; display: flex; gap: 8px; align-items: baseline; }
+  .walk-list li:last-child { border-bottom: none; }
+  .walk-list .dist { font-weight: 800; color: var(--ocean-dark); min-width: 50px; font-size: 0.78rem; }
+
+  /* Comparison grid */
+  .vs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 14px 0; }
+  .vs-card { background: white; border-radius: 14px; padding: 20px; box-shadow: 0 3px 12px rgba(0,0,0,0.05); }
+  .vs-card h4 { font-size: 0.95rem; font-weight: 800; margin-bottom: 10px; }
+  .vs-card ul { list-style: none; font-size: 0.82rem; }
+  .vs-card ul li { padding: 3px 0; }
+  .vs-card ul li::before { content: "✓ "; color: var(--palm); font-weight: 700; }
+
+  @media (max-width: 600px) {
+    .vs-grid { grid-template-columns: 1fr; }
+    .rest-table { font-size: 0.75rem; }
+    .rest-table thead th, .rest-table tbody td { padding: 7px 8px; }
+    .pick-grid { grid-template-columns: 1fr; }
+  }
+
+  /* Back link */
+  .back { display: inline-block; margin: 24px 0 0; color: var(--ocean); font-weight: 700; text-decoration: none; font-size: 0.85rem; }
+  .back:hover { text-decoration: underline; }
+
+  footer { background: var(--dark); color: rgba(255,255,255,0.6); text-align: center; padding: 24px 20px; font-size: 0.78rem; margin-top: 20px; }
+  footer a { color: var(--ocean-light); }
+</style>
+</head>
+<body>
+
+<!-- ======== HERO ======== -->
+<div class="hero">
+  <h1>&#127869; Where to Eat</h1>
+  <p>The definitive restaurant &amp; food guide for your week in Scala — every town within reach, from cheap pizza to Michelin stars.</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="num">50+</div><div class="label">Restaurants Reviewed</div></div>
+    <div class="hero-stat"><div class="num">4</div><div class="label">Towns Covered</div></div>
+    <div class="hero-stat"><div class="num">4</div><div class="label">Michelin Stars Nearby</div></div>
+    <div class="hero-stat"><div class="num">&#8364;8&ndash;45</div><div class="label">Per Person Range</div></div>
+  </div>
+</div>
+
+<!-- ======== VERDICT BAR ======== -->
+<div class="container">
+<div class="verdict-bar">
+  <h2>&#127828; Bottom Line: You'll Eat Like Royalty</h2>
+  <p>Scala sits between Ravello &amp; Amalfi — two of the coast's best food towns. Budget &#8364;25&ndash;40/person for a full dinner with wine. Pizza slices from &#8364;4, a proper seafood dinner from &#8364;30. Michelin tasting menus start around &#8364;120.</p>
+</div>
+
+<!-- ======== TOP PICKS OVERVIEW ======== -->
+<div class="section">
+  <h2>&#127942; Our Top Picks at a Glance</h2>
+  <p class="sub">The best restaurants for every mood and budget — all within 15 min of your Airbnb</p>
+
+  <div class="pick-grid">
+    <div class="pick budget">
+      <div class="pick-label">&#128176; Best Cheap Eat</div>
+      <div class="pick-name">Pizzeria A Gradillo</div>
+      <div class="pick-detail">Ravello — Pizza &amp; pasta</div>
+      <div class="pick-price">$ &middot; from &#8364;8/person</div>
+      <div class="pick-order">Order: Margherita DOC, eggplant parmigiana</div>
+    </div>
+    <div class="pick splurge">
+      <div class="pick-label">&#127775; Best Splurge</div>
+      <div class="pick-name">Sensi Restaurant</div>
+      <div class="pick-detail">Amalfi — 1 Michelin Star</div>
+      <div class="pick-price">$$$$ &middot; ~&#8364;120 tasting menu</div>
+      <div class="pick-order">Order: 6-course tasting with wine pairing</div>
+    </div>
+    <div class="pick local">
+      <div class="pick-label">&#128171; Best Overall</div>
+      <div class="pick-name">Taverna Buonvicino</div>
+      <div class="pick-detail">Amalfi — Italian/Pizza</div>
+      <div class="pick-price">$$&ndash;$$$ &middot; ~&#8364;25&ndash;35/person</div>
+      <div class="pick-order">Order: Mussels marinara, tuna steak, scialatielli</div>
+    </div>
+  </div>
+
+  <div class="pick-grid">
+    <div class="pick budget">
+      <div class="pick-label">&#127829; Best Pizza</div>
+      <div class="pick-name">Mim&igrave; Ristorante Pizzeria</div>
+      <div class="pick-detail">Ravello — 2,380 reviews &middot; $$</div>
+      <div class="pick-price">$$&ndash;$$$ &middot; ~&#8364;15&ndash;25/person</div>
+      <div class="pick-order">Order: "Pizza like a cloud" — try the bruschetta &amp; octopus salad</div>
+    </div>
+    <div class="pick splurge">
+      <div class="pick-label">&#129438; Best Seafood</div>
+      <div class="pick-name">Da Ciccio Cielo Mare E Terra</div>
+      <div class="pick-detail">Amalfi — 1,489 reviews &middot; $$$$</div>
+      <div class="pick-price">$$$$ &middot; ~&#8364;50&ndash;70/person</div>
+      <div class="pick-order">Order: Seafood pasta "in a bag" — the signature dish</div>
+    </div>
+    <div class="pick local">
+      <div class="pick-label">&#127793; Best Farm-to-Table</div>
+      <div class="pick-name">Agricola Fore Porta</div>
+      <div class="pick-detail">Amalfi — 332 reviews &middot; 4.8/5</div>
+      <div class="pick-price">$$&ndash;$$$ &middot; ~&#8364;25&ndash;35/person</div>
+      <div class="pick-order">Order: Tomato bruschetta, fresh pasta, homemade dessert</div>
+    </div>
+  </div>
+</div>
+
+<!-- ======== SCALA — HOME BASE ======== -->
+<div class="section">
+  <div class="town-header">
+    <h2>&#127968; Scala — Your Home Base</h2>
+    <span class="town-badge">0 min from Airbnb</span>
+  </div>
+  <p class="sub">A tiny hilltop village — limited dining, but what's here is authentic and peaceful</p>
+
+  <div class="card">
+    <h3>Ristorante Zi'Ntonio</h3>
+    <div class="card-sub">End of Via Torricella &middot; Steps from your Airbnb</div>
+    <p style="font-size:0.88rem;">The closest restaurant to "Windows on Heaven." Authentic Campanian cuisine in a family-run spot perched on the hillside. Known for traditional pasta dishes, local vegetables, and homemade limoncello. No frills — just proper Italian home cooking with a killer view.</p>
+    <div class="tip tip-money"><strong>&#128176; Budget:</strong> $$&ndash;$$$ &middot; Expect &#8364;20&ndash;35/person for a full meal with wine.</div>
+    <div class="tip tip-pro"><strong>&#9733; Order this:</strong> Ask for whatever's fresh that day. Pasta with local vegetables, grilled meat, and finish with delizia al limone.</div>
+  </div>
+
+  <div class="card">
+    <h3>Da Lorenzo</h3>
+    <div class="card-sub">Scala centro &middot; ~5 min walk</div>
+    <p style="font-size:0.88rem;">Another local gem in Scala's tiny piazza. Small, family-run trattoria serving classic Southern Italian dishes. Fewer tourists here than anywhere on the coast — you'll be eating with actual locals.</p>
+    <div class="tip tip-money"><strong>&#128176; Budget:</strong> $$&ndash;$$$ &middot; Similar pricing, &#8364;20&ndash;30/person.</div>
+  </div>
+
+  <div class="tip tip-warn"><strong>&#9888; Heads up:</strong> Scala has very limited dining options. Most evenings you'll want to walk to Ravello (10 min) or drive/bus to Amalfi (15 min). No food delivery services reach Scala.</div>
+</div>
+
+<!-- ======== RAVELLO ======== -->
+<div class="section">
+  <div class="town-header">
+    <h2><img src="https://flagcdn.com/20x15/it.png" alt="IT" style="vertical-align:middle;margin-right:4px;"> Ravello</h2>
+    <span class="town-badge">10 min walk from Scala</span>
+  </div>
+  <p class="sub">Your closest food town — 30 restaurants within walking distance, from &#8364;8 pizza to Michelin stars</p>
+
+  <!-- Top 15 Ravello table -->
+  <table class="rest-table">
+    <thead><tr><th>#</th><th>Restaurant</th><th>Cuisine</th><th>Price</th><th>Reviews</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td><span class="name">Mim&igrave; Ristorante Pizzeria</span></td>
+        <td><span class="cuisine">Italian, Pizza</span></td>
+        <td class="price">$$&ndash;$$$</td>
+        <td class="reviews">2,380</td>
+        <td><span class="badge badge-tc">TC 2025</span> "Pizza like a cloud"</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td><span class="name">Da Nonno Alfonso</span></td>
+        <td><span class="cuisine">Italian, Pizza</span></td>
+        <td class="price">$$&ndash;$$$</td>
+        <td class="reviews">100</td>
+        <td>Eggplant parmigiana, local vibe</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td><span class="name">Il Flauto di Pan</span></td>
+        <td><span class="cuisine">Italian, Seafood</span></td>
+        <td class="price">$$$$</td>
+        <td class="reviews">531</td>
+        <td><span class="badge badge-michelin">MICHELIN</span> Seafood tasting menu</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td><span class="name">Vittoria</span></td>
+        <td><span class="cuisine">Italian, Pizza</span></td>
+        <td class="price">$$&ndash;$$$</td>
+        <td class="reviews">1,146</td>
+        <td>Squid, octopus, sea bass, pizza</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td><span class="name">Salvatore Ravello 1958</span></td>
+        <td><span class="cuisine">Italian, Seafood</span></td>
+        <td class="price">$$&ndash;$$$</td>
+        <td class="reviews">861</td>
+        <td>"Innovative tiramisu!" &middot; Bread crisp amuse</td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td><span class="name">Villa Maria Restaurant</span></td>
+        <td><span class="cuisine">Italian, Mediterranean</span></td>
+        <td class="price">$$&ndash;$$$</td>
+        <td class="reviews">1,264</td>
+        <td>Garden terrace, classic pasta</td>
+      </tr>
+      <tr>
+        <td>7</td>
+        <td><span class="name">Rossellinis Restaurant</span></td>
+        <td><span class="cuisine">Italian, Seafood</span></td>
+        <td class="price">$$$$</td>
+        <td class="reviews">407</td>
+        <td><span class="badge badge-michelin">1 MICHELIN &#9733;</span> Fine dining at Hotel Palazzo Avino</td>
+      </tr>
+      <tr>
+        <td>8</td>
+        <td><span class="name">Babel Wine Bar Deli &amp; Art</span></td>
+        <td><span class="cuisine">Wine Bar</span></td>
+        <td class="price">$$&ndash;$$$</td>
+        <td class="reviews">464</td>
+        <td><span class="badge badge-tc">TC 2025</span> Lemon cake &amp; tiramisu</td>
+      </tr>
+      <tr>
+        <td>9</td>
+        <td><span class="name">Enotavola — Palazzo Della Marra</span></td>
+        <td><span class="cuisine">Italian, Mediterranean</span></td>
+        <td class="price">$$&ndash;$$$</td>
+        <td class="reviews">517</td>
+        <td>Great wine list, returned for dinner</td>
+      </tr>
+      <tr>
+        <td>10</td>
+        <td><span class="name">Bella Vista Sul Mare</span></td>
+        <td><span class="cuisine">Italian, Seafood</span></td>
+        <td class="price">$$&ndash;$$$</td>
+        <td class="reviews">472</td>
+        <td>Old building, romantic, great views</td>
+      </tr>
+      <tr>
+        <td>12</td>
+        <td><span class="name">Cumpa' Cosimo</span></td>
+        <td><span class="cuisine">Italian, Neapolitan</span></td>
+        <td class="price">$$&ndash;$$$</td>
+        <td class="reviews">2,574</td>
+        <td>Bolognese, veal limoncello, tiramisu</td>
+      </tr>
+      <tr>
+        <td>14</td>
+        <td><span class="name">L'Antica Cartiera</span></td>
+        <td><span class="cuisine">Italian, Seafood</span></td>
+        <td class="price">$$$$</td>
+        <td class="reviews">387</td>
+        <td>By the sea, romantic, "almost fine dining"</td>
+      </tr>
+      <tr>
+        <td>26</td>
+        <td><span class="name">La Vecchia Cantina</span></td>
+        <td><span class="cuisine">Italian, Pizza</span></td>
+        <td class="price">$$&ndash;$$$</td>
+        <td class="reviews">590</td>
+        <td>Edge of Ravello — great first-night spot</td>
+      </tr>
+      <tr>
+        <td>28</td>
+        <td><span class="name">Sisina's Snack Bar</span></td>
+        <td><span class="cuisine">Cafe</span></td>
+        <td class="price">$</td>
+        <td class="reviews">107</td>
+        <td><span class="badge badge-budget">CHEAP EAT</span> Excellent coffee, friendly</td>
+      </tr>
+      <tr>
+        <td>29</td>
+        <td><span class="name">Pizzeria A Gradillo</span></td>
+        <td><span class="cuisine">Italian, Pizza</span></td>
+        <td class="price">$</td>
+        <td class="reviews">46</td>
+        <td><span class="badge badge-budget">CHEAP EAT</span> Gnocchi, marinara pizza, &#8364;8&ndash;12</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="tip tip-money"><strong>&#128176; Ravello price guide:</strong> Budget pizza &amp; pasta &#8364;8&ndash;15 (A Gradillo, Sisina's). Mid-range full dinner &#8364;25&ndash;40 (Mim&igrave;, Cumpa' Cosimo, Villa Maria). Splurge &#8364;80&ndash;150+ (Rossellinis, Il Flauto di Pan).</div>
+
+  <div class="card" style="margin-top:16px;">
+    <h3>&#9733; Ravello Must-Visits</h3>
+    <div class="card-sub">Our top 3 recommendations for your week</div>
+    <p style="font-size:0.88rem;"><strong>Mim&igrave; Ristorante Pizzeria</strong> — The #1 restaurant in Ravello for good reason. 2,380 reviews, Travelers' Choice 2025. Their pizza dough is legendarily light ("like a cloud"). Start with the bruschetta and octopus salad, then a margherita or seafood pizza. &#8364;15&ndash;25/person. Go early — it gets packed.</p>
+    <p style="font-size:0.88rem;margin-top:8px;"><strong>Cumpa' Cosimo</strong> — The most-reviewed restaurant in Ravello (2,574 reviews). A Ravello institution since forever. Old-school Neapolitan/Campanian food. Try the bolognese, the veal with limoncello, and definitely the tiramisu. &#8364;20&ndash;35/person.</p>
+    <p style="font-size:0.88rem;margin-top:8px;"><strong>Babel Wine Bar Deli &amp; Art</strong> — Perfect for a lighter evening. Great wine selection, charcuterie boards, and their lemon cake is incredible. More relaxed vibe than a full restaurant. Travelers' Choice 2025. &#8364;15&ndash;30/person.</p>
+  </div>
+
+  <div class="tip tip-pro"><strong>&#128161; Local tip:</strong> <strong>Caseificio Staiano</strong> offers mozzarella-making classes in Ravello. 48 reviews, all raving. A unique Amalfi Coast experience — learn to make fresh mozzarella and eat it right there.</div>
+</div>
+
+<!-- ======== AMALFI TOWN ======== -->
+<div class="section">
+  <div class="town-header">
+    <h2><img src="https://flagcdn.com/20x15/it.png" alt="IT" style="vertical-align:middle;margin-right:4px;"> Amalfi Town</h2>
+    <span class="town-badge">15 min by car/bus</span>
+  </div>
+  <p class="sub">The coast's main town — 60+ restaurants from street food to 3 Michelin-starred spots</p>
+
+  <table class="rest-table">
+    <thead><tr><th>#</th><th>Restaurant</th><th>Cuisine</th><th>Price</th><th>Reviews</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td><span class="name">Taverna Buonvicino</span></td>
+        <td><span class="cuisine">Italian, Pizza</span></td>
+        <td class="price">$$&ndash;$$$</td>
+        <td class="reviews">1,869</td>
+        <td><span class="badge badge-tc">TC 2025</span> Mussels, tuna, beautiful pastas</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td><span class="name">Da Ciccio Cielo Mare E Terra</span></td>
+        <td><span class="cuisine">Italian, Seafood</span></td>
+        <td class="price">$$$$</td>
+        <td class="reviews">1,489</td>
+        <td><span class="badge badge-tc">TC 2025</span> "Seafood pasta in a bag"</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td><span class="name">Restaurant Marina Grande</span></td>
+        <td><span class="cuisine">Italian, Seafood</span></td>
+        <td class="price">$$$$</td>
+        <td class="reviews">1,928</td>
+        <td><span class="badge badge-michelin">MICHELIN</span> Famous lobster pasta</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td><span class="name">Ristorante L'Abside</span></td>
+        <td><span class="cuisine">Italian, Seafood</span></td>
+        <td class="price">$$&ndash;$$$</td>
+        <td class="reviews">2,322</td>
+        <td><span class="badge badge-tc">TC 2025</span> Seafood pasta, homemade desserts</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td><span class="name">Agricola Fore Porta</span></td>
+        <td><span class="cuisine">Italian, Mediterranean</span></td>
+        <td class="price">$$&ndash;$$$</td>
+        <td class="reviews">332</td>
+        <td><span class="badge badge-tc">TC 2025</span> <span class="badge badge-top">4.8/5</span> Farm-to-table</td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td><span class="name">Sensi Restaurant</span></td>
+        <td><span class="cuisine">Italian, Seafood</span></td>
+        <td class="price">$$$$</td>
+        <td class="reviews">496</td>
+        <td><span class="badge badge-michelin">1 MICHELIN &#9733;</span> 6-course tasting menu</td>
+      </tr>
+      <tr>
+        <td>7</td>
+        <td><span class="name">Baglio Amalfi Italian Bistr&ograve;</span></td>
+        <td><span class="cuisine">Italian, Seafood</span></td>
+        <td class="price">$$&ndash;$$$</td>
+        <td class="reviews">788</td>
+        <td><span class="badge badge-tc">TC 2025</span> Family-run, cosy, 4.8/5</td>
+      </tr>
+      <tr>
+        <td>8</td>
+        <td><span class="name">Il Tar&igrave; Art Restaurant</span></td>
+        <td><span class="cuisine">Italian, Seafood</span></td>
+        <td class="price">$$&ndash;$$$</td>
+        <td class="reviews">1,812</td>
+        <td>Octopus, clams, mussels, shrimp</td>
+      </tr>
+      <tr>
+        <td>9</td>
+        <td><span class="name">Taverna degli Apostoli</span></td>
+        <td><span class="cuisine">Italian, Seafood</span></td>
+        <td class="price">$$&ndash;$$$</td>
+        <td class="reviews">1,546</td>
+        <td>Seafood crustacean, amazing last-night spot</td>
+      </tr>
+      <tr>
+        <td>10</td>
+        <td><span class="name">Trattoria Da Maria</span></td>
+        <td><span class="cuisine">Italian, Pizza</span></td>
+        <td class="price">$$&ndash;$$$</td>
+        <td class="reviews">2,220</td>
+        <td><span class="badge badge-tc">TC 2025</span> "Pizza to pasta — everything exceeded"</td>
+      </tr>
+      <tr>
+        <td>11</td>
+        <td><span class="name">Pizzeria Donna Stella</span></td>
+        <td><span class="cuisine">Italian, Pizza</span></td>
+        <td class="price">$$&ndash;$$$</td>
+        <td class="reviews">2,055</td>
+        <td><span class="badge badge-tc">TC 2025</span> Lemon tiramisu, arancini</td>
+      </tr>
+      <tr>
+        <td>12</td>
+        <td><span class="name">La Caravella dal 1959</span></td>
+        <td><span class="cuisine">Italian, Seafood</span></td>
+        <td class="price">$$$$</td>
+        <td class="reviews">510</td>
+        <td><span class="badge badge-michelin">1 MICHELIN &#9733;</span> 9-course tasting with wine</td>
+      </tr>
+      <tr>
+        <td>14</td>
+        <td><span class="name">Trattoria Rispoli</span></td>
+        <td><span class="cuisine">Italian, Neapolitan</span></td>
+        <td class="price">$</td>
+        <td class="reviews">443</td>
+        <td><span class="badge badge-budget">CHEAP EAT</span> Pogerola &middot; Full meal ~&#8364;50 for 2!</td>
+      </tr>
+      <tr>
+        <td>16</td>
+        <td><span class="name">Al Cancelletto</span></td>
+        <td><span class="cuisine">Italian, Seafood</span></td>
+        <td class="price">$$&ndash;$$$</td>
+        <td class="reviews">977</td>
+        <td>Tuna tartare, fried aubergine cylinder</td>
+      </tr>
+      <tr>
+        <td>17</td>
+        <td><span class="name">Lo Smeraldino</span></td>
+        <td><span class="cuisine">Italian, Healthy</span></td>
+        <td class="price">$$&ndash;$$$</td>
+        <td class="reviews">2,075</td>
+        <td>Reasonably priced, seafood pasta, tiramisu</td>
+      </tr>
+      <tr>
+        <td>19</td>
+        <td><span class="name">Da Gemma</span></td>
+        <td><span class="cuisine">Italian, Seafood</span></td>
+        <td class="price">$$$$</td>
+        <td class="reviews">3,043</td>
+        <td>Amalfi's most-reviewed. Touristy but good</td>
+      </tr>
+      <tr>
+        <td>21</td>
+        <td><span class="name">Glicine Restaurant</span></td>
+        <td><span class="cuisine">Italian, International</span></td>
+        <td class="price">$$$$</td>
+        <td class="reviews">104</td>
+        <td><span class="badge badge-michelin">1 MICHELIN &#9733;</span> Tasting menus, enchanting</td>
+      </tr>
+      <tr>
+        <td>26</td>
+        <td><span class="name">Pescheria CICA</span></td>
+        <td><span class="cuisine">Italian, Seafood</span></td>
+        <td class="price">$</td>
+        <td class="reviews">303</td>
+        <td><span class="badge badge-budget">CHEAP EAT</span> Fried seafood cones on the go</td>
+      </tr>
+      <tr>
+        <td>28</td>
+        <td><span class="name">Cuoppo d'Amalfi</span></td>
+        <td><span class="cuisine">Italian, Seafood</span></td>
+        <td class="price">$</td>
+        <td class="reviews">713</td>
+        <td><span class="badge badge-budget">CHEAP EAT</span> Street food — fried anchovies!</td>
+      </tr>
+      <tr>
+        <td>&mdash;</td>
+        <td><span class="name">Pizza Express Amalfi</span></td>
+        <td><span class="cuisine">Italian, Pizza</span></td>
+        <td class="price">$</td>
+        <td class="reviews">856</td>
+        <td><span class="badge badge-budget">CHEAP EAT</span> Quick slices, &#8364;4&ndash;8</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="tip tip-money"><strong>&#128176; Amalfi price guide:</strong> Street food &#8364;4&ndash;8 (Cuoppo, CICA, Pizza Express). Mid-range dinner &#8364;25&ndash;45 (L'Abside, Buonvicino, Da Maria). Michelin star &#8364;100&ndash;180 (Sensi, La Caravella, Glicine).</div>
+
+  <div class="card" style="margin-top:16px;">
+    <h3>&#9733; Amalfi Must-Visits</h3>
+    <div class="card-sub">Our carefully curated picks — one for each budget</div>
+
+    <p style="font-size:0.88rem;"><strong>&#128176; Budget: Trattoria Rispoli</strong> (Pogerola, 10 min uphill from Amalfi) — The best-value restaurant on the entire coast. 443 reviews of people raving. A full 3-course meal with wine for around &#8364;25 each. Neapolitan home cooking in a hilltop setting with views. "Wine, antipasti, primo, secondo, dolce — around &#8364;50 for two."</p>
+
+    <p style="font-size:0.88rem;margin-top:10px;"><strong>&#129370; Mid-Range: Ristorante L'Abside</strong> — 2,322 reviews, Travelers' Choice 2025. The sweet spot between quality and price. Their seafood pasta and homemade desserts are legendary. Lobster linguine is the standout. Beautiful atmospheric setting. &#8364;30&ndash;40/person with wine.</p>
+
+    <p style="font-size:0.88rem;margin-top:10px;"><strong>&#127775; Splurge: Sensi Restaurant</strong> — 1 Michelin Star. The ultimate dinner experience on the coast. 6-course tasting menu executed with precision. Every dish is a work of art. Book ahead — small space, high demand. &#8364;120&ndash;150/person with wine pairing.</p>
+
+    <p style="font-size:0.88rem;margin-top:10px;"><strong>&#127843; Street Food: Cuoppo d'Amalfi</strong> — A must-try Amalfi experience. Grab a paper cone of fresh-fried anchovies, calamari, and mixed seafood for &#8364;5&ndash;8. Perfect for a beachside lunch. 713 reviews.</p>
+  </div>
+
+  <div class="tip tip-warn"><strong>&#9888; Tourist trap warning:</strong> Restaurants directly facing the Duomo charge a 15&ndash;25% premium for the view alone. Walk one street back for the same quality at lower prices. Da Gemma (3,043 reviews) is a classic but reviewers note it's become "a little touristy."</div>
+</div>
+
+<!-- ======== MINORI ======== -->
+<div class="section">
+  <div class="town-header">
+    <h2><img src="https://flagcdn.com/20x15/it.png" alt="IT" style="vertical-align:middle;margin-right:4px;"> Minori</h2>
+    <span class="town-badge">20 min by car/bus</span>
+  </div>
+  <p class="sub">The "City of Taste" — birthplace of Amalfi Coast pasta-making, cheaper than Amalfi, more authentic</p>
+
+  <table class="rest-table">
+    <thead><tr><th>#</th><th>Restaurant</th><th>Cuisine</th><th>Price</th><th>Reviews</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td><span class="name">Ristorante Pizzeria Giardiniello</span></td>
+        <td><span class="cuisine">Italian, Pizza</span></td>
+        <td class="price">$$&ndash;$$$</td>
+        <td class="reviews">2,886</td>
+        <td>Tuna, sea bass, lobster linguini, salad</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td><span class="name">Sal De Riso Ristorante &amp; Bistrot</span></td>
+        <td><span class="cuisine">Campanian, Southern Italian</span></td>
+        <td class="price">$$&ndash;$$$</td>
+        <td class="reviews">181</td>
+        <td>By famous pastry chef Sal De Riso</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td><span class="name">Taberna 33</span></td>
+        <td><span class="cuisine">Italian, Mediterranean</span></td>
+        <td class="price">$$&ndash;$$$</td>
+        <td class="reviews">369</td>
+        <td>"Best Lemon &amp; Shrimp Pasta," baccal&agrave;</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td><span class="name">Cuonc Cuonc</span></td>
+        <td><span class="cuisine">Italian, Mediterranean</span></td>
+        <td class="price">$</td>
+        <td class="reviews">68</td>
+        <td><span class="badge badge-budget">CHEAP EAT</span> Path of Lemons views, wine &#8364;3</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td><span class="name">Il Bistr&ograve; dell'Avvocato</span></td>
+        <td><span class="cuisine">Italian, Seafood</span></td>
+        <td class="price">$$&ndash;$$$</td>
+        <td class="reviews">99</td>
+        <td>"Perfect dinner in Minori," date night</td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td><span class="name">Janeiro Rist&ograve;bar</span></td>
+        <td><span class="cuisine">Italian, Seafood</span></td>
+        <td class="price">$$&ndash;$$$</td>
+        <td class="reviews">116</td>
+        <td><span class="badge badge-top">4.9/5</span> Seafood pasta, sea bass</td>
+      </tr>
+      <tr>
+        <td>7</td>
+        <td><span class="name">La Locanda del Pescatore</span></td>
+        <td><span class="cuisine">Italian, Seafood</span></td>
+        <td class="price">$$&ndash;$$$</td>
+        <td class="reviews">1,516</td>
+        <td><span class="badge badge-tc">TC 2025</span> Fresh fish, pasta, seafood</td>
+      </tr>
+      <tr>
+        <td>8</td>
+        <td><span class="name">La Botte</span></td>
+        <td><span class="cuisine">Italian, Pizza</span></td>
+        <td class="price">$$&ndash;$$$</td>
+        <td class="reviews">1,133</td>
+        <td>"Best restaurant in Minori" — calamari, pizza, pasta</td>
+      </tr>
+      <tr>
+        <td>9</td>
+        <td><span class="name">Pizzeria O' Sarracino</span></td>
+        <td><span class="cuisine">Italian, Pizza</span></td>
+        <td class="price">$</td>
+        <td class="reviews">170</td>
+        <td><span class="badge badge-budget">CHEAP EAT</span> Excellent pizza, superb price</td>
+      </tr>
+      <tr>
+        <td>13</td>
+        <td><span class="name">Pescheria Andrea's</span></td>
+        <td><span class="cuisine">Seafood, Fast Food</span></td>
+        <td class="price">$</td>
+        <td class="reviews">42</td>
+        <td><span class="badge badge-budget">CHEAP EAT</span> Best frittata frutti di mare in Minori</td>
+      </tr>
+      <tr>
+        <td>14</td>
+        <td><span class="name">A Ricetta</span></td>
+        <td><span class="cuisine">Italian, Seafood</span></td>
+        <td class="price">$$&ndash;$$$</td>
+        <td class="reviews">973</td>
+        <td><span class="badge badge-tc">TC 2025</span> GF pasta, fresh spaghetti</td>
+      </tr>
+      <tr>
+        <td>&mdash;</td>
+        <td><span class="name">Pasticceria Gambardella</span></td>
+        <td><span class="cuisine">Italian, Pastry</span></td>
+        <td class="price">$$&ndash;$$$</td>
+        <td class="reviews">387</td>
+        <td>Famous pastries &amp; lemon desserts</td>
+      </tr>
+      <tr>
+        <td>&mdash;</td>
+        <td><span class="name">Alessandro De Riso Dal 1939</span></td>
+        <td><span class="cuisine">Seafood</span></td>
+        <td class="price">$$&ndash;$$$</td>
+        <td class="reviews">657</td>
+        <td>Historic seafood restaurant since 1939</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="tip tip-money"><strong>&#128176; Minori price guide:</strong> Generally 15&ndash;20% cheaper than Amalfi for similar quality. Street food &#8364;3&ndash;7 (Pescheria Andrea's, O' Sarracino). Full dinner &#8364;20&ndash;35 (Giardiniello, La Botte, A Ricetta).</div>
+
+  <div class="card" style="margin-top:16px;">
+    <h3>&#9733; Minori Must-Visits</h3>
+    <div class="card-sub">Why you should make the 20 min trip at least once</div>
+    <p style="font-size:0.88rem;"><strong>Giardiniello</strong> — 2,886 reviews makes it the most-reviewed restaurant on this entire list. Great pizza, lobster linguini, fresh sea bass. Friendly service. &#8364;25&ndash;35/person.</p>
+    <p style="font-size:0.88rem;margin-top:8px;"><strong>Sal De Riso</strong> — Sal De Riso is THE celebrity pastry chef of the Amalfi Coast. His bistrot serves both savory and sweet — but you're really here for the desserts. His delizia al limone is world-famous. Book a table for lunch and save room for 2&ndash;3 desserts.</p>
+    <p style="font-size:0.88rem;margin-top:8px;"><strong>O' Sarracino</strong> — "Excellent pizza, excellent service, superb price." A no-frills pizza joint where locals eat. Margherita from &#8364;5. If you want a cheap Monday night dinner, this is it.</p>
+  </div>
+
+  <div class="tip tip-pro"><strong>&#128161; Fun fact:</strong> Minori is the historic capital of pasta on the Amalfi Coast. The town's pasta-making tradition dates back over 800 years — fresh <em>ndunderi</em> (a local ricotta gnocchi) originated here.</div>
+</div>
+
+<!-- ======== MUST-TRY DISHES ======== -->
+<div class="section">
+  <h2>&#127837; Dishes You Must Try</h2>
+  <p class="sub">The absolute essential Amalfi Coast foods — order these or regret it forever</p>
+
+  <div class="dish-grid">
+    <div class="dish">
+      <div class="dish-emoji">&#127837;</div>
+      <div class="dish-name">Scialatielli ai Frutti di Mare</div>
+      <div class="dish-desc">Thick handmade pasta ribbons with fresh clams, mussels, shrimp &amp; squid in a light tomato/white wine sauce. THE Amalfi Coast pasta.</div>
+      <div class="dish-where">&#8594; Best at: L'Abside, Da Ciccio, Taverna Buonvicino</div>
+    </div>
+    <div class="dish">
+      <div class="dish-emoji">&#129438;</div>
+      <div class="dish-name">Lobster Linguine</div>
+      <div class="dish-desc">Fresh half-lobster over hand-cut linguine in a cherry tomato sauce. Rich, sweet, unforgettable. Expect &#8364;25&ndash;35 per plate.</div>
+      <div class="dish-where">&#8594; Best at: Marina Grande, L'Abside, Giardiniello</div>
+    </div>
+    <div class="dish">
+      <div class="dish-emoji">&#127843;</div>
+      <div class="dish-name">Cuoppo di Mare</div>
+      <div class="dish-desc">Paper cone of fresh-fried calamari, anchovies, shrimp &amp; small fish. Street food perfection, &#8364;5&ndash;8.</div>
+      <div class="dish-where">&#8594; Best at: Cuoppo d'Amalfi, Pescheria CICA, Pescheria Andrea's</div>
+    </div>
+    <div class="dish">
+      <div class="dish-emoji">&#127819;</div>
+      <div class="dish-name">Delizia al Limone</div>
+      <div class="dish-desc">Sponge cake dome soaked in limoncello syrup, filled with lemon cream. The signature Amalfi dessert.</div>
+      <div class="dish-where">&#8594; Best at: Sal De Riso, Pasticceria Gambardella, Babel</div>
+    </div>
+    <div class="dish">
+      <div class="dish-emoji">&#127829;</div>
+      <div class="dish-name">Pizza Napoletana</div>
+      <div class="dish-desc">Wood-fired with San Marzano tomatoes, fresh mozzarella di bufala, basil. You're in the birthplace of pizza — eat it daily.</div>
+      <div class="dish-where">&#8594; Best at: Mim&igrave;, Donna Stella, A Gradillo, O' Sarracino</div>
+    </div>
+    <div class="dish">
+      <div class="dish-emoji">&#128031;</div>
+      <div class="dish-name">Colatura di Alici</div>
+      <div class="dish-desc">Anchovy sauce from nearby Cetara — liquid umami gold. Drizzled over spaghetti, it's an ancient Roman-era condiment still made today.</div>
+      <div class="dish-where">&#8594; Best at: Any restaurant — ask for spaghetti con colatura</div>
+    </div>
+    <div class="dish">
+      <div class="dish-emoji">&#129472;</div>
+      <div class="dish-name">N'dunderi</div>
+      <div class="dish-desc">Minori's local ricotta gnocchi — pillowy soft dumplings in a simple tomato sauce. An 800-year-old recipe only found here.</div>
+      <div class="dish-where">&#8594; Best at: Giardiniello, La Botte, A Ricetta</div>
+    </div>
+    <div class="dish">
+      <div class="dish-emoji">&#127846;</div>
+      <div class="dish-name">Sfogliatella</div>
+      <div class="dish-desc">Crispy, layered shell-shaped pastry filled with sweet ricotta &amp; candied orange. Campania's beloved breakfast pastry.</div>
+      <div class="dish-where">&#8594; Best at: Pasticceria Gambardella, Sal De Riso, any bar</div>
+    </div>
+  </div>
+</div>
+
+<!-- ======== HEAD-TO-HEAD COMPARISON ======== -->
+<div class="section">
+  <h2>&#9878;&#65039; Town-by-Town Comparison</h2>
+  <p class="sub">Which town should you eat in tonight?</p>
+
+  <div class="vs-grid">
+    <div class="vs-card" style="border-top: 4px solid var(--palm);">
+      <h4>&#127793; Ravello — The Walking Option</h4>
+      <ul>
+        <li>10 min walk from Airbnb</li>
+        <li>30 restaurants to choose from</li>
+        <li>Best pizza on the coast (Mim&igrave;)</li>
+        <li>2 Michelin-starred restaurants</li>
+        <li>Wine bars &amp; casual cafes</li>
+        <li>Slightly pricier than Minori</li>
+        <li>Can walk home after wine!</li>
+      </ul>
+    </div>
+    <div class="vs-card" style="border-top: 4px solid var(--ocean);">
+      <h4>&#9875; Amalfi — The Full Experience</h4>
+      <ul>
+        <li>15 min by car/bus</li>
+        <li>60+ restaurants, most options</li>
+        <li>3 Michelin-starred restaurants</li>
+        <li>Best street food (cuoppo, CICA)</li>
+        <li>Seafood is king here</li>
+        <li>Tourist premium on main square</li>
+        <li>Need bus/car/taxi to get home</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="vs-grid" style="margin-top:0;">
+    <div class="vs-card" style="border-top: 4px solid var(--gold);">
+      <h4>&#127774; Minori — The Local's Secret</h4>
+      <ul>
+        <li>20 min by car/bus</li>
+        <li>15&ndash;20% cheaper than Amalfi</li>
+        <li>Birthplace of Amalfi Coast pasta</li>
+        <li>Sal De Riso's pastry empire</li>
+        <li>Fewer tourists, more authentic</li>
+        <li>Best value full meals</li>
+        <li>Beach town — combine with swim</li>
+      </ul>
+    </div>
+    <div class="vs-card" style="border-top: 4px solid var(--sunset);">
+      <h4>&#127968; Scala — The Home Cook</h4>
+      <ul>
+        <li>Doorstep dining (Zi'Ntonio)</li>
+        <li>Only 2&ndash;3 restaurant options</li>
+        <li>Buy groceries at local shop</li>
+        <li>Cook at your Airbnb kitchen</li>
+        <li>Most peaceful &amp; authentic</li>
+        <li>Zero tourists at dinner</li>
+        <li>Best for lazy staying-in nights</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ======== BUDGET GUIDE ======== -->
+<div class="section">
+  <h2>&#128176; Budget Meal Planner</h2>
+  <p class="sub">How to eat well for 7 days — from &#8364;140 to &#8364;500 per person for the week</p>
+
+  <div class="card">
+    <h3>&#128154; Budget Week — ~&#8364;140/person (&#8364;20/day)</h3>
+    <div class="card-sub">Grocery shopping + cheap eats</div>
+    <ul style="font-size:0.85rem; margin-left:16px;">
+      <li><strong>Breakfast:</strong> Coffee &amp; pastry at bar (&#8364;3) or buy croissants from bakery</li>
+      <li><strong>Lunch:</strong> Cook pasta at Airbnb with market tomatoes, or grab a &#8364;5 pizza slice</li>
+      <li><strong>Dinner:</strong> Alternate: 3 nights cooking in + 4 cheap-eat dinners (A Gradillo, O' Sarracino, Cuoppo, Rispoli)</li>
+      <li><strong>Total:</strong> ~&#8364;140/person for the week &middot; &#8364;280 for both</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>&#128153; Mid-Range Week — ~&#8364;280/person (&#8364;40/day)</h3>
+    <div class="card-sub">The sweet spot — eat out most nights</div>
+    <ul style="font-size:0.85rem; margin-left:16px;">
+      <li><strong>Breakfast:</strong> Coffee &amp; sfogliatella at a real cafe (&#8364;4)</li>
+      <li><strong>Lunch:</strong> Light focaccia or street food (&#8364;8)</li>
+      <li><strong>Dinner:</strong> Eat out 6 nights at mid-range spots like L'Abside, Buonvicino, Mim&igrave; (&#8364;28 avg)</li>
+      <li><strong>Total:</strong> ~&#8364;280/person for the week &middot; &#8364;560 for both</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>&#128156; Treat-Yourself Week — ~&#8364;500/person (&#8364;70/day)</h3>
+    <div class="card-sub">Multiple splurge dinners + daily eating out</div>
+    <ul style="font-size:0.85rem; margin-left:16px;">
+      <li><strong>Breakfast:</strong> Proper sit-down cafe (&#8364;6)</li>
+      <li><strong>Lunch:</strong> Seafood lunch on the beach (&#8364;20)</li>
+      <li><strong>Dinner:</strong> 5 mid-range + 2 splurge dinners (Sensi + Da Ciccio or Marina Grande) (&#8364;44 avg)</li>
+      <li><strong>Total:</strong> ~&#8364;500/person for the week &middot; &#8364;1,000 for both</li>
+    </ul>
+  </div>
+
+  <div class="tip tip-info"><strong>&#128203; Our trip budget:</strong> We allocated ~$700 CAD (~&#8364;470) for food for both of us. That's roughly the mid-range plan — eating out most nights with one or two splurge meals.</div>
+</div>
+
+<!-- ======== COOKING AT HOME ======== -->
+<div class="section">
+  <h2>&#127859; Cooking at Your Airbnb</h2>
+  <p class="sub">Your "Windows on Heaven" Airbnb has a kitchen — here's how to use it</p>
+
+  <div class="card">
+    <h3>Grocery Shopping Near Scala</h3>
+    <div class="card-sub">Stock up for breakfast &amp; light meals</div>
+    <ul style="font-size:0.85rem; margin-left:16px;">
+      <li><strong>Scala mini-market:</strong> Basic essentials — pasta, bread, wine, fruit, cheese. Limited but sufficient.</li>
+      <li><strong>Amalfi supermarkets:</strong> Larger selection in Amalfi town. Stock up when you're there for a day trip.</li>
+      <li><strong>Must-buy local items:</strong> San Marzano tomatoes, fresh mozzarella di bufala, local lemons, olive oil, pasta secca, colatura di alici from Cetara.</li>
+    </ul>
+    <div class="tip tip-pro" style="margin-top:12px;"><strong>&#128161; Easy Airbnb meals:</strong> Spaghetti aglio e olio (5 min), bruschetta with fresh tomatoes, caprese salad (mozzarella + tomato + basil), cured meat &amp; cheese board with local wine.</div>
+  </div>
+</div>
+
+<!-- ======== PRACTICAL TIPS ======== -->
+<div class="section">
+  <h2>&#128221; Practical Eating Tips</h2>
+  <p class="sub">Know before you go — avoid the mistakes, eat like a local</p>
+
+  <div class="card">
+    <h3>Reservation Rules</h3>
+    <div class="card-sub">August is peak season — plan ahead</div>
+    <ul style="font-size:0.85rem; margin-left:16px;">
+      <li><strong>Michelin restaurants:</strong> Book 2&ndash;4 weeks ahead. Sensi, La Caravella, Rossellinis, Glicine all fill up fast.</li>
+      <li><strong>Popular mid-range:</strong> Book same-day or day before. Mim&igrave;, L'Abside, Giardiniello accept walk-ins but get crowded after 8pm.</li>
+      <li><strong>Pizza places &amp; trattorias:</strong> No reservation needed. Just show up. A Gradillo, O' Sarracino, Da Maria — first come, first served.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>Eating Schedule (Italian Style)</h3>
+    <div class="card-sub">Adjust to the local rhythm</div>
+    <ul style="font-size:0.85rem; margin-left:16px;">
+      <li><strong>Breakfast (7&ndash;10am):</strong> Stand at the bar. Espresso + cornetto (croissant). &#8364;2.50&ndash;4. Never cappuccino after 11am.</li>
+      <li><strong>Lunch (12:30&ndash;2:30pm):</strong> Many restaurants close 3&ndash;7pm. Eat before 2pm or you're stuck with bars.</li>
+      <li><strong>Aperitivo (6&ndash;8pm):</strong> Spritz or Campari with free snacks at a wine bar. Babel, Enotavola, or any terrace with a view.</li>
+      <li><strong>Dinner (8&ndash;10:30pm):</strong> Italians eat late. Prime time 8:30&ndash;9:30pm. Don't show up at 6pm — you'll eat alone.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>Money-Saving Tricks</h3>
+    <div class="card-sub">Stretch your food budget further</div>
+    <ul style="font-size:0.85rem; margin-left:16px;">
+      <li><strong>Coperto:</strong> Cover charge (&#8364;2&ndash;4/person) is normal in Italy. Not a scam — just how it works.</li>
+      <li><strong>House wine:</strong> Vino della casa is &#8364;4&ndash;8/carafe vs &#8364;20+ for bottled. It's usually excellent here.</li>
+      <li><strong>Lunch menus:</strong> Some restaurants offer fixed-price lunch (pranzo fisso) for &#8364;12&ndash;18 — pasta + secondo + water.</li>
+      <li><strong>Water:</strong> Ask for "acqua del rubinetto" (tap water) — it's free. Bottled is &#8364;2&ndash;3.</li>
+      <li><strong>Skip the piazza:</strong> Restaurants with sea views or on main squares charge 20%+ more. Walk 30 seconds into a side street.</li>
+      <li><strong>Aperitivo hack:</strong> A &#8364;8 Aperol Spritz often comes with free aperitivo snacks (olives, chips, bruschetta). It's basically a free light dinner.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ======== DISTANCE FROM AIRBNB ======== -->
+<div class="section">
+  <h2>&#128663; Getting There from Your Airbnb</h2>
+  <p class="sub">Windows on Heaven, Scala — all distances from your front door</p>
+
+  <ul class="walk-list">
+    <li><span class="dist">0 min</span> Ristorante Zi'Ntonio — literally next door</li>
+    <li><span class="dist">5 min</span> Da Lorenzo — Scala piazza</li>
+    <li><span class="dist">10 min</span> Ravello restaurants — walk down to town center</li>
+    <li><span class="dist">12 min</span> Mim&igrave; Ristorante Pizzeria — via the Scala-Ravello path</li>
+    <li><span class="dist">15 min</span> Ravello wine bars (Babel, Enotavola) — pleasant evening stroll</li>
+    <li><span class="dist">15 min</span> Amalfi town — by car or SITA bus (runs ~every 30 min)</li>
+    <li><span class="dist">20 min</span> Minori — by car or SITA bus (via Amalfi or Ravello)</li>
+    <li><span class="dist">25 min</span> Pogerola (Trattoria Rispoli) — bus from Amalfi + short walk uphill</li>
+  </ul>
+
+  <div class="tip tip-warn"><strong>&#128652; Bus tip:</strong> The last SITA bus from Amalfi back up to Ravello/Scala is around 11pm in summer. After that, it's taxi or a long walk uphill. Budget &#8364;25&ndash;35 for a late-night taxi back from Amalfi.</div>
+</div>
+
+<!-- ======== BACK LINK ======== -->
+<a href="best-trip.html" class="back" style="margin-left:20px;">&larr; Back to trip itinerary</a>
+
+</div><!-- /container -->
+
+<footer>
+  Made with &#10084;&#65039; for our Amalfi adventure &middot; Aug 2026<br>
+  <a href="best-trip.html">Trip itinerary &rarr;</a> &middot;
+  <a href="flights.html">Compare flights &rarr;</a> &middot;
+  <a href="hotels.html">Hotels vs Airbnb &rarr;</a> &middot;
+  <a href="viz.html">Explore all 1,000 Airbnb picks &rarr;</a>
+</footer>
+
+</body>
+</html>
