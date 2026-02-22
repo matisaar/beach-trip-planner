@@ -124,6 +124,15 @@
   .walk-list .wl-time { color: var(--ocean); font-weight: 700; font-size: 0.78rem; background: #dbeafe; padding: 2px 8px; border-radius: 6px; white-space: nowrap; }
   .walk-list .wl-bus { color: var(--palm); background: #dcfce7; }
 
+  /* Nav links section */
+  .nav-links { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; margin: 20px 0 0; }
+  .nav-link { display: flex; align-items: center; gap: 8px; padding: 14px 16px; border-radius: 12px; text-decoration: none; font-weight: 700; font-size: 0.85rem; color: white; transition: all 0.2s; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.15); }
+  .nav-link:hover { transform: translateY(-2px); background: rgba(255,255,255,0.22); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+  .nav-link .nl-icon { font-size: 1.1rem; }
+  .nav-link .nl-text { display: flex; flex-direction: column; }
+  .nav-link .nl-title { font-weight: 800; font-size: 0.82rem; }
+  .nav-link .nl-sub { font-weight: 400; font-size: 0.68rem; opacity: 0.75; }
+
   footer { background: var(--dark); color: rgba(255,255,255,0.6); text-align: center; padding: 24px 20px; font-size: 0.78rem; margin-top: 20px; }
   footer a { color: var(--ocean-light); }
 
@@ -147,6 +156,12 @@
     <div class="hero-stat"><div class="num">Aug 22&ndash;29</div><div class="label">2026</div></div>
     <div class="hero-stat"><div class="num">$5,300</div><div class="label">CAD Total</div></div>
     <div class="hero-stat"><div class="num">Scala</div><div class="label">Home Base</div></div>
+  </div>
+  <div class="nav-links" style="max-width:780px;margin:20px auto 0;">
+    <a class="nav-link" href="flights.html"><span class="nl-icon">&#9992;&#65039;</span><span class="nl-text"><span class="nl-title">Flight Comparison</span><span class="nl-sub">15+ routes from $1,161/pp</span></span></a>
+    <a class="nav-link" href="hotels.html"><span class="nl-icon">&#127976;</span><span class="nl-text"><span class="nl-title">Hotel vs Airbnb</span><span class="nl-sub">Why we chose Airbnb</span></span></a>
+    <a class="nav-link" href="share.html"><span class="nl-icon">&#128228;</span><span class="nl-text"><span class="nl-title">Share with Family</span><span class="nl-sub">Budget-free version</span></span></a>
+    <a class="nav-link" href="viz.html"><span class="nl-icon">&#127968;</span><span class="nl-text"><span class="nl-title">Airbnb Explorer</span><span class="nl-sub">Top 1,000 listings</span></span></a>
   </div>
 </div>
 
@@ -598,6 +613,8 @@
 
 <footer>
   Made with &#10084;&#65039; for our Amalfi adventure &middot; Aug 2026<br>
+  <a href="flights.html">Compare flights &rarr;</a> &middot;
+  <a href="hotels.html">Hotels vs Airbnb &rarr;</a> &middot;
   <a href="viz.html">Explore all 1,000 Airbnb picks &rarr;</a>
 </footer>
 

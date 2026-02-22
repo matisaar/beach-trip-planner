@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flight Comparison — YYZ → NAP / FCO — Amalfi Coast 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+  :root {
+    --ocean: #0077b6; --ocean-dark: #023e8a; --ocean-light: #00b4d8;
+    --sand: #f5e6d3; --sunset: #ff6b35; --coral: #e63946;
+    --palm: #2d6a4f; --dark: #1a1a2e; --gray: #6b7280;
+    --light: #f8fafc; --white: #ffffff; --gold: #f59e0b;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: var(--light); color: var(--dark); line-height: 1.7; }
+
+  .hero { background: linear-gradient(135deg, #1a472a 0%, #023e8a 50%, var(--ocean) 100%); color: white; padding: 60px 24px 50px; text-align: center; }
+  .hero h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 900; margin-bottom: 8px; }
+  .hero p { font-size: 1rem; opacity: 0.85; max-width: 640px; margin: 0 auto 20px; }
+  .hero-stats { display: flex; gap: 28px; justify-content: center; flex-wrap: wrap; margin-top: 16px; }
+  .hero-stat { text-align: center; }
+  .hero-stat .num { font-size: 1.5rem; font-weight: 900; }
+  .hero-stat .label { font-size: 0.72rem; opacity: 0.7; }
+
+  .container { max-width: 860px; margin: 0 auto; padding: 0 20px; }
+  .section { padding: 32px 0; }
+  .section h2 { font-size: 1.35rem; font-weight: 800; margin-bottom: 4px; color: var(--ocean-dark); }
+  .section .sub { color: var(--gray); font-size: 0.85rem; margin-bottom: 16px; }
+
+  /* Verdict bar */
+  .verdict-bar { background: linear-gradient(135deg, var(--sunset), var(--coral)); color: white; border-radius: 14px; padding: 24px; margin: -28px auto 0; position: relative; z-index: 10; max-width: 860px; box-shadow: 0 10px 30px rgba(230,57,70,0.2); text-align: center; }
+  .verdict-bar h2 { color: white; font-size: 1.3rem; font-weight: 900; margin-bottom: 6px; }
+  .verdict-bar p { font-size: 0.92rem; opacity: 0.92; margin: 0; }
+
+  .card { background: white; border-radius: 14px; padding: 24px; margin-bottom: 16px; box-shadow: 0 3px 12px rgba(0,0,0,0.05); }
+  .card h3 { font-size: 1.1rem; font-weight: 800; margin-bottom: 4px; }
+  .card .card-sub { color: var(--gray); font-size: 0.82rem; margin-bottom: 12px; }
+
+  .tip { border-radius: 10px; padding: 12px 14px; font-size: 0.82rem; margin: 10px 0; line-height: 1.5; }
+  .tip-money { background: #dcfce7; border-left: 4px solid var(--palm); }
+  .tip-warn { background: #fef3c7; border-left: 4px solid var(--gold); }
+  .tip-pro { background: #dbeafe; border-left: 4px solid var(--ocean); }
+  .tip-info { background: #dbeafe; border-left: 4px solid var(--ocean); }
+  .tip strong { font-weight: 700; }
+
+  /* Flight table */
+  .flight-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 0.82rem; margin: 14px 0; }
+  .flight-table thead th { background: var(--ocean-dark); color: white; padding: 10px 12px; text-align: left; font-weight: 700; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.5px; }
+  .flight-table thead th:first-child { border-radius: 10px 0 0 0; }
+  .flight-table thead th:last-child { border-radius: 0 10px 0 0; }
+  .flight-table tbody td { padding: 10px 12px; border-bottom: 1px solid #f0f0f0; vertical-align: middle; }
+  .flight-table tbody tr:last-child td { border-bottom: none; }
+  .flight-table tbody tr:hover { background: #f0f7ff; }
+  .flight-table .price { font-weight: 800; color: var(--ocean-dark); white-space: nowrap; }
+  .flight-table .price-couple { font-size: 0.75rem; color: var(--gray); font-weight: 600; }
+  .flight-table .airline { font-weight: 700; }
+  .flight-table .stops { white-space: nowrap; }
+  .flight-table .duration { white-space: nowrap; font-weight: 600; }
+  .flight-table .layover { font-size: 0.78rem; color: var(--gray); }
+  .flight-table .badge { display: inline-block; font-size: 0.65rem; font-weight: 800; padding: 2px 7px; border-radius: 6px; margin-left: 4px; vertical-align: middle; }
+  .badge-cheapest { background: #dcfce7; color: var(--palm); }
+  .badge-best { background: #dbeafe; color: var(--ocean-dark); }
+  .badge-fastest { background: #fef3c7; color: #92400e; }
+  .badge-nonstop { background: #fce7f3; color: #9d174d; }
+  .flight-table .airport-note { font-size: 0.72rem; color: var(--sunset); font-weight: 600; }
+
+  /* pick cards */
+  .pick-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin: 16px 0; }
+  .pick { background: white; border-radius: 14px; padding: 20px; box-shadow: 0 3px 12px rgba(0,0,0,0.05); border-top: 4px solid var(--ocean); }
+  .pick.cheapest { border-top-color: var(--palm); }
+  .pick.best { border-top-color: var(--ocean); }
+  .pick.fastest { border-top-color: var(--gold); }
+  .pick .pick-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 800; margin-bottom: 6px; }
+  .pick.cheapest .pick-label { color: var(--palm); }
+  .pick.best .pick-label { color: var(--ocean); }
+  .pick.fastest .pick-label { color: var(--gold); }
+  .pick .pick-airline { font-size: 1rem; font-weight: 800; margin-bottom: 2px; }
+  .pick .pick-detail { font-size: 0.82rem; color: #555; margin-bottom: 2px; }
+  .pick .pick-price { font-size: 1.15rem; font-weight: 900; color: var(--ocean-dark); }
+  .pick .pick-couple { font-size: 0.82rem; color: var(--gray); }
+
+  /* Search links */
+  .search-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; margin: 14px 0; }
+  .search-link { display: flex; align-items: center; gap: 8px; padding: 14px 16px; border-radius: 12px; text-decoration: none; font-weight: 700; font-size: 0.85rem; color: white; transition: all 0.2s; text-align: left; }
+  .search-link:hover { transform: translateY(-2px); filter: brightness(1.1); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+  .search-link .sl-name { font-weight: 800; }
+  .search-link .sl-note { font-size: 0.72rem; opacity: 0.85; font-weight: 400; }
+  .sl-google { background: linear-gradient(135deg, #4285f4, #1a73e8); }
+  .sl-kayak { background: linear-gradient(135deg, #ff6900, #e05500); }
+  .sl-skyscanner { background: linear-gradient(135deg, #0770e3, #044999); }
+  .sl-momondo { background: linear-gradient(135deg, #7b2d8e, #5c2171); }
+  .sl-cheapflights { background: linear-gradient(135deg, #2e86de, #1e6bc1); }
+  .sl-expedia { background: linear-gradient(135deg, #fddb32, #d4a40a); color: #1a1a2e; }
+  .sl-flighthub { background: linear-gradient(135deg, #e31c5f, #c01048); }
+  .sl-kiwi { background: linear-gradient(135deg, #00a991, #007a6c); }
+
+  /* Comparison grid */
+  .vs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 14px 0; }
+  .vs-card { background: white; border-radius: 14px; padding: 20px; box-shadow: 0 3px 12px rgba(0,0,0,0.05); }
+  .vs-card h4 { font-size: 0.95rem; font-weight: 800; margin-bottom: 8px; }
+  .vs-card .vs-route { font-size: 0.82rem; color: var(--gray); margin-bottom: 10px; }
+  .vs-card .vs-price { font-size: 1.3rem; font-weight: 900; color: var(--ocean-dark); }
+  .vs-card .vs-detail { font-size: 0.8rem; color: #555; margin-top: 4px; }
+  .vs-card .vs-savings { font-size: 0.82rem; font-weight: 700; color: var(--palm); margin-top: 6px; }
+  .vs-card.winner { border: 2px solid var(--palm); position: relative; }
+  .vs-card.winner::before { content: "✈️ OUR PICK"; position: absolute; top: -12px; left: 16px; background: var(--palm); color: white; padding: 2px 10px; border-radius: 6px; font-size: 0.68rem; font-weight: 800; letter-spacing: 0.3px; }
+
+  .back-link { display: block; text-align: center; padding: 16px; font-size: 0.88rem; font-weight: 700; color: var(--ocean); text-decoration: none; margin-top: 10px; }
+  .back-link:hover { text-decoration: underline; }
+
+  footer { background: var(--dark); color: rgba(255,255,255,0.6); text-align: center; padding: 24px 20px; font-size: 0.78rem; margin-top: 20px; }
+  footer a { color: var(--ocean-light); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  @media (max-width: 700px) {
+    .hero h1 { font-size: 1.7rem; }
+    .flight-table { font-size: 0.75rem; }
+    .flight-table thead th, .flight-table tbody td { padding: 8px 6px; }
+    .pick-grid { grid-template-columns: 1fr; }
+    .vs-grid { grid-template-columns: 1fr; }
+    .search-grid { grid-template-columns: 1fr 1fr; }
+    .card { padding: 18px; }
+  }
+  @media (max-width: 480px) {
+    .search-grid { grid-template-columns: 1fr; }
+    .flight-table { display: block; overflow-x: auto; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ======== HERO ======== -->
+<div class="hero">
+  <h1><img src="https://flagcdn.com/w40/it.png" alt="&#127470;&#127481;" style="height:1em;vertical-align:-0.1em;margin-right:4px"> Flight Comparison</h1>
+  <p>Every route we found from Toronto to the Amalfi Coast &mdash; real prices from Google Flights, multiple airlines, two airports</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="num">$1,161</div><div class="label">Cheapest pp</div></div>
+    <div class="hero-stat"><div class="num">15+</div><div class="label">Routes Found</div></div>
+    <div class="hero-stat"><div class="num">Aug 21&ndash;29</div><div class="label">Flexible Dates</div></div>
+    <div class="hero-stat"><div class="num">YYZ &rarr; NAP</div><div class="label">+ Rome Option</div></div>
+  </div>
+</div>
+
+<!-- ======== VERDICT ======== -->
+<div class="container">
+<div class="verdict-bar">
+  <h2>&#9992;&#65039; Best Deal: Fly to Rome, Train to Naples</h2>
+  <p>Air Transat nonstop YYZ&rarr;FCO for <strong>$1,199/person</strong> &mdash; then a &euro;12 Trenitalia ride to Naples (1 hr 10 min). Total for two: ~$2,480 CAD including trains. Or fly direct to Naples from $1,229/pp via Iberia.</p>
+</div>
+
+<!-- ======== TOP 3 PICKS ======== -->
+<div class="section">
+  <h2>&#127942; Our Top 3 Picks</h2>
+  <p class="sub">Best options across all routes and dates &mdash; prices per person, round trip, CAD</p>
+
+  <div class="pick-grid">
+    <div class="pick cheapest">
+      <div class="pick-label">&#128176; Cheapest Overall</div>
+      <div class="pick-airline">Air Canada &rarr; Rome</div>
+      <div class="pick-detail">1 stop via Montr&eacute;al &middot; 10h 45m &middot; from Billy Bishop YTZ</div>
+      <div class="pick-detail">Aug 22&ndash;29 &middot; YTZ &rarr; FCO</div>
+      <div class="pick-price">$1,161 <span class="pick-couple">&middot; $2,322 for two</span></div>
+    </div>
+    <div class="pick best">
+      <div class="pick-label">&#11088; Best Value Direct to Naples</div>
+      <div class="pick-airline">ITA Airways via Rome</div>
+      <div class="pick-detail">1 stop FCO &middot; 11h 35m &middot; 2h 05m layover</div>
+      <div class="pick-detail">Aug 22&ndash;29 &middot; YYZ &rarr; NAP</div>
+      <div class="pick-price">$1,351 <span class="pick-couple">&middot; $2,702 for two</span></div>
+    </div>
+    <div class="pick fastest">
+      <div class="pick-label">&#9889; Fastest Flight</div>
+      <div class="pick-airline">Air Transat &mdash; Nonstop!</div>
+      <div class="pick-detail">Direct &middot; 8h 35m &middot; no layover at all</div>
+      <div class="pick-detail">Aug 22&ndash;29 &middot; YYZ &rarr; FCO (Rome)</div>
+      <div class="pick-price">$1,199 <span class="pick-couple">&middot; $2,398 for two</span></div>
+    </div>
+  </div>
+
+  <div class="tip tip-money">
+    <strong>Rome strategy:</strong> Fly nonstop to Rome (FCO) for $1,199/pp, then grab a &euro;12 Trenitalia high-speed train from Roma Termini to Napoli Centrale (1h 10m). From there, take the Alibus or SITA bus to get to Scala. Total ground transfer adds ~3 hours but saves <strong>$68&ndash;190/person</strong> vs flying direct to Naples.
+  </div>
+</div>
+
+<!-- ======== NAPLES DIRECT ======== -->
+<div class="section">
+  <h2>&#9992;&#65039; Direct to Naples (YYZ &rarr; NAP)</h2>
+  <p class="sub">Sat Aug 22 &rarr; Sat Aug 29, 2026 &mdash; round trip per person, CAD</p>
+
+  <div class="card" style="overflow-x:auto;padding:16px;">
+    <table class="flight-table">
+      <thead>
+        <tr>
+          <th>Airline</th>
+          <th>Price (pp)</th>
+          <th>Stops</th>
+          <th>Duration</th>
+          <th>Layover</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="airline">Iberia <span class="layover">(Iberia Express)</span></td>
+          <td class="price">$1,229 <div class="price-couple">$2,458 for 2</div></td>
+          <td class="stops">1 stop</td>
+          <td class="duration">14h 55m</td>
+          <td class="layover">4h 40m Madrid (MAD)</td>
+          <td><span class="badge badge-cheapest">Cheapest</span></td>
+        </tr>
+        <tr>
+          <td class="airline">American <span class="layover">(Republic Airways)</span></td>
+          <td class="price">$1,322 <div class="price-couple">$2,644 for 2</div></td>
+          <td class="stops">1 stop</td>
+          <td class="duration">14h 45m</td>
+          <td class="layover">3h 15m Chicago (ORD)</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="airline">Air Canada + Lufthansa <span class="layover">(Jazz)</span><div class="airport-note">&#9888; from Billy Bishop YTZ</div></td>
+          <td class="price">$1,324 <div class="price-couple">$2,648 for 2</div></td>
+          <td class="stops">2 stops</td>
+          <td class="duration">12h 55m</td>
+          <td class="layover">Boston (BOS) + Munich (MUC)</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="airline">ITA Airways</td>
+          <td class="price">$1,351 <div class="price-couple">$2,702 for 2</div></td>
+          <td class="stops">1 stop</td>
+          <td class="duration">11h 35m</td>
+          <td class="layover">2h 05m Rome (FCO)</td>
+          <td><span class="badge badge-best">Best Value</span></td>
+        </tr>
+        <tr>
+          <td class="airline">Air Canada + Lufthansa <span class="layover">(Jazz)</span><div class="airport-note">&#9888; from Billy Bishop YTZ</div></td>
+          <td class="price">$1,355 <div class="price-couple">$2,710 for 2</div></td>
+          <td class="stops">2 stops</td>
+          <td class="duration">15h 25m</td>
+          <td class="layover">Washington (IAD) + Frankfurt (FRA)</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="airline">American <span class="layover">(Envoy Air)</span></td>
+          <td class="price">$1,499 <div class="price-couple">$2,998 for 2</div></td>
+          <td class="stops">1 stop</td>
+          <td class="duration">12h 46m</td>
+          <td class="layover">1h 16m Chicago (ORD)</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="airline">American <span class="layover">(Republic Airways)</span></td>
+          <td class="price">$1,499 <div class="price-couple">$2,998 for 2</div></td>
+          <td class="stops">1 stop</td>
+          <td class="duration">12h 46m</td>
+          <td class="layover">Philadelphia (PHL)</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="airline">Air Canada <span class="layover">(Jazz)</span><div class="airport-note">&#9888; from Billy Bishop YTZ</div></td>
+          <td class="price">$1,502 <div class="price-couple">$3,004 for 2</div></td>
+          <td class="stops">1 stop</td>
+          <td class="duration">11h 10m</td>
+          <td class="layover">1h 53m Montr&eacute;al (YUL)</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="airline">Air Canada + Lufthansa</td>
+          <td class="price">$1,515 <div class="price-couple">$3,030 for 2</div></td>
+          <td class="stops">1 stop</td>
+          <td class="duration">10h 10m</td>
+          <td class="layover">48m Montr&eacute;al (YUL)</td>
+          <td><span class="badge badge-fastest">Fastest</span></td>
+        </tr>
+        <tr>
+          <td class="airline">Air France</td>
+          <td class="price">$1,824 <div class="price-couple">$3,648 for 2</div></td>
+          <td class="stops">1 stop</td>
+          <td class="duration">11h 30m</td>
+          <td class="layover">1h 50m Paris (CDG)</td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="tip tip-pro">
+    <strong>YTZ = Billy Bishop Toronto City Airport</strong> (downtown island airport). Quick ferry+walk to terminal. If you live downtown, it&rsquo;s way more convenient than Pearson. Some AC routes depart from here instead of YYZ.
+  </div>
+</div>
+
+<!-- ======== FLY A DAY EARLIER ======== -->
+<div class="section">
+  <h2>&#128197; Flexible Dates: Fly Friday Aug 21</h2>
+  <p class="sub">Shifting departure one day earlier &mdash; Fri Aug 21 &rarr; Fri Aug 28 &mdash; unlocks different prices and new airlines</p>
+
+  <div class="card" style="overflow-x:auto;padding:16px;">
+    <table class="flight-table">
+      <thead>
+        <tr>
+          <th>Airline</th>
+          <th>Price (pp)</th>
+          <th>Stops</th>
+          <th>Duration</th>
+          <th>Layover</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="airline">Air Canada + Lufthansa</td>
+          <td class="price">$1,288 <div class="price-couple">$2,576 for 2</div></td>
+          <td class="stops">1 stop</td>
+          <td class="duration">10h 10m</td>
+          <td class="layover">48m Montr&eacute;al (YUL)</td>
+          <td><span class="badge badge-cheapest">Cheapest</span></td>
+        </tr>
+        <tr>
+          <td class="airline">Iberia <span class="layover">(Iberia Express)</span></td>
+          <td class="price">$1,313 <div class="price-couple">$2,626 for 2</div></td>
+          <td class="stops">1 stop</td>
+          <td class="duration">14h 55m</td>
+          <td class="layover">4h 40m Madrid (MAD)</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="airline">TAP Air Portugal <span class="layover">(Portugalia)</span></td>
+          <td class="price">$1,345 <div class="price-couple">$2,690 for 2</div></td>
+          <td class="stops">1 stop</td>
+          <td class="duration">12h 05m</td>
+          <td class="layover">1h 25m Lisbon (LIS)</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="airline">ITA Airways</td>
+          <td class="price">$1,346 <div class="price-couple">$2,692 for 2</div></td>
+          <td class="stops">1 stop</td>
+          <td class="duration">11h 35m</td>
+          <td class="layover">2h 05m Rome (FCO)</td>
+          <td><span class="badge badge-best">Best Value</span></td>
+        </tr>
+        <tr>
+          <td class="airline">Air Canada + Lufthansa <span class="layover">(Jazz)</span><div class="airport-note">&#9888; from Billy Bishop YTZ</div></td>
+          <td class="price">$1,353 <div class="price-couple">$2,706 for 2</div></td>
+          <td class="stops">2 stops</td>
+          <td class="duration">12h 55m</td>
+          <td class="layover">Boston (BOS) + Munich (MUC)</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="airline">British Airways</td>
+          <td class="price">$1,515 <div class="price-couple">$3,030 for 2</div></td>
+          <td class="stops">1 stop</td>
+          <td class="duration">14h 45m</td>
+          <td class="layover">4h 35m London (LHR)</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="airline">Air Canada + Brussels Airlines</td>
+          <td class="price">$1,566 <div class="price-couple">$3,132 for 2</div></td>
+          <td class="stops">1 stop</td>
+          <td class="duration">11h 25m</td>
+          <td class="layover">1h 55m Brussels (BRU)</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="airline">Air Canada + ITA</td>
+          <td class="price">$1,571 <div class="price-couple">$3,142 for 2</div></td>
+          <td class="stops">1 stop</td>
+          <td class="duration">11h 10m</td>
+          <td class="layover">1h 35m Rome (FCO)</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="airline">Air France</td>
+          <td class="price">$1,824 <div class="price-couple">$3,648 for 2</div></td>
+          <td class="stops">1 stop</td>
+          <td class="duration">11h 30m</td>
+          <td class="layover">1h 50m Paris (CDG)</td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="tip tip-warn">
+    <strong>Friday flights = new airlines!</strong> TAP Air Portugal and British Airways only show up on the Aug 21 departure. TAP via Lisbon at $1,345 is a solid deal with a quick layover. Flying Friday also means you arrive Saturday morning and get a full first day.
+  </div>
+</div>
+
+<!-- ======== ROME ALTERNATIVE ======== -->
+<div class="section">
+  <h2>&#127751; The Rome Alternative (YYZ &rarr; FCO)</h2>
+  <p class="sub">Fly to Rome Fiumicino instead &mdash; cheaper fares, nonstop options, then train to Naples</p>
+
+  <div class="card" style="overflow-x:auto;padding:16px;">
+    <table class="flight-table">
+      <thead>
+        <tr>
+          <th>Airline</th>
+          <th>Price (pp)</th>
+          <th>Stops</th>
+          <th>Duration</th>
+          <th>Layover</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="airline">Air Canada <span class="layover">(Jazz)</span><div class="airport-note">&#9888; from Billy Bishop YTZ</div></td>
+          <td class="price">$1,161 <div class="price-couple">$2,322 for 2</div></td>
+          <td class="stops">1 stop</td>
+          <td class="duration">10h 45m</td>
+          <td class="layover">1h 38m Montr&eacute;al (YUL)</td>
+          <td><span class="badge badge-cheapest">Cheapest</span></td>
+        </tr>
+        <tr>
+          <td class="airline">Air Transat / Porter</td>
+          <td class="price">$1,199 <div class="price-couple">$2,398 for 2</div></td>
+          <td class="stops">Nonstop</td>
+          <td class="duration">8h 35m</td>
+          <td class="layover">&mdash;</td>
+          <td><span class="badge badge-nonstop">Nonstop!</span></td>
+        </tr>
+        <tr>
+          <td class="airline">Air Canada + United <span class="layover">(Jazz)</span><div class="airport-note">&#9888; from Billy Bishop YTZ</div></td>
+          <td class="price">$1,223 <div class="price-couple">$2,446 for 2</div></td>
+          <td class="stops">1 stop</td>
+          <td class="duration">16h 20m</td>
+          <td class="layover">6h 08m Washington (IAD)</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="airline">Air Canada + Lufthansa</td>
+          <td class="price">$1,266 <div class="price-couple">$2,532 for 2</div></td>
+          <td class="stops">1 stop</td>
+          <td class="duration">11h 45m</td>
+          <td class="layover">2h 03m Montr&eacute;al (YUL)</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="airline">Air Canada + Lufthansa</td>
+          <td class="price">$1,319 <div class="price-couple">$2,638 for 2</div></td>
+          <td class="stops">1 stop</td>
+          <td class="duration">10h 45m</td>
+          <td class="layover">1h 03m Montr&eacute;al (YUL)</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="airline">SWISS + Air Canada</td>
+          <td class="price">$1,343 <div class="price-couple">$2,686 for 2</div></td>
+          <td class="stops">1 stop</td>
+          <td class="duration">10h 20m</td>
+          <td class="layover">55m Z&uuml;rich (ZRH)</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="airline">ITA Airways</td>
+          <td class="price">$1,371 <div class="price-couple">$2,742 for 2</div></td>
+          <td class="stops">Nonstop</td>
+          <td class="duration">8h 35m</td>
+          <td class="layover">&mdash;</td>
+          <td><span class="badge badge-nonstop">Nonstop</span></td>
+        </tr>
+        <tr>
+          <td class="airline">Air Canada</td>
+          <td class="price">$1,578 <div class="price-couple">$3,156 for 2</div></td>
+          <td class="stops">Nonstop</td>
+          <td class="duration">8h 20m</td>
+          <td class="layover">&mdash;</td>
+          <td><span class="badge badge-fastest">Fastest</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="tip tip-money">
+    <strong>Rome &rarr; Naples by train:</strong> Trenitalia high-speed from Roma Termini to Napoli Centrale takes <strong>1h 10m</strong> and costs about <strong>&euro;12&ndash;25</strong> (~$18&ndash;36 CAD). Trains run every 15&ndash;30 min. Book early on <a href="https://www.trenitalia.com/en.html" target="_blank">trenitalia.com</a> for the cheapest tickets. Airport shuttle (Leonardo Express) from FCO to Roma Termini is &euro;14 and takes 32 min.
+  </div>
+</div>
+
+<!-- ======== SIDE BY SIDE ======== -->
+<div class="section">
+  <h2>&#9878;&#65039; Naples vs Rome &mdash; Head to Head</h2>
+  <p class="sub">Comparing the cheapest and best-value options across both airports</p>
+
+  <div class="vs-grid">
+    <div class="vs-card">
+      <h4>&#9992;&#65039; Fly Direct to Naples</h4>
+      <div class="vs-route">YYZ &rarr; NAP &middot; Aug 22&ndash;29</div>
+      <div class="vs-price">$1,229 /person</div>
+      <div class="vs-detail">Iberia via Madrid &middot; 1 stop &middot; 14h 55m</div>
+      <div class="vs-detail">For two: <strong>$2,458 CAD</strong></div>
+      <div class="vs-detail" style="margin-top:8px;color:var(--palm);">&#10003; Land in Naples, bus straight to Scala</div>
+      <div class="vs-detail" style="color:var(--coral);">&#10007; Long layover in Madrid</div>
+    </div>
+    <div class="vs-card winner">
+      <h4>&#127960;&#65039; Fly to Rome + Train</h4>
+      <div class="vs-route">YYZ &rarr; FCO &middot; Aug 22&ndash;29 &middot; + train</div>
+      <div class="vs-price">$1,199 /person</div>
+      <div class="vs-detail">Air Transat nonstop &middot; 8h 35m flight</div>
+      <div class="vs-detail">+ &euro;26 train/shuttle (&cong; $38 CAD)</div>
+      <div class="vs-detail">For two: <strong>~$2,474 CAD</strong> all-in</div>
+      <div class="vs-detail" style="margin-top:8px;color:var(--palm);">&#10003; Nonstop flight! Shortest travel day</div>
+      <div class="vs-detail" style="color:var(--coral);">&#10007; Need train + bus after landing</div>
+    </div>
+  </div>
+
+  <div class="tip tip-pro">
+    <strong>Bottom line:</strong> Both routes cost roughly the same (~$2,460&ndash;$2,480 for two). The Rome option gives you a <strong>nonstop 8.5-hour flight</strong> vs a 15-hour journey with a layover. The Rome route adds ~2.5 hours of ground transfer but the total travel time is still shorter. If convenience matters, Rome nonstop wins.
+  </div>
+
+  <div class="tip tip-warn">
+    <strong>Budget note:</strong> Our original budget was $2,200 for flights. The cheapest realistic option is ~$2,322&ndash;$2,458 for two, putting us $120&ndash;$260 over. Consider shaving this from the food or activity budget, or watch for price drops closer to booking time. Google says prices are &ldquo;currently typical&rdquo; for Naples and &ldquo;currently high&rdquo; for Rome.
+  </div>
+</div>
+
+<!-- ======== SEARCH EVERY SITE ======== -->
+<div class="section">
+  <h2>&#128269; Search Every Booking Site</h2>
+  <p class="sub">Prices change daily &mdash; check these links to find the latest deals. All pre-filled with YYZ&rarr;NAP, Aug 22&ndash;29, 2 adults.</p>
+
+  <div class="search-grid">
+    <a class="search-link sl-google" href="https://www.google.com/travel/flights?q=flights+from+Toronto+to+Naples+August+22+2026+round+trip+return+August+29" target="_blank">
+      <div><div class="sl-name">Google Flights</div><div class="sl-note">Best overview &amp; price tracking</div></div>
+    </a>
+    <a class="search-link sl-kayak" href="https://www.kayak.com/flights/YYZ-NAP/2026-08-22/2026-08-29/2adults" target="_blank">
+      <div><div class="sl-name">Kayak</div><div class="sl-note">Fare alerts + price predictor</div></div>
+    </a>
+    <a class="search-link sl-skyscanner" href="https://www.skyscanner.ca/transport/flights/yyz/nap/2026-08-22/2026-08-29/?adults=2" target="_blank">
+      <div><div class="sl-name">Skyscanner</div><div class="sl-note">Search everywhere feature</div></div>
+    </a>
+    <a class="search-link sl-momondo" href="https://www.momondo.ca/flight-search/YYZ-NAP/2026-08-22/2026-08-29/2adults" target="_blank">
+      <div><div class="sl-name">Momondo</div><div class="sl-note">Deep search, hidden fares</div></div>
+    </a>
+    <a class="search-link sl-cheapflights" href="https://www.cheapflights.ca/flight-search/YYZ-NAP/2026-08-22/2026-08-29/2adults" target="_blank">
+      <div><div class="sl-name">Cheapflights</div><div class="sl-note">Powered by Kayak&rsquo;s engine</div></div>
+    </a>
+    <a class="search-link sl-expedia" href="https://www.expedia.ca/Flights-search/YYZ-NAP/2026-08-22/2026-08-29/?d1=2026-08-22&d2=2026-08-29&passengers=adults:2" target="_blank">
+      <div><div class="sl-name">Expedia</div><div class="sl-note">Bundle with hotel for discounts</div></div>
+    </a>
+    <a class="search-link sl-flighthub" href="https://www.flighthub.com/flight/search?num_adults=2&type=roundtrip&origin_0=YYZ&destination_0=NAP&departure_date_0=2026-08-22&departure_date_1=2026-08-29" target="_blank">
+      <div><div class="sl-name">FlightHub</div><div class="sl-note">Canadian booking agency</div></div>
+    </a>
+    <a class="search-link sl-kiwi" href="https://www.kiwi.com/en/search/tiles/toronto-ontario-canada/naples-campania-italy/2026-08-22/2026-08-29?sortBy=price" target="_blank">
+      <div><div class="sl-name">Kiwi.com</div><div class="sl-note">Self-transfer combos &amp; hacks</div></div>
+    </a>
+  </div>
+
+  <div class="tip tip-pro">
+    <strong>Also check the Rome route:</strong>
+    <a href="https://www.google.com/travel/flights?q=flights+from+Toronto+to+Rome+August+22+2026+round+trip+return+August+29" target="_blank" style="color:var(--ocean);font-weight:600;">Google Flights YYZ&rarr;FCO</a> &middot;
+    <a href="https://www.skyscanner.ca/transport/flights/yyz/rome/2026-08-22/2026-08-29/?adults=2" target="_blank" style="color:var(--ocean);font-weight:600;">Skyscanner YYZ&rarr;Rome</a> &middot;
+    <a href="https://www.kayak.com/flights/YYZ-FCO/2026-08-22/2026-08-29/2adults" target="_blank" style="color:var(--ocean);font-weight:600;">Kayak YYZ&rarr;FCO</a>
+  </div>
+</div>
+
+<!-- ======== TIPS ======== -->
+<div class="section">
+  <h2>&#128161; Booking Tips</h2>
+  <div class="tip tip-pro"><strong>Set up price alerts:</strong> Google Flights has a &ldquo;Track prices&rdquo; toggle. Flip it on for both the Naples and Rome routes. You&rsquo;ll get email notifications when prices drop. Kayak and Skyscanner have their own alert systems too.</div>
+  <div class="tip tip-money"><strong>Best time to book:</strong> For August 2026 flights, the sweet spot is typically <strong>3&ndash;5 months before departure</strong> (March&ndash;May 2026). Prices are &ldquo;currently typical&rdquo; per Google, so they&rsquo;re unlikely to drop much, but worth monitoring.</div>
+  <div class="tip tip-warn"><strong>Baggage fees not included:</strong> Prices shown are base fares + taxes. Checked bag fees vary: Iberia &euro;25&ndash;70, ITA &euro;30&ndash;55, Air Transat includes 1 checked bag, Air Canada includes 1&ndash;2 bags on transatlantic. Always check at checkout.</div>
+  <div class="tip tip-pro"><strong>Flexible date trick:</strong> Use Google Flights&rsquo; date grid to see prices for every day combination. Flying Wed or Thu can save $50&ndash;150 vs weekend departures. Our Aug 21 (Fri) shows slightly different deals than Aug 22 (Sat).</div>
+  <div class="tip tip-info"><strong>Airport taxi to Scala:</strong> Whether you land at Naples (NAP) or Rome (FCO→train to Napoli Centrale), the final leg is the same: SITA bus from Amalfi up to Scala, or a private transfer (~&euro;130 flat for 2 from Naples). Budget about <strong>3 hours</strong> from Naples airport to the Airbnb door.</div>
+</div>
+
+<a href="best-trip.html" class="back-link">&larr; Back to the full itinerary</a>
+
+</div><!-- /container -->
+
+<footer>
+  <p>Flight comparison &bull; Amalfi Coast 2026 &bull; Researched Jun 2025</p>
+  <p style="margin-top:4px;">Prices sourced from <a href="https://www.google.com/travel/flights" target="_blank">Google Flights</a> on Jun 2025 for Aug 2026 travel. All prices in CAD, round trip per person, economy class. Prices may change &mdash; use the search links above for live quotes.</p>
+</footer>
+
+</body>
+</html>
