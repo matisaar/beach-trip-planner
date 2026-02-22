@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amalfi Coast 2026 — Our Trip Itinerary</title>
+<meta property="og:title" content="Amalfi Coast 2026 — Our Trip Itinerary">
+<meta property="og:description" content="7 nights in a sea-view house in Scala, Italy — Aug 22–29, 2026">
+<meta property="og:image" content="https://a0.muscache.com/im/pictures/hosting/Hosting-32588731/original/d5f0a59a-9621-439f-a413-086d1c42b97f.jpeg">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+  :root {
+    --ocean: #0077b6; --ocean-dark: #023e8a; --ocean-light: #00b4d8;
+    --sand: #f5e6d3; --sunset: #ff6b35; --coral: #e63946;
+    --palm: #2d6a4f; --dark: #1a1a2e; --gray: #6b7280;
+    --light: #f8fafc; --white: #ffffff; --gold: #f59e0b;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: var(--light); color: var(--dark); line-height: 1.7; }
+  .hero { background: linear-gradient(135deg, #1a472a 0%, #023e8a 50%, var(--ocean) 100%); color: white; padding: 60px 24px 50px; text-align: center; }
+  .hero h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 900; margin-bottom: 8px; }
+  .hero p { font-size: 1rem; opacity: 0.85; max-width: 600px; margin: 0 auto 20px; }
+  .hero-stats { display: flex; gap: 28px; justify-content: center; flex-wrap: wrap; margin-top: 16px; }
+  .hero-stat { text-align: center; }
+  .hero-stat .num { font-size: 1.5rem; font-weight: 900; }
+  .hero-stat .label { font-size: 0.72rem; opacity: 0.7; }
+
+  .container { max-width: 780px; margin: 0 auto; padding: 0 20px; }
+  .section { padding: 32px 0; }
+  .section h2 { font-size: 1.35rem; font-weight: 800; margin-bottom: 4px; color: var(--ocean-dark); }
+  .section .sub { color: var(--gray); font-size: 0.85rem; margin-bottom: 16px; }
+
+  .facts { background: linear-gradient(135deg, var(--sunset), var(--coral)); color: white; border-radius: 14px; padding: 20px 24px; margin: -28px auto 0; position: relative; z-index: 10; max-width: 780px; box-shadow: 0 10px 30px rgba(230,57,70,0.2); display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; }
+  .fact { background: rgba(255,255,255,0.13); border-radius: 10px; padding: 10px 12px; }
+  .fact .fl { font-size: 0.68rem; opacity: 0.8; text-transform: uppercase; letter-spacing: 0.5px; }
+  .fact .fv { font-size: 0.92rem; font-weight: 800; margin-top: 1px; }
+
+  .card { background: white; border-radius: 14px; padding: 24px; margin-bottom: 16px; box-shadow: 0 3px 12px rgba(0,0,0,0.05); }
+  .card h3 { font-size: 1.1rem; font-weight: 800; margin-bottom: 4px; }
+  .card .card-sub { color: var(--gray); font-size: 0.82rem; margin-bottom: 12px; }
+
+  /* Airbnb hero card */
+  .airbnb-hero { background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.1); margin: 14px 0; }
+  .airbnb-hero img { width: 100%; height: 260px; object-fit: cover; }
+  .airbnb-hero .ah-body { padding: 20px 24px; }
+  .airbnb-hero .ah-badge { display: inline-block; font-size: 0.72rem; font-weight: 700; padding: 3px 10px; border-radius: 14px; background: linear-gradient(135deg, var(--palm), #40916c); color: white; margin-bottom: 10px; }
+  .airbnb-hero .ah-name { font-size: 1.2rem; font-weight: 800; margin-bottom: 2px; }
+  .airbnb-hero .ah-loc { font-size: 0.85rem; color: var(--gray); margin-bottom: 10px; }
+  .airbnb-hero .ah-stats { display: flex; gap: 16px; font-size: 0.85rem; margin-bottom: 10px; flex-wrap: wrap; }
+  .airbnb-hero .ah-stats .star { color: var(--coral); font-weight: 700; }
+  .airbnb-hero .ah-perks { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+  .airbnb-hero .ah-perk { background: var(--light); border-radius: 8px; padding: 5px 10px; font-size: 0.78rem; font-weight: 600; }
+  .airbnb-hero .ah-link { display: block; text-align: center; padding: 12px; background: linear-gradient(135deg, #FF385C, #e31c5f); color: white; text-decoration: none; font-weight: 700; font-size: 0.92rem; border-radius: 10px; transition: filter 0.2s; }
+  .airbnb-hero .ah-link:hover { filter: brightness(1.1); }
+
+  /* Day cards */
+  .day { background: white; border-radius: 14px; padding: 24px; margin-bottom: 16px; box-shadow: 0 3px 12px rgba(0,0,0,0.05); border-left: 4px solid var(--ocean); }
+  .day.chill { border-left-color: var(--palm); }
+  .day.adventure { border-left-color: var(--sunset); }
+  .day h3 { font-size: 1rem; font-weight: 800; color: var(--ocean-dark); margin-bottom: 2px; }
+  .day .day-vibe { font-size: 0.78rem; color: var(--gray); margin-bottom: 14px; }
+  .day .block { margin-bottom: 12px; }
+  .day .block:last-of-type { margin-bottom: 0; }
+  .day .block-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700; margin-bottom: 3px; }
+  .day .block-label.morning { color: var(--gold); }
+  .day .block-label.afternoon { color: var(--ocean); }
+  .day .block-label.evening { color: var(--sunset); }
+  .day .block p { font-size: 0.85rem; color: #444; }
+  .day .block p a { color: var(--ocean); text-decoration: none; font-weight: 600; }
+  .day .block p a:hover { text-decoration: underline; }
+  .day .or { font-size: 0.8rem; color: var(--palm); font-style: italic; margin-top: 4px; }
+  .day .day-footer { display: flex; gap: 10px; margin-top: 14px; font-size: 0.75rem; flex-wrap: wrap; align-items: center; padding-top: 10px; border-top: 1px solid #f0f0f0; }
+  .day .day-map a { color: var(--palm); text-decoration: none; font-weight: 600; }
+
+  .eat { background: var(--light); border-radius: 8px; padding: 10px 12px; margin-top: 6px; font-size: 0.82rem; }
+  .eat .eat-name { font-weight: 700; }
+  .eat .eat-desc { color: var(--gray); }
+  .eat .eat-meta { margin-top: 2px; font-size: 0.78rem; }
+  .eat .eat-meta a { color: var(--ocean); text-decoration: none; font-weight: 600; }
+
+  .tip { border-radius: 10px; padding: 12px 14px; font-size: 0.82rem; margin: 10px 0; line-height: 1.5; }
+  .tip-info { background: #dcfce7; border-left: 4px solid var(--palm); }
+  .tip-warn { background: #fef3c7; border-left: 4px solid var(--gold); }
+  .tip-pro { background: #dbeafe; border-left: 4px solid var(--ocean); }
+  .tip strong { font-weight: 700; }
+
+  /* Neighbourhood grid */
+  .hood-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 14px 0; }
+  .hood-card { background: white; border-radius: 12px; padding: 16px; box-shadow: 0 3px 12px rgba(0,0,0,0.05); }
+  .hood-card h4 { font-size: 0.88rem; font-weight: 800; margin-bottom: 2px; }
+  .hood-card .hc-dist { font-size: 0.72rem; color: var(--ocean); font-weight: 700; margin-bottom: 6px; }
+  .hood-card p { font-size: 0.8rem; color: #555; margin: 0; }
+  .hood-card .hc-meta { margin-top: 4px; font-size: 0.75rem; }
+  .hood-card .hc-meta a { color: var(--ocean); text-decoration: none; font-weight: 600; }
+  .hood-card .hc-stars { color: var(--gold); font-size: 0.78rem; font-weight: 700; }
+  .hood-section-label { font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; color: var(--ocean-dark); margin: 20px 0 8px; padding-bottom: 4px; border-bottom: 2px solid var(--ocean-light); }
+  .walk-list { list-style: none; padding: 0; margin: 10px 0; }
+  .walk-list li { font-size: 0.82rem; padding: 6px 0; border-bottom: 1px solid #f0f0f0; display: flex; justify-content: space-between; align-items: center; }
+  .walk-list li:last-child { border-bottom: none; }
+  .walk-list .wl-place { font-weight: 600; }
+  .walk-list .wl-time { color: var(--ocean); font-weight: 700; font-size: 0.78rem; background: #dbeafe; padding: 2px 8px; border-radius: 6px; white-space: nowrap; }
+  .walk-list .wl-bus { color: var(--palm); background: #dcfce7; }
+
+  footer { background: var(--dark); color: rgba(255,255,255,0.6); text-align: center; padding: 24px 20px; font-size: 0.78rem; margin-top: 20px; }
+  footer a { color: var(--ocean-light); }
+
+  @media (max-width: 640px) {
+    .hero h1 { font-size: 1.7rem; }
+    .facts { grid-template-columns: 1fr 1fr; }
+    .card, .day { padding: 18px; }
+    .airbnb-hero img { height: 200px; }
+    .hood-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ======== HERO ======== -->
+<div class="hero">
+  <h1><img src="https://flagcdn.com/w40/it.png" alt="" style="height:1em;vertical-align:-0.1em;margin-right:4px"> Amalfi Coast 2026</h1>
+  <p>7 nights in a cliff-side sea-view house in <strong>Scala</strong> &mdash; the Amalfi Coast&rsquo;s hidden hilltop village</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="num">7</div><div class="label">Nights</div></div>
+    <div class="hero-stat"><div class="num">Aug 22&ndash;29</div><div class="label">2026</div></div>
+    <div class="hero-stat"><div class="num">Scala</div><div class="label">Home Base</div></div>
+    <div class="hero-stat"><div class="num">30&deg;C</div><div class="label">Avg Temp</div></div>
+  </div>
+</div>
+
+<!-- ======== QUICK FACTS BAR ======== -->
+<div class="container">
+<div class="facts">
+  <div class="fact"><div class="fl">&#9992;&#65039; Flights</div><div class="fv">Toronto &rarr; Naples</div></div>
+  <div class="fact"><div class="fl">&#128205; Base</div><div class="fv">Scala</div></div>
+  <div class="fact"><div class="fl">&#128197; Dates</div><div class="fv">Aug 22&#8211;29</div></div>
+  <div class="fact"><div class="fl">&#127774; Weather</div><div class="fv">30&deg;C, sunny</div></div>
+  <div class="fact"><div class="fl">&#128717;&#65039; Style</div><div class="fv">Chill + explore</div></div>
+</div>
+
+<!-- ======== WHERE WE'RE STAYING ======== -->
+<div class="section">
+  <h2>&#127968; Where We&rsquo;re Staying</h2>
+  <p class="sub">A sea-view house in the hilltop village of Scala</p>
+
+  <div class="airbnb-hero">
+    <img src="https://a0.muscache.com/im/pictures/hosting/Hosting-32588731/original/d5f0a59a-9621-439f-a413-086d1c42b97f.jpeg" alt="Windows on Heaven sea view" loading="lazy">
+    <div class="ah-body">
+      <span class="ah-badge">&#11088; Guest Favourite</span>
+      <div class="ah-name">Windows on Heaven &mdash; Total Sea View House!</div>
+      <div class="ah-loc">Scala &middot; hilltop village 400 m above the sea &middot; 10 min walk to Ravello</div>
+      <div class="ah-stats">
+        <span class="star">&#9733; 4.98</span>
+        <span>445 reviews</span>
+        <span>2 bedrooms</span>
+        <span>2 beds</span>
+        <span>Entire home</span>
+      </div>
+      <div class="ah-perks">
+        <span class="ah-perk">&#127754; Total sea view</span>
+        <span class="ah-perk">&#127968; Entire home</span>
+        <span class="ah-perk">&#128663; Free parking nearby</span>
+        <span class="ah-perk">&#128246; WiFi</span>
+      </div>
+      <a class="ah-link" href="https://www.airbnb.ca/rooms/32588731" target="_blank">View on Airbnb &rarr;</a>
+    </div>
+  </div>
+
+  <div class="tip tip-pro">
+    <strong>Why Scala?</strong> Ancient hilltop village perched 400 m above the coast. 10 min walk down to Ravello, 15 min bus to Amalfi, 40 min bus to Positano. Quieter than the coast towns but right in the middle of everything. The views from the terrace are insane.
+  </div>
+</div>
+
+<!-- ======== THE NEIGHBOURHOOD ======== -->
+<div class="section">
+  <h2>&#128205; The Neighbourhood</h2>
+  <p class="sub">Everything around the house on Via Torricella, Scala</p>
+
+  <div class="tip tip-pro" style="margin-bottom:16px">
+    <strong>Bus stop at the door:</strong> There&rsquo;s a SITA bus stop right at Ristorante Zi&rsquo;Ntonio on Via Torricella &mdash; steps from the house. Buses run down to <strong>Amalfi</strong> (15 min) roughly every 30&ndash;60 min. From Amalfi you connect to everywhere on the coast.
+  </div>
+
+  <!-- Walking distances -->
+  <div class="card">
+    <h3>&#128694; How Far Is Everything?</h3>
+    <div class="card-sub">Walking times from our front door</div>
+    <ul class="walk-list">
+      <li><span class="wl-place">Ristorante Zi&rsquo;Ntonio &amp; bus stop</span> <span class="wl-time">1 min &#128694;</span></li>
+      <li><span class="wl-place">Mini Market (groceries)</span> <span class="wl-time">8 min &#128694;</span></li>
+      <li><span class="wl-place">Piazza Municipio (Scala centre)</span> <span class="wl-time">10 min &#128694;</span></li>
+      <li><span class="wl-place">Duomo di Scala (11th-c. cathedral)</span> <span class="wl-time">10 min &#128694;</span></li>
+      <li><span class="wl-place">Ravello (Piazza Duomo)</span> <span class="wl-time">12 min &#128694;</span></li>
+      <li><span class="wl-place">Villa Rufolo, Ravello</span> <span class="wl-time">14 min &#128694;</span></li>
+      <li><span class="wl-place">Villa Cimbrone, Ravello</span> <span class="wl-time">20 min &#128694;</span></li>
+      <li><span class="wl-place">Torre dello Ziro (watchtower hike)</span> <span class="wl-time">25 min &#128694;</span></li>
+      <li><span class="wl-place">Amalfi town centre</span> <span class="wl-time wl-bus">15 min &#128652;</span></li>
+      <li><span class="wl-place">Atrani beach</span> <span class="wl-time wl-bus">18 min &#128652;</span></li>
+      <li><span class="wl-place">Positano</span> <span class="wl-time wl-bus">55 min &#128652;</span></li>
+    </ul>
+    <div class="tip tip-warn" style="margin-top:10px"><strong>Heads up:</strong> Scala is hilly &mdash; the walk to Ravello is mostly downhill (great!), but the walk back is a solid uphill. Worth it for the views. Wear good shoes on the stone paths.</div>
+  </div>
+
+  <!-- Food spots -->
+  <div class="hood-section-label">&#127829; Restaurants Near the House</div>
+  <div class="hood-grid">
+    <div class="hood-card">
+      <h4>Zi&rsquo;Ntonio</h4>
+      <div class="hc-dist">1 min walk &mdash; literally next door</div>
+      <p>Classic Scala trattoria &amp; pizzeria. Wood-fired pizza, pasta, local wine. Terrace seating with views.</p>
+      <div class="hc-meta"><span class="hc-stars">&#9733; 4.7</span> &middot; <a href="https://maps.google.com/?q=Zi+Ntonio+Scala+Italy" target="_blank">Map</a></div>
+    </div>
+    <div class="hood-card">
+      <h4>San Giovanni</h4>
+      <div class="hc-dist">3 min walk &mdash; further down Via Torricella</div>
+      <p>Family-run. Honest home-style cooking, generous portions. Great set menus at lunch.</p>
+      <div class="hc-meta"><span class="hc-stars">&#9733; 4.3</span> &middot; <a href="https://maps.google.com/?q=San+Giovanni+Restaurant+Scala+Italy" target="_blank">Map</a></div>
+    </div>
+    <div class="hood-card">
+      <h4>Ristorante Gli Ulivi</h4>
+      <div class="hc-dist">10 min walk &mdash; Piazza S. Pietro</div>
+      <p>Fresh seafood pasta and lemon-everything. Beautiful olive-tree garden.</p>
+      <div class="hc-meta"><span class="hc-stars">&#9733; 4.6</span> &middot; <a href="https://maps.google.com/?q=Ristorante+Gli+Ulivi+Scala+Italy" target="_blank">Map</a></div>
+    </div>
+    <div class="hood-card">
+      <h4>Il Pinguino</h4>
+      <div class="hc-dist">12 min walk &mdash; Via Rosca</div>
+      <p>Casual local hangout. Great pizza and panini. Popular with locals at lunch.</p>
+      <div class="hc-meta"><span class="hc-stars">&#9733; 4.5</span> &middot; <a href="https://maps.google.com/?q=Il+Pinguino+Scala+Italy" target="_blank">Map</a></div>
+    </div>
+    <div class="hood-card">
+      <h4>Borgo San Pietro</h4>
+      <div class="hc-dist">14 min walk</div>
+      <p>Pizzeria inside a charming B&amp;B. Stone courtyard, good wine list, wood-fired pizza.</p>
+      <div class="hc-meta"><span class="hc-stars">&#9733; 4.5</span> &middot; <a href="https://maps.google.com/?q=Borgo+San+Pietro+ristorante+Scala+Italy" target="_blank">Map</a></div>
+    </div>
+    <div class="hood-card">
+      <h4>Sotto le Stelle</h4>
+      <div class="hc-dist">15 min walk &mdash; upper Scala</div>
+      <p>Highest-rated pizza in Scala. Outdoor terrace under the stars. Arrive early &mdash; small place.</p>
+      <div class="hc-meta"><span class="hc-stars">&#9733; 4.9</span> &middot; <a href="https://maps.google.com/?q=Ristorante+pizzeria+Sotto+le+Stelle+Scala+Italy" target="_blank">Map</a></div>
+    </div>
+  </div>
+
+  <!-- Things to do nearby -->
+  <div class="hood-section-label">&#127965;&#65039; Things to Do Within Walking Distance</div>
+  <div class="hood-grid">
+    <div class="hood-card">
+      <h4>Torre dello Ziro</h4>
+      <div class="hc-dist">25 min walk south</div>
+      <p>Medieval watchtower on a cliff between Scala and Atrani. 360&deg; panorama of the entire coast. Best at sunset. The trail starts just past our house.</p>
+      <div class="hc-meta"><span class="hc-stars">&#9733; 4.5</span> &middot; <a href="https://maps.google.com/?q=Torre+dello+Ziro+Scala+Italy" target="_blank">Map</a></div>
+    </div>
+    <div class="hood-card">
+      <h4>Ruins of San Eustaquio Basilica</h4>
+      <div class="hc-dist">15 min walk</div>
+      <p>12th-century basilica ruins with original frescoes. Hauntingly beautiful, barely any tourists.</p>
+      <div class="hc-meta"><span class="hc-stars">&#9733; 4.7</span> &middot; <a href="https://maps.google.com/?q=Ruins+San+Eustaquio+Basilica+Scala+Italy" target="_blank">Map</a></div>
+    </div>
+    <div class="hood-card">
+      <h4>Valle delle Ferriere</h4>
+      <div class="hc-dist">30 min walk to trailhead</div>
+      <p>Hidden nature reserve. Waterfalls, rare ferns, lush forest. Cool escape from the heat. Hike one-way down to Amalfi and bus back.</p>
+      <div class="hc-meta"><span class="hc-stars">&#9733; 4.7</span> &middot; <a href="https://maps.google.com/?q=Valle+delle+Ferriere+Scala+Italy" target="_blank">Map</a></div>
+    </div>
+    <div class="hood-card">
+      <h4>Duomo di Scala</h4>
+      <div class="hc-dist">10 min walk &mdash; Scala centre</div>
+      <p>11th-century cathedral with a crypt and medieval art. One of the oldest churches on the Amalfi Coast.</p>
+      <div class="hc-meta"><span class="hc-stars">&#9733; 4.6</span> &middot; <a href="https://maps.google.com/?q=Duomo+di+Scala+Italy" target="_blank">Map</a></div>
+    </div>
+  </div>
+</div>
+
+<!-- ======== DAY-BY-DAY ITINERARY ======== -->
+<div class="section">
+  <h2>&#128197; Day-by-Day Itinerary</h2>
+  <p class="sub">Flexible vibes &mdash; swap any day around, nothing is locked</p>
+
+  <!-- DAY 1 -->
+  <div class="day">
+    <h3>Day 1 &mdash; Arrival Day &#9992;&#65039;</h3>
+    <div class="day-vibe">Sat Aug 22 &middot; Travel &amp; settle in</div>
+    <div class="block"><div class="block-label morning">&#127749; Arrive</div>
+      <p>Fly into <strong>Naples (NAP)</strong>. Take the train to Salerno, then SITA bus up the coast to Amalfi, then a local bus or taxi up to <strong>Scala</strong> (~2&ndash;3 hr coast transit total).</p>
+    </div>
+    <div class="block"><div class="block-label afternoon">&#127793; Settle</div>
+      <p>Check in at <strong>Windows on Heaven</strong>. Take in that sea view from the terrace &mdash; it&rsquo;s unreal. Grab groceries at the small shop in the piazza for breakfast supplies.</p>
+    </div>
+    <div class="block"><div class="block-label evening">&#127769; Evening</div>
+      <p>Walk 10 min downhill to <strong>Ravello</strong> for dinner. Ravello is our literal neighbour.</p>
+      <div class="eat"><span class="eat-name">Babel Ravello</span> &mdash; <span class="eat-desc">casual wine &amp; pasta on the main square</span><div class="eat-meta"><a href="https://maps.google.com/?q=Babel+Ravello" target="_blank">Map</a></div></div>
+    </div>
+    <div class="day-footer">
+      <span class="day-map"><a href="https://www.google.com/maps/dir/Naples+International+Airport/Scala+SA+Italy" target="_blank">&#128506; Route map</a></span>
+    </div>
+  </div>
+
+  <!-- DAY 2 -->
+  <div class="day chill">
+    <h3>Day 2 &mdash; Amalfi &amp; the Coast &#127754;</h3>
+    <div class="day-vibe">Sun Aug 23 &middot; Beach + town vibes</div>
+    <div class="block"><div class="block-label morning">&#9728;&#65039; Morning</div>
+      <p>Bus down from Scala to <strong>Amalfi</strong> (15 min). Explore the Duomo, wander the narrow streets, grab a lemon granita. Hit the small <strong>Marina Grande beach</strong> or walk 5 min to quieter <strong>Atrani beach</strong>.</p>
+    </div>
+    <div class="block"><div class="block-label afternoon">&#127966;&#65039; Afternoon</div>
+      <p>Lunch waterside in Atrani, then an optional ferry to <strong>Positano</strong> for the iconic pastel village stroll.</p>
+      <div class="eat"><span class="eat-name">Le Arcate</span> &mdash; <span class="eat-desc">beachside seafood in Atrani, unbeatable setting</span><div class="eat-meta"><a href="https://maps.google.com/?q=Le+Arcate+Atrani" target="_blank">Map</a></div></div>
+    </div>
+    <div class="block"><div class="block-label evening">&#127769; Evening</div>
+      <p>Bus back to Scala. Sunset from the terrace with Amalfi coast views.</p>
+    </div>
+    <div class="day-footer">
+      <span class="day-map"><a href="https://www.google.com/maps/dir/Scala+SA+Italy/Amalfi+SA+Italy/Atrani+SA+Italy/Scala+SA+Italy" target="_blank">&#128506; Route map</a></span>
+    </div>
+  </div>
+
+  <!-- DAY 3 -->
+  <div class="day">
+    <h3>Day 3 &mdash; Positano Full Day &#127965;&#65039;</h3>
+    <div class="day-vibe">Mon Aug 24 &middot; The famous one</div>
+    <div class="block"><div class="block-label morning">&#127774; Morning</div>
+      <p>Bus from Scala &rarr; Amalfi, then Amalfi &rarr; <strong>Positano</strong> (40 min bus or ferry). Claim a spot at <strong>Spiaggia Grande</strong>. Swim in that turquoise water.</p>
+    </div>
+    <div class="block"><div class="block-label afternoon">&#127829; Afternoon</div>
+      <p>Wander the vertical streets, shop at local boutiques, find the ceramic tiles. Lunch at a cliffside restaurant.</p>
+      <div class="eat"><span class="eat-name">Da Vincenzo</span> &mdash; <span class="eat-desc">legendary family-run, book ahead</span><div class="eat-meta"><a href="https://maps.google.com/?q=Da+Vincenzo+Positano" target="_blank">Map</a></div></div>
+    </div>
+    <div class="block"><div class="block-label evening">&#127769; Evening</div>
+      <p>Ferry back to Amalfi, bus up to Scala. Pizza at <strong>Zi&rsquo;Ntonio</strong> next door if we&rsquo;re hungry.</p>
+    </div>
+    <div class="day-footer">
+      <span class="day-map"><a href="https://www.google.com/maps/dir/Scala+SA+Italy/Amalfi+SA+Italy/Positano+SA+Italy/Amalfi+SA+Italy/Scala+SA+Italy" target="_blank">&#128506; Route map</a></span>
+    </div>
+  </div>
+
+  <!-- DAY 4 -->
+  <div class="day adventure">
+    <h3>Day 4 &mdash; Path of the Gods &#9968;&#65039;</h3>
+    <div class="day-vibe">Tue Aug 25 &middot; The legendary hike</div>
+    <div class="block"><div class="block-label morning">&#127748; Morning</div>
+      <p>Bus Scala &rarr; Amalfi, then Amalfi &rarr; <strong>Bomerano</strong>. Start the <strong>Sentiero degli Dei</strong> (Path of the Gods) heading west toward Nocelle. The trail is 7.8 km, mostly downhill, 3&ndash;4 hrs. Jaw-dropping cliff-edge views the entire way.</p>
+    </div>
+    <div class="block"><div class="block-label afternoon">&#127958;&#65039; Afternoon</div>
+      <p>Arrive in <strong>Nocelle</strong>, take the 1,500-step stairway down to Positano (or the local bus). Celebrate with a gelato on the beach.</p>
+      <div class="eat"><span class="eat-name">Trattoria da Santa Croce</span> &mdash; <span class="eat-desc">Nocelle mountaintop lunch, earned it</span><div class="eat-meta"><a href="https://maps.google.com/?q=Santa+Croce+Nocelle" target="_blank">Map</a></div></div>
+    </div>
+    <div class="block"><div class="block-label evening">&#127769; Evening</div>
+      <p>Ferry Positano &rarr; Amalfi, bus up to Scala. Exhausted-happy dinner at home with terrace views.</p>
+    </div>
+    <div class="day-footer">
+      <span class="day-map"><a href="https://www.google.com/maps/dir/Scala+SA+Italy/Bomerano+Agerola/Sentiero+degli+Dei/Nocelle+Positano/Positano+SA+Italy" target="_blank">&#128506; Route map</a></span>
+    </div>
+  </div>
+
+  <!-- DAY 5 -->
+  <div class="day chill">
+    <h3>Day 5 &mdash; Ravello &amp; Chill &#127926;</h3>
+    <div class="day-vibe">Wed Aug 26 &middot; Arts, gardens &amp; recovery</div>
+    <div class="block"><div class="block-label morning">&#127793; Morning</div>
+      <p>Walk 10 min downhill to <strong>Ravello</strong> &mdash; it&rsquo;s literally our neighbour village. Visit <strong>Villa Rufolo</strong> &mdash; stunning cliffside gardens that inspired Wagner. Then <strong>Villa Cimbrone</strong> for the famous Terrace of Infinity.</p>
+    </div>
+    <div class="block"><div class="block-label afternoon">&#127861; Afternoon</div>
+      <p>Lunch in Ravello&rsquo;s piazza, then slow walk back up to Scala. Afternoon reading on the terrace or nap with that sea breeze.</p>
+      <div class="eat"><span class="eat-name">Vittoria</span> &mdash; <span class="eat-desc">classic Ravello trattoria, amazing pasta e fagioli</span><div class="eat-meta"><a href="https://maps.google.com/?q=Ristorante+Vittoria+Ravello" target="_blank">Map</a></div></div>
+    </div>
+    <div class="block"><div class="block-label evening">&#127769; Evening</div>
+      <p>Check if the <strong>Ravello Festival</strong> has a concert tonight (Jul&ndash;Aug programme). Classical music on a cliff-top stage above the sea.</p>
+    </div>
+    <div class="day-footer">
+      <span class="day-map"><a href="https://www.google.com/maps/dir/Scala+SA+Italy/Villa+Rufolo+Ravello/Villa+Cimbrone+Ravello/Scala+SA+Italy" target="_blank">&#128506; Route map</a></span>
+    </div>
+  </div>
+
+  <!-- DAY 6 -->
+  <div class="day adventure">
+    <h3>Day 6 &mdash; Capri Day Trip &#128038;</h3>
+    <div class="day-vibe">Thu Aug 27 &middot; Island paradise</div>
+    <div class="block"><div class="block-label morning">&#9971;&#65039; Morning</div>
+      <p>Early bus Scala &rarr; Amalfi, then <strong>ferry to Capri</strong> (~1 hr 20 min). Take the funicular up to Capri Town. Wander the Piazzetta, then bus or walk to <strong>Anacapri</strong> for Monte Solaro chairlift &mdash; panoramic views of the whole bay.</p>
+    </div>
+    <div class="block"><div class="block-label afternoon">&#127754; Afternoon</div>
+      <p><strong>Blue Grotto</strong> run if open. Or skip the queue and swim at <strong>Marina Piccola</strong> instead &mdash; crystal clear water.</p>
+      <div class="eat"><span class="eat-name">Lo Sfizio</span> &mdash; <span class="eat-desc">great Capri lunch spot, panini &amp; insalata caprese</span><div class="eat-meta"><a href="https://maps.google.com/?q=Lo+Sfizio+Capri" target="_blank">Map</a></div></div>
+    </div>
+    <div class="block"><div class="block-label evening">&#127769; Evening</div>
+      <p>Late ferry back to Amalfi. Quick bus up to Scala. Light dinner at home.</p>
+    </div>
+    <div class="day-footer">
+      <span class="day-map"><a href="https://www.google.com/maps/dir/Scala+SA+Italy/Amalfi+SA+Italy/Capri+NA+Italy" target="_blank">&#128506; Route map</a></span>
+    </div>
+  </div>
+
+  <!-- DAY 7 -->
+  <div class="day chill">
+    <h3>Day 7 &mdash; Last Day Vibes &#127773;</h3>
+    <div class="day-vibe">Fri Aug 28 &middot; Soak it all in</div>
+    <div class="block"><div class="block-label morning">&#9728;&#65039; Morning</div>
+      <p>Sleep in. Slow coffee on the terrace. One last walk through Scala&rsquo;s medieval lanes and the 11th-century <strong>Duomo di Scala</strong>.</p>
+    </div>
+    <div class="block"><div class="block-label afternoon">&#127754; Afternoon</div>
+      <p>Bus down to Amalfi for a last swim at <strong>Atrani beach</strong>. Browse the paper shops &mdash; Amalfi is famous for its handmade paper.</p>
+      <div class="eat"><span class="eat-name">Andrea Pansa</span> &mdash; <span class="eat-desc">Amalfi&rsquo;s legendary pastry shop since 1830. Get the delizia al limone.</span><div class="eat-meta"><a href="https://maps.google.com/?q=Andrea+Pansa+Amalfi" target="_blank">Map</a></div></div>
+    </div>
+    <div class="block"><div class="block-label evening">&#127769; Evening</div>
+      <p>Sunset from the terrace one last time. Special dinner at a Ravello restaurant with a view.</p>
+      <div class="eat"><span class="eat-name">Rossellinis</span> &mdash; <span class="eat-desc">2-Michelin-star tasting menu if we want to go all out</span><div class="eat-meta"><a href="https://maps.google.com/?q=Rossellinis+Ravello" target="_blank">Map</a></div></div>
+      <p class="or">Or keep it casual at Babel again &mdash; can&rsquo;t go wrong</p>
+    </div>
+    <div class="day-footer">
+      <span class="day-map"><a href="https://www.google.com/maps/dir/Scala+SA+Italy/Atrani+SA+Italy/Ravello+SA+Italy/Scala+SA+Italy" target="_blank">&#128506; Route map</a></span>
+    </div>
+  </div>
+
+  <!-- DAY 8 -->
+  <div class="day">
+    <h3>Day 8 &mdash; Departure &#9992;&#65039;</h3>
+    <div class="day-vibe">Sat Aug 29 &middot; Ciao, Amalfi!</div>
+    <div class="block"><div class="block-label morning">&#128092; Morning</div>
+      <p>Check out. Reverse the Day 1 route: bus Scala &rarr; Amalfi, then bus or ferry to Salerno, train to Naples airport. Allow 4&ndash;5 hrs total.</p>
+    </div>
+    <div class="tip tip-warn"><strong>Flight tip:</strong> Book an afternoon/evening flight out of Naples. Morning traffic on the coast road is gnarly.</div>
+    <div class="day-footer">
+      <span class="day-map"><a href="https://www.google.com/maps/dir/Scala+SA+Italy/Amalfi+SA+Italy/Salerno+Central+Station/Naples+International+Airport" target="_blank">&#128506; Route map</a></span>
+    </div>
+  </div>
+</div>
+
+<!-- ======== FOOD CHEAT SHEET ======== -->
+<div class="section">
+  <h2>&#127829; Must-Try Food</h2>
+  <p class="sub">The Amalfi Coast essentials</p>
+  <div class="card">
+    <h3>Dishes We Can&rsquo;t Miss</h3>
+    <div class="card-sub">Ask for these everywhere</div>
+    <p style="font-size:0.85rem;color:#444;">
+      <strong>Scialatielli ai frutti di mare</strong> &mdash; fresh hand-rolled pasta with seafood, the coast&rsquo;s signature dish<br>
+      <strong>Delizia al limone</strong> &mdash; lemon sponge cake with limoncello cream, heavenly<br>
+      <strong>Frittura di paranza</strong> &mdash; crispy fried mixed fish, best at beach restaurants<br>
+      <strong>Insalata caprese</strong> &mdash; local mozzarella di bufala + tomatoes, nothing like at home<br>
+      <strong>Sfogliatella</strong> &mdash; crispy shell-shaped pastry filled with ricotta, a Neapolitan staple<br>
+      <strong>Limoncello</strong> &mdash; homemade everywhere, served ice-cold after dinner (free at many spots)<br>
+    </p>
+  </div>
+  <div class="tip tip-info"><strong>Pro tip:</strong> Eat <em>pranzo</em> (lunch) as the big meal &mdash; many restaurants offer amazing set lunch menus. For dinner, local pizzerias are the move.</div>
+</div>
+
+<!-- ======== GETTING AROUND ======== -->
+<div class="section">
+  <h2>&#128652; Getting Around</h2>
+  <p class="sub">Buses, ferries &amp; walking paths</p>
+  <div class="card">
+    <p style="font-size:0.85rem;color:#444;margin-bottom:10px">
+      <strong>By bus:</strong> SITA buses are the main way around the coast. Stop right at our door. Buy tickets at any tabaccheria (tobacco shop) &mdash; <strong>not on the bus</strong>. Runs every 30&ndash;60 min.
+    </p>
+    <p style="font-size:0.85rem;color:#444;margin-bottom:10px">
+      <strong>By foot to Ravello:</strong> 12 min downhill on ancient stone paths. The walk back up is ~18 min and steep, but shaded and scenic.
+    </p>
+    <p style="font-size:0.85rem;color:#444;margin-bottom:10px">
+      <strong>By ferry:</strong> Bus to Amalfi first, then ferries go to Positano (25 min), Salerno (35 min), or Capri (80 min).
+    </p>
+    <p style="font-size:0.85rem;color:#444">
+      <strong>Driving?</strong> Don&rsquo;t. The coast road is a one-lane nightmare in August. Buses and ferries are the way.
+    </p>
+  </div>
+</div>
+
+<!-- ======== QUICK TIPS ======== -->
+<div class="section">
+  <h2>&#128161; Quick Tips</h2>
+  <div class="tip tip-pro"><strong>SITA bus pass:</strong> You can get a 24-hr unlimited bus pass at any tabaccheria. Covers Scala&ndash;Amalfi, Amalfi&ndash;Positano, Amalfi&ndash;Ravello all in one.</div>
+  <div class="tip tip-warn"><strong>Cash:</strong> Many small restaurants, buses, and beach vendors are cash-only. There&rsquo;s an ATM in Amalfi at the post office.</div>
+  <div class="tip tip-pro"><strong>Scala is our secret weapon:</strong> We&rsquo;re above the chaos. The terrace gives us a sunset view every single night. Ravello is a 10-min walk. Amalfi is a 15-min bus. Best of both worlds.</div>
+</div>
+
+</div><!-- /container -->
+
+<footer>
+  Made with &#10084;&#65039; for our Amalfi adventure &middot; Aug 2026
+</footer>
+
+</body>
+</html>
