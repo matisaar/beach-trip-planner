@@ -15,7 +15,7 @@
   // ── Other projects (external links shown in nav) ──────────
   var EXTERNAL_PROJECTS = [
     { name: '🏠 Greek Property Finder', url: 'https://matisaar.github.io/greek-property-finder/', desc: 'Investment properties under €75k' },
-    { name: '🛒 Calgary Grocery Scraper', url: 'https://github.com/matisaar/calgary-grocery-scraper', desc: 'Price comparison tool' },
+    { name: '🛒 Calgary Grocery Scraper', url: 'https://matisaar.github.io/calgary-grocery-scraper/', desc: 'Price comparison tool' },
     { name: '📈 Stock Analyzer', url: 'https://michael-stock-analyzer.vercel.app', desc: 'Michael\'s stock analyzer' },
     { name: '📋 T661 Checker', url: 'https://t661-checker.vercel.app', desc: 'SR&ED claim checker' }
   ];
