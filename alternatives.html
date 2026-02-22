@@ -3,834 +3,531 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Extend the Trip — Cheaper Airbnbs &amp; Less Touristy Italy — 2026</title>
+<title>Extend the Trip — Cheaper Airbnbs Across Italy — 2026</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-  :root {
-    --ocean: #0077b6; --ocean-dark: #023e8a; --ocean-light: #00b4d8;
-    --sand: #f5e6d3; --sunset: #ff6b35; --coral: #e63946;
-    --palm: #2d6a4f; --dark: #1a1a2e; --gray: #6b7280;
-    --light: #f8fafc; --white: #ffffff; --gold: #f59e0b;
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Inter', sans-serif; background: var(--light); color: var(--dark); line-height: 1.7; }
+  :root{--ocean:#0077b6;--ocean-dark:#023e8a;--ocean-light:#00b4d8;--sunset:#ff6b35;--coral:#e63946;--palm:#2d6a4f;--dark:#1a1a2e;--gray:#6b7280;--light:#f8fafc;--gold:#f59e0b}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Inter',sans-serif;background:var(--light);color:var(--dark);line-height:1.7}
+  .hero{background:linear-gradient(135deg,#1a472a 0%,#023e8a 50%,var(--ocean) 100%);color:#fff;padding:60px 24px 50px;text-align:center}
+  .hero h1{font-size:clamp(2rem,5vw,3rem);font-weight:900;margin-bottom:8px}
+  .hero p{font-size:1rem;opacity:.85;max-width:640px;margin:0 auto 20px}
+  .hero-stats{display:flex;gap:28px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+  .hero-stat{text-align:center}.hero-stat .num{font-size:1.5rem;font-weight:900}.hero-stat .label{font-size:.72rem;opacity:.7}
+  .container{max-width:860px;margin:0 auto;padding:0 20px}
+  .section{padding:32px 0}
+  .section h2{font-size:1.35rem;font-weight:800;margin-bottom:4px;color:var(--ocean-dark)}
+  .section .sub{color:var(--gray);font-size:.85rem;margin-bottom:16px}
+  .verdict-bar{background:linear-gradient(135deg,var(--sunset),var(--coral));color:#fff;border-radius:14px;padding:24px;margin:-28px auto 0;position:relative;z-index:10;max-width:860px;box-shadow:0 10px 30px rgba(230,57,70,.2);text-align:center}
+  .verdict-bar h2{color:#fff;font-size:1.3rem;font-weight:900;margin-bottom:6px}
+  .verdict-bar p{font-size:.92rem;opacity:.92;margin:0}
+  .tip{border-radius:10px;padding:12px 14px;font-size:.82rem;margin:10px 0;line-height:1.5}
+  .tip-money{background:#dcfce7;border-left:4px solid var(--palm)}
+  .tip-warn{background:#fef3c7;border-left:4px solid var(--gold)}
+  .tip-pro{background:#dbeafe;border-left:4px solid var(--ocean)}
+  .tip strong{font-weight:700}
+  .card{background:#fff;border-radius:14px;padding:24px;margin-bottom:16px;box-shadow:0 3px 12px rgba(0,0,0,.05)}
+  .card h3{font-size:1.1rem;font-weight:800;margin-bottom:4px}
 
-  .hero { background: linear-gradient(135deg, #1a472a 0%, #023e8a 50%, var(--ocean) 100%); color: white; padding: 60px 24px 50px; text-align: center; }
-  .hero h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 900; margin-bottom: 8px; }
-  .hero p { font-size: 1rem; opacity: 0.85; max-width: 640px; margin: 0 auto 20px; }
-  .hero-stats { display: flex; gap: 28px; justify-content: center; flex-wrap: wrap; margin-top: 16px; }
-  .hero-stat { text-align: center; }
-  .hero-stat .num { font-size: 1.5rem; font-weight: 900; }
-  .hero-stat .label { font-size: 0.72rem; opacity: 0.7; }
+  /* Region hero card — image + body, matching airbnb-hero from best-trip */
+  .region-hero{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 8px 30px rgba(0,0,0,.1);margin:14px 0}
+  .region-hero img{width:100%;height:240px;object-fit:cover}
+  .region-hero .rh-body{padding:20px 24px}
+  .region-hero .rh-badge{display:inline-block;font-size:.72rem;font-weight:700;padding:3px 10px;border-radius:14px;color:#fff;margin-bottom:10px}
+  .badge-easy{background:linear-gradient(135deg,var(--coral),#c1121f)}
+  .badge-value{background:linear-gradient(135deg,var(--palm),#40916c)}
+  .badge-cheap{background:linear-gradient(135deg,var(--gold),#d97706)}
+  .badge-hidden{background:linear-gradient(135deg,var(--ocean-dark),var(--ocean))}
+  .badge-close{background:linear-gradient(135deg,var(--sunset),#e85d04)}
+  .badge-unique{background:linear-gradient(135deg,#7c3aed,#5b21b6)}
+  .region-hero .rh-name{font-size:1.2rem;font-weight:800;margin-bottom:2px}
+  .region-hero .rh-loc{font-size:.85rem;color:var(--gray);margin-bottom:10px}
+  .region-hero .rh-stats{display:flex;gap:14px;font-size:.82rem;margin-bottom:12px;flex-wrap:wrap}
+  .region-hero .rh-stats span{font-weight:600}
 
-  .container { max-width: 860px; margin: 0 auto; padding: 0 20px; }
-  .section { padding: 32px 0; }
-  .section h2 { font-size: 1.35rem; font-weight: 800; margin-bottom: 4px; color: var(--ocean-dark); }
-  .section .sub { color: var(--gray); font-size: 0.85rem; margin-bottom: 16px; }
-
-  .verdict-bar { background: linear-gradient(135deg, var(--sunset), var(--coral)); color: white; border-radius: 14px; padding: 24px; margin: -28px auto 0; position: relative; z-index: 10; max-width: 860px; box-shadow: 0 10px 30px rgba(230,57,70,0.2); text-align: center; }
-  .verdict-bar h2 { color: white; font-size: 1.3rem; font-weight: 900; margin-bottom: 6px; }
-  .verdict-bar p { font-size: 0.92rem; opacity: 0.92; margin: 0; }
-
-  .card { background: white; border-radius: 14px; padding: 24px; margin-bottom: 16px; box-shadow: 0 3px 12px rgba(0,0,0,0.05); }
-  .card h3 { font-size: 1.1rem; font-weight: 800; margin-bottom: 4px; }
-  .card .card-sub { color: var(--gray); font-size: 0.82rem; margin-bottom: 12px; }
-
-  .tip { border-radius: 10px; padding: 12px 14px; font-size: 0.82rem; margin: 10px 0; line-height: 1.5; }
-  .tip-money { background: #dcfce7; border-left: 4px solid var(--palm); }
-  .tip-warn { background: #fef3c7; border-left: 4px solid var(--gold); }
-  .tip-pro { background: #dbeafe; border-left: 4px solid var(--ocean); }
-  .tip-info { background: #dbeafe; border-left: 4px solid var(--ocean); }
-
-  /* Region cards */
-  .region { background: white; border-radius: 14px; padding: 0; margin-bottom: 20px; box-shadow: 0 3px 12px rgba(0,0,0,0.05); overflow: hidden; }
-  .region-head { padding: 20px 24px 14px; border-bottom: 1px solid #f0f0f0; }
-  .region-head h3 { font-size: 1.15rem; font-weight: 900; margin-bottom: 2px; }
-  .region-head .region-meta { display: flex; gap: 16px; flex-wrap: wrap; font-size: 0.78rem; color: var(--gray); }
-  .region-head .region-meta span { display: flex; align-items: center; gap: 4px; }
-  .region-body { padding: 16px 24px 20px; }
-
-  /* Listing table */
-  .listing-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 0.82rem; margin: 10px 0; }
-  .listing-table thead th { background: var(--ocean-dark); color: white; padding: 10px 10px; text-align: left; font-weight: 700; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.5px; }
-  .listing-table thead th:first-child { border-radius: 10px 0 0 0; }
-  .listing-table thead th:last-child { border-radius: 0 10px 0 0; }
-  .listing-table tbody td { padding: 10px 10px; border-bottom: 1px solid #f0f0f0; vertical-align: middle; }
-  .listing-table tbody tr:last-child td { border-bottom: none; }
-  .listing-table tbody tr:hover { background: #f0f7ff; }
-  .listing-table .name { font-weight: 800; }
-  .listing-table .name a { color: var(--ocean-dark); text-decoration: none; }
-  .listing-table .name a:hover { text-decoration: underline; }
-  .listing-table .price { font-weight: 800; color: var(--palm); white-space: nowrap; }
-  .listing-table .rating { font-weight: 700; white-space: nowrap; }
-  .listing-table .reviews { font-size: 0.75rem; color: var(--gray); }
-  .listing-table .badge { display: inline-block; font-size: 0.62rem; font-weight: 800; padding: 2px 7px; border-radius: 6px; margin-left: 4px; vertical-align: middle; white-space: nowrap; }
-  .badge-top { background: #fef3c7; color: #92400e; }
-  .badge-cheap { background: #dcfce7; color: var(--palm); }
-  .badge-fav { background: #dbeafe; color: var(--ocean-dark); }
-
-  /* Pick cards */
-  .pick-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin: 16px 0; }
-  .pick { background: white; border-radius: 14px; padding: 20px; box-shadow: 0 3px 12px rgba(0,0,0,0.05); border-top: 4px solid var(--ocean); }
-  .pick.budget { border-top-color: var(--palm); }
-  .pick.splurge { border-top-color: var(--coral); }
-  .pick.local { border-top-color: var(--gold); }
-  .pick .pick-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 800; margin-bottom: 6px; }
-  .pick.budget .pick-label { color: var(--palm); }
-  .pick.splurge .pick-label { color: var(--coral); }
-  .pick.local .pick-label { color: var(--gold); }
-  .pick .pick-name { font-size: 1rem; font-weight: 800; margin-bottom: 2px; }
-  .pick .pick-detail { font-size: 0.82rem; color: #555; margin-bottom: 2px; }
-  .pick .pick-price { font-size: 0.92rem; font-weight: 700; color: var(--palm); }
-  .pick .pick-order { font-size: 0.78rem; color: var(--gray); margin-top: 4px; font-style: italic; }
-
-  /* Comparison bar */
-  .comp-bar { display: flex; gap: 2px; margin: 12px 0; border-radius: 10px; overflow: hidden; height: 32px; }
-  .comp-bar .seg { display: flex; align-items: center; justify-content: center; font-size: 0.68rem; font-weight: 800; color: white; }
+  /* Listing table — scrollable on mobile */
+  .table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:12px 0;border-radius:10px}
+  .listing-table{width:100%;border-collapse:separate;border-spacing:0;font-size:.82rem;min-width:560px}
+  .listing-table thead th{background:var(--ocean-dark);color:#fff;padding:10px 10px;text-align:left;font-weight:700;font-size:.72rem;text-transform:uppercase;letter-spacing:.5px;white-space:nowrap}
+  .listing-table thead th:first-child{border-radius:10px 0 0 0}
+  .listing-table thead th:last-child{border-radius:0 10px 0 0}
+  .listing-table tbody td{padding:10px 10px;border-bottom:1px solid #f0f0f0;vertical-align:middle}
+  .listing-table tbody tr:last-child td{border-bottom:none}
+  .listing-table tbody tr:hover{background:#f0f7ff}
+  .listing-table .name{font-weight:800}
+  .listing-table .name a{color:var(--ocean-dark);text-decoration:none}
+  .listing-table .name a:hover{text-decoration:underline}
+  .listing-table .price{font-weight:800;color:var(--palm);white-space:nowrap}
+  .listing-table .rating{font-weight:700;white-space:nowrap}
+  .listing-table .reviews{font-size:.75rem;color:var(--gray)}
+  .listing-table .badge{display:inline-block;font-size:.62rem;font-weight:800;padding:2px 7px;border-radius:6px;margin-left:4px;vertical-align:middle;white-space:nowrap}
+  .badge-top{background:#fef3c7;color:#92400e}
+  .badge-budget{background:#dcfce7;color:var(--palm)}
+  .badge-fav{background:#dbeafe;color:var(--ocean-dark)}
+  .map-pin{font-size:.7rem;text-decoration:none;margin-left:4px}
 
   /* Scenario cards */
-  .scenario { background: white; border-radius: 14px; padding: 20px 24px; margin-bottom: 14px; box-shadow: 0 3px 12px rgba(0,0,0,0.05); border-left: 5px solid var(--ocean); }
-  .scenario.best { border-left-color: var(--palm); }
-  .scenario.mid { border-left-color: var(--gold); }
-  .scenario.max { border-left-color: var(--coral); }
-  .scenario h4 { font-size: 1rem; font-weight: 800; margin-bottom: 2px; }
-  .scenario .sc-sub { font-size: 0.78rem; color: var(--gray); margin-bottom: 10px; }
-  .scenario table { width: 100%; font-size: 0.82rem; border-collapse: collapse; }
-  .scenario table td { padding: 4px 0; }
-  .scenario table td:last-child { text-align: right; font-weight: 700; }
-  .scenario .total { font-size: 1rem; font-weight: 900; color: var(--ocean-dark); margin-top: 8px; text-align: right; }
+  .scenario{background:#fff;border-radius:14px;padding:20px 24px;margin-bottom:14px;box-shadow:0 3px 12px rgba(0,0,0,.05);border-left:5px solid var(--ocean)}
+  .scenario.best{border-left-color:var(--palm)}
+  .scenario.mid{border-left-color:var(--gold)}
+  .scenario.max{border-left-color:var(--coral)}
+  .scenario h4{font-size:1rem;font-weight:800;margin-bottom:2px}
+  .scenario .sc-sub{font-size:.78rem;color:var(--gray);margin-bottom:10px}
+  .scenario table{width:100%;font-size:.82rem;border-collapse:collapse}
+  .scenario table td{padding:4px 0}
+  .scenario table td:last-child{text-align:right;font-weight:700}
+  .scenario .total{font-size:1rem;font-weight:900;color:var(--ocean-dark);margin-top:8px;text-align:right}
 
-  /* VS grid */
-  .vs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 14px 0; }
-  .vs-card { background: white; border-radius: 14px; padding: 20px; box-shadow: 0 3px 12px rgba(0,0,0,0.05); }
-  .vs-card h4 { font-size: 0.95rem; font-weight: 800; margin-bottom: 10px; }
-  .vs-card ul { list-style: none; font-size: 0.82rem; }
-  .vs-card ul li { padding: 3px 0; }
-  .vs-card ul li::before { content: "&#10003; "; color: var(--palm); font-weight: 700; }
+  /* Food comparison */
+  .food-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #f0f0f0;font-size:.85rem}
+  .food-row:last-child{border-bottom:none}
+  .food-name{font-weight:800;min-width:110px}
+  .food-bar{flex:1;height:10px;background:#e5e7eb;border-radius:5px;overflow:hidden}
+  .food-fill{height:100%;border-radius:5px;background:var(--palm)}
+  .food-cost{font-weight:700;min-width:70px;text-align:right;color:var(--ocean-dark);font-size:.82rem}
 
-  /* Safety grid */
-  .safety-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin: 14px 0; }
-  .safety-item { background: white; border-radius: 12px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); text-align: center; }
-  .safety-item .emoji { font-size: 1.4rem; margin-bottom: 4px; }
-  .safety-item .s-name { font-size: 0.85rem; font-weight: 800; margin-bottom: 2px; }
-  .safety-item .s-score { font-size: 0.78rem; color: var(--palm); font-weight: 700; }
-
-  @media (max-width: 600px) {
-    .vs-grid { grid-template-columns: 1fr; }
-    .listing-table { font-size: 0.75rem; }
-    .listing-table thead th, .listing-table tbody td { padding: 7px 6px; }
-    .pick-grid { grid-template-columns: 1fr; }
-    .safety-grid { grid-template-columns: 1fr 1fr; }
+  .back{display:inline-block;margin:24px 0 0;color:var(--ocean);font-weight:700;text-decoration:none;font-size:.85rem}
+  .back:hover{text-decoration:underline}
+  footer{background:var(--dark);color:rgba(255,255,255,.6);text-align:center;padding:24px 20px;font-size:.78rem;margin-top:20px}
+  footer a{color:var(--ocean-light)}
+  @media(max-width:600px){
+    .hero{padding:40px 16px 36px}
+    .region-hero img{height:180px}
+    .region-hero .rh-body{padding:14px 16px}
+    .listing-table{font-size:.75rem}
+    .listing-table thead th,.listing-table tbody td{padding:7px 6px}
+    .food-row{font-size:.78rem}
+    .food-name{min-width:80px}
+    .scenario{padding:16px 18px}
+    .verdict-bar{margin:-20px 10px 0;padding:18px}
   }
-
-  .back { display: inline-block; margin: 24px 0 0; color: var(--ocean); font-weight: 700; text-decoration: none; font-size: 0.85rem; }
-  .back:hover { text-decoration: underline; }
-
-  footer { background: var(--dark); color: rgba(255,255,255,0.6); text-align: center; padding: 24px 20px; font-size: 0.78rem; margin-top: 20px; }
-  footer a { color: var(--ocean-light); }
 </style>
 </head>
 <body>
 
-<!-- ======== HERO ======== -->
 <div class="hero">
   <h1>&#127758; Extend Your Italy Trip</h1>
-  <p>What if you stayed longer? Cheaper Airbnbs, less touristy towns, amazing food for half the price &mdash; a second base to make it a 10&ndash;14 day adventure.</p>
+  <p>Cheaper Airbnbs in less touristy regions &mdash; add 3&ndash;7 extra days for $500&ndash;$1,100 CAD.</p>
   <div class="hero-stats">
-    <div class="hero-stat"><div class="num">6</div><div class="label">Regions Compared</div></div>
-    <div class="hero-stat"><div class="num">800+</div><div class="label">Listings Found</div></div>
-    <div class="hero-stat"><div class="num">$57&ndash;120</div><div class="label">CAD/Night Range</div></div>
-    <div class="hero-stat"><div class="num">50&ndash;70%</div><div class="label">Cheaper Than Scala</div></div>
+    <div class="hero-stat"><div class="num">6</div><div class="label">Regions</div></div>
+    <div class="hero-stat"><div class="num">800+</div><div class="label">Entire Homes</div></div>
+    <div class="hero-stat"><div class="num">$57</div><div class="label">Cheapest/Night</div></div>
+    <div class="hero-stat"><div class="num">50&ndash;75%</div><div class="label">Cheaper Than Scala</div></div>
   </div>
 </div>
 
-<!-- ======== VERDICT BAR ======== -->
 <div class="container">
 <div class="verdict-bar">
-  <h2>&#128161; The Big Idea</h2>
-  <p>Your Scala Airbnb costs $230/night. A private entire-apartment in Puglia, Sicily, or Calabria costs $75&ndash;$115/night. Add 5 extra days for as little as $500 CAD total &mdash; accommodation + food + transport. That's a 12-day Italy trip for under $6,000.</p>
-</div>
-
-<!-- ======== CURRENT VS BUDGET ======== -->
-<div class="section">
-  <h2>&#128200; Your Current Trip vs. Extended Trip</h2>
-  <p class="sub">How the numbers change when you add a cheaper &ldquo;second base&rdquo;</p>
-
-  <div class="vs-grid">
-    <div class="vs-card" style="border-top: 4px solid var(--coral);">
-      <h4>&#127968; Current Plan &mdash; 7 Nights</h4>
-      <ul>
-        <li>Scala, Amalfi Coast</li>
-        <li>$230 CAD/night Airbnb</li>
-        <li>$1,610 accommodation</li>
-        <li>~$700 food (&#8364;25&ndash;40/day for 2)</li>
-        <li>~$2,322 flights</li>
-        <li><strong>Total: ~$5,300 CAD</strong></li>
-      </ul>
-    </div>
-    <div class="vs-card" style="border-top: 4px solid var(--palm);">
-      <h4>&#127793; Extended Plan &mdash; 12 Nights</h4>
-      <ul>
-        <li>7 nights Scala + 5 nights elsewhere</li>
-        <li>Second base: $75&ndash;$100 CAD/night</li>
-        <li>Extra accommodation: $375&ndash;$500</li>
-        <li>Extra food: $175&ndash;$250 (cheaper areas)</li>
-        <li>Internal train/bus: $30&ndash;$60</li>
-        <li><strong>Total: ~$5,900&ndash;$6,100 CAD</strong></li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="tip tip-money"><strong>&#128176; Key insight:</strong> 5 extra days in Italy costs roughly $600&ndash;$800 CAD total. That's just $120&ndash;$160/day for two people &mdash; accommodation, all meals, and transport included. The flights are the same either way.</div>
-</div>
-
-<!-- ======== TOP PICKS OVERVIEW ======== -->
-<div class="section">
-  <h2>&#127942; Our Top 3 Extension Picks</h2>
-  <p class="sub">Where we'd go after a week on the Amalfi Coast</p>
-
-  <div class="pick-grid">
-    <div class="pick budget">
-      <div class="pick-label">&#129351; Best Overall Pick</div>
-      <div class="pick-name">Naples</div>
-      <div class="pick-detail">2&ndash;3 days &middot; No transport needed (flight lands here)</div>
-      <div class="pick-price">$109&ndash;$121/night &middot; 93 listings</div>
-      <div class="pick-order">Best pizza on Earth, Pompeii, vibrant street life. Stay at start or end of trip.</div>
-    </div>
-    <div class="pick local">
-      <div class="pick-label">&#129352; Best Value Extended Stay</div>
-      <div class="pick-name">Puglia (Lecce/Bari Area)</div>
-      <div class="pick-detail">4&ndash;7 days &middot; Train from Naples (~3h)</div>
-      <div class="pick-price">$74&ndash;$115/night &middot; 251 listings</div>
-      <div class="pick-order">Baroque cities, whitewashed trulli, beaches, incredible seafood at half Amalfi prices.</div>
-    </div>
-    <div class="pick splurge">
-      <div class="pick-label">&#129353; Most Adventurous</div>
-      <div class="pick-name">Sicily (Catania/Ragusa)</div>
-      <div class="pick-detail">5&ndash;7 days &middot; Cheap flights from NAP (~$40)</div>
-      <div class="pick-price">$57&ndash;$100/night &middot; 350 listings</div>
-      <div class="pick-order">Mt Etna, ancient Greek temples, the cheapest food in Italy, zero tourist crowds inland.</div>
-    </div>
-  </div>
+  <h2>&#128161; Your Scala Airbnb = $230/night. &nbsp;These = $57&ndash;$120/night.</h2>
+  <p>Add 5 extra days for ~$600 total (stay + food + transport). A 12-day Italy trip for under $6,000.</p>
 </div>
 
 <!-- ======== NAPLES ======== -->
 <div class="section">
-  <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;">
-    <h2>&#127829; Naples</h2>
-    <span style="font-size:0.72rem;font-weight:700;background:var(--coral);color:white;padding:3px 10px;border-radius:20px;">EASY ADD-ON &middot; 0 extra transport</span>
-  </div>
-  <p class="sub">Your flight lands at NAP. Stay 2&ndash;3 nights at the start or end &mdash; no extra bus/train needed.</p>
+  <h2>&#127829; Naples</h2>
+  <p class="sub">Easiest add-on &mdash; your flight lands here. 2&ndash;3 nights, no extra transport.</p>
 
-  <div class="region">
-    <div class="region-head">
-      <h3>Why Naples?</h3>
-      <div class="region-meta">
+  <div class="region-hero">
+    <img src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=860&h=240&fit=crop" alt="Naples waterfront with Vesuvius" loading="lazy">
+    <div class="rh-body">
+      <span class="rh-badge badge-easy">EASIEST ADD-ON</span>
+      <div class="rh-name">Naples <a href="https://maps.google.com/?q=Naples+Italy" target="_blank">&#128205;</a></div>
+      <div class="rh-loc">93 entire homes under $120/night &middot; Best pizza on Earth &middot; <a href="https://maps.google.com/?q=Pompeii+Italy" target="_blank">Pompeii</a> 30 min away</div>
+      <div class="rh-stats">
         <span>&#128176; Food: &#8364;5&ndash;15/meal</span>
-        <span>&#128205; 93 entire homes under $100/night</span>
         <span>&#9989; Safe in tourist areas</span>
+        <span>&#128663; 0 extra transport</span>
       </div>
     </div>
-    <div class="region-body">
-      <p style="font-size:0.88rem;margin-bottom:12px;">Naples is <strong>the birthplace of pizza</strong> and the cheapest major city in Southern Italy for food. A margherita from the legendary L'Antica Pizzeria da Michele costs &#8364;5. A full meal with wine runs &#8364;12&ndash;20/person. The historic center is a UNESCO World Heritage Site. Pompeii is a 30-min train ride. The Archaelogical Museum is world-class.</p>
-
-      <table class="listing-table">
-        <thead><tr><th>Airbnb Listing</th><th>Location</th><th>7 Nights</th><th>Per Night</th><th>Rating</th></tr></thead>
-        <tbody>
-          <tr>
-            <td><span class="name"><a href="https://www.airbnb.ca/rooms/14234870" target="_blank">Mati&rsquo;s House &mdash; Piazzetta Nilo</a></span></td>
-            <td>Historic Center</td>
-            <td class="price">~$728</td>
-            <td class="price">$121</td>
-            <td class="rating">4.90 <span class="reviews">(642)</span> <span class="badge badge-fav">GUEST FAV</span></td>
-          </tr>
-          <tr>
-            <td><span class="name"><a href="https://www.airbnb.ca/rooms/882333332944235467" target="_blank">Botanical Garden Downtown</a></span></td>
-            <td>Downtown</td>
-            <td class="price">$797</td>
-            <td class="price">$114</td>
-            <td class="rating">4.91 <span class="reviews">(258)</span> <span class="badge badge-fav">GUEST FAV</span></td>
-          </tr>
-          <tr>
-            <td><span class="name"><a href="https://www.airbnb.ca/rooms/26252847" target="_blank">Millet Apartment</a></span></td>
-            <td>Central</td>
-            <td class="price">~$770</td>
-            <td class="price">$110</td>
-            <td class="rating">4.87 <span class="reviews">(448)</span></td>
-          </tr>
-          <tr>
-            <td><span class="name"><a href="https://www.airbnb.ca/rooms/21600242" target="_blank">Entire Apartment + Free Parking</a></span></td>
-            <td>Near Subway</td>
-            <td class="price">~$750</td>
-            <td class="price">$107</td>
-            <td class="rating">4.92 <span class="reviews">(261)</span> <span class="badge badge-fav">GUEST FAV</span></td>
-          </tr>
-          <tr>
-            <td><span class="name"><a href="https://www.airbnb.ca/rooms/898554596799708047" target="_blank">The Casket</a></span></td>
-            <td>Central</td>
-            <td class="price">$764</td>
-            <td class="price">$109</td>
-            <td class="rating">4.70 <span class="reviews">(163)</span></td>
-          </tr>
-        </tbody>
-      </table>
-
-      <div class="tip tip-pro"><strong>&#128161; Pro tip:</strong> Stay 2&ndash;3 nights in Naples <em>before</em> heading to the Amalfi Coast. You arrive at NAP airport, uber to your Airbnb (&#8364;15), explore the city, eat incredible pizza, visit Pompeii. Then take the SITA bus to Amalfi on day 3. No wasted travel days.</div>
-
-      <div class="tip tip-money"><strong>&#128176; Naples food budget:</strong> Margherita pizza &#8364;4&ndash;6. Full seafood lunch &#8364;12&ndash;18. Espresso &#8364;1. Sfogliatella &#8364;2. Two people can eat 3 meals a day for under &#8364;35 total. That&rsquo;s roughly $25 CAD/person/day.</div>
-    </div>
   </div>
+
+  <div class="table-wrap">
+  <table class="listing-table">
+    <thead><tr><th>Listing</th><th>Area</th><th>/Night</th><th>Rating</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><span class="name"><a href="https://www.airbnb.ca/rooms/14234870" target="_blank">Mati&rsquo;s House &mdash; Piazzetta Nilo</a></span><a class="map-pin" href="https://maps.google.com/?q=Piazzetta+Nilo+Naples+Italy" target="_blank">&#128205;</a></td>
+        <td>Historic Center</td>
+        <td class="price">$121</td>
+        <td class="rating">4.90 <span class="reviews">(642)</span> <span class="badge badge-fav">FAV</span></td>
+      </tr>
+      <tr>
+        <td><span class="name"><a href="https://www.airbnb.ca/rooms/882333332944235467" target="_blank">Botanical Garden Downtown</a></span><a class="map-pin" href="https://maps.google.com/?q=Orto+Botanico+Naples+Italy" target="_blank">&#128205;</a></td>
+        <td>Downtown</td>
+        <td class="price">$114</td>
+        <td class="rating">4.91 <span class="reviews">(258)</span> <span class="badge badge-fav">FAV</span></td>
+      </tr>
+      <tr>
+        <td><span class="name"><a href="https://www.airbnb.ca/rooms/21600242" target="_blank">Whole Apartment + Free Parking</a></span><a class="map-pin" href="https://maps.google.com/?q=Naples+Metro+Italy" target="_blank">&#128205;</a></td>
+        <td>Near Subway</td>
+        <td class="price">$107</td>
+        <td class="rating">4.92 <span class="reviews">(261)</span> <span class="badge badge-fav">FAV</span></td>
+      </tr>
+      <tr>
+        <td><span class="name"><a href="https://www.airbnb.ca/rooms/898554596799708047" target="_blank">The Casket</a></span><a class="map-pin" href="https://maps.google.com/?q=The+Casket+Naples+Italy" target="_blank">&#128205;</a></td>
+        <td>Central</td>
+        <td class="price">$109</td>
+        <td class="rating">4.70 <span class="reviews">(163)</span></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="tip tip-pro"><strong>&#128161; Strategy:</strong> Stay 2&ndash;3 nights in <a href="https://maps.google.com/?q=Naples+Historic+Center+Italy" target="_blank">Naples</a> <em>before</em> heading to Amalfi. Uber from NAP airport &#8364;15. Visit <a href="https://maps.google.com/?q=Pompeii+Archaeological+Park" target="_blank">Pompeii</a> (30 min train) and the <a href="https://maps.google.com/?q=Museo+Archeologico+Nazionale+Napoli" target="_blank">Archaeological Museum</a>. Then SITA bus to Amalfi.</div>
 </div>
 
 <!-- ======== PUGLIA ======== -->
 <div class="section">
-  <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;">
-    <h2>&#127807; Puglia</h2>
-    <span style="font-size:0.72rem;font-weight:700;background:var(--palm);color:white;padding:3px 10px;border-radius:20px;">BEST VALUE &middot; 251 listings under $100/night</span>
-  </div>
-  <p class="sub">Italy's &ldquo;heel&rdquo; &mdash; baroque cities, trulli houses, stunning beaches, and food at half Amalfi prices</p>
+  <h2>&#127807; Puglia</h2>
+  <p class="sub">Italy's heel &mdash; baroque cities, trulli houses, incredible food at half Amalfi prices.</p>
 
-  <div class="region">
-    <div class="region-head">
-      <h3>Why Puglia?</h3>
-      <div class="region-meta">
+  <div class="region-hero">
+    <img src="https://images.unsplash.com/photo-1633321702518-7fecdafb94d5?w=860&h=240&fit=crop" alt="Trulli houses in Alberobello Puglia" loading="lazy">
+    <div class="rh-body">
+      <span class="rh-badge badge-value">BEST VALUE</span>
+      <div class="rh-name">Puglia <a href="https://maps.google.com/?q=Puglia+Italy" target="_blank">&#128205;</a></div>
+      <div class="rh-loc">251 homes from $74/night &middot; <a href="https://maps.google.com/?q=Lecce+Italy" target="_blank">Lecce</a>, <a href="https://maps.google.com/?q=Polignano+a+Mare+Italy" target="_blank">Polignano a Mare</a>, <a href="https://maps.google.com/?q=Alberobello+Italy" target="_blank">Alberobello</a></div>
+      <div class="rh-stats">
         <span>&#128176; Food: &#8364;8&ndash;20/meal</span>
-        <span>&#128205; 251 homes from $74/night</span>
-        <span>&#9989; Very safe, friendly locals</span>
-        <span>&#128646; 3h train from Naples</span>
+        <span>&#9989; Very safe</span>
+        <span>&#128646; 3h train from <a href="https://maps.google.com/?q=Napoli+Centrale+Station" target="_blank">Naples</a></span>
       </div>
     </div>
-    <div class="region-body">
-      <p style="font-size:0.88rem;margin-bottom:12px;">Puglia is the <strong>anti-Amalfi Coast</strong>. Same incredible Italian food, same sea, same sunshine &mdash; but 40&ndash;60% cheaper and with a fraction of the tourists. Lecce is called the &ldquo;Florence of the South&rdquo; for its baroque architecture. Polignano a Mare has dramatic cliff-top sea views. The Trulli houses in Alberobello are a UNESCO site. Orecchiette pasta, burrata cheese, and focaccia Barese are staples &mdash; and a full dinner costs what an appetizer costs in Amalfi.</p>
-
-      <table class="listing-table">
-        <thead><tr><th>Airbnb Listing</th><th>Location</th><th>7 Nights</th><th>Per Night</th><th>Rating</th></tr></thead>
-        <tbody>
-          <tr>
-            <td><span class="name"><a href="https://www.airbnb.ca/rooms/849120895205506634" target="_blank">Borgo Sant&rsquo;Angelo House</a></span></td>
-            <td>Andria</td>
-            <td class="price">$521</td>
-            <td class="price">$74</td>
-            <td class="rating">4.97 <span class="reviews">(33)</span> <span class="badge badge-cheap">CHEAPEST</span></td>
-          </tr>
-          <tr>
-            <td><span class="name"><a href="https://www.airbnb.ca/rooms/593840077410077370" target="_blank">Luigina Apartment</a></span></td>
-            <td>Guardia Perticara</td>
-            <td class="price">$526</td>
-            <td class="price">$75</td>
-            <td class="rating">4.98 <span class="reviews">(47)</span> <span class="badge badge-top">TOP RATED</span></td>
-          </tr>
-          <tr>
-            <td><span class="name"><a href="https://www.airbnb.ca/rooms/25018462" target="_blank">Studio La Capinera</a></span></td>
-            <td>Putignano</td>
-            <td class="price">$652</td>
-            <td class="price">$93</td>
-            <td class="rating">4.86 <span class="reviews">(66)</span> <span class="badge badge-top">TOP RATED</span></td>
-          </tr>
-          <tr>
-            <td><span class="name"><a href="https://www.airbnb.ca/rooms/27600554" target="_blank">Nido di Puglia &mdash; Antiche Mura</a></span></td>
-            <td>Turi</td>
-            <td class="price">$774</td>
-            <td class="price">$110</td>
-            <td class="rating">5.0 <span class="reviews">(46)</span> <span class="badge badge-top">PERFECT 5.0</span></td>
-          </tr>
-          <tr>
-            <td><span class="name"><a href="https://www.airbnb.ca/rooms/1118047449785651872" target="_blank">Vicolo 107</a></span></td>
-            <td>Sannicandro di Bari</td>
-            <td class="price">$807</td>
-            <td class="price">$115</td>
-            <td class="rating">4.99 <span class="reviews">(128)</span> <span class="badge badge-fav">GUEST FAV</span></td>
-          </tr>
-          <tr>
-            <td><span class="name"><a href="https://www.airbnb.ca/rooms/35275287" target="_blank">Casa Faggiano (18th-Century)</a></span></td>
-            <td>Ceglie Messapica</td>
-            <td class="price">$837</td>
-            <td class="price">$120</td>
-            <td class="rating">4.99 <span class="reviews">(130)</span> <span class="badge badge-top">TOP RATED</span></td>
-          </tr>
-          <tr>
-            <td><span class="name"><a href="https://www.airbnb.ca/rooms/35937778" target="_blank">Balconies in Bloom &mdash; Baroque</a></span></td>
-            <td>Lecce</td>
-            <td class="price">~$800</td>
-            <td class="price">$114</td>
-            <td class="rating">4.88 <span class="reviews">(41)</span></td>
-          </tr>
-          <tr>
-            <td><span class="name"><a href="https://www.airbnb.ca/rooms/44431750" target="_blank">Laura&rsquo;s Holiday Home</a></span></td>
-            <td>Lecce</td>
-            <td class="price">~$820</td>
-            <td class="price">$117</td>
-            <td class="rating">4.85 <span class="reviews">(67)</span> <span class="badge badge-fav">GUEST FAV</span></td>
-          </tr>
-        </tbody>
-      </table>
-
-      <div class="tip tip-money"><strong>&#128176; Puglia food budget:</strong> Focaccia Barese from the bakery &#8364;2. Fresh orecchiette with broccoli rabe &#8364;8. Burrata with tomatoes &#8364;6. Grilled seafood dinner &#8364;18. House wine &#8364;4/carafe. Two people eat all day for &#8364;40&ndash;50 (~$30&ndash;35 CAD/person/day).</div>
-
-      <div class="tip tip-pro"><strong>&#128161; Getting there:</strong> Trenitalia train from Naples (Napoli Centrale) to Bari costs &#8364;20&ndash;40 and takes 3&ndash;4 hours. Or Naples to Lecce is 5h. Frequent departures. Book at <a href="https://www.trenitalia.com" target="_blank">trenitalia.com</a>.</div>
-    </div>
   </div>
+
+  <div class="table-wrap">
+  <table class="listing-table">
+    <thead><tr><th>Listing</th><th>Area</th><th>/Night</th><th>Rating</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><span class="name"><a href="https://www.airbnb.ca/rooms/849120895205506634" target="_blank">Borgo Sant&rsquo;Angelo</a></span><a class="map-pin" href="https://maps.google.com/?q=Andria+Italy" target="_blank">&#128205;</a></td>
+        <td><a href="https://maps.google.com/?q=Andria+Italy" target="_blank">Andria</a></td>
+        <td class="price">$74</td>
+        <td class="rating">4.97 <span class="reviews">(33)</span> <span class="badge badge-budget">CHEAP</span></td>
+      </tr>
+      <tr>
+        <td><span class="name"><a href="https://www.airbnb.ca/rooms/593840077410077370" target="_blank">Luigina Apartment</a></span><a class="map-pin" href="https://maps.google.com/?q=Guardia+Perticara+Italy" target="_blank">&#128205;</a></td>
+        <td>Guardia Perticara</td>
+        <td class="price">$75</td>
+        <td class="rating">4.98 <span class="reviews">(47)</span> <span class="badge badge-top">TOP</span></td>
+      </tr>
+      <tr>
+        <td><span class="name"><a href="https://www.airbnb.ca/rooms/27600554" target="_blank">Nido di Puglia</a></span><a class="map-pin" href="https://maps.google.com/?q=Turi+Puglia+Italy" target="_blank">&#128205;</a></td>
+        <td><a href="https://maps.google.com/?q=Turi+Puglia+Italy" target="_blank">Turi</a></td>
+        <td class="price">$110</td>
+        <td class="rating">5.0 <span class="reviews">(46)</span> <span class="badge badge-top">5.0</span></td>
+      </tr>
+      <tr>
+        <td><span class="name"><a href="https://www.airbnb.ca/rooms/1118047449785651872" target="_blank">Vicolo 107</a></span><a class="map-pin" href="https://maps.google.com/?q=Sannicandro+di+Bari+Italy" target="_blank">&#128205;</a></td>
+        <td>Sannicandro di Bari</td>
+        <td class="price">$115</td>
+        <td class="rating">4.99 <span class="reviews">(128)</span> <span class="badge badge-fav">FAV</span></td>
+      </tr>
+      <tr>
+        <td><span class="name"><a href="https://www.airbnb.ca/rooms/35275287" target="_blank">Casa Faggiano (18th-C.)</a></span><a class="map-pin" href="https://maps.google.com/?q=Ceglie+Messapica+Italy" target="_blank">&#128205;</a></td>
+        <td><a href="https://maps.google.com/?q=Ceglie+Messapica+Italy" target="_blank">Ceglie Messapica</a></td>
+        <td class="price">$120</td>
+        <td class="rating">4.99 <span class="reviews">(130)</span> <span class="badge badge-top">TOP</span></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="tip tip-money"><strong>&#128176;</strong> Focaccia Barese &#8364;2. Orecchiette &#8364;8. Grilled seafood dinner &#8364;18. House wine &#8364;4. Two people eat all day for &#8364;40&ndash;50 (~$30&ndash;35 CAD/person/day).</div>
+  <div class="tip tip-pro"><strong>&#128646;</strong> <a href="https://maps.google.com/?q=Napoli+Centrale+Station" target="_blank">Naples</a> &#8594; <a href="https://maps.google.com/?q=Bari+Centrale+Station" target="_blank">Bari</a>: &#8364;20&ndash;40, 3&ndash;4h. Book at <a href="https://www.trenitalia.com" target="_blank">trenitalia.com</a>.</div>
 </div>
 
 <!-- ======== SICILY ======== -->
 <div class="section">
-  <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;">
-    <h2>&#127755; Sicily</h2>
-    <span style="font-size:0.72rem;font-weight:700;background:var(--gold);color:white;padding:3px 10px;border-radius:20px;">CHEAPEST &middot; 350 listings under $100/night</span>
-  </div>
-  <p class="sub">A whole different Italy &mdash; volcanoes, Greek ruins, the cheapest food in the country, and almost no tourist crowds inland</p>
+  <h2>&#127755; Sicily</h2>
+  <p class="sub">Cheapest region in Italy &mdash; from $57/night. Volcanoes, Greek temples, zero tourist crowds inland.</p>
 
-  <div class="region">
-    <div class="region-head">
-      <h3>Why Sicily?</h3>
-      <div class="region-meta">
+  <div class="region-hero">
+    <img src="https://images.unsplash.com/photo-1523365280197-f1783db9fe62?w=860&h=240&fit=crop" alt="Mount Etna and Catania Sicily" loading="lazy">
+    <div class="rh-body">
+      <span class="rh-badge badge-cheap">CHEAPEST</span>
+      <div class="rh-name">Sicily <a href="https://maps.google.com/?q=Sicily+Italy" target="_blank">&#128205;</a></div>
+      <div class="rh-loc">350 homes from $57/night &middot; <a href="https://maps.google.com/?q=Catania+Italy" target="_blank">Catania</a>, <a href="https://maps.google.com/?q=Ragusa+Ibla+Italy" target="_blank">Ragusa Ibla</a>, <a href="https://maps.google.com/?q=Mount+Etna+Sicily" target="_blank">Mt Etna</a></div>
+      <div class="rh-stats">
         <span>&#128176; Food: &#8364;4&ndash;15/meal</span>
-        <span>&#128205; 350 homes from $57/night</span>
         <span>&#9989; Safe for tourists</span>
         <span>&#9992; $40&ndash;60 flight from NAP</span>
       </div>
     </div>
-    <div class="region-body">
-      <p style="font-size:0.88rem;margin-bottom:12px;">Sicily is <strong>the cheapest region in Italy</strong> for both accommodation and food. A full sit-down lunch costs &#8364;8&ndash;12. Arancini from a street vendor cost &#8364;2. The island has more Greek temples than Greece, Mt Etna is Europe&rsquo;s highest active volcano, and Catania&rsquo;s fish market is one of the most cinematic places in all of Italy. Ragusa Ibla and Modica (Baroque Valley) are UNESCO World Heritage towns with almost zero international tourists. Catania has excellent nightlife, great food markets, and is the most &ldquo;real&rdquo; Italian city experience you can get.</p>
-
-      <table class="listing-table">
-        <thead><tr><th>Airbnb Listing</th><th>Location</th><th>7 Nights</th><th>Per Night</th><th>Rating</th></tr></thead>
-        <tbody>
-          <tr>
-            <td><span class="name"><a href="https://www.airbnb.ca/rooms/1381264830421618973" target="_blank">Cosy Ground Floor Flat &ldquo;Giovanni&rdquo;</a></span></td>
-            <td>Calamonaci</td>
-            <td class="price">$400</td>
-            <td class="price">$57</td>
-            <td class="rating">4.82 <span class="reviews">(11)</span> <span class="badge badge-cheap">CHEAPEST</span></td>
-          </tr>
-          <tr>
-            <td><span class="name"><a href="https://www.airbnb.ca/rooms/887406527306812200" target="_blank">1BR Lovely Home</a></span></td>
-            <td>Roccalumera</td>
-            <td class="price">$478</td>
-            <td class="price">$68</td>
-            <td class="rating">&mdash;</td>
-          </tr>
-          <tr>
-            <td><span class="name"><a href="https://www.airbnb.ca/rooms/1343286441566763564" target="_blank">Awesome Apartment in Ragusa</a></span></td>
-            <td>Ragusa</td>
-            <td class="price">$537</td>
-            <td class="price">$77</td>
-            <td class="rating">&mdash;</td>
-          </tr>
-          <tr>
-            <td><span class="name"><a href="https://www.airbnb.ca/rooms/38020447" target="_blank">Le Coccole &mdash; Small Apartment</a></span></td>
-            <td>Aci Castello</td>
-            <td class="price">$586</td>
-            <td class="price">$84</td>
-            <td class="rating">4.72 <span class="reviews">(131)</span></td>
-          </tr>
-          <tr>
-            <td><span class="name"><a href="https://www.airbnb.ca/rooms/40668544" target="_blank">Giardino delle Zagare &mdash; Etna &amp; Sea</a></span></td>
-            <td>Riposto</td>
-            <td class="price">$602</td>
-            <td class="price">$86</td>
-            <td class="rating">4.83 <span class="reviews">(364)</span> <span class="badge badge-fav">GUEST FAV</span></td>
-          </tr>
-          <tr>
-            <td><span class="name"><a href="https://www.airbnb.ca/rooms/34876760" target="_blank">Dimora Vera &mdash; 3BR House</a></span></td>
-            <td>Chiaramonte Gulfi</td>
-            <td class="price">$630</td>
-            <td class="price">$90</td>
-            <td class="rating">4.95 <span class="reviews">(91)</span> <span class="badge badge-top">TOP RATED</span></td>
-          </tr>
-          <tr>
-            <td><span class="name"><a href="https://www.airbnb.ca/rooms/43939015" target="_blank">Lina&rsquo;s House &mdash; 2BR</a></span></td>
-            <td>Catania</td>
-            <td class="price">$712</td>
-            <td class="price">$102</td>
-            <td class="rating">4.86 <span class="reviews">(57)</span> <span class="badge badge-fav">GUEST FAV</span></td>
-          </tr>
-        </tbody>
-      </table>
-
-      <div class="tip tip-money"><strong>&#128176; Sicily food budget:</strong> Arancini &#8364;1.50&ndash;2. Pasta alla Norma &#8364;7. Granita with brioche (breakfast) &#8364;3. Full seafood dinner &#8364;12&ndash;20. Cannoli &#8364;2. Two people can eat all day for under &#8364;35 total (~$25 CAD/person/day). It&rsquo;s the cheapest food in Italy.</div>
-
-      <div class="tip tip-pro"><strong>&#128161; Getting there:</strong> Budget airlines (Ryanair, easyJet, Wizz Air) fly NAP&rarr;CTA (Catania) from &#8364;25&ndash;40 one-way. 1-hour flight. Or take the train (5&ndash;6h, &#8364;30&ndash;50) for the scenic route.</div>
-    </div>
   </div>
+
+  <div class="table-wrap">
+  <table class="listing-table">
+    <thead><tr><th>Listing</th><th>Area</th><th>/Night</th><th>Rating</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><span class="name"><a href="https://www.airbnb.ca/rooms/1381264830421618973" target="_blank">Cosy Flat &ldquo;Giovanni&rdquo;</a></span><a class="map-pin" href="https://maps.google.com/?q=Calamonaci+Sicily+Italy" target="_blank">&#128205;</a></td>
+        <td>Calamonaci</td>
+        <td class="price">$57</td>
+        <td class="rating">4.82 <span class="reviews">(11)</span> <span class="badge badge-budget">CHEAP</span></td>
+      </tr>
+      <tr>
+        <td><span class="name"><a href="https://www.airbnb.ca/rooms/40668544" target="_blank">Giardino delle Zagare</a></span><a class="map-pin" href="https://maps.google.com/?q=Riposto+Catania+Sicily+Italy" target="_blank">&#128205;</a></td>
+        <td><a href="https://maps.google.com/?q=Riposto+Sicily+Italy" target="_blank">Riposto</a> (Etna)</td>
+        <td class="price">$86</td>
+        <td class="rating">4.83 <span class="reviews">(364)</span> <span class="badge badge-fav">FAV</span></td>
+      </tr>
+      <tr>
+        <td><span class="name"><a href="https://www.airbnb.ca/rooms/34876760" target="_blank">Dimora Vera &mdash; 3BR</a></span><a class="map-pin" href="https://maps.google.com/?q=Chiaramonte+Gulfi+Sicily+Italy" target="_blank">&#128205;</a></td>
+        <td>Chiaramonte Gulfi</td>
+        <td class="price">$90</td>
+        <td class="rating">4.95 <span class="reviews">(91)</span> <span class="badge badge-top">TOP</span></td>
+      </tr>
+      <tr>
+        <td><span class="name"><a href="https://www.airbnb.ca/rooms/38020447" target="_blank">Le Coccole</a></span><a class="map-pin" href="https://maps.google.com/?q=Aci+Castello+Sicily+Italy" target="_blank">&#128205;</a></td>
+        <td><a href="https://maps.google.com/?q=Aci+Castello+Sicily+Italy" target="_blank">Aci Castello</a></td>
+        <td class="price">$84</td>
+        <td class="rating">4.72 <span class="reviews">(131)</span></td>
+      </tr>
+      <tr>
+        <td><span class="name"><a href="https://www.airbnb.ca/rooms/43939015" target="_blank">Lina&rsquo;s House &mdash; 2BR</a></span><a class="map-pin" href="https://maps.google.com/?q=Catania+Center+Italy" target="_blank">&#128205;</a></td>
+        <td><a href="https://maps.google.com/?q=Catania+Italy" target="_blank">Catania</a></td>
+        <td class="price">$102</td>
+        <td class="rating">4.86 <span class="reviews">(57)</span> <span class="badge badge-fav">FAV</span></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="tip tip-money"><strong>&#128176;</strong> Arancini &#8364;1.50. Pasta alla Norma &#8364;7. Granita with brioche &#8364;3. Full seafood dinner &#8364;12&ndash;20. Two people eat all day for ~$25 CAD/person/day.</div>
+  <div class="tip tip-pro"><strong>&#9992;</strong> Ryanair/easyJet fly <a href="https://maps.google.com/?q=Naples+Airport+NAP" target="_blank">NAP</a> &#8594; <a href="https://maps.google.com/?q=Catania+Airport+CTA" target="_blank">CTA</a> from &#8364;25&ndash;40. 1-hour flight.</div>
 </div>
 
 <!-- ======== CALABRIA ======== -->
 <div class="section">
-  <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;">
-    <h2>&#127754; Calabria</h2>
-    <span style="font-size:0.72rem;font-weight:700;background:var(--ocean-dark);color:white;padding:3px 10px;border-radius:20px;">HIDDEN GEM &middot; 49 listings under $100/night</span>
-  </div>
-  <p class="sub">Italy's best-kept secret &mdash; the toe of the boot, wild mountains, crystal waters, and virtually zero tourists</p>
+  <h2>&#127754; Calabria</h2>
+  <p class="sub">Italy's toe &mdash; wild coast, fiery food, virtually zero international tourists.</p>
 
-  <div class="region">
-    <div class="region-head">
-      <h3>Why Calabria?</h3>
-      <div class="region-meta">
+  <div class="region-hero">
+    <img src="https://images.unsplash.com/photo-1599232288126-6352e51db83c?w=860&h=240&fit=crop" alt="Tropea Calabria cliff coastline" loading="lazy">
+    <div class="rh-body">
+      <span class="rh-badge badge-hidden">HIDDEN GEM</span>
+      <div class="rh-name">Calabria <a href="https://maps.google.com/?q=Calabria+Italy" target="_blank">&#128205;</a></div>
+      <div class="rh-loc">49 homes from $82/night &middot; <a href="https://maps.google.com/?q=Tropea+Italy" target="_blank">Tropea</a>, <a href="https://maps.google.com/?q=Cosenza+Italy" target="_blank">Cosenza</a>, <a href="https://maps.google.com/?q=Pizzo+Calabria+Italy" target="_blank">Pizzo</a></div>
+      <div class="rh-stats">
         <span>&#128176; Food: &#8364;6&ndash;18/meal</span>
-        <span>&#128205; 49 homes from $82/night</span>
-        <span>&#9989; Safe, very welcoming</span>
+        <span>&#9989; Very safe, welcoming</span>
         <span>&#128646; 3&ndash;4h train from Naples</span>
       </div>
     </div>
-    <div class="region-body">
-      <p style="font-size:0.88rem;margin-bottom:12px;">Calabria is where Italians go when they want cheap beach vacations. The region is <strong>remarkably untouched by international tourism</strong> &mdash; you&rsquo;ll barely hear English spoken. The Tyrrhenian coast (Tropea, Pizzo) has turquoise water rivaling the Amalfi Coast. Cosenza has a charming old town. The food is fiery (nduja, pepperoncino in everything) and absurdly cheap. Think of it as the raw, authentic Italy before the Instagram crowds arrived.</p>
-
-      <table class="listing-table">
-        <thead><tr><th>Airbnb Listing</th><th>Location</th><th>7 Nights</th><th>Per Night</th><th>Rating</th></tr></thead>
-        <tbody>
-          <tr>
-            <td><span class="name"><a href="https://www.airbnb.ca/rooms/49748635" target="_blank">Casa Brancaleone &mdash; 3BR</a></span></td>
-            <td>Brancaleone</td>
-            <td class="price">$575</td>
-            <td class="price">$82</td>
-            <td class="rating">4.25 <span class="reviews">(4)</span> <span class="badge badge-cheap">CHEAPEST</span></td>
-          </tr>
-          <tr>
-            <td><span class="name"><a href="https://www.airbnb.ca/rooms/20212931" target="_blank">A Casa da Cummari Stella</a></span></td>
-            <td>Bivongi</td>
-            <td class="price">$612</td>
-            <td class="price">$87</td>
-            <td class="rating">4.88 <span class="reviews">(34)</span> <span class="badge badge-fav">GUEST FAV</span></td>
-          </tr>
-          <tr>
-            <td><span class="name"><a href="https://www.airbnb.ca/rooms/51477581" target="_blank">At Grandma&rsquo;s House</a></span></td>
-            <td>Verbicaro</td>
-            <td class="price">$625</td>
-            <td class="price">$89</td>
-            <td class="rating">4.75 <span class="reviews">(72)</span></td>
-          </tr>
-          <tr>
-            <td><span class="name"><a href="https://www.airbnb.ca/rooms/36860583" target="_blank">Fattoria Armonia Cottage</a></span></td>
-            <td>Stilo</td>
-            <td class="price">$690</td>
-            <td class="price">$99</td>
-            <td class="rating">5.0 <span class="reviews">(3)</span> <span class="badge badge-top">PERFECT 5.0</span></td>
-          </tr>
-          <tr>
-            <td><span class="name"><a href="https://www.airbnb.ca/rooms/10921095" target="_blank">Old Cosenza: Art and History</a></span></td>
-            <td>Cosenza</td>
-            <td class="price">$695</td>
-            <td class="price">$99</td>
-            <td class="rating">4.82 <span class="reviews">(303)</span> <span class="badge badge-fav">GUEST FAV</span></td>
-          </tr>
-        </tbody>
-      </table>
-
-      <div class="tip tip-money"><strong>&#128176; Calabria food budget:</strong> Calabria is obsessed with pork and chili. Nduja (spicy spreadable salami) on bruschetta &#8364;3. Fileja pasta with nduja &#8364;7. Pizzo&rsquo;s famous tartufo gelato &#8364;3. Full dinner &#8364;12&ndash;18. Two people eat everything for &#8364;35&ndash;45/day (~$25&ndash;30 CAD/person/day).</div>
-    </div>
   </div>
+
+  <div class="table-wrap">
+  <table class="listing-table">
+    <thead><tr><th>Listing</th><th>Area</th><th>/Night</th><th>Rating</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><span class="name"><a href="https://www.airbnb.ca/rooms/49748635" target="_blank">Casa Brancaleone &mdash; 3BR</a></span><a class="map-pin" href="https://maps.google.com/?q=Brancaleone+Calabria+Italy" target="_blank">&#128205;</a></td>
+        <td>Brancaleone</td>
+        <td class="price">$82</td>
+        <td class="rating"><span class="badge badge-budget">CHEAP</span></td>
+      </tr>
+      <tr>
+        <td><span class="name"><a href="https://www.airbnb.ca/rooms/20212931" target="_blank">A Casa da Cummari Stella</a></span><a class="map-pin" href="https://maps.google.com/?q=Bivongi+Calabria+Italy" target="_blank">&#128205;</a></td>
+        <td>Bivongi</td>
+        <td class="price">$87</td>
+        <td class="rating">4.88 <span class="reviews">(34)</span> <span class="badge badge-fav">FAV</span></td>
+      </tr>
+      <tr>
+        <td><span class="name"><a href="https://www.airbnb.ca/rooms/10921095" target="_blank">Old Cosenza: Art &amp; History</a></span><a class="map-pin" href="https://maps.google.com/?q=Cosenza+Old+Town+Italy" target="_blank">&#128205;</a></td>
+        <td><a href="https://maps.google.com/?q=Cosenza+Italy" target="_blank">Cosenza</a></td>
+        <td class="price">$99</td>
+        <td class="rating">4.82 <span class="reviews">(303)</span> <span class="badge badge-fav">FAV</span></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="tip tip-money"><strong>&#128176;</strong> Nduja bruschetta &#8364;3. Fileja pasta &#8364;7. <a href="https://maps.google.com/?q=Pizzo+Calabria+Italy" target="_blank">Pizzo</a>'s famous tartufo gelato &#8364;3. Full dinner &#8364;12&ndash;18.</div>
 </div>
 
-<!-- ======== CILENTO / PAESTUM ======== -->
+<!-- ======== CILENTO ======== -->
 <div class="section">
-  <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;">
-    <h2>&#127961; Cilento Coast &amp; Paestum</h2>
-    <span style="font-size:0.72rem;font-weight:700;background:var(--sunset);color:white;padding:3px 10px;border-radius:20px;">CLOSEST OPTION &middot; 1h south of Amalfi</span>
-  </div>
-  <p class="sub">Like the Amalfi Coast 30 years ago &mdash; same beauty, 1/3 the price, almost no international tourists</p>
+  <h2>&#127961; Cilento &amp; Paestum</h2>
+  <p class="sub">Closest option &mdash; 1 hour south of Amalfi. Same beauty, 1/3 the price.</p>
 
-  <div class="region">
-    <div class="region-head">
-      <h3>Why Cilento?</h3>
-      <div class="region-meta">
+  <div class="region-hero">
+    <img src="https://images.unsplash.com/photo-1580834341580-8c17a3a630ca?w=860&h=240&fit=crop" alt="Paestum Greek temples ruins" loading="lazy">
+    <div class="rh-body">
+      <span class="rh-badge badge-close">CLOSEST OPTION</span>
+      <div class="rh-name">Cilento Coast <a href="https://maps.google.com/?q=Cilento+Coast+Italy" target="_blank">&#128205;</a></div>
+      <div class="rh-loc">105 homes from $79/night &middot; <a href="https://maps.google.com/?q=Paestum+Italy" target="_blank">Paestum</a> (Greek temples), <a href="https://maps.google.com/?q=Castellabate+Italy" target="_blank">Castellabate</a>, <a href="https://maps.google.com/?q=Agropoli+Italy" target="_blank">Agropoli</a></div>
+      <div class="rh-stats">
         <span>&#128176; Food: &#8364;8&ndash;20/meal</span>
-        <span>&#128205; 105 homes from $79/night</span>
-        <span>&#9989; Very safe, National Park</span>
+        <span>&#9989; Extremely safe</span>
         <span>&#128652; 1h from Amalfi</span>
       </div>
     </div>
-    <div class="region-body">
-      <p style="font-size:0.88rem;margin-bottom:12px;">The <strong>Cilento National Park</strong> (UNESCO) is just an hour south of the Amalfi Coast but feels like a different world. Paestum has 2,500-year-old Greek temples that rival the Parthenon. Castellabate (&ldquo;Welcome to the South&rdquo; filming location) is a gorgeous hilltop town with beaches below. Agropoli, Acciaroli, and Marina di Camerota have crystal-clear water with none of the Amalfi crowds. Best of all &mdash; you can combine it with your Amalfi stay without flying anywhere.</p>
-
-      <table class="listing-table">
-        <thead><tr><th>Airbnb Listing</th><th>Location</th><th>7 Nights</th><th>Per Night</th><th>Rating</th></tr></thead>
-        <tbody>
-          <tr>
-            <td><span class="name"><a href="https://www.airbnb.ca/rooms/22136318" target="_blank">Awesome Apartment in Castellabate</a></span></td>
-            <td>Castellabate</td>
-            <td class="price">$555</td>
-            <td class="price">$79</td>
-            <td class="rating">4.33 <span class="reviews">(12)</span></td>
-          </tr>
-          <tr>
-            <td><span class="name"><a href="https://www.airbnb.ca/rooms/961456113411480383" target="_blank">The Orizzonte Sea &mdash; 2BR</a></span></td>
-            <td>Piano-Vetrale</td>
-            <td class="price">$596</td>
-            <td class="price">$85</td>
-            <td class="rating">5.0 <span class="reviews">(15)</span> <span class="badge badge-top">PERFECT 5.0</span></td>
-          </tr>
-          <tr>
-            <td><span class="name"><a href="https://www.airbnb.ca/rooms/640502213847820406" target="_blank">VESEVUS Apartment</a></span></td>
-            <td>Terzigno (nr Pompeii)</td>
-            <td class="price">$652</td>
-            <td class="price">$93</td>
-            <td class="rating">4.88 <span class="reviews">(82)</span></td>
-          </tr>
-          <tr>
-            <td><span class="name"><a href="https://www.airbnb.ca/rooms/42620387" target="_blank">Pompei &amp; Beautiful Places</a></span></td>
-            <td>Scafati (nr Pompeii)</td>
-            <td class="price">$693</td>
-            <td class="price">$99</td>
-            <td class="rating">5.0 <span class="reviews">(109)</span> <span class="badge badge-top">PERFECT 5.0</span></td>
-          </tr>
-        </tbody>
-      </table>
-
-      <div class="tip tip-pro"><strong>&#128161; Combo idea:</strong> Take the SITA bus south from Amalfi towards Salerno, swap to a local bus or rental car, and you&rsquo;re in Cilento in about an hour. Add 2&ndash;3 nights in Castellabate or Paestum area at $79&ndash;99/night before heading back to Naples for your flight home.</div>
-    </div>
   </div>
+
+  <div class="table-wrap">
+  <table class="listing-table">
+    <thead><tr><th>Listing</th><th>Area</th><th>/Night</th><th>Rating</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><span class="name"><a href="https://www.airbnb.ca/rooms/22136318" target="_blank">Apartment in Castellabate</a></span><a class="map-pin" href="https://maps.google.com/?q=Castellabate+Italy" target="_blank">&#128205;</a></td>
+        <td><a href="https://maps.google.com/?q=Castellabate+Italy" target="_blank">Castellabate</a></td>
+        <td class="price">$79</td>
+        <td class="rating">4.33 <span class="reviews">(12)</span></td>
+      </tr>
+      <tr>
+        <td><span class="name"><a href="https://www.airbnb.ca/rooms/961456113411480383" target="_blank">The Orizzonte Sea &mdash; 2BR</a></span><a class="map-pin" href="https://maps.google.com/?q=Piano+Vetrale+Cilento+Italy" target="_blank">&#128205;</a></td>
+        <td>Piano-Vetrale</td>
+        <td class="price">$85</td>
+        <td class="rating">5.0 <span class="reviews">(15)</span> <span class="badge badge-top">5.0</span></td>
+      </tr>
+      <tr>
+        <td><span class="name"><a href="https://www.airbnb.ca/rooms/42620387" target="_blank">Pompei &amp; Beautiful Places</a></span><a class="map-pin" href="https://maps.google.com/?q=Scafati+Italy" target="_blank">&#128205;</a></td>
+        <td>Scafati (nr <a href="https://maps.google.com/?q=Pompeii+Italy" target="_blank">Pompeii</a>)</td>
+        <td class="price">$99</td>
+        <td class="rating">5.0 <span class="reviews">(109)</span> <span class="badge badge-top">5.0</span></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="tip tip-pro"><strong>&#128652;</strong> SITA bus south from <a href="https://maps.google.com/?q=Amalfi+Italy" target="_blank">Amalfi</a> to <a href="https://maps.google.com/?q=Salerno+Italy" target="_blank">Salerno</a>, then local bus to <a href="https://maps.google.com/?q=Castellabate+Italy" target="_blank">Castellabate</a>. ~1 hour total. Combine with your Amalfi stay &mdash; no flights needed.</div>
 </div>
 
 <!-- ======== MATERA ======== -->
 <div class="section">
-  <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;">
-    <h2>&#127963; Matera (Basilicata)</h2>
-    <span style="font-size:0.72rem;font-weight:700;background:var(--gray);color:white;padding:3px 10px;border-radius:20px;">UNIQUE EXPERIENCE &middot; Cave city</span>
-  </div>
-  <p class="sub">Europe's most extraordinary town &mdash; cave dwellings, 9,000 years of history, &ldquo;the Sassi&rdquo;</p>
+  <h2>&#127963; Matera</h2>
+  <p class="sub">Cave city &mdash; UNESCO World Heritage. Best as a 2-night stopover between Amalfi &amp; Puglia.</p>
 
-  <div class="region">
-    <div class="region-head">
-      <h3>Why Matera?</h3>
-      <div class="region-meta">
+  <div class="region-hero">
+    <img src="https://images.unsplash.com/photo-1568797629984-e1cce4e22fbc?w=860&h=240&fit=crop" alt="Matera Sassi cave dwellings at dusk" loading="lazy">
+    <div class="rh-body">
+      <span class="rh-badge badge-unique">UNIQUE EXPERIENCE</span>
+      <div class="rh-name">Matera <a href="https://maps.google.com/?q=Matera+Sassi+Italy" target="_blank">&#128205;</a></div>
+      <div class="rh-loc">Cave dwellings from $93/night &middot; <a href="https://maps.google.com/?q=Sassi+di+Matera+Italy" target="_blank">The Sassi</a> (9,000 yrs old) &middot; James Bond filming location</div>
+      <div class="rh-stats">
         <span>&#128176; Food: &#8364;8&ndash;20/meal</span>
-        <span>&#128205; Cave hotels from $93/night</span>
         <span>&#9989; Extremely safe</span>
-        <span>&#128646; 4h from Naples</span>
+        <span>&#128646; 4h from Naples / 1.5h from <a href="https://maps.google.com/?q=Bari+Italy" target="_blank">Bari</a></span>
       </div>
     </div>
-    <div class="region-body">
-      <p style="font-size:0.88rem;margin-bottom:12px;">Matera&rsquo;s <strong>Sassi</strong> (ancient cave dwellings carved into limestone cliffs) are a UNESCO World Heritage Site and one of the most photographed places in Italy. It was the European Capital of Culture in 2019 and served as the filming location for recent James Bond and biblical films. The town went from being &ldquo;the shame of Italy&rdquo; (it was evacuated in the 1950s due to poverty) to one of its most stunning destinations. Many Airbnbs here are <em>actual converted caves</em>. Food is hearty Basilicatan fare &mdash; pasta with peppers, crusco peppers, lamb, and incredible local bread.</p>
+  </div>
 
-      <table class="listing-table">
-        <thead><tr><th>Airbnb Listing</th><th>Location</th><th>7 Nights</th><th>Per Night</th><th>Rating</th></tr></thead>
-        <tbody>
-          <tr>
-            <td><span class="name"><a href="https://www.airbnb.ca/rooms/14107343" target="_blank">Casa dei Pargoli Junior</a></span></td>
-            <td>Matera Sassi</td>
-            <td class="price">$654</td>
-            <td class="price">$93</td>
-            <td class="rating">4.91 <span class="reviews">(176)</span> <span class="badge badge-top">TOP RATED</span></td>
-          </tr>
-          <tr>
-            <td><span class="name"><a href="https://www.airbnb.ca/rooms/1291245910631600557" target="_blank">Felice&rsquo;s House</a></span></td>
-            <td>Matera</td>
-            <td class="price">~$650</td>
-            <td class="price">$93</td>
-            <td class="rating">4.78 <span class="reviews">(98)</span> <span class="badge badge-fav">GUEST FAV</span></td>
-          </tr>
-        </tbody>
-      </table>
-
-      <div class="tip tip-pro"><strong>&#128161; Best as a 2-night stop:</strong> Matera is tiny &mdash; you can see everything in 1.5 days. Perfect as a stopover between the Amalfi Coast and Puglia. Bus from Salerno/Naples takes 3&ndash;4h. Then continue to Bari/Lecce by train (1.5h).</div>
-    </div>
+  <div class="table-wrap">
+  <table class="listing-table">
+    <thead><tr><th>Listing</th><th>Area</th><th>/Night</th><th>Rating</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><span class="name"><a href="https://www.airbnb.ca/rooms/14107343" target="_blank">Casa dei Pargoli Junior</a></span><a class="map-pin" href="https://maps.google.com/?q=Casa+dei+Pargoli+Matera+Italy" target="_blank">&#128205;</a></td>
+        <td><a href="https://maps.google.com/?q=Matera+Sassi+Italy" target="_blank">Matera Sassi</a></td>
+        <td class="price">$93</td>
+        <td class="rating">4.91 <span class="reviews">(176)</span> <span class="badge badge-top">TOP</span></td>
+      </tr>
+      <tr>
+        <td><span class="name"><a href="https://www.airbnb.ca/rooms/1291245910631600557" target="_blank">Felice&rsquo;s House</a></span><a class="map-pin" href="https://maps.google.com/?q=Matera+Italy" target="_blank">&#128205;</a></td>
+        <td>Matera</td>
+        <td class="price">$93</td>
+        <td class="rating">4.78 <span class="reviews">(98)</span> <span class="badge badge-fav">FAV</span></td>
+      </tr>
+    </tbody>
+  </table>
   </div>
 </div>
 
 <!-- ======== TRIP EXTENSION SCENARIOS ======== -->
 <div class="section">
   <h2>&#128197; Trip Extension Scenarios</h2>
-  <p class="sub">Three ways to turn 7 nights into 10&ndash;14 &mdash; with real budgets</p>
+  <p class="sub">Three ways to stretch 7 nights into 10&ndash;14</p>
 
   <div class="scenario best">
-    <h4>&#128154; Scenario A: +3 Nights in Naples ($480 extra)</h4>
-    <div class="sc-sub">Easiest option &mdash; start in Naples, then Amalfi Coast</div>
+    <h4>&#128154; +3 Nights in Naples</h4>
+    <div class="sc-sub">Easiest &mdash; stay before or after Amalfi</div>
     <table>
-      <tr><td>Airbnb (3 nights @ $110/night)</td><td>$330</td></tr>
-      <tr><td>Food (3 days @ $25/pp/day &times; 2)</td><td>$150</td></tr>
-      <tr><td>Transport (airport &rarr; Airbnb)</td><td>$0 (already in Naples)</td></tr>
+      <tr><td>Airbnb (3 nights &times; $110)</td><td>$330</td></tr>
+      <tr><td>Food (3 days &times; $50/day for 2)</td><td>$150</td></tr>
+      <tr><td>Transport</td><td>$0</td></tr>
     </table>
-    <div class="total">Extra cost: ~$480 CAD &middot; Total trip: ~$5,780</div>
+    <div class="total">+$480 &middot; Trip total: ~$5,780</div>
   </div>
 
   <div class="scenario mid">
-    <h4>&#128155; Scenario B: +5 Nights in Puglia ($790 extra)</h4>
-    <div class="sc-sub">Best value extension &mdash; Amalfi Coast, then train to Bari/Lecce</div>
+    <h4>&#128155; +5 Nights in Puglia</h4>
+    <div class="sc-sub">Best value &mdash; train to Bari/Lecce after Amalfi</div>
     <table>
-      <tr><td>Airbnb (5 nights @ $90/night)</td><td>$450</td></tr>
-      <tr><td>Food (5 days @ $30/pp/day &times; 2)</td><td>$300</td></tr>
-      <tr><td>Train Naples &rarr; Bari</td><td>$40</td></tr>
+      <tr><td>Airbnb (5 nights &times; $90)</td><td>$450</td></tr>
+      <tr><td>Food (5 days &times; $60/day for 2)</td><td>$300</td></tr>
+      <tr><td>Train Naples &#8594; Bari</td><td>$40</td></tr>
     </table>
-    <div class="total">Extra cost: ~$790 CAD &middot; Total trip: ~$6,090</div>
+    <div class="total">+$790 &middot; Trip total: ~$6,090</div>
   </div>
 
   <div class="scenario max">
-    <h4>&#128156; Scenario C: +7 Nights &mdash; Naples + Puglia ($1,100 extra)</h4>
-    <div class="sc-sub">The ultimate 14-day Italy trip: Naples &rarr; Amalfi &rarr; Puglia</div>
+    <h4>&#128156; +7 Nights &mdash; Naples + Puglia</h4>
+    <div class="sc-sub">14-day Italy trip: Naples &#8594; Amalfi &#8594; Puglia</div>
     <table>
-      <tr><td>Naples Airbnb (2 nights @ $110/night)</td><td>$220</td></tr>
-      <tr><td>Puglia Airbnb (5 nights @ $90/night)</td><td>$450</td></tr>
-      <tr><td>Food (7 days @ $28/pp/day &times; 2)</td><td>$390</td></tr>
-      <tr><td>Trains (Naples&rarr;Bari, Bari&rarr;Naples)</td><td>$80</td></tr>
+      <tr><td>Naples Airbnb (2 &times; $110)</td><td>$220</td></tr>
+      <tr><td>Puglia Airbnb (5 &times; $90)</td><td>$450</td></tr>
+      <tr><td>Food (7 days &times; $56/day for 2)</td><td>$390</td></tr>
+      <tr><td>Trains (Naples&#8594;Bari, Bari&#8594;Naples)</td><td>$80</td></tr>
     </table>
-    <div class="total">Extra cost: ~$1,140 CAD &middot; Total trip: ~$6,440</div>
+    <div class="total">+$1,140 &middot; Trip total: ~$6,440</div>
   </div>
 
-  <div class="tip tip-money"><strong>&#128176; Budget reality check:</strong> Your current budget is $5,300 CAD. Scenario A barely goes over. Scenario B adds almost a full week for just $790 more. Scenario C &mdash; a 14-day Italy trip from Toronto &mdash; comes in at ~$6,400. That&rsquo;s $3,200/person for 2 weeks in Italy including flights. Not bad at all.</div>
-</div>
-
-<!-- ======== SAFETY INFO ======== -->
-<div class="section">
-  <h2>&#128274; Safety Overview</h2>
-  <p class="sub">All regions recommended here are safe for tourists &mdash; here's what to know</p>
-
-  <div class="safety-grid">
-    <div class="safety-item">
-      <div class="emoji">&#128155;</div>
-      <div class="s-name">Naples</div>
-      <div class="s-score">Safe in tourist areas</div>
-      <p style="font-size:0.72rem;color:#666;margin-top:4px;">Avoid dimly-lit back streets at night. Spaccanapoli &amp; waterfront are fine. Petty theft&mdash;keep valuables close.</p>
-    </div>
-    <div class="safety-item">
-      <div class="emoji">&#128154;</div>
-      <div class="s-name">Puglia</div>
-      <div class="s-score">Very safe</div>
-      <p style="font-size:0.72rem;color:#666;margin-top:4px;">One of Italy&rsquo;s safest regions. Small towns are extremely welcoming. Zero violent crime concerns.</p>
-    </div>
-    <div class="safety-item">
-      <div class="emoji">&#128154;</div>
-      <div class="s-name">Sicily</div>
-      <div class="s-score">Safe for tourists</div>
-      <p style="font-size:0.72rem;color:#666;margin-top:4px;">Mafia stereotypes are outdated. Tourist areas are safe. Catania can be gritty but no worse than any big city.</p>
-    </div>
-    <div class="safety-item">
-      <div class="emoji">&#128154;</div>
-      <div class="s-name">Calabria</div>
-      <div class="s-score">Very safe for tourists</div>
-      <p style="font-size:0.72rem;color:#666;margin-top:4px;">Extremely welcoming locals. Tourist infrastructure is less developed but crime against visitors is essentially zero.</p>
-    </div>
-    <div class="safety-item">
-      <div class="emoji">&#128154;</div>
-      <div class="s-name">Cilento</div>
-      <div class="s-score">Extremely safe</div>
-      <p style="font-size:0.72rem;color:#666;margin-top:4px;">National park region, mostly Italian families on holiday. Peaceful, relaxed, zero safety concerns.</p>
-    </div>
-    <div class="safety-item">
-      <div class="emoji">&#128154;</div>
-      <div class="s-name">Matera</div>
-      <div class="s-score">Extremely safe</div>
-      <p style="font-size:0.72rem;color:#666;margin-top:4px;">Small UNESCO city, walkable, well-lit. One of the safest places in all of Southern Italy.</p>
-    </div>
-  </div>
-
-  <div class="tip tip-warn"><strong>&#9888; General Southern Italy safety:</strong> Keep your phone in a front pocket in crowded areas. Don&rsquo;t leave bags unattended on beaches. Use official taxis or Uber/FreeNow apps. Lock your rental car and don&rsquo;t leave valuables visible. These are the same precautions you&rsquo;d take in any European city.</div>
+  <div class="tip tip-money"><strong>&#128176;</strong> Current budget: $5,300. Scenario A barely exceeds it. Scenario C = 14 days in Italy for $6,440 = <strong>$3,220/person</strong> including flights.</div>
 </div>
 
 <!-- ======== FOOD COST COMPARISON ======== -->
 <div class="section">
-  <h2>&#127860; Food Cost Comparison</h2>
-  <p class="sub">What a typical day of eating costs for 2 people in each region</p>
-
-  <table class="listing-table">
-    <thead><tr><th>Region</th><th>Breakfast</th><th>Lunch</th><th>Dinner</th><th>Daily Total (2 ppl)</th><th>CAD/day</th></tr></thead>
-    <tbody>
-      <tr>
-        <td><strong>Amalfi Coast</strong></td>
-        <td>&#8364;8</td>
-        <td>&#8364;25</td>
-        <td>&#8364;55</td>
-        <td class="price">&#8364;88</td>
-        <td class="price">~$62</td>
-      </tr>
-      <tr>
-        <td><strong>Naples</strong></td>
-        <td>&#8364;5</td>
-        <td>&#8364;16</td>
-        <td>&#8364;30</td>
-        <td class="price">&#8364;51</td>
-        <td class="price">~$36</td>
-      </tr>
-      <tr>
-        <td><strong>Puglia</strong></td>
-        <td>&#8364;5</td>
-        <td>&#8364;18</td>
-        <td>&#8364;32</td>
-        <td class="price">&#8364;55</td>
-        <td class="price">~$39</td>
-      </tr>
-      <tr>
-        <td><strong>Sicily</strong></td>
-        <td>&#8364;4</td>
-        <td>&#8364;14</td>
-        <td>&#8364;28</td>
-        <td class="price">&#8364;46</td>
-        <td class="price">~$32</td>
-      </tr>
-      <tr>
-        <td><strong>Calabria</strong></td>
-        <td>&#8364;4</td>
-        <td>&#8364;14</td>
-        <td>&#8364;28</td>
-        <td class="price">&#8364;46</td>
-        <td class="price">~$32</td>
-      </tr>
-      <tr>
-        <td><strong>Cilento</strong></td>
-        <td>&#8364;5</td>
-        <td>&#8364;16</td>
-        <td>&#8364;30</td>
-        <td class="price">&#8364;51</td>
-        <td class="price">~$36</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <div class="tip tip-money"><strong>&#128176; The takeaway:</strong> Moving from the Amalfi Coast to any other Southern Italian region roughly <strong>halves your food costs</strong>. A couple eating out 3 meals a day in Sicily/Calabria pays what one person spends at Amalfi.</div>
-</div>
-
-<!-- ======== LOGISTICS ======== -->
-<div class="section">
-  <h2>&#128646; Getting Around</h2>
-  <p class="sub">How to move between bases without renting a car</p>
+  <h2>&#127860; Daily Food Cost for 2 People</h2>
+  <p class="sub">All meals eaten out &mdash; breakfast, lunch, dinner</p>
 
   <div class="card">
-    <h3>Train Routes from Naples</h3>
-    <div class="card-sub">All prices are 2nd class, one-way, bookable at trenitalia.com</div>
-    <table class="listing-table">
-      <thead><tr><th>Route</th><th>Time</th><th>Price (approx.)</th><th>Frequency</th></tr></thead>
-      <tbody>
-        <tr><td><strong>Naples &rarr; Salerno</strong></td><td>35 min</td><td class="price">&#8364;5&ndash;10</td><td>Every 15&ndash;30 min</td></tr>
-        <tr><td><strong>Naples &rarr; Bari</strong></td><td>3.5&ndash;4h</td><td class="price">&#8364;20&ndash;40</td><td>Hourly</td></tr>
-        <tr><td><strong>Naples &rarr; Lecce</strong></td><td>5&ndash;5.5h</td><td class="price">&#8364;30&ndash;50</td><td>Several daily</td></tr>
-        <tr><td><strong>Naples &rarr; Matera</strong></td><td>3.5&ndash;4h</td><td class="price">&#8364;20&ndash;30</td><td>Bus via Flixbus/Marozzi</td></tr>
-        <tr><td><strong>Naples &rarr; Cosenza</strong></td><td>3&ndash;3.5h</td><td class="price">&#8364;20&ndash;35</td><td>Several daily</td></tr>
-        <tr><td><strong>Bari &rarr; Matera</strong></td><td>1.5h</td><td class="price">&#8364;8&ndash;12</td><td>FAL regional train</td></tr>
-        <tr><td><strong>NAP &rarr; CTA (fly)</strong></td><td>1h flight</td><td class="price">&#8364;25&ndash;60</td><td>Ryanair/easyJet daily</td></tr>
-      </tbody>
-    </table>
+    <div class="food-row"><span class="food-name">Amalfi Coast</span><div class="food-bar"><div class="food-fill" style="width:100%;background:var(--coral)"></div></div><span class="food-cost">~$62 CAD</span></div>
+    <div class="food-row"><span class="food-name">Puglia</span><div class="food-bar"><div class="food-fill" style="width:63%"></div></div><span class="food-cost">~$39 CAD</span></div>
+    <div class="food-row"><span class="food-name">Naples</span><div class="food-bar"><div class="food-fill" style="width:58%"></div></div><span class="food-cost">~$36 CAD</span></div>
+    <div class="food-row"><span class="food-name">Cilento</span><div class="food-bar"><div class="food-fill" style="width:58%"></div></div><span class="food-cost">~$36 CAD</span></div>
+    <div class="food-row"><span class="food-name">Calabria</span><div class="food-bar"><div class="food-fill" style="width:52%"></div></div><span class="food-cost">~$32 CAD</span></div>
+    <div class="food-row"><span class="food-name">Sicily</span><div class="food-bar"><div class="food-fill" style="width:52%"></div></div><span class="food-cost">~$32 CAD</span></div>
   </div>
-
-  <div class="tip tip-pro"><strong>&#128161; Best route for Scenario C:</strong> Fly into Naples (Aug 20). Explore Naples 2 days. SITA bus to Amalfi (Aug 22). 7 nights in Scala. Bus back to Salerno (Aug 29). Train to Bari (3.5h). 5 nights in Puglia. Train back to Naples (Sep 3). Fly home.</div>
 </div>
 
-<!-- ======== FINAL RECOMMENDATION ======== -->
+<!-- ======== TRANSPORT CHEAT SHEET ======== -->
 <div class="section">
-  <h2>&#127919; Our Recommendation</h2>
-  <p class="sub">If we could only pick one extension option</p>
+  <h2>&#128646; Transport Cheat Sheet</h2>
+  <p class="sub">How to get between bases without a car</p>
 
-  <div class="card" style="border-left: 5px solid var(--palm); border-top: none;">
-    <h3>&#128154; Add 2&ndash;3 Nights in Naples + 2 Nights in Matera</h3>
-    <div class="card-sub">Total trip: 11&ndash;12 nights &middot; Extra cost: ~$650&ndash;$800 CAD</div>
-    <p style="font-size:0.88rem;">Start in Naples for the world&rsquo;s best pizza, Pompeii, and the National Archaeological Museum. Then bus/drive to the Amalfi Coast for your 7 nights in Scala. After checkout, head to Matera for 2 nights in a literal cave dwelling. It&rsquo;s on the way to the airport (roughly) and makes for an unforgettable finale. Train back to Naples for your flight home.</p>
-    <p style="font-size:0.88rem;margin-top:8px;">This gives you <strong>three completely different Italian experiences</strong>: chaotic, foodie Naples &rarr; scenic, romantic Amalfi Coast &rarr; ancient, otherworldly Matera. All for under $6,100 CAD total.</p>
+  <div class="table-wrap">
+  <table class="listing-table">
+    <thead><tr><th>Route</th><th>Time</th><th>Cost</th><th>How</th></tr></thead>
+    <tbody>
+      <tr><td><a href="https://maps.google.com/?q=Napoli+Centrale+Station" target="_blank">Naples</a> &#8594; <a href="https://maps.google.com/?q=Salerno+Station+Italy" target="_blank">Salerno</a></td><td>35 min</td><td class="price">&#8364;5&ndash;10</td><td>Train (every 15 min)</td></tr>
+      <tr><td><a href="https://maps.google.com/?q=Napoli+Centrale+Station" target="_blank">Naples</a> &#8594; <a href="https://maps.google.com/?q=Bari+Centrale+Station" target="_blank">Bari</a></td><td>3.5&ndash;4h</td><td class="price">&#8364;20&ndash;40</td><td>Train (hourly)</td></tr>
+      <tr><td><a href="https://maps.google.com/?q=Napoli+Centrale+Station" target="_blank">Naples</a> &#8594; <a href="https://maps.google.com/?q=Lecce+Station+Italy" target="_blank">Lecce</a></td><td>5&ndash;5.5h</td><td class="price">&#8364;30&ndash;50</td><td>Train</td></tr>
+      <tr><td><a href="https://maps.google.com/?q=Bari+Centrale+Station" target="_blank">Bari</a> &#8594; <a href="https://maps.google.com/?q=Matera+Italy" target="_blank">Matera</a></td><td>1.5h</td><td class="price">&#8364;8&ndash;12</td><td>FAL train</td></tr>
+      <tr><td><a href="https://maps.google.com/?q=Naples+Airport+NAP" target="_blank">NAP</a> &#8594; <a href="https://maps.google.com/?q=Catania+Airport+CTA" target="_blank">CTA</a></td><td>1h flight</td><td class="price">&#8364;25&ndash;60</td><td>Ryanair / easyJet</td></tr>
+    </tbody>
+  </table>
   </div>
 
-  <div class="tip tip-warn"><strong>&#9888; Important:</strong> If you extend the trip, check if your return flight has a change fee or is flexible. Some fares allow free date changes if done early enough. With budget airlines, it may be cheaper to book a new one-way home than pay a change fee.</div>
+  <div class="tip tip-pro"><strong>&#128161; Best 14-day route:</strong> Fly into <a href="https://maps.google.com/?q=Naples+Airport+NAP" target="_blank">Naples</a> (Aug 20) &#8594; 2 nights Naples &#8594; bus to <a href="https://maps.google.com/?q=Amalfi+Italy" target="_blank">Amalfi</a> (Aug 22) &#8594; 7 nights <a href="https://maps.google.com/?q=Scala+Italy" target="_blank">Scala</a> &#8594; train to <a href="https://maps.google.com/?q=Bari+Italy" target="_blank">Bari</a> (Aug 29) &#8594; 5 nights Puglia &#8594; train back to Naples (Sep 3) &#8594; fly home.</div>
 </div>
 
-<!-- ======== BACK LINK ======== -->
-<a href="best-trip.html" class="back" style="margin-left:20px;">&larr; Back to trip itinerary</a>
+<!-- ======== SAFETY ======== -->
+<div class="section">
+  <div class="tip tip-warn"><strong>&#128274; Safety:</strong> All 6 regions are safe for tourists. Naples is the only one where you should watch for petty theft &mdash; keep your phone in a front pocket in crowded areas like <a href="https://maps.google.com/?q=Spaccanapoli+Naples+Italy" target="_blank">Spaccanapoli</a>. Puglia, Calabria, Cilento, and Matera are extremely safe small-town Italy. Sicily is safe &mdash; mafia stereotypes are decades outdated.</div>
+</div>
 
-</div><!-- /container -->
+<a href="best-trip.html" class="back">&larr; Back to trip itinerary</a>
+
+</div>
 
 <footer>
   Made with &#10084;&#65039; for our Amalfi adventure &middot; Aug 2026<br>
-  <a href="best-trip.html">Trip itinerary &rarr;</a> &middot;
-  <a href="flights.html">Compare flights &rarr;</a> &middot;
-  <a href="restaurants.html">Restaurant guide &rarr;</a> &middot;
-  <a href="hotels.html">Hotels vs Airbnb &rarr;</a> &middot;
-  <a href="viz.html">Explore all 1,000 Airbnb picks &rarr;</a>
+  <a href="best-trip.html">Trip itinerary &#8594;</a> &middot;
+  <a href="flights.html">Compare flights &#8594;</a> &middot;
+  <a href="restaurants.html">Restaurant guide &#8594;</a> &middot;
+  <a href="hotels.html">Hotels vs Airbnb &#8594;</a> &middot;
+  <a href="viz.html">Explore all 1,000 Airbnb picks &#8594;</a>
 </footer>
 
 </body>

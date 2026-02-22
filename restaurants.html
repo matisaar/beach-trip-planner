@@ -44,7 +44,8 @@
   .tip strong { font-weight: 700; }
 
   /* Restaurant table */
-  .rest-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 0.82rem; margin: 14px 0; }
+  .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 14px 0; border-radius: 10px; }
+  .rest-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 0.82rem; min-width: 640px; }
   .rest-table thead th { background: var(--ocean-dark); color: white; padding: 10px 12px; text-align: left; font-weight: 700; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.5px; }
   .rest-table thead th:first-child { border-radius: 10px 0 0 0; }
   .rest-table thead th:last-child { border-radius: 0 10px 0 0; }
@@ -229,6 +230,7 @@
   <p class="sub">Your closest food town — 30 restaurants within walking distance, from &#8364;8 pizza to Michelin stars</p>
 
   <!-- Top 15 Ravello table -->
+  <div class="table-wrap">
   <table class="rest-table">
     <thead><tr><th>#</th><th>Restaurant</th><th>Cuisine</th><th>Price</th><th>Reviews</th><th>Notes</th></tr></thead>
     <tbody>
@@ -354,6 +356,7 @@
       </tr>
     </tbody>
   </table>
+  </div>
 
   <div class="tip tip-money"><strong>&#128176; Ravello price guide:</strong> Budget pizza &amp; pasta &#8364;8&ndash;15 (A Gradillo, Sisina's). Mid-range full dinner &#8364;25&ndash;40 (Mim&igrave;, Cumpa' Cosimo, Villa Maria). Splurge &#8364;80&ndash;150+ (Rossellinis, Il Flauto di Pan).</div>
 
@@ -376,6 +379,7 @@
   </div>
   <p class="sub">The coast's main town — 60+ restaurants from street food to 3 Michelin-starred spots</p>
 
+  <div class="table-wrap">
   <table class="rest-table">
     <thead><tr><th>#</th><th>Restaurant</th><th>Cuisine</th><th>Price</th><th>Reviews</th><th>Notes</th></tr></thead>
     <tbody>
@@ -541,6 +545,7 @@
       </tr>
     </tbody>
   </table>
+  </div>
 
   <div class="tip tip-money"><strong>&#128176; Amalfi price guide:</strong> Street food &#8364;4&ndash;8 (Cuoppo, CICA, Pizza Express). Mid-range dinner &#8364;25&ndash;45 (L'Abside, Buonvicino, Da Maria). Michelin star &#8364;100&ndash;180 (Sensi, La Caravella, Glicine).</div>
 
@@ -568,6 +573,7 @@
   </div>
   <p class="sub">The "City of Taste" — birthplace of Amalfi Coast pasta-making, cheaper than Amalfi, more authentic</p>
 
+  <div class="table-wrap">
   <table class="rest-table">
     <thead><tr><th>#</th><th>Restaurant</th><th>Cuisine</th><th>Price</th><th>Reviews</th><th>Notes</th></tr></thead>
     <tbody>
@@ -677,6 +683,7 @@
       </tr>
     </tbody>
   </table>
+  </div>
 
   <div class="tip tip-money"><strong>&#128176; Minori price guide:</strong> Generally 15&ndash;20% cheaper than Amalfi for similar quality. Street food &#8364;3&ndash;7 (Pescheria Andrea's, O' Sarracino). Full dinner &#8364;20&ndash;35 (Giardiniello, La Botte, A Ricetta).</div>
 
