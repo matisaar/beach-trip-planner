@@ -34,8 +34,7 @@
     if (f === 'index.html')       return '🏠';
     if (/compare/i.test(f))       return '⚖️';
     if (/share/i.test(f))         return '📤';
-    if (/explore/i.test(f))       return '🔭';
-    if (/flight/i.test(f))        return '✈️';
+    if (/explore/i.test(f))       return '🔭';    if (/island/i.test(f))        return '🏝️';    if (/flight/i.test(f))        return '✈️';
     if (/restaurant/i.test(f))    return '🍽️';
     if (/hotel/i.test(f))         return '🏨';
     if (/airbnb/i.test(f))        return '🏡';
@@ -51,7 +50,7 @@
   var GROUP_LABELS = {
     main:     '📍 Overview',
     italy:    '🇮🇹 Italy · Amalfi Coast',
-    greece:   '🇬🇷 Greece · Crete',
+    greece:   '🇬🇷 Greece · Islands',
     projects: '🚀 Other Projects'
   };
   // Pages that sort first within their group
@@ -59,7 +58,7 @@
 
   function group(f) {
     if (/^(index|compare|share|explore)\.html$/.test(f)) return 'main';
-    if (/^greece/i.test(f)) return 'greece';
+    if (/^(greece|island)/i.test(f)) return 'greece';
     if (/^(best-trip|flights|restaurants|hotels|airbnbs|alternatives|viz)/i.test(f)) return 'italy';
     return 'main';
   }

@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Island Hop 2026 — Athens → Mykonos → Santorini → Crete</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+  :root {
+    --ocean: #0077b6; --ocean-dark: #023e8a; --ocean-light: #00b4d8;
+    --sand: #f5e6d3; --sunset: #ff6b35; --coral: #e63946;
+    --palm: #2d6a4f; --dark: #1a1a2e; --gray: #6b7280;
+    --light: #f8fafc; --white: #ffffff; --gold: #f59e0b;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: var(--light); color: var(--dark); line-height: 1.7; }
+  a { color: var(--ocean); text-decoration: none; font-weight: 600; }
+  a:hover { text-decoration: underline; }
+
+  /* Hero */
+  .hero { background: linear-gradient(135deg, #023e8a 0%, #0077b6 40%, #00b4d8 70%, #48cae4 100%); color: white; padding: 60px 24px 50px; text-align: center; }
+  .hero h1 { font-size: clamp(1.8rem, 5vw, 2.8rem); font-weight: 900; margin-bottom: 8px; }
+  .hero p { font-size: 1rem; opacity: 0.85; max-width: 640px; margin: 0 auto 20px; }
+  .hero-stats { display: flex; gap: 28px; justify-content: center; flex-wrap: wrap; margin-top: 16px; }
+  .hero-stat { text-align: center; }
+  .hero-stat .num { font-size: 1.5rem; font-weight: 900; }
+  .hero-stat .label { font-size: 0.72rem; opacity: 0.7; }
+
+  /* Route bar */
+  .route-bar { display: flex; border-radius: 12px; overflow: hidden; margin: 20px auto 0; max-width: 780px; }
+  .route-seg { padding: 14px 10px; color: white; text-align: center; display: flex; flex-direction: column; justify-content: center; }
+  .route-seg .rs-city { font-weight: 900; font-size: 0.85rem; }
+  .route-seg .rs-nights { font-size: 0.68rem; opacity: 0.8; }
+  .route-arrow { background: rgba(255,255,255,0.15); flex: 0 0 28px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; }
+  .rs-athens { background: #1a472a; flex: 2; }
+  .rs-mykonos { background: #023e8a; flex: 3; }
+  .rs-santorini { background: #7c3aed; flex: 2; }
+  .rs-crete { background: #e63946; flex: 4; }
+
+  /* Layout */
+  .container { max-width: 780px; margin: 0 auto; padding: 0 20px; }
+  .section { padding: 28px 0; }
+  .section h2 { font-size: 1.35rem; font-weight: 800; margin-bottom: 12px; color: var(--ocean-dark); }
+  .card { background: white; border-radius: 14px; padding: 20px; margin-bottom: 14px; box-shadow: 0 3px 12px rgba(0,0,0,0.05); }
+  .card h3 { font-size: 1rem; font-weight: 800; margin-bottom: 6px; }
+  .divider { height: 2px; background: linear-gradient(90deg, transparent, var(--ocean-light), transparent); margin: 10px 0; }
+
+  /* Stop headers */
+  .stop-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 3px solid var(--ocean-light); }
+  .stop-num { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1rem; flex-shrink: 0; color: white; }
+  .stop-info .stop-city { font-weight: 900; font-size: 1.2rem; }
+  .stop-info .stop-dates { font-size: 0.82rem; color: var(--gray); }
+
+  /* Airbnb hero card */
+  .airbnb-hero { background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.1); margin: 14px 0; }
+  .airbnb-hero img { width: 100%; height: 260px; object-fit: cover; }
+  .ah-body { padding: 20px 24px; }
+  .ah-badge { display: inline-block; font-size: 0.72rem; font-weight: 700; padding: 3px 10px; border-radius: 14px; background: linear-gradient(135deg, var(--palm), #40916c); color: white; margin-bottom: 10px; }
+  .ah-name { font-size: 1.15rem; font-weight: 800; margin-bottom: 2px; }
+  .ah-stats { display: flex; gap: 14px; font-size: 0.85rem; margin: 8px 0; flex-wrap: wrap; }
+  .ah-stats .star { color: var(--coral); font-weight: 700; }
+  .ah-price { font-size: 0.95rem; margin-bottom: 12px; }
+  .ah-price strong { font-size: 1.1rem; }
+  .ah-price .total { color: var(--gray); font-size: 0.82rem; }
+  .ah-link { display: block; text-align: center; padding: 12px; background: linear-gradient(135deg, #FF385C, #e31c5f); color: white; text-decoration: none; font-weight: 700; font-size: 0.92rem; border-radius: 10px; }
+  .ah-link:hover { filter: brightness(1.1); text-decoration: none; }
+  .photo-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 4px; margin-top: 4px; border-radius: 0 0 12px 12px; overflow: hidden; }
+  .photo-row img { width: 100%; height: 130px; object-fit: cover; }
+
+  /* Airbnb option cards */
+  .ab-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 12px 0; }
+  .ab-card { background: white; border-radius: 12px; padding: 14px; box-shadow: 0 2px 10px rgba(0,0,0,0.06); border: 1px solid #e5e7eb; transition: all 0.15s; }
+  .ab-card:hover { border-color: var(--ocean-light); box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
+  .ab-card .ab-name { font-weight: 800; font-size: 0.88rem; }
+  .ab-card .ab-name a { color: var(--dark); }
+  .ab-card .ab-name a:hover { color: var(--ocean); }
+  .ab-card .ab-meta { font-size: 0.78rem; color: var(--gray); margin-top: 3px; }
+  .ab-card .ab-price { font-weight: 800; color: var(--ocean-dark); font-size: 0.88rem; margin-top: 6px; }
+  .ab-card .ab-tag { display: inline-block; font-size: 0.65rem; font-weight: 700; padding: 2px 7px; border-radius: 6px; margin-top: 4px; }
+
+  /* Link grid */
+  .link-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 12px 0; }
+  .link-card { background: white; border-radius: 10px; padding: 12px 14px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--dark); transition: all 0.15s; border: 1px solid #e5e7eb; }
+  .link-card:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); text-decoration: none; border-color: var(--ocean-light); }
+  .link-card .lc-icon { font-size: 1.2rem; flex-shrink: 0; }
+  .link-card .lc-text { display: flex; flex-direction: column; }
+  .link-card .lc-name { font-weight: 700; font-size: 0.85rem; }
+  .link-card .lc-meta { font-size: 0.72rem; color: var(--gray); }
+  .link-card .lc-tag { font-size: 0.68rem; font-weight: 700; padding: 2px 7px; border-radius: 6px; margin-left: auto; flex-shrink: 0; }
+  .tag-walk { background: #dbeafe; color: var(--ocean-dark); }
+  .tag-drive { background: #fff7ed; color: var(--sunset); }
+  .tag-bus { background: #dcfce7; color: var(--palm); }
+  .tag-ferry { background: #ede9fe; color: #7c3aed; }
+  .tag-flight { background: #fce7f3; color: #be185d; }
+
+  /* Eat grid */
+  .eat-grid { display: grid; grid-template-columns: 1fr; gap: 6px; margin: 10px 0; }
+  .eat-row { display: flex; align-items: center; gap: 10px; background: white; border-radius: 10px; padding: 10px 14px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); text-decoration: none; color: var(--dark); border: 1px solid #e5e7eb; transition: all 0.15s; }
+  .eat-row:hover { border-color: var(--ocean-light); text-decoration: none; }
+  .eat-row .er-name { font-weight: 700; font-size: 0.85rem; }
+  .eat-row .er-type { font-size: 0.72rem; color: var(--gray); }
+  .eat-row .er-price { margin-left: auto; font-weight: 800; font-size: 0.82rem; color: var(--palm); white-space: nowrap; }
+
+  /* Insider tips */
+  .insider { background: linear-gradient(135deg, #fef3c7, #fff7ed); border-radius: 12px; padding: 16px 20px; margin: 14px 0; border-left: 4px solid var(--gold); }
+  .insider .tip-label { font-size: 0.7rem; font-weight: 800; color: #92400e; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+  .insider p { font-size: 0.85rem; color: #78350f; line-height: 1.6; margin: 0; }
+
+  /* Transport card */
+  .transport { background: linear-gradient(135deg, #ede9fe, #f0f7ff); border-radius: 12px; padding: 16px 20px; margin: 14px 0; border-left: 4px solid #7c3aed; }
+  .transport .t-label { font-size: 0.7rem; font-weight: 800; color: #5b21b6; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+  .transport p { font-size: 0.85rem; color: #3b0764; line-height: 1.6; margin: 0; }
+  .transport a { color: #5b21b6; }
+
+  /* Budget */
+  .budget-row { display: flex; align-items: center; margin-bottom: 6px; gap: 8px; }
+  .budget-label { width: 90px; font-size: 0.78rem; font-weight: 600; flex-shrink: 0; }
+  .budget-bar-bg { flex: 1; height: 8px; background: #e5e7eb; border-radius: 4px; overflow: hidden; }
+  .budget-bar-fill { height: 100%; border-radius: 4px; }
+  .budget-val { width: 70px; text-align: right; font-size: 0.78rem; font-weight: 600; color: var(--ocean-dark); flex-shrink: 0; }
+
+  /* Book buttons */
+  .book-grid { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+  .book-btn { display: inline-flex; align-items: center; gap: 5px; padding: 10px 16px; border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 0.82rem; color: white; transition: all 0.15s; }
+  .book-btn:hover { transform: translateY(-1px); filter: brightness(1.1); text-decoration: none; }
+
+  /* Beach / activity grid */
+  .beach-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 12px 0; }
+  .beach-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 3px 12px rgba(0,0,0,0.06); text-decoration: none; color: var(--dark); transition: all 0.15s; }
+  .beach-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.12); text-decoration: none; }
+  .beach-card .bc-body { padding: 12px 14px; }
+  .beach-card .bc-name { font-weight: 800; font-size: 0.9rem; }
+  .beach-card .bc-meta { font-size: 0.75rem; color: var(--gray); margin-top: 2px; }
+  .beach-card .bc-tag { display: inline-block; font-size: 0.68rem; font-weight: 700; padding: 2px 7px; border-radius: 6px; margin-top: 4px; }
+
+  /* Nav links */
+  .nav-links { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 20px 0 0; }
+  .nav-link { display: flex; align-items: center; gap: 8px; padding: 14px 16px; border-radius: 12px; text-decoration: none; font-weight: 700; font-size: 0.85rem; color: white; transition: all 0.2s; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.15); }
+  .nav-link:hover { transform: translateY(-2px); background: rgba(255,255,255,0.22); text-decoration: none; }
+  .nav-link .nl-icon { font-size: 1.1rem; }
+  .nav-link .nl-text { display: flex; flex-direction: column; }
+  .nav-link .nl-title { font-weight: 800; font-size: 0.82rem; }
+  .nav-link .nl-sub { font-weight: 400; font-size: 0.68rem; opacity: 0.75; }
+
+  /* Optional card */
+  .optional { background: white; border-radius: 14px; padding: 20px; margin-bottom: 14px; box-shadow: 0 3px 12px rgba(0,0,0,0.05); border: 2px dashed #d1d5db; }
+  .optional h3 { font-size: 1rem; font-weight: 800; margin-bottom: 6px; color: var(--gray); }
+
+  /* Golden rules */
+  .rule { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 10px; }
+  .rule-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 2px; }
+  .rule-text { font-size: 0.85rem; line-height: 1.6; }
+  .rule-text strong { font-weight: 800; }
+
+  footer { background: var(--dark); color: rgba(255,255,255,0.6); text-align: center; padding: 24px 20px; font-size: 0.78rem; margin-top: 20px; }
+  footer a { color: var(--ocean-light); }
+
+  @media (max-width: 640px) {
+    .hero h1 { font-size: 1.7rem; }
+    .route-bar { flex-direction: column; }
+    .route-seg, .route-arrow { flex: none !important; }
+    .route-arrow { padding: 4px; font-size: 0.7rem; }
+    .link-grid, .ab-grid, .beach-grid { grid-template-columns: 1fr; }
+    .airbnb-hero img { height: 200px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <h1><img src="https://flagcdn.com/w40/gr.png" alt="" style="height:1em;vertical-align:-0.1em;margin-right:4px"> Island Hop 2026</h1>
+  <p>Athens &rarr; Mykonos &rarr; Santorini &rarr; Crete &mdash; the ultimate Greek island-hopping route with <strong>insider tips from a local</strong></p>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="num">11</div><div class="label">Nights</div></div>
+    <div class="hero-stat"><div class="num">4</div><div class="label">Islands</div></div>
+    <div class="hero-stat"><div class="num">~$6,500</div><div class="label">CAD Total</div></div>
+    <div class="hero-stat"><div class="num">Aug 22</div><div class="label">– Sep 2</div></div>
+  </div>
+  <div class="route-bar">
+    <div class="route-seg rs-athens"><div class="rs-city">Athens</div><div class="rs-nights">2 nights</div></div>
+    <div class="route-arrow">&#9992;</div>
+    <div class="route-seg rs-mykonos"><div class="rs-city">Mykonos</div><div class="rs-nights">3 nights</div></div>
+    <div class="route-arrow">&#9875;</div>
+    <div class="route-seg rs-santorini"><div class="rs-city">Santorini</div><div class="rs-nights">2 nights</div></div>
+    <div class="route-arrow">&#9875;</div>
+    <div class="route-seg rs-crete"><div class="rs-city">Crete</div><div class="rs-nights">4 nights</div></div>
+  </div>
+  <div class="nav-links" style="max-width:780px;margin:20px auto 0;">
+    <a class="nav-link" href="greece.html"><span class="nl-icon">&#127468;&#127479;</span><span class="nl-text"><span class="nl-title">Crete-Only Plan</span><span class="nl-sub">7 nights, $4,600</span></span></a>
+    <a class="nav-link" href="compare.html" style="background:linear-gradient(135deg,#ff6b35,#e63946);border-color:#ff6b35;"><span class="nl-icon">&#9878;&#65039;</span><span class="nl-text"><span class="nl-title">Compare All Trips</span><span class="nl-sub">Italy vs Greece</span></span></a>
+    <a class="nav-link" href="greece-airbnbs.html" style="background:linear-gradient(135deg,#FF385C,#e31c5f);border-color:#FF385C;"><span class="nl-icon">&#127968;</span><span class="nl-text"><span class="nl-title">Browse Airbnbs</span><span class="nl-sub">35 Crete picks</span></span></a>
+    <a class="nav-link" href="https://www.ferries.gr" target="_blank" style="background:linear-gradient(135deg,#7c3aed,#5b21b6);border-color:#7c3aed;"><span class="nl-icon">&#9875;</span><span class="nl-text"><span class="nl-title">Book Ferries</span><span class="nl-sub">ferries.gr</span></span></a>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ═══════════════════════════════════════════════════════════
+     STOP 1: ATHENS / GLYFADA
+     ═══════════════════════════════════════════════════════════ -->
+<div class="section">
+  <div class="stop-header">
+    <div class="stop-num" style="background:#1a472a">1</div>
+    <div class="stop-info">
+      <div class="stop-city">Athens &mdash; Glyfada &middot; 2 nights</div>
+      <div class="stop-dates">Aug 22&ndash;24 &middot; <a href="https://www.google.com/maps/search/Glyfada+Athens+Greece" target="_blank" style="color:var(--ocean)">Open in Maps</a></div>
+    </div>
+  </div>
+
+  <p style="font-size:0.88rem;margin-bottom:14px;">Skip the chaotic city centre. <strong>Glyfada</strong> is a chic coastal suburb in south Athens &mdash; beach bars, great restaurants, metro to the Acropolis. The perfect decompression stop after a long flight.</p>
+
+  <div class="insider">
+    <div class="tip-label">&#128161; Insider tip</div>
+    <p>Stay in <strong>Glyfada or south Athens</strong>. Rent an electric bike to explore the coast. Optional day trip to <a href="https://www.google.com/maps/search/Cape+Sounion+Temple+of+Poseidon+Greece" target="_blank" style="color:#92400e;"><strong>Cape Sounion</strong></a> &mdash; beautiful drive along the water with beaches, sunsets, and the Temple of Poseidon. Family there can show you around.</p>
+  </div>
+
+  <h3 style="margin-top:18px">&#127968; Where to Stay</h3>
+  <div class="ab-grid">
+    <div class="ab-card" style="border-color:var(--palm);border-width:2px;">
+      <div class="ab-name"><a href="https://www.airbnb.ca/rooms/54368883?check_in=2026-08-22&check_out=2026-08-24&adults=2" target="_blank">Sunny Studio Near Metro</a></div>
+      <div class="ab-meta">&#9733; 4.97 (31 reviews) &middot; Glyfada &middot; Studio</div>
+      <div class="ab-price">$231 / 2 nights (~$116/n)</div>
+      <span class="ab-tag" style="background:#dcfce7;color:var(--palm)">&#11088; Top pick</span>
+    </div>
+    <div class="ab-card">
+      <div class="ab-name"><a href="https://www.airbnb.ca/rooms/40745532?check_in=2026-08-22&check_out=2026-08-24&adults=2" target="_blank">Mrs Pergam &mdash; Studio + Terrace</a></div>
+      <div class="ab-meta">&#9733; 4.94 (109 reviews) &middot; Glyfada &middot; Terrace</div>
+      <div class="ab-price">$284 / 2 nights (~$142/n)</div>
+    </div>
+    <div class="ab-card">
+      <div class="ab-name"><a href="https://www.airbnb.ca/rooms/23100004?check_in=2026-08-22&check_out=2026-08-24&adults=2" target="_blank">Unique Stylish Studio</a></div>
+      <div class="ab-meta">&#9733; 4.99 (287 reviews) &middot; Alimos &middot; Near beaches</div>
+      <div class="ab-price">$379 / 2 nights (~$190/n)</div>
+      <span class="ab-tag" style="background:#fef3c7;color:#92400e">Highest rated</span>
+    </div>
+    <div class="ab-card">
+      <div class="ab-name"><a href="https://www.airbnb.ca/rooms/35278899?check_in=2026-08-22&check_out=2026-08-24&adults=2" target="_blank">Kalliopi's Apartment</a></div>
+      <div class="ab-meta">&#9733; 4.87 (171 reviews) &middot; Ilioupoli</div>
+      <div class="ab-price">$186 / 2 nights (~$93/n)</div>
+      <span class="ab-tag" style="background:#dbeafe;color:var(--ocean-dark)">Budget pick</span>
+    </div>
+  </div>
+  <p style="font-size:0.78rem;color:var(--gray);"><a href="https://www.airbnb.ca/s/Glyfada--Athens--Greece/homes?checkin=2026-08-22&checkout=2026-08-24&adults=2&price_max=200&min_bedrooms=1" target="_blank">Browse all Glyfada Airbnbs &rarr;</a></p>
+
+  <h3 style="margin-top:18px">&#128205; What to Do</h3>
+  <div class="link-grid">
+    <a class="link-card" href="https://www.google.com/maps/search/Glyfada+Beach+Athens+Greece" target="_blank">
+      <span class="lc-icon">&#127754;</span>
+      <span class="lc-text"><span class="lc-name">Glyfada Beach</span><span class="lc-meta">Sandy beach, bars, sunbeds</span></span>
+      <span class="lc-tag tag-walk">5 min</span>
+    </a>
+    <a class="link-card" href="https://www.google.com/maps/search/Vouliagmeni+Beach+Athens" target="_blank">
+      <span class="lc-icon">&#127754;</span>
+      <span class="lc-text"><span class="lc-name">Vouliagmeni Beach</span><span class="lc-meta">Upscale, crystal water</span></span>
+      <span class="lc-tag tag-drive">10 min</span>
+    </a>
+    <a class="link-card" href="https://www.google.com/maps/search/Cape+Sounion+Temple+of+Poseidon+Greece" target="_blank">
+      <span class="lc-icon">&#127963;&#65039;</span>
+      <span class="lc-text"><span class="lc-name">Cape Sounion</span><span class="lc-meta">Temple of Poseidon, sunset cliffs</span></span>
+      <span class="lc-tag tag-drive">45 min</span>
+    </a>
+    <a class="link-card" href="https://www.google.com/maps/search/Acropolis+Athens+Greece" target="_blank">
+      <span class="lc-icon">&#127984;</span>
+      <span class="lc-text"><span class="lc-name">Acropolis</span><span class="lc-meta">Metro from Glyfada, 40 min</span></span>
+      <span class="lc-tag tag-bus">40 min</span>
+    </a>
+    <a class="link-card" href="https://www.google.com/maps/search/Balux+Cafe+Glyfada+Athens" target="_blank">
+      <span class="lc-icon">&#127864;</span>
+      <span class="lc-text"><span class="lc-name">Balux Beach Bar</span><span class="lc-meta">Beach club, cocktails, DJ</span></span>
+      <span class="lc-tag tag-walk">8 min</span>
+    </a>
+    <a class="link-card" href="https://www.google.com/maps/search/Piraeus+Port+Athens+Greece" target="_blank">
+      <span class="lc-icon">&#9875;</span>
+      <span class="lc-text"><span class="lc-name">Piraeus Port</span><span class="lc-meta">Ferry terminal for islands</span></span>
+      <span class="lc-tag tag-bus">30 min</span>
+    </a>
+  </div>
+
+  <h3 style="margin-top:18px">&#128197; 2-day outline</h3>
+  <div class="card" style="font-size:0.85rem;line-height:1.9;">
+    <strong>Day 1:</strong> Arrive <a href="https://www.google.com/maps/search/Athens+International+Airport" target="_blank">ATH</a> &rarr; metro/taxi to Glyfada &rarr; beach afternoon &rarr; seafood dinner on the coast<br>
+    <strong>Day 2:</strong> <a href="https://www.google.com/maps/search/Cape+Sounion+Temple+of+Poseidon+Greece" target="_blank">Cape Sounion</a> day trip (drive the coast road, swim, sunset at the temple) <em>or</em> <a href="https://www.google.com/maps/search/Acropolis+Athens+Greece" target="_blank">Acropolis</a> + Plaka &rarr; early night before ferries
+  </div>
+
+  <div class="transport">
+    <div class="t-label">&#9875; Getting to Mykonos</div>
+    <p><strong>Ferry from <a href="https://www.google.com/maps/search/Piraeus+Port+Athens+Greece" target="_blank">Piraeus</a></strong> &mdash; 2.5 hrs (high-speed) or 5 hrs (regular). ~&euro;45&ndash;65pp. Book on <a href="https://www.ferries.gr" target="_blank"><strong>ferries.gr</strong></a>. Take morning ferry, arrive by lunch. Metro to Piraeus from Glyfada ~30 min.</p>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     STOP 2: MYKONOS
+     ═══════════════════════════════════════════════════════════ -->
+<div class="section">
+  <div class="stop-header">
+    <div class="stop-num" style="background:#023e8a">2</div>
+    <div class="stop-info">
+      <div class="stop-city">Mykonos &middot; 3 nights</div>
+      <div class="stop-dates">Aug 24&ndash;27 &middot; <a href="https://www.google.com/maps/search/Mykonos+Town+Greece" target="_blank" style="color:var(--ocean)">Open in Maps</a></div>
+    </div>
+  </div>
+
+  <p style="font-size:0.88rem;margin-bottom:14px;">The iconic party island. Whitewashed streets, harbour windmills, world-class nightlife, and beautiful beaches. <strong>Expensive but worth it</strong> for 2&ndash;3 nights. Stay in <strong>Mykonos Town</strong> near the harbour &mdash; walk home, no taxis.</p>
+
+  <div class="insider">
+    <div class="tip-label">&#128161; Insider tip</div>
+    <p>Stay <strong>walking distance from the harbour</strong> &mdash; taxis are impossible at night and you&rsquo;ll want to walk home after bars. <strong>Party at least one night.</strong> Go to <a href="https://www.google.com/maps/search/Super+Paradise+Beach+Mykonos" target="_blank" style="color:#92400e;">Super Paradise Beach</a> but avoid prime sun hours (the party starts at 4pm). Gyros are cheap (&euro;3&ndash;4) &mdash; drinks are NOT. Windmill photos are a must.</p>
+  </div>
+
+  <h3 style="margin-top:18px">&#127968; Where to Stay</h3>
+  <div class="ab-grid">
+    <div class="ab-card" style="border-color:var(--palm);border-width:2px;">
+      <div class="ab-name"><a href="https://www.airbnb.ca/rooms/22996392?check_in=2026-08-24&check_out=2026-08-27&adults=2" target="_blank">Wake Up to Harbor Views</a></div>
+      <div class="ab-meta">&#9733; 4.76 (280 reviews) &middot; Mykonos Town &middot; Harbour views</div>
+      <div class="ab-price">$856 / 3 nights (~$285/n)</div>
+      <span class="ab-tag" style="background:#dcfce7;color:var(--palm)">&#11088; Top pick &mdash; harbour</span>
+    </div>
+    <div class="ab-card">
+      <div class="ab-name"><a href="https://www.airbnb.ca/rooms/1208585205629971616?check_in=2026-08-24&check_out=2026-08-27&adults=2" target="_blank">Animus Luxury Apartment</a></div>
+      <div class="ab-meta">&#9733; 5.0 (29 reviews) &middot; Mykonos &middot; Luxury</div>
+      <div class="ab-price">$893 / 3 nights (~$298/n)</div>
+      <span class="ab-tag" style="background:#fef3c7;color:#92400e">Perfect score</span>
+    </div>
+    <div class="ab-card">
+      <div class="ab-name"><a href="https://www.airbnb.ca/rooms/1007821531913773963?check_in=2026-08-24&check_out=2026-08-27&adults=2" target="_blank">Sea View Apartments</a></div>
+      <div class="ab-meta">&#9733; 4.95 (20 reviews) &middot; Mykonos &middot; Sea view</div>
+      <div class="ab-price">$876 / 3 nights (~$292/n)</div>
+    </div>
+    <div class="ab-card">
+      <div class="ab-name"><a href="https://www.airbnb.ca/rooms/27987045?check_in=2026-08-24&check_out=2026-08-27&adults=2" target="_blank">Twin Room &mdash; Heart of Town</a></div>
+      <div class="ab-meta">&#9733; 4.7 (293 reviews) &middot; Central Mykonos Town</div>
+      <div class="ab-price">$735 / 3 nights (~$245/n)</div>
+      <span class="ab-tag" style="background:#dbeafe;color:var(--ocean-dark)">Budget pick</span>
+    </div>
+  </div>
+  <p style="font-size:0.78rem;color:var(--gray);"><a href="https://www.airbnb.ca/s/Mykonos-Town--Mykonos--Greece/homes?checkin=2026-08-24&checkout=2026-08-27&adults=2&price_max=300&min_bedrooms=1" target="_blank">Browse all Mykonos Airbnbs &rarr;</a></p>
+
+  <h3 style="margin-top:18px">&#128205; Beaches &amp; Nightlife</h3>
+  <div class="link-grid">
+    <a class="link-card" href="https://www.google.com/maps/search/Super+Paradise+Beach+Mykonos" target="_blank">
+      <span class="lc-icon">&#127754;</span>
+      <span class="lc-text"><span class="lc-name">Super Paradise Beach</span><span class="lc-meta">Famous party beach, DJ sets from 4pm</span></span>
+      <span class="lc-tag tag-drive">15 min</span>
+    </a>
+    <a class="link-card" href="https://www.google.com/maps/search/Paradise+Beach+Mykonos" target="_blank">
+      <span class="lc-icon">&#127754;</span>
+      <span class="lc-text"><span class="lc-name">Paradise Beach</span><span class="lc-meta">Big club beach, full-moon parties</span></span>
+      <span class="lc-tag tag-drive">12 min</span>
+    </a>
+    <a class="link-card" href="https://www.google.com/maps/search/Windmills+of+Kato+Mili+Mykonos" target="_blank">
+      <span class="lc-icon">&#127747;</span>
+      <span class="lc-text"><span class="lc-name">Kato Mili Windmills</span><span class="lc-meta">Iconic sunset photo spot</span></span>
+      <span class="lc-tag tag-walk">5 min</span>
+    </a>
+    <a class="link-card" href="https://www.google.com/maps/search/Little+Venice+Mykonos" target="_blank">
+      <span class="lc-icon">&#127864;</span>
+      <span class="lc-text"><span class="lc-name">Little Venice</span><span class="lc-meta">Waterfront bars, sunset cocktails</span></span>
+      <span class="lc-tag tag-walk">5 min</span>
+    </a>
+    <a class="link-card" href="https://www.google.com/maps/search/Cavo+Paradiso+Mykonos" target="_blank">
+      <span class="lc-icon">&#127926;</span>
+      <span class="lc-text"><span class="lc-name">Cavo Paradiso</span><span class="lc-meta">World-famous cliff-top club</span></span>
+      <span class="lc-tag tag-drive">10 min</span>
+    </a>
+    <a class="link-card" href="https://www.google.com/maps/search/Ornos+Beach+Mykonos" target="_blank">
+      <span class="lc-icon">&#127754;</span>
+      <span class="lc-text"><span class="lc-name">Ornos Beach</span><span class="lc-meta">Family-friendly, calm water, tavernas</span></span>
+      <span class="lc-tag tag-drive">8 min</span>
+    </a>
+  </div>
+
+  <h3 style="margin-top:18px">&#127829; Eat &amp; Drink</h3>
+  <div class="eat-grid">
+    <a class="eat-row" href="https://www.google.com/maps/search/Joanna+Nikos+Place+Mykonos+Town" target="_blank">
+      <span><span class="er-name">Joanna's Niko's Place</span><span class="er-type"> &middot; Best souvlaki in Mykonos Town</span></span>
+      <span class="er-price">&euro;4&ndash;8pp</span>
+    </a>
+    <a class="eat-row" href="https://www.google.com/maps/search/Fokos+Taverna+Mykonos" target="_blank">
+      <span><span class="er-name">Fokos Taverna</span><span class="er-type"> &middot; Remote beach taverna, fresh fish, worth the drive</span></span>
+      <span class="er-price">&euro;20&ndash;30pp</span>
+    </a>
+    <a class="eat-row" href="https://www.google.com/maps/search/Scarpa+Bar+Mykonos" target="_blank">
+      <span><span class="er-name">Scarpa Bar</span><span class="er-type"> &middot; Harbour cocktail bar, great music</span></span>
+      <span class="er-price">&euro;12&ndash;18</span>
+    </a>
+    <a class="eat-row" href="https://www.google.com/maps/search/Gyros+Mykonos+Town" target="_blank">
+      <span><span class="er-name">Street Gyros</span><span class="er-type"> &middot; Multiple spots in town &middot; best cheap eats</span></span>
+      <span class="er-price">&euro;3&ndash;4</span>
+    </a>
+  </div>
+
+  <h3 style="margin-top:18px">&#128197; 3-day outline</h3>
+  <div class="card" style="font-size:0.85rem;line-height:1.9;">
+    <strong>Day 3:</strong> Arrive by ferry &rarr; check in &rarr; <a href="https://www.google.com/maps/search/Mykonos+Town+Greece" target="_blank">explore town</a> &rarr; <a href="https://www.google.com/maps/search/Little+Venice+Mykonos" target="_blank">Little Venice</a> sunset &rarr; <a href="https://www.google.com/maps/search/Windmills+of+Kato+Mili+Mykonos" target="_blank">windmill photos</a> &rarr; harbour dinner<br>
+    <strong>Day 4:</strong> <a href="https://www.google.com/maps/search/Super+Paradise+Beach+Mykonos" target="_blank">Super Paradise Beach</a> (go around noon, party from 4pm) &rarr; gyros dinner &rarr; <a href="https://www.google.com/maps/search/Cavo+Paradiso+Mykonos" target="_blank">Cavo Paradiso</a> party night &#127881;<br>
+    <strong>Day 5:</strong> Chill morning &rarr; <a href="https://www.google.com/maps/search/Ornos+Beach+Mykonos" target="_blank">Ornos Beach</a> &rarr; pack up &rarr; evening or AM ferry to Santorini
+  </div>
+
+  <div class="transport">
+    <div class="t-label">&#9875; Getting to Santorini</div>
+    <p><strong>Ferry from Mykonos</strong> &mdash; 2&ndash;3 hrs (high-speed). ~&euro;45&ndash;65pp. Multiple daily departures. Book on <a href="https://www.ferries.gr" target="_blank"><strong>ferries.gr</strong></a>. SeaJets and Golden Star are the main operators.</p>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     STOP 3: SANTORINI
+     ═══════════════════════════════════════════════════════════ -->
+<div class="section">
+  <div class="stop-header">
+    <div class="stop-num" style="background:#7c3aed">3</div>
+    <div class="stop-info">
+      <div class="stop-city">Santorini &middot; 2 nights</div>
+      <div class="stop-dates">Aug 27&ndash;29 &middot; <a href="https://www.google.com/maps/search/Imerovigli+Santorini+Greece" target="_blank" style="color:var(--ocean)">Open in Maps</a></div>
+    </div>
+  </div>
+
+  <p style="font-size:0.88rem;margin-bottom:14px;">The caldera island. Breathtaking cliff-top villages, legendary sunsets, volcanic beaches. <strong>2 nights is perfect</strong> &mdash; it&rsquo;s stunning but crowded and expensive. Stay in <strong>Imerovigli</strong> (quieter, caldera views) or <strong>Oia</strong> (iconic but mobbed at sunset).</p>
+
+  <div class="insider">
+    <div class="tip-label">&#128161; Insider tip</div>
+    <p><strong>Rent a 4-wheeler or ATV</strong> &mdash; taxis are IMPOSSIBLE to get, especially at sunset. <strong>Dinner in Fira is a MUST</strong> &mdash; the views are unreal. Visit wineries (Santorini wine is unique). The <strong>beaches suck</strong> compared to other islands (volcanic = black/red rock) &mdash; if you go to any beach, go to <a href="https://www.google.com/maps/search/Red+Beach+Santorini+Greece" target="_blank" style="color:#92400e;"><strong>Red Beach</strong></a>. Great hiking between villages. Don&rsquo;t stay more than 2 nights.</p>
+  </div>
+
+  <h3 style="margin-top:18px">&#127968; Where to Stay</h3>
+  <div class="ab-grid">
+    <div class="ab-card" style="border-color:#7c3aed;border-width:2px;">
+      <div class="ab-name"><a href="https://www.airbnb.ca/rooms/675109723540652184?check_in=2026-08-27&check_out=2026-08-29&adults=2" target="_blank">Breakfast Dome &mdash; Caldera View</a></div>
+      <div class="ab-meta">&#9733; 4.97 (36 reviews) &middot; Imerovigli &middot; Breakfast incl.</div>
+      <div class="ab-price">$555 / 2 nights (~$278/n)</div>
+      <span class="ab-tag" style="background:#ede9fe;color:#5b21b6">&#11088; Top pick</span>
+    </div>
+    <div class="ab-card">
+      <div class="ab-name"><a href="https://www.airbnb.ca/rooms/23587189?check_in=2026-08-27&check_out=2026-08-29&adults=2" target="_blank">Illusion Cave Suite</a></div>
+      <div class="ab-meta">&#9733; 4.96 (194 reviews) &middot; Central cave &middot; Sea view &middot; King bed</div>
+      <div class="ab-price">Top Guest Favourite</div>
+      <span class="ab-tag" style="background:#fef3c7;color:#92400e">&#127942; #1 rated</span>
+    </div>
+    <div class="ab-card">
+      <div class="ab-name"><a href="https://www.airbnb.ca/rooms/4393550?check_in=2026-08-27&check_out=2026-08-29&adults=2" target="_blank">Doho I &mdash; Earth Home</a></div>
+      <div class="ab-meta">&#9733; 4.86 (120 reviews) &middot; Fira &middot; Cave dwelling</div>
+      <div class="ab-price">$456 / 2 nights (~$228/n)</div>
+      <span class="ab-tag" style="background:#dbeafe;color:var(--ocean-dark)">Great value</span>
+    </div>
+    <div class="ab-card">
+      <div class="ab-name"><a href="https://www.airbnb.ca/rooms/958636260486324812?check_in=2026-08-27&check_out=2026-08-29&adults=2" target="_blank">BeSanto Imerovigli</a></div>
+      <div class="ab-meta">&#9733; 4.84 (37 reviews) &middot; Imerovigli &middot; Dome</div>
+      <div class="ab-price">$435 / 2 nights (~$218/n)</div>
+      <span class="ab-tag" style="background:#dbeafe;color:var(--ocean-dark)">Budget pick</span>
+    </div>
+  </div>
+  <p style="font-size:0.78rem;color:var(--gray);"><a href="https://www.airbnb.ca/s/Imerovigli--Santorini--Greece/homes?checkin=2026-08-27&checkout=2026-08-29&adults=2&price_max=350&min_bedrooms=1" target="_blank">Browse all Santorini Airbnbs &rarr;</a></p>
+
+  <h3 style="margin-top:18px">&#128205; Must-Do Santorini</h3>
+  <div class="link-grid">
+    <a class="link-card" href="https://www.google.com/maps/search/Oia+Sunset+Point+Santorini" target="_blank">
+      <span class="lc-icon">&#127751;</span>
+      <span class="lc-text"><span class="lc-name">Oia Sunset</span><span class="lc-meta">Most famous sunset in the world</span></span>
+      <span class="lc-tag tag-drive">15 min</span>
+    </a>
+    <a class="link-card" href="https://www.google.com/maps/search/Fira+Santorini+Greece" target="_blank">
+      <span class="lc-icon">&#127860;</span>
+      <span class="lc-text"><span class="lc-name">Dinner in Fira</span><span class="lc-meta">Caldera-edge restaurants &mdash; a MUST</span></span>
+      <span class="lc-tag tag-drive">10 min</span>
+    </a>
+    <a class="link-card" href="https://www.google.com/maps/search/Santo+Wines+Winery+Santorini" target="_blank">
+      <span class="lc-icon">&#127863;</span>
+      <span class="lc-text"><span class="lc-name">Santo Wines</span><span class="lc-meta">Wine tasting with caldera views</span></span>
+      <span class="lc-tag tag-drive">12 min</span>
+    </a>
+    <a class="link-card" href="https://www.google.com/maps/search/Venetsanos+Winery+Santorini" target="_blank">
+      <span class="lc-icon">&#127863;</span>
+      <span class="lc-text"><span class="lc-name">Venetsanos Winery</span><span class="lc-meta">Cliff-edge winery, stunning terrace</span></span>
+      <span class="lc-tag tag-drive">10 min</span>
+    </a>
+    <a class="link-card" href="https://www.google.com/maps/search/Red+Beach+Santorini+Greece" target="_blank">
+      <span class="lc-icon">&#127754;</span>
+      <span class="lc-text"><span class="lc-name">Red Beach</span><span class="lc-meta">Volcanic red cliffs &mdash; the best beach here</span></span>
+      <span class="lc-tag tag-drive">20 min</span>
+    </a>
+    <a class="link-card" href="https://www.google.com/maps/dir/Fira+Santorini/Oia+Santorini" target="_blank">
+      <span class="lc-icon">&#129406;</span>
+      <span class="lc-text"><span class="lc-name">Fira &rarr; Oia Hike</span><span class="lc-meta">10km caldera trail, incredible views</span></span>
+      <span class="lc-tag" style="background:#dcfce7;color:var(--palm)">3 hrs</span>
+    </a>
+  </div>
+
+  <h3 style="margin-top:18px">&#127829; Eat &amp; Drink</h3>
+  <div class="eat-grid">
+    <a class="eat-row" href="https://www.google.com/maps/search/Lucky's+Souvlaki+Fira+Santorini" target="_blank">
+      <span><span class="er-name">Lucky's Souvlakia</span><span class="er-type"> &middot; Best cheap eats in Fira, local favourite</span></span>
+      <span class="er-price">&euro;4&ndash;8pp</span>
+    </a>
+    <a class="eat-row" href="https://www.google.com/maps/search/Ammoudi+Fish+Taverna+Oia+Santorini" target="_blank">
+      <span><span class="er-name">Ammoudi Bay Tavernas</span><span class="er-type"> &middot; Fresh fish at the harbour below Oia cliffs</span></span>
+      <span class="er-price">&euro;25&ndash;35pp</span>
+    </a>
+    <a class="eat-row" href="https://www.google.com/maps/search/Argo+Restaurant+Fira+Santorini" target="_blank">
+      <span><span class="er-name">Argo Restaurant</span><span class="er-type"> &middot; Caldera-view dinner in Fira &mdash; book ahead</span></span>
+      <span class="er-price">&euro;20&ndash;30pp</span>
+    </a>
+  </div>
+
+  <h3 style="margin-top:18px">&#128197; 2-day outline</h3>
+  <div class="card" style="font-size:0.85rem;line-height:1.9;">
+    <strong>Day 6:</strong> Arrive by ferry &rarr; pick up ATV &rarr; check in &rarr; <a href="https://www.google.com/maps/search/Santo+Wines+Winery+Santorini" target="_blank">winery visit</a> &rarr; <a href="https://www.google.com/maps/search/Fira+Santorini+Greece" target="_blank">dinner in Fira</a> with caldera views &#127751;<br>
+    <strong>Day 7:</strong> <a href="https://www.google.com/maps/dir/Fira+Santorini/Oia+Santorini" target="_blank">Hike Fira &rarr; Oia</a> (morning, 3 hrs) &rarr; <a href="https://www.google.com/maps/search/Red+Beach+Santorini+Greece" target="_blank">Red Beach</a> afternoon &rarr; <a href="https://www.google.com/maps/search/Oia+Sunset+Point+Santorini" target="_blank">Oia sunset</a> &rarr; pack up &rarr; next AM ferry
+  </div>
+
+  <div class="transport">
+    <div class="t-label">&#9875; Getting to Crete</div>
+    <p><strong>Option A (recommended):</strong> Ferry Santorini &rarr; <a href="https://www.google.com/maps/search/Heraklion+Port+Crete+Greece" target="_blank">Heraklion</a> (~2&ndash;4 hrs, &euro;40&ndash;60pp) &rarr; pick up rental car &rarr; drive to Chania (2.5 hrs on north coast highway). You need a car in Crete anyway!<br>
+    <strong>Option B:</strong> Fly Santorini &rarr; Athens &rarr; Chania (~4 hrs total with connection, ~&euro;80&ndash;120pp). More comfortable but pricier.</p>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     STOP 4: CRETE / CHANIA
+     ═══════════════════════════════════════════════════════════ -->
+<div class="section">
+  <div class="stop-header">
+    <div class="stop-num" style="background:#e63946">4</div>
+    <div class="stop-info">
+      <div class="stop-city">Chania, Crete &middot; 4 nights</div>
+      <div class="stop-dates">Aug 29&ndash;Sep 2 &middot; <a href="https://www.google.com/maps/search/Chania+Old+Town+Crete+Greece" target="_blank" style="color:var(--ocean)">Open in Maps</a></div>
+    </div>
+  </div>
+
+  <p style="font-size:0.88rem;margin-bottom:14px;">The grand finale. Crete is <strong>nothing like the other islands</strong> &mdash; it&rsquo;s huge, wild, and has the best food in Greece. Chania&rsquo;s Venetian harbour is magical. This is where you slow down, rent a car, and <strong>discover</strong>.</p>
+
+  <div class="insider">
+    <div class="tip-label">&#128161; Insider tip</div>
+    <p>You <strong>DEFINITELY need a rental car</strong> in Crete. Do the <a href="https://www.google.com/maps/search/Samaria+Gorge+Crete+Greece" target="_blank" style="color:#92400e;"><strong>Samaria Gorge</strong></a> &mdash; it&rsquo;s 16km, an organized trip, and absolutely breathtaking. <a href="https://www.google.com/maps/search/Elafonissi+Beach+Crete" target="_blank" style="color:#92400e;"><strong>Elafonissi</strong></a> has PINK SAND. Try <a href="https://www.google.com/maps/search/Gramvousa+Restaurant+Chania+Crete" target="_blank" style="color:#92400e;"><strong>Gramvousa restaurant</strong></a> &mdash; Niki&rsquo;s all-time favourite. Cretan food is unique &mdash; amazing cheese, fresh everything. Just drive around and discover!</p>
+  </div>
+
+  <h3 style="margin-top:18px">&#127968; Where to Stay</h3>
+
+  <div class="airbnb-hero">
+    <img src="https://a0.muscache.com/im/pictures/airflow/Hosting-44209542/original/38ef1c98-c39e-4e77-8deb-bbc4d9422ade.jpg" alt="Sunny Splatzia apartment">
+    <div class="ah-body">
+      <div class="ah-badge">&#127775; Top 10% of homes</div>
+      <div class="ah-name">Sunny Splatzia Apt &#9728;&#65039; Old Town || Venetian Port!</div>
+      <div class="ah-stats">
+        <span class="star">&#9733; 4.96</span>
+        <span>93 reviews</span>
+        <span>1-bed &middot; Kitchen &middot; A/C &middot; WiFi</span>
+      </div>
+      <div class="ah-price"><strong>~$175 CAD</strong>/night &middot; <span class="total">~$700 for 4 nights</span></div>
+      <a class="ah-link" href="https://www.airbnb.ca/rooms/44209542?check_in=2026-08-29&check_out=2026-09-02&adults=2" target="_blank">View on Airbnb &rarr;</a>
+    </div>
+  </div>
+  <div class="photo-row">
+    <img src="https://a0.muscache.com/im/pictures/airflow/Hosting-44209542/original/380d0413-70af-499f-bd4b-c5280b78a2f1.jpg" alt="bedroom">
+    <img src="https://a0.muscache.com/im/pictures/airflow/Hosting-44209542/original/0b13a7b5-66c3-4ae3-a34d-2fffb3788697.jpg" alt="living room">
+    <img src="https://a0.muscache.com/im/pictures/airflow/Hosting-44209542/original/49a7d9f3-3743-4fbf-8f94-3e5d2935dad4.jpg" alt="balcony view">
+  </div>
+
+  <p style="font-size:0.82rem;margin-top:10px;margin-bottom:8px;"><strong>More options:</strong></p>
+  <div class="ab-grid">
+    <div class="ab-card">
+      <div class="ab-name"><a href="https://www.airbnb.ca/rooms/49343472?check_in=2026-08-29&check_out=2026-09-02&adults=2" target="_blank">Duplex &mdash; City Centre</a></div>
+      <div class="ab-meta">&#9733; 4.98 (50 reviews) &middot; Chania centre</div>
+      <div class="ab-price">$725 / 4 nights</div>
+      <span class="ab-tag" style="background:#fef3c7;color:#92400e">Top rated</span>
+    </div>
+    <div class="ab-card">
+      <div class="ab-name"><a href="https://www.airbnb.ca/rooms/880094702622398823?check_in=2026-08-29&check_out=2026-09-02&adults=2" target="_blank">Calma Apartment</a></div>
+      <div class="ab-meta">&#9733; 4.9 (52 reviews) &middot; Chania</div>
+      <div class="ab-price">$645 / 4 nights</div>
+    </div>
+    <div class="ab-card">
+      <div class="ab-name"><a href="https://www.airbnb.ca/rooms/873029336853168436?check_in=2026-08-29&check_out=2026-09-02&adults=2" target="_blank">Studio Near Beaches</a></div>
+      <div class="ab-meta">&#9733; 4.98 (47 reviews) &middot; Close to beaches</div>
+      <div class="ab-price">$558 / 4 nights</div>
+    </div>
+    <div class="ab-card">
+      <div class="ab-name"><a href="https://www.airbnb.ca/rooms/33861330?check_in=2026-08-29&check_out=2026-09-02&adults=2" target="_blank">Petros-Matina House</a></div>
+      <div class="ab-meta">&#9733; 4.96 (76 reviews) &middot; Mournies</div>
+      <div class="ab-price">$461 / 4 nights</div>
+      <span class="ab-tag" style="background:#dbeafe;color:var(--ocean-dark)">Budget pick</span>
+    </div>
+  </div>
+  <p style="font-size:0.78rem;color:var(--gray);"><a href="https://www.airbnb.ca/s/Chania--Crete--Greece/homes?checkin=2026-08-29&checkout=2026-09-02&adults=2&price_max=180&min_bedrooms=1" target="_blank">Browse all Chania Airbnbs &rarr;</a></p>
+
+  <h3 style="margin-top:18px">&#127754; Must-Do Crete</h3>
+  <div class="beach-grid">
+    <a class="beach-card" href="https://www.google.com/maps/search/Samaria+Gorge+Crete+Greece" target="_blank">
+      <div class="bc-body">
+        <div class="bc-name">&#129406; Samaria Gorge</div>
+        <div class="bc-meta">16km hike through a massive gorge &middot; Organized day trip from Chania</div>
+        <span class="bc-tag" style="background:#fef3c7;color:#92400e">MUST DO &middot; Breathtaking</span>
+      </div>
+    </a>
+    <a class="beach-card" href="https://www.google.com/maps/search/Elafonissi+Beach+Crete" target="_blank">
+      <div class="bc-body">
+        <div class="bc-name">&#127754; Elafonissi Beach</div>
+        <div class="bc-meta">75 min drive &middot; Pink sand, knee-deep lagoons</div>
+        <span class="bc-tag" style="background:#fce7f3;color:#be185d">PINK SAND &middot; Top 10 Europe</span>
+      </div>
+    </a>
+    <a class="beach-card" href="https://www.google.com/maps/search/Balos+Lagoon+Crete" target="_blank">
+      <div class="bc-body">
+        <div class="bc-name">&#127754; Balos Lagoon</div>
+        <div class="bc-meta">1 hr drive + ferry or hike &middot; Turquoise paradise</div>
+        <span class="bc-tag" style="background:#dcfce7;color:var(--palm)">Free &middot; #1 in Greece</span>
+      </div>
+    </a>
+    <a class="beach-card" href="https://www.google.com/maps/search/Venetian+Harbour+Chania+Crete" target="_blank">
+      <div class="bc-body">
+        <div class="bc-name">&#9875; Venetian Harbour</div>
+        <div class="bc-meta">Walk from Old Town &middot; Restaurants, lighthouse, sunset</div>
+        <span class="bc-tag" style="background:#dbeafe;color:var(--ocean-dark)">Walk &middot; 2 min</span>
+      </div>
+    </a>
+  </div>
+
+  <h3 style="margin-top:18px">&#128205; Walkable from Old Town</h3>
+  <div class="link-grid">
+    <a class="link-card" href="https://www.google.com/maps/search/Nea+Chora+Beach+Chania" target="_blank">
+      <span class="lc-icon">&#127754;</span>
+      <span class="lc-text"><span class="lc-name">Nea Chora Beach</span><span class="lc-meta">Sandy, calm, tavernas on sand</span></span>
+      <span class="lc-tag tag-walk">12 min</span>
+    </a>
+    <a class="link-card" href="https://www.google.com/maps/search/Splantzia+square+Chania+Old+Town" target="_blank">
+      <span class="lc-icon">&#127863;</span>
+      <span class="lc-text"><span class="lc-name">Splantzia Quarter</span><span class="lc-meta">Best bars, hidden courtyards</span></span>
+      <span class="lc-tag tag-walk">3 min</span>
+    </a>
+    <a class="link-card" href="https://www.google.com/maps/search/Municipal+Market+of+Chania" target="_blank">
+      <span class="lc-icon">&#128722;</span>
+      <span class="lc-text"><span class="lc-name">Agora Market</span><span class="lc-meta">Fresh food, olive oil, cheese</span></span>
+      <span class="lc-tag tag-walk">5 min</span>
+    </a>
+    <a class="link-card" href="https://www.google.com/maps/search/Lighthouse+Chania+Crete" target="_blank">
+      <span class="lc-icon">&#128294;</span>
+      <span class="lc-text"><span class="lc-name">Venetian Lighthouse</span><span class="lc-meta">Walk the harbour wall</span></span>
+      <span class="lc-tag tag-walk">10 min</span>
+    </a>
+  </div>
+
+  <h3 style="margin-top:18px">&#127829; Eat &amp; Drink</h3>
+  <div class="eat-grid">
+    <a class="eat-row" href="https://www.google.com/maps/search/Gramvousa+Restaurant+Chania+Crete" target="_blank" style="border-color:var(--gold);background:linear-gradient(135deg,#fffbeb,white);">
+      <span><span class="er-name">&#11088; Gramvousa</span><span class="er-type"> &middot; Niki's all-time favourite &middot; Must visit</span></span>
+      <span class="er-price">&euro;15&ndash;25pp</span>
+    </a>
+    <a class="eat-row" href="https://www.google.com/maps/search/Tamam+Restaurant+Chania+Old+Town" target="_blank">
+      <span><span class="er-name">Tamam</span><span class="er-type"> &middot; Cretan food, converted bathhouse &middot; 1 min walk</span></span>
+      <span class="er-price">&euro;15&ndash;20pp</span>
+    </a>
+    <a class="eat-row" href="https://www.google.com/maps/search/To+Steno+Chania" target="_blank">
+      <span><span class="er-name">To Steno</span><span class="er-type"> &middot; Best gyros in Chania, &euro;3 wraps</span></span>
+      <span class="er-price">&euro;3&ndash;8pp</span>
+    </a>
+    <a class="eat-row" href="https://www.google.com/maps/search/Bougatsa+Iordanis+Chania" target="_blank">
+      <span><span class="er-name">Bougatsa Iordanis</span><span class="er-type"> &middot; Legendary custard pie &middot; 3 min walk</span></span>
+      <span class="er-price">&euro;3.50</span>
+    </a>
+    <a class="eat-row" href="https://www.google.com/maps/search/Thalassino+Ageri+Chania" target="_blank">
+      <span><span class="er-name">Thalassino Ageri</span><span class="er-type"> &middot; Harbour seafood, romantic</span></span>
+      <span class="er-price">&euro;25&ndash;30pp</span>
+    </a>
+  </div>
+
+  <h3 style="margin-top:18px">&#128197; 4-day outline</h3>
+  <div class="card" style="font-size:0.85rem;line-height:1.9;">
+    <strong>Day 8:</strong> Arrive from Santorini (ferry+drive or flight) &rarr; pick up rental car &rarr; check in &rarr; <a href="https://www.google.com/maps/search/Venetian+Harbour+Chania+Crete" target="_blank">harbour sunset</a> &rarr; <a href="https://www.google.com/maps/search/Gramvousa+Restaurant+Chania+Crete" target="_blank">Gramvousa</a> dinner &#11088;<br>
+    <strong>Day 9:</strong> <a href="https://www.google.com/maps/search/Samaria+Gorge+Crete+Greece" target="_blank">&#129406; Samaria Gorge</a> organized day trip (all day, 16km hike, absolutely breathtaking)<br>
+    <strong>Day 10:</strong> <a href="https://www.google.com/maps/dir/Chania+Crete/Elafonissi+Beach+Crete/Falassarna+Beach+Crete/Chania+Crete" target="_blank">&#128663; Elafonissi + Falassarna</a> &mdash; pink sand morning, west-coast sunset &rarr; <a href="https://www.google.com/maps/search/Tamam+Restaurant+Chania+Old+Town" target="_blank">Tamam</a> dinner<br>
+    <strong>Day 11:</strong> <a href="https://www.google.com/maps/search/Balos+Lagoon+Crete" target="_blank">&#128663; Balos Lagoon</a> (drive + ferry or hike) <em>or</em> lazy <a href="https://www.google.com/maps/search/Nea+Chora+Beach+Chania" target="_blank">Nea Chora</a> beach day &rarr; last dinner &rarr; next AM to <a href="https://www.google.com/maps/search/Chania+International+Airport" target="_blank">CHQ airport</a>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     OPTIONAL: MILOS & SERIFOS
+     ═══════════════════════════════════════════════════════════ -->
+<div class="section">
+  <h2>&#128301; Optional Add-Ons &mdash; Milos &amp; Serifos</h2>
+  <p style="font-size:0.85rem;margin-bottom:14px;">If you have extra time (14+ days), slot these between Mykonos &amp; Santorini. Both are quieter, less touristy gems.</p>
+
+  <div class="optional">
+    <h3>&#127754; Milos &mdash; 2&ndash;3 nights</h3>
+    <p style="font-size:0.85rem;line-height:1.7;">
+      White beaches, old fishing villages, incredibly relaxing. Rent a car to explore.
+      <a href="https://www.google.com/maps/search/Sarakiniko+Beach+Milos" target="_blank">Sarakiniko Beach</a> (lunar white rock) &middot;
+      <a href="https://www.google.com/maps/search/Kleftiko+Milos" target="_blank">Kleftiko</a> (sea caves, boat trip) &middot;
+      <a href="https://www.google.com/maps/search/Plaka+Milos+Greece" target="_blank">Plaka village</a> (sunset).
+      Ferry from Mykonos ~4&ndash;5 hrs or from Athens ~7 hrs.
+    </p>
+    <p style="font-size:0.78rem;margin-top:6px;"><a href="https://www.airbnb.ca/s/Milos--Greece/homes?checkin=2026-08-27&checkout=2026-08-29&adults=2&price_max=200" target="_blank">Browse Milos Airbnbs &rarr;</a></p>
+  </div>
+
+  <div class="optional">
+    <h3>&#127965;&#65039; Serifos &mdash; 2 nights</h3>
+    <p style="font-size:0.85rem;line-height:1.7;">
+      Ultra-relaxing tiny island. Rent a car or 4-wheeler.
+      <a href="https://www.google.com/maps/search/Chora+Serifos+Greece" target="_blank">Chora</a> (hilltop village with views) &middot;
+      <a href="https://www.google.com/maps/search/Psili+Ammos+Beach+Serifos" target="_blank">Psili Ammos</a> (beautiful sandy beach) &middot;
+      <a href="https://www.google.com/maps/search/Livadi+Serifos+Greece" target="_blank">Livadi port</a>.
+      Ferry from Mykonos ~2.5 hrs.
+    </p>
+    <p style="font-size:0.78rem;margin-top:6px;"><a href="https://www.airbnb.ca/s/Serifos--Greece/homes?checkin=2026-08-27&checkout=2026-08-29&adults=2&price_max=150" target="_blank">Browse Serifos Airbnbs &rarr;</a></p>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     BUDGET
+     ═══════════════════════════════════════════════════════════ -->
+<div class="section">
+  <h2>&#128176; Budget &mdash; ~$6,500 CAD for two</h2>
+  <div class="card">
+    <div class="budget-row"><div class="budget-label">&#9992;&#65039; Flights</div><div class="budget-bar-bg"><div class="budget-bar-fill" style="width:34%;background:var(--ocean)"></div></div><div class="budget-val">$2,200</div></div>
+    <div class="budget-row"><div class="budget-label">&#9875; Ferries</div><div class="budget-bar-bg"><div class="budget-bar-fill" style="width:6%;background:#7c3aed"></div></div><div class="budget-val">$400</div></div>
+    <div class="budget-row"><div class="budget-label">&#127968; Athens</div><div class="budget-bar-bg"><div class="budget-bar-fill" style="width:4%;background:#1a472a"></div></div><div class="budget-val">$230</div></div>
+    <div class="budget-row"><div class="budget-label">&#127968; Mykonos</div><div class="budget-bar-bg"><div class="budget-bar-fill" style="width:13%;background:var(--ocean-dark)"></div></div><div class="budget-val">$856</div></div>
+    <div class="budget-row"><div class="budget-label">&#127968; Santorini</div><div class="budget-bar-bg"><div class="budget-bar-fill" style="width:9%;background:#7c3aed"></div></div><div class="budget-val">$555</div></div>
+    <div class="budget-row"><div class="budget-label">&#127968; Chania</div><div class="budget-bar-bg"><div class="budget-bar-fill" style="width:11%;background:var(--coral)"></div></div><div class="budget-val">$700</div></div>
+    <div class="budget-row"><div class="budget-label">&#127829; Food</div><div class="budget-bar-bg"><div class="budget-bar-fill" style="width:11%;background:var(--palm)"></div></div><div class="budget-val">$700</div></div>
+    <div class="budget-row"><div class="budget-label">&#128663; Cars+ATV</div><div class="budget-bar-bg"><div class="budget-bar-fill" style="width:6%;background:var(--sunset)"></div></div><div class="budget-val">$400</div></div>
+    <div class="budget-row"><div class="budget-label">&#127881; Fun</div><div class="budget-bar-bg"><div class="budget-bar-fill" style="width:5%;background:var(--gold)"></div></div><div class="budget-val">$300</div></div>
+    <div class="budget-row"><div class="budget-label">&#128178; Buffer</div><div class="budget-bar-bg"><div class="budget-bar-fill" style="width:2%;background:var(--gray)"></div></div><div class="budget-val">$160</div></div>
+    <div style="text-align:right;margin-top:10px;font-size:0.95rem;font-weight:900;color:var(--ocean-dark);">Total &asymp; $6,500 CAD</div>
+    <p style="font-size:0.78rem;color:var(--gray);margin-top:6px;">~$1,900 more than the Crete-only plan but you see <strong>4 islands</strong> over <strong>11 nights</strong>. Budget picks bring it under $6,000.</p>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     GOLDEN RULES
+     ═══════════════════════════════════════════════════════════ -->
+<div class="section">
+  <h2>&#128161; Golden Rules &mdash; from a Local</h2>
+  <div class="card">
+    <div class="rule"><span class="rule-icon">&#128274;</span><div class="rule-text"><strong>Leave your passport in the safe.</strong> Carry a photo of it on your phone. Don&rsquo;t carry lots of cash.</div></div>
+    <div class="rule"><span class="rule-icon">&#128087;</span><div class="rule-text"><strong>Dress nice everywhere.</strong> Greeks dress up even for casual dinners. No gym clothes at restaurants.</div></div>
+    <div class="rule"><span class="rule-icon">&#9875;</span><div class="rule-text"><strong>Book ferries on <a href="https://www.ferries.gr" target="_blank">ferries.gr</a>.</strong> Figure out your island order first, then plan boats/flights. Piraeus is the main port from Athens.</div></div>
+    <div class="rule"><span class="rule-icon">&#128663;</span><div class="rule-text"><strong>Rent cars in Santorini &amp; Crete.</strong> ATV in Santorini (taxis impossible). Full car in Crete (essential for gorges &amp; beaches).</div></div>
+    <div class="rule"><span class="rule-icon">&#127860;</span><div class="rule-text"><strong>Don&rsquo;t eat at the first place you see.</strong> Check TripAdvisor reviews + check the map location. Harbour-front = tourist trap.</div></div>
+    <div class="rule"><span class="rule-icon">&#128652;</span><div class="rule-text"><strong>Public transit is cheap.</strong> Metro in Athens, ferries between islands, KTEL buses in Crete. Use them.</div></div>
+    <div class="rule"><span class="rule-icon">&#127774;</span><div class="rule-text"><strong>Don&rsquo;t over-plan.</strong> Leave room to discover. Some of the best moments will be random.</div></div>
+    <div class="rule"><span class="rule-icon">&#127881;</span><div class="rule-text"><strong>Mykonos:</strong> Party at least one night. Walk-home distance from harbour is non-negotiable.</div></div>
+    <div class="rule"><span class="rule-icon">&#127751;</span><div class="rule-text"><strong>Santorini:</strong> 2 nights MAX. Fira dinner required. Beaches are volcanic (skip them or do Red Beach).</div></div>
+    <div class="rule"><span class="rule-icon">&#129406;</span><div class="rule-text"><strong>Crete:</strong> Samaria Gorge is a MUST. Elafonissi is a MUST. Rent a car. Eat everything.</div></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     BOOK EVERYTHING
+     ═══════════════════════════════════════════════════════════ -->
+<div class="section">
+  <h2>&#128279; Book Everything</h2>
+  <div class="book-grid">
+    <a class="book-btn" href="https://www.google.com/travel/flights?q=flights+from+Toronto+to+Athens+August+22+2026+one+way" target="_blank" style="background:var(--ocean)">&#9992;&#65039; Flights YYZ &rarr; ATH</a>
+    <a class="book-btn" href="https://www.google.com/travel/flights?q=flights+from+Chania+Crete+to+Toronto+September+2+2026+one+way" target="_blank" style="background:var(--ocean)">&#9992;&#65039; Flights CHQ &rarr; YYZ</a>
+    <a class="book-btn" href="https://www.ferries.gr" target="_blank" style="background:#7c3aed">&#9875; ferries.gr</a>
+    <a class="book-btn" href="https://www.airbnb.ca/rooms/54368883?check_in=2026-08-22&check_out=2026-08-24&adults=2" target="_blank" style="background:#FF385C">&#127968; Athens Airbnb</a>
+    <a class="book-btn" href="https://www.airbnb.ca/rooms/22996392?check_in=2026-08-24&check_out=2026-08-27&adults=2" target="_blank" style="background:#FF385C">&#127968; Mykonos Airbnb</a>
+    <a class="book-btn" href="https://www.airbnb.ca/rooms/675109723540652184?check_in=2026-08-27&check_out=2026-08-29&adults=2" target="_blank" style="background:#FF385C">&#127968; Santorini Airbnb</a>
+    <a class="book-btn" href="https://www.airbnb.ca/rooms/44209542?check_in=2026-08-29&check_out=2026-09-02&adults=2" target="_blank" style="background:#FF385C">&#127968; Chania Airbnb</a>
+    <a class="book-btn" href="https://www.discovercars.com/greece" target="_blank" style="background:var(--sunset)">&#128663; Rent a Car</a>
+    <a class="book-btn" href="greece-restaurants.html" style="background:var(--coral)">&#127829; Restaurant Guide</a>
+    <a class="book-btn" href="greece-airbnbs.html" style="background:#FF385C">&#127942; Browse 35 Crete Airbnbs</a>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     VS CRETE ONLY
+     ═══════════════════════════════════════════════════════════ -->
+<div class="section">
+  <h2>&#9878;&#65039; Island Hop vs Crete-Only</h2>
+  <div class="card" style="overflow-x:auto;">
+    <table style="width:100%;border-collapse:separate;border-spacing:0;font-size:0.82rem;">
+      <thead>
+        <tr>
+          <th style="padding:8px 10px;text-align:left;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.5px;background:var(--ocean-dark);color:white;border-radius:8px 0 0 0;"></th>
+          <th style="padding:8px 10px;text-align:left;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.5px;background:var(--ocean-dark);color:white;">&#127968; Crete Only</th>
+          <th style="padding:8px 10px;text-align:left;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.5px;background:var(--ocean-dark);color:white;border-radius:0 8px 0 0;">&#9875; Island Hop</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="padding:8px 10px;border-bottom:1px solid #f0f0f0;font-weight:700;">Cost</td><td style="padding:8px 10px;border-bottom:1px solid #f0f0f0;font-weight:700;color:var(--palm)">$4,600</td><td style="padding:8px 10px;border-bottom:1px solid #f0f0f0;">$6,500</td></tr>
+        <tr><td style="padding:8px 10px;border-bottom:1px solid #f0f0f0;font-weight:700;">Nights</td><td style="padding:8px 10px;border-bottom:1px solid #f0f0f0;">7</td><td style="padding:8px 10px;border-bottom:1px solid #f0f0f0;font-weight:700;color:var(--palm)">11</td></tr>
+        <tr><td style="padding:8px 10px;border-bottom:1px solid #f0f0f0;font-weight:700;">Islands</td><td style="padding:8px 10px;border-bottom:1px solid #f0f0f0;">1 (Crete)</td><td style="padding:8px 10px;border-bottom:1px solid #f0f0f0;font-weight:700;color:var(--palm)">4</td></tr>
+        <tr><td style="padding:8px 10px;border-bottom:1px solid #f0f0f0;font-weight:700;">Nightlife</td><td style="padding:8px 10px;border-bottom:1px solid #f0f0f0;">Chill bars</td><td style="padding:8px 10px;border-bottom:1px solid #f0f0f0;font-weight:700;color:var(--palm)">Mykonos clubs!</td></tr>
+        <tr><td style="padding:8px 10px;border-bottom:1px solid #f0f0f0;font-weight:700;">Beaches</td><td style="padding:8px 10px;border-bottom:1px solid #f0f0f0;font-weight:700;color:var(--palm)">World-class</td><td style="padding:8px 10px;border-bottom:1px solid #f0f0f0;">Mixed (great in Crete)</td></tr>
+        <tr><td style="padding:8px 10px;border-bottom:1px solid #f0f0f0;font-weight:700;">Relaxation</td><td style="padding:8px 10px;border-bottom:1px solid #f0f0f0;font-weight:700;color:var(--palm)">Very chill</td><td style="padding:8px 10px;border-bottom:1px solid #f0f0f0;">More hectic</td></tr>
+        <tr><td style="padding:8px 10px;border-bottom:1px solid #f0f0f0;font-weight:700;">Iconic Views</td><td style="padding:8px 10px;border-bottom:1px solid #f0f0f0;">Venetian harbour</td><td style="padding:8px 10px;border-bottom:1px solid #f0f0f0;font-weight:700;color:var(--palm)">Oia + Mykonos + harbour</td></tr>
+        <tr><td style="padding:8px 10px;font-weight:700;">Days Off Work</td><td style="padding:8px 10px;font-weight:700;color:var(--palm)">5</td><td style="padding:8px 10px;">7&ndash;8</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div style="background:#ede9fe;border-radius:10px;padding:12px 16px;margin-top:10px;font-size:0.85rem;border-left:4px solid #7c3aed;">
+    <strong>Bottom line:</strong> Island hop if you can take 7&ndash;8 PTO days and have ~$6,500. It&rsquo;s the trip of a lifetime. If budget or time is tight, the <a href="greece.html"><strong>Crete-only plan</strong></a> is still incredible.
+  </div>
+</div>
+
+</div>
+
+<footer>
+  <a href="greece.html">Crete itinerary</a> &middot;
+  <a href="compare.html">Compare all trips</a> &middot;
+  <a href="greece-flights.html">Greece flights</a> &middot;
+  <a href="greece-restaurants.html">Restaurants</a> &middot;
+  <a href="greece-airbnbs.html">Browse Airbnbs</a> &middot;
+  <a href="best-trip.html">Italy option</a>
+</footer>
+
+<script src="nav.js"></script>
+</body>
+</html>
