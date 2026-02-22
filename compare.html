@@ -13,101 +13,78 @@
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { font-family: 'Inter', sans-serif; background: var(--light); color: var(--dark); line-height: 1.7; }
-
+  a { color: var(--ocean); text-decoration: none; font-weight: 600; }
+  a:hover { text-decoration: underline; }
   .hero { background: linear-gradient(135deg, #1a472a 0%, #023e8a 50%, var(--ocean-light) 100%); color: white; padding: 60px 24px 50px; text-align: center; }
   .hero h1 { font-size: clamp(2rem, 5vw, 2.8rem); font-weight: 900; margin-bottom: 8px; }
   .hero p { font-size: 1rem; opacity: 0.85; max-width: 640px; margin: 0 auto; }
-
   .container { max-width: 920px; margin: 0 auto; padding: 0 20px; }
-  .section { padding: 32px 0; }
-  .section h2 { font-size: 1.35rem; font-weight: 800; margin-bottom: 4px; color: var(--ocean-dark); }
-  .section .sub { color: var(--gray); font-size: 0.85rem; margin-bottom: 16px; }
+  .section { padding: 28px 0; }
+  .section h2 { font-size: 1.35rem; font-weight: 800; margin-bottom: 12px; color: var(--ocean-dark); }
 
-  /* Path cards */
-  .path { background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); margin-bottom: 28px; }
+  .path { background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); margin-bottom: 24px; }
   .path-header { padding: 20px 24px 0; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
   .path-badge { font-size: 0.7rem; font-weight: 800; padding: 4px 12px; border-radius: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
   .path-a .path-badge { background: #dcfce7; color: var(--palm); }
   .path-b .path-badge { background: #dbeafe; color: var(--ocean-dark); }
   .path-c .path-badge { background: #fef3c7; color: #92400e; }
-  .path-title { font-size: 1.3rem; font-weight: 900; }
+  .path-title { font-size: 1.2rem; font-weight: 900; }
   .path-dates { color: var(--gray); font-size: 0.82rem; font-weight: 600; margin-left: auto; }
 
-  /* Photo grid */
   .photo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin: 16px 0 0; }
-  .photo-grid.triple { grid-template-columns: 1fr 1fr 1fr; }
-  .photo-grid img { width: 100%; height: 200px; object-fit: cover; display: block; }
-  .photo-grid .photo-main { grid-column: 1 / -1; height: 280px; }
-  .photo-grid .photo-label { position: absolute; bottom: 8px; left: 8px; background: rgba(0,0,0,0.7); color: white; font-size: 0.68rem; padding: 3px 10px; border-radius: 6px; font-weight: 700; }
   .photo-wrap { position: relative; overflow: hidden; }
+  .photo-wrap img { width: 100%; height: 200px; object-fit: cover; display: block; }
+  .photo-label { position: absolute; bottom: 8px; left: 8px; background: rgba(0,0,0,0.7); color: white; font-size: 0.68rem; padding: 3px 10px; border-radius: 6px; font-weight: 700; }
 
   .path-body { padding: 20px 24px; }
-  .path-body h3 { font-size: 1rem; font-weight: 800; margin-bottom: 2px; }
-  .path-body .airbnb-info { display: flex; gap: 16px; flex-wrap: wrap; font-size: 0.85rem; margin: 8px 0 14px; }
-  .path-body .airbnb-info .ai-item { display: flex; align-items: center; gap: 4px; }
-  .path-body .airbnb-info .star { color: var(--coral); font-weight: 700; }
-  .path-body .airbnb-info .price { color: var(--ocean-dark); font-weight: 800; }
+  .path-body h3 { font-size: 0.95rem; font-weight: 800; margin: 14px 0 6px; }
+  .path-body h3:first-child { margin-top: 0; }
 
-  .path-body .desc { font-size: 0.85rem; color: #444; margin-bottom: 14px; }
-  .path-body .desc strong { font-weight: 700; }
+  .stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 8px; margin: 12px 0; }
+  .stat-card { background: var(--light); border-radius: 10px; padding: 10px; text-align: center; }
+  .stat-card .sc-num { font-size: 1rem; font-weight: 900; color: var(--ocean-dark); }
+  .stat-card .sc-label { font-size: 0.65rem; color: var(--gray); text-transform: uppercase; letter-spacing: 0.3px; font-weight: 700; }
 
-  /* Stats row */
-  .stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; margin: 14px 0; }
-  .stat-card { background: var(--light); border-radius: 10px; padding: 12px; text-align: center; }
-  .stat-card .sc-num { font-size: 1.1rem; font-weight: 900; color: var(--ocean-dark); }
-  .stat-card .sc-label { font-size: 0.68rem; color: var(--gray); text-transform: uppercase; letter-spacing: 0.3px; font-weight: 700; }
+  .btn-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; padding-top: 14px; border-top: 1px solid #f0f0f0; }
+  .btn { display: inline-block; padding: 10px 16px; border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 0.82rem; color: white; transition: all 0.15s; }
+  .btn:hover { transform: translateY(-1px); filter: brightness(1.1); text-decoration: none; }
 
-  /* Beach section */
-  .beach-list { list-style: none; padding: 0; margin: 10px 0; }
-  .beach-list li { font-size: 0.85rem; padding: 5px 0; border-bottom: 1px solid #f0f0f0; }
-  .beach-list li:last-child { border-bottom: none; }
-  .beach-list .beach-name { font-weight: 700; }
-  .beach-list .beach-note { color: var(--gray); font-size: 0.78rem; }
+  .airbnb-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 10px 0; }
+  .ab-card { background: var(--light); border-radius: 10px; padding: 12px; }
+  .ab-card .ab-name { font-weight: 800; font-size: 0.85rem; }
+  .ab-card .ab-meta { font-size: 0.78rem; color: var(--gray); margin-top: 2px; }
+  .ab-card .ab-price { font-weight: 800; color: var(--ocean-dark); font-size: 0.85rem; margin-top: 4px; }
 
-  /* Buttons */
-  .path-buttons { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; padding-top: 16px; border-top: 1px solid #f0f0f0; }
-  .btn { display: inline-block; padding: 10px 18px; border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 0.82rem; color: white; transition: all 0.2s; }
-  .btn:hover { transform: translateY(-1px); filter: brightness(1.1); }
-  .btn-airbnb { background: linear-gradient(135deg, #FF385C, #e31c5f); }
-  .btn-plan { background: var(--ocean); }
-  .btn-flights { background: var(--palm); }
-
-  .tip { border-radius: 10px; padding: 12px 14px; font-size: 0.82rem; margin: 10px 0; line-height: 1.5; }
-  .tip-money { background: #dcfce7; border-left: 4px solid var(--palm); }
-  .tip-warn { background: #fef3c7; border-left: 4px solid var(--gold); }
-  .tip-pro { background: #dbeafe; border-left: 4px solid var(--ocean); }
-  .tip strong { font-weight: 700; }
-
-  /* Comparison table */
-  .compare-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 0.82rem; margin: 14px 0; }
-  .compare-table thead th { background: var(--ocean-dark); color: white; padding: 10px 12px; text-align: left; font-weight: 700; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.5px; }
+  .compare-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 0.8rem; margin: 14px 0; }
+  .compare-table thead th { background: var(--ocean-dark); color: white; padding: 10px 10px; text-align: left; font-weight: 700; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.5px; }
   .compare-table thead th:first-child { border-radius: 10px 0 0 0; }
   .compare-table thead th:last-child { border-radius: 0 10px 0 0; }
-  .compare-table tbody td { padding: 10px 12px; border-bottom: 1px solid #f0f0f0; vertical-align: middle; }
-  .compare-table tbody tr:last-child td { border-bottom: none; }
+  .compare-table tbody td { padding: 8px 10px; border-bottom: 1px solid #f0f0f0; vertical-align: middle; }
   .compare-table .winner { font-weight: 700; color: var(--palm); }
-  .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 10px; }
+  .table-wrap { overflow-x: auto; border-radius: 10px; }
 
-  /* Split trip timeline */
   .timeline { display: flex; gap: 0; margin: 16px 0; border-radius: 10px; overflow: hidden; }
-  .timeline .tl-seg { padding: 14px 16px; color: white; font-size: 0.82rem; text-align: center; }
-  .timeline .tl-seg .tl-days { font-weight: 900; font-size: 1rem; }
-  .timeline .tl-seg .tl-loc { font-size: 0.72rem; opacity: 0.85; }
+  .tl-seg { padding: 12px 14px; color: white; font-size: 0.8rem; text-align: center; }
+  .tl-seg .tl-days { font-weight: 900; font-size: 0.95rem; }
+  .tl-seg .tl-loc { font-size: 0.7rem; opacity: 0.85; }
   .tl-italy { background: linear-gradient(135deg, #1a472a, #023e8a); flex: 5; }
-  .tl-flight { background: var(--gray); flex: 0.5; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
+  .tl-flight { background: var(--gray); flex: 0.5; display: flex; align-items: center; justify-content: center; font-size: 1rem; }
   .tl-greece { background: linear-gradient(135deg, #023e8a, #00b4d8); flex: 7; }
+
+  .verdict-card { background: white; border-radius: 12px; padding: 16px 20px; box-shadow: 0 3px 12px rgba(0,0,0,0.05); margin-bottom: 10px; border-left: 4px solid; display: flex; align-items: center; gap: 12px; }
+  .verdict-card .vc-text { font-size: 0.88rem; }
+  .verdict-card .vc-text strong { font-weight: 800; }
 
   footer { background: var(--dark); color: rgba(255,255,255,0.6); text-align: center; padding: 24px 20px; font-size: 0.78rem; margin-top: 20px; }
   footer a { color: var(--ocean-light); }
 
   @media (max-width: 640px) {
     .hero h1 { font-size: 1.7rem; }
-    .photo-grid img { height: 140px; }
-    .photo-grid .photo-main { height: 200px; }
-    .path-body { padding: 16px; }
+    .photo-wrap img { height: 150px; }
     .path-dates { margin-left: 0; }
+    .airbnb-pair { grid-template-columns: 1fr; }
     .timeline { flex-direction: column; }
-    .timeline .tl-seg, .timeline .tl-flight { flex: none; }
+    .tl-seg, .tl-flight { flex: none; }
   }
 </style>
 </head>
@@ -115,343 +92,231 @@
 
 <div class="hero">
   <h1><img src="https://flagcdn.com/w40/it.png" alt="" style="height:0.85em;vertical-align:-0.1em"> vs <img src="https://flagcdn.com/w40/gr.png" alt="" style="height:0.85em;vertical-align:-0.1em"> Trip Showdown</h1>
-  <p>Three ways to spend summer 2026 &mdash; with real Airbnb listings, real photos, and honest budgets</p>
+  <p>3 options &mdash; real Airbnbs, real photos, honest budgets</p>
 </div>
 
 <div class="container">
 
-<!-- ============================================================ -->
-<!-- PATH A: ITALY ONLY -->
-<!-- ============================================================ -->
+<!-- PATH A: ITALY -->
 <div class="section">
 <div class="path path-a">
   <div class="path-header">
     <span class="path-badge">Path A</span>
-    <span class="path-title"><img src="https://flagcdn.com/w20/it.png" alt="" style="height:0.85em;vertical-align:-0.1em"> Amalfi Coast Only</span>
-    <span class="path-dates">Aug 22 &ndash; 29 &middot; 7 nights</span>
+    <span class="path-title"><img src="https://flagcdn.com/w20/it.png" alt="" style="height:0.85em"> Amalfi Coast</span>
+    <span class="path-dates">7 nights &middot; Aug 22&ndash;29</span>
   </div>
-
   <div class="photo-grid">
-    <div class="photo-wrap photo-main">
-      <img src="https://a0.muscache.com/im/pictures/hosting/Hosting-32588731/original/d5f0a59a-9621-439f-a413-086d1c42b97f.jpeg" alt="Windows on Heaven — sea view from terrace">
-      <span class="photo-label">Windows on Heaven &mdash; Scala, Amalfi Coast</span>
+    <div class="photo-wrap" style="grid-column:1/-1">
+      <img src="https://a0.muscache.com/im/pictures/hosting/Hosting-32588731/original/d5f0a59a-9621-439f-a413-086d1c42b97f.jpeg" alt="Windows on Heaven" style="height:260px">
+      <span class="photo-label">Windows on Heaven &mdash; Scala</span>
     </div>
-    <div class="photo-wrap">
-      <img src="https://a0.muscache.com/im/pictures/miso/Hosting-32588731/original/3c71f921-e500-419f-a552-d826496222de.jpeg" alt="Windows on Heaven interior">
-    </div>
-    <div class="photo-wrap">
-      <img src="https://a0.muscache.com/im/pictures/miso/Hosting-32588731/original/ba29b4e4-4315-4d6a-93b5-7c31751bcf76.jpeg" alt="Windows on Heaven bedroom view">
-    </div>
+    <div class="photo-wrap"><img src="https://a0.muscache.com/im/pictures/miso/Hosting-32588731/original/3c71f921-e500-419f-a552-d826496222de.jpeg" alt="interior"></div>
+    <div class="photo-wrap"><img src="https://a0.muscache.com/im/pictures/miso/Hosting-32588731/original/ba29b4e4-4315-4d6a-93b5-7c31751bcf76.jpeg" alt="bedroom"></div>
   </div>
-
   <div class="path-body">
-    <h3>Windows on Heaven &mdash; Sea View House</h3>
-    <div class="airbnb-info">
-      <span class="ai-item"><span class="star">&#9733; 4.98</span> (445 reviews)</span>
-      <span class="ai-item">Top Guest Favourite</span>
-      <span class="ai-item">Superhost &middot; 13 yrs</span>
-      <span class="ai-item price">~$175 CAD/night &middot; $1,225 total</span>
-    </div>
-    <p class="desc">
-      Independent apartment in <strong>Scala</strong>, the oldest town on the Amalfi Coast. Frontal sea view from every room &mdash; shower, bed, garden terrace. Homemade breakfast by Cristina. 2 bedrooms, private bathroom, kitchen. 20-min walk to Ravello, 15-min bus to Amalfi. Two friendly labradors (Kratos &amp; S&agrave;ga). <strong>The view is genuinely insane.</strong>
-    </p>
+    <h3><a href="https://www.airbnb.ca/rooms/32588731?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank">Windows on Heaven</a> &mdash; &#9733; 4.98 (445 reviews)</h3>
+    <p style="font-size:0.85rem;color:#555;margin-bottom:10px;">Hilltop sea-view house in <a href="https://www.google.com/maps/place/Scala+SA+Italy" target="_blank">Scala</a>. 10 min walk to <a href="https://www.google.com/maps/place/Ravello+SA+Italy" target="_blank">Ravello</a>, 15 min bus to <a href="https://www.google.com/maps/place/Amalfi+SA+Italy" target="_blank">Amalfi</a>. Homemade breakfast. <strong>~$175 CAD/night.</strong></p>
 
     <div class="stats-row">
       <div class="stat-card"><div class="sc-num">$5,300</div><div class="sc-label">Total (2 ppl)</div></div>
-      <div class="stat-card"><div class="sc-num">7</div><div class="sc-label">Nights</div></div>
-      <div class="stat-card"><div class="sc-num">2&ndash;3</div><div class="sc-label">Beach Days</div></div>
       <div class="stat-card"><div class="sc-num">$1,800</div><div class="sc-label">Flights RT</div></div>
+      <div class="stat-card"><div class="sc-num">2&ndash;3</div><div class="sc-label">Beach Days</div></div>
+      <div class="stat-card"><div class="sc-num">No</div><div class="sc-label">Delivery apps</div></div>
     </div>
 
-    <h3 style="margin-top:16px">&#127754; Beaches</h3>
-    <ul class="beach-list">
-      <li><span class="beach-name">Atrani Beach</span> &mdash; closest to Scala, tiny &amp; charming, 15 min bus <span class="beach-note">(local favourite)</span></li>
-      <li><span class="beach-name">Marina Grande, Amalfi</span> &mdash; main town beach, easy access, good facilities <span class="beach-note">(touristy but fun)</span></li>
-      <li><span class="beach-name">Positano (Spiaggia Grande)</span> &mdash; the iconic shot, expensive sunbeds, day trip <span class="beach-note">(worth one visit)</span></li>
-      <li><span class="beach-name">Erchie</span> &mdash; hidden cove, less crowded, bus from Amalfi <span class="beach-note">(local secret)</span></li>
-    </ul>
-    <div class="tip tip-pro"><strong>Beach reality:</strong> Amalfi Coast beaches are small, rocky, and often have paid sunbeds (&euro;15&ndash;25/person). The coast is more about cliffs, villages, and views than sprawling sandy beaches. Beautiful, but not a &ldquo;beach trip&rdquo; destination.</div>
+    <h3>&#127754; Beaches</h3>
+    <p style="font-size:0.82rem;color:#555;">Small, rocky, paid sunbeds &euro;15&ndash;25/pp. Beautiful but <strong>not a beach destination</strong>.</p>
+    <p style="font-size:0.82rem;margin-top:4px;"><a href="https://www.google.com/maps/place/Atrani+Beach+Italy" target="_blank">Atrani</a> &middot; <a href="https://www.google.com/maps/place/Marina+Grande+Amalfi" target="_blank">Amalfi</a> &middot; <a href="https://www.google.com/maps/place/Spiaggia+Grande+Positano" target="_blank">Positano</a> &middot; <a href="https://www.google.com/maps/place/Erchie+Beach+Italy" target="_blank">Erchie</a></p>
 
-    <h3 style="margin-top:16px">&#127775; Big Highlights</h3>
-    <p class="desc">Path of the Gods hike &middot; Ravello &amp; Villa Cimbrone gardens &middot; Pompeii day trip &middot; Limoncello everywhere &middot; Ferry to Capri &middot; Italian food at its peak &middot; That terrace view every single night</p>
+    <h3>&#127775; Highlights</h3>
+    <p style="font-size:0.82rem;"><a href="https://www.google.com/maps/place/Sentiero+degli+Dei+Amalfi" target="_blank">Path of the Gods</a> &middot; <a href="https://www.google.com/maps/place/Villa+Cimbrone+Ravello" target="_blank">Villa Cimbrone</a> &middot; <a href="https://www.google.com/maps/place/Pompeii+Italy" target="_blank">Pompeii</a> &middot; <a href="https://www.google.com/maps/place/Capri+Italy" target="_blank">Capri</a> &middot; That terrace view every night</p>
 
-    <div class="path-buttons">
-      <a href="https://www.airbnb.ca/rooms/32588731" target="_blank" class="btn btn-airbnb">View on Airbnb &rarr;</a>
-      <a href="best-trip.html" class="btn btn-plan">Full Itinerary &rarr;</a>
-      <a href="flights.html" class="btn btn-flights">Flight Options &rarr;</a>
+    <div class="btn-row">
+      <a class="btn" href="https://www.airbnb.ca/rooms/32588731?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank" style="background:#FF385C">View Airbnb &rarr;</a>
+      <a class="btn" href="best-trip.html" style="background:var(--ocean)">Full Itinerary &rarr;</a>
+      <a class="btn" href="flights.html" style="background:var(--palm)">Flights &rarr;</a>
     </div>
   </div>
 </div>
 </div>
 
-<!-- ============================================================ -->
-<!-- PATH B: GREECE ONLY -->
-<!-- ============================================================ -->
+<!-- PATH B: GREECE (2 STOPS) -->
 <div class="section" style="padding-top:0">
 <div class="path path-b">
   <div class="path-header">
     <span class="path-badge">Path B</span>
-    <span class="path-title"><img src="https://flagcdn.com/w20/gr.png" alt="" style="height:0.85em;vertical-align:-0.1em"> Crete / Chania Only</span>
-    <span class="path-dates">Aug 22 &ndash; 29 &middot; 7 nights</span>
+    <span class="path-title"><img src="https://flagcdn.com/w20/gr.png" alt="" style="height:0.85em"> Crete &mdash; Chania + Rethymno</span>
+    <span class="path-dates">7 nights &middot; Aug 22&ndash;29</span>
   </div>
-
-  <!-- Airbnb pick 1: Sunny Splatzia -->
   <div class="photo-grid">
-    <div class="photo-wrap photo-main">
-      <img src="https://a0.muscache.com/im/pictures/airflow/Hosting-44209542/original/38ef1c98-c39e-4e77-8deb-bbc4d9422ade.jpg" alt="Sunny Splatzia apartment — Chania Old Town">
-      <span class="photo-label">Sunny Splatzia &mdash; Chania Old Town, steps from Venetian Port</span>
+    <div class="photo-wrap">
+      <img src="https://a0.muscache.com/im/pictures/airflow/Hosting-44209542/original/38ef1c98-c39e-4e77-8deb-bbc4d9422ade.jpg" alt="Sunny Splatzia Chania">
+      <span class="photo-label">Chania &mdash; 4 nights</span>
     </div>
     <div class="photo-wrap">
-      <img src="https://a0.muscache.com/im/pictures/airflow/Hosting-44209542/original/380d0413-70af-499f-bd4b-c5280b78a2f1.jpg" alt="Sunny Splatzia bedroom">
-    </div>
-    <div class="photo-wrap">
-      <img src="https://a0.muscache.com/im/pictures/airflow/Hosting-44209542/original/0b13a7b5-66c3-4ae3-a34d-2fffb3788697.jpg" alt="Sunny Splatzia living area">
+      <img src="https://a0.muscache.com/im/pictures/hosting/Hosting-34563447/original/4a4d99f6-2bce-404e-a917-b8dd82628912.jpeg" alt="Nikis Home Rethymno">
+      <span class="photo-label">Rethymno &mdash; 3 nights</span>
     </div>
   </div>
-
   <div class="path-body">
-    <h3>&#9312; Sunny Splatzia Apt &mdash; Old Town / Venetian Port</h3>
-    <div class="airbnb-info">
-      <span class="ai-item"><span class="star">&#9733; 4.96</span> (93 reviews)</span>
-      <span class="ai-item">Top Guest Favourite</span>
-      <span class="ai-item">Hosted by Eva &amp; Raya &middot; 6 yrs</span>
-      <span class="ai-item price">$1,340 CAD / 7 nights</span>
-    </div>
-    <p class="desc">
-      Heart of Splatzia Quarter, steps from the Venetian port entrance. Two balconies, each overlooking a different Ottoman minaret. Fully equipped kitchen, A/C, Smart TV. Self check-in via lockbox. <strong>&ldquo;Perfect place! We felt like it was our home for the week.&rdquo;</strong> &mdash; Heather, Sept 2025. Beach access, walkable to everything.
-    </p>
-
-    <!-- Alternate option 2 -->
-    <div style="margin:16px 0;padding:16px;background:var(--light);border-radius:12px;border:1px solid #e5e7eb;">
-      <h3 style="font-size:0.92rem">&#9313; Backup: Central Flat Near the Beach</h3>
-      <div style="display:flex;gap:8px;margin:8px 0;">
-        <img src="https://a0.muscache.com/im/pictures/miso/Hosting-34209650/original/7c741f1c-d3eb-47a2-aac8-73a5fc62fc3a.jpeg" alt="Central Flat Near the Beach" style="width:180px;height:120px;object-fit:cover;border-radius:8px;">
-        <div>
-          <div class="airbnb-info" style="margin:0 0 6px">
-            <span class="ai-item"><span class="star">&#9733; 4.97</span> (172 reviews)</span>
-            <span class="ai-item">Top Guest Favourite</span>
-            <span class="ai-item price">$1,259 CAD / 7 nights</span>
-          </div>
-          <p style="font-size:0.82rem;color:#555;margin:0;">1 bed, near Nea Chora beach. Free cancellation. &ldquo;Everything is walkable&rdquo; vibe. $80 cheaper than Splatzia option. <a href="https://www.airbnb.ca/rooms/34209650" target="_blank" style="color:var(--ocean);font-weight:700;">View on Airbnb &rarr;</a></p>
-        </div>
+    <h3>2 Airbnbs, 2 beach towns</h3>
+    <div class="airbnb-pair">
+      <div class="ab-card">
+        <div class="ab-name"><a href="https://www.airbnb.ca/rooms/44209542?check_in=2026-08-22&check_out=2026-08-26&adults=2" target="_blank">Sunny Splatzia</a></div>
+        <div class="ab-meta">&#9733; 4.96 (93 reviews) &middot; <a href="https://www.google.com/maps/place/Splatzia+Quarter+Chania+Crete" target="_blank">Chania Old Town</a></div>
+        <div class="ab-price">4 nights &middot; ~$766</div>
       </div>
-    </div>
-
-    <!-- Alternate option 3 -->
-    <div style="margin:0 0 16px;padding:16px;background:var(--light);border-radius:12px;border:1px solid #e5e7eb;">
-      <h3 style="font-size:0.92rem">&#9314; Budget pick: BACALICO Sweet Home &mdash; Venetian Old Town</h3>
-      <div style="display:flex;gap:8px;margin:8px 0;">
-        <img src="https://a0.muscache.com/im/pictures/3e3b56b2-70a7-4bfa-9afc-f6fd8989096d.jpg" alt="BACALICO Sweet Home" style="width:180px;height:120px;object-fit:cover;border-radius:8px;">
-        <div>
-          <div class="airbnb-info" style="margin:0 0 6px">
-            <span class="ai-item"><span class="star">&#9733; 4.89</span> (62 reviews)</span>
-            <span class="ai-item">Free cancellation</span>
-            <span class="ai-item price">$977 CAD / 7 nights</span>
-          </div>
-          <p style="font-size:0.82rem;color:#555;margin:0;">Renovated Venetian home, 2 single beds, in the Old Town. Cheapest option with great reviews. Solid budget choice. <a href="https://www.airbnb.ca/rooms/35619536" target="_blank" style="color:var(--ocean);font-weight:700;">View on Airbnb &rarr;</a></p>
-        </div>
+      <div class="ab-card">
+        <div class="ab-name"><a href="https://www.airbnb.ca/rooms/34563447?check_in=2026-08-26&check_out=2026-08-29&adults=2" target="_blank">Nikis Home</a></div>
+        <div class="ab-meta">&#9733; 4.92 (195 reviews) &middot; <a href="https://www.google.com/maps/place/Rethymno+Old+Town+Crete" target="_blank">Rethymno Old Town</a></div>
+        <div class="ab-price">3 nights &middot; ~$453</div>
       </div>
     </div>
 
     <div class="stats-row">
-      <div class="stat-card"><div class="sc-num">$4,800</div><div class="sc-label">Total (2 ppl)</div></div>
-      <div class="stat-card"><div class="sc-num">7</div><div class="sc-label">Nights</div></div>
-      <div class="stat-card"><div class="sc-num">3&ndash;4</div><div class="sc-label">Beach Days</div></div>
+      <div class="stat-card"><div class="sc-num">$4,600</div><div class="sc-label">Total (2 ppl)</div></div>
       <div class="stat-card"><div class="sc-num">$1,950</div><div class="sc-label">Flights RT</div></div>
+      <div class="stat-card"><div class="sc-num">3&ndash;4</div><div class="sc-label">Beach Days</div></div>
+      <div class="stat-card"><div class="sc-num">Yes</div><div class="sc-label">Delivery apps</div></div>
     </div>
 
-    <h3 style="margin-top:16px">&#127754; Beaches</h3>
-    <ul class="beach-list">
-      <li><span class="beach-name">Balos Lagoon</span> &mdash; turquoise Caribbean-like water, pink sand, #1 beach in Greece <span class="beach-note">(bucket list &mdash; Day 3)</span></li>
-      <li><span class="beach-name">Elafonissi</span> &mdash; pink sand, knee-deep warm lagoon, feels tropical <span class="beach-note">(Day 5)</span></li>
-      <li><span class="beach-name">Seitan Limania</span> &mdash; insane turquoise cove cut into cliffs, short hike down <span class="beach-note">(Day 7)</span></li>
-      <li><span class="beach-name">Nea Chora</span> &mdash; local town beach, 5-min walk from Old Town, no fuss <span class="beach-note">(anytime)</span></li>
-      <li><span class="beach-name">Falassarna</span> &mdash; wide golden sand, epic sunsets, less crowded <span class="beach-note">(combine with Elafonissi)</span></li>
-    </ul>
-    <div class="tip tip-pro"><strong>Beach reality:</strong> Crete has world-class beaches &mdash; wide, sandy, warm, free. Balos and Elafonissi regularly rank in Europe&rsquo;s top 10. You don&rsquo;t need to pay &euro;25 for a sunbed here. Bring a towel and you&rsquo;re set. <strong>This is a beach destination.</strong></div>
+    <h3>&#127754; Beaches</h3>
+    <p style="font-size:0.82rem;color:#555;">World-class sandy beaches, mostly free. <strong>This is a beach destination.</strong></p>
+    <p style="font-size:0.82rem;margin-top:4px;"><a href="https://www.google.com/maps/place/Balos+Lagoon+Crete" target="_blank">Balos Lagoon</a> &middot; <a href="https://www.google.com/maps/place/Elafonissi+Beach+Crete" target="_blank">Elafonissi</a> &middot; <a href="https://www.google.com/maps/place/Falassarna+Beach+Crete" target="_blank">Falassarna</a> &middot; <a href="https://www.google.com/maps/place/Preveli+Beach+Crete" target="_blank">Preveli</a> &middot; <a href="https://www.google.com/maps/place/Nea+Chora+Beach+Chania" target="_blank">Nea Chora</a> &middot; <a href="https://www.google.com/maps/place/Rethymno+Beach" target="_blank">Rethymno Beach</a></p>
 
-    <h3 style="margin-top:16px">&#127775; Big Highlights</h3>
-    <p class="desc">Samaria Gorge (18km hike, Europe&rsquo;s longest) &middot; Venetian Harbour &amp; lighthouse walks &middot; Insane Cretan food (50+ amazing restaurants) &middot; Balos sunset from the cliffs &middot; Rethymno day trip &middot; Lake Kournas &middot; Free raki with every meal</p>
+    <h3>&#127775; Highlights</h3>
+    <p style="font-size:0.82rem;"><a href="https://www.google.com/maps/place/Venetian+Harbour+Chania" target="_blank">Venetian Harbour</a> &middot; <a href="https://www.google.com/maps/place/Fortezza+of+Rethymno" target="_blank">Fortezza Castle</a> &middot; Cretan food (&euro;3 gyros!) &middot; BEAT rideshare &middot; efood/Wolt delivery &middot; Free raki with every meal</p>
 
-    <div class="path-buttons">
-      <a href="https://www.airbnb.ca/rooms/44209542" target="_blank" class="btn btn-airbnb">View Splatzia on Airbnb &rarr;</a>
-      <a href="greece.html" class="btn btn-plan">Full Itinerary &rarr;</a>
-      <a href="greece-flights.html" class="btn btn-flights">Flight Options &rarr;</a>
+    <div class="btn-row">
+      <a class="btn" href="https://www.airbnb.ca/rooms/44209542?check_in=2026-08-22&check_out=2026-08-26&adults=2" target="_blank" style="background:#FF385C">Chania Airbnb &rarr;</a>
+      <a class="btn" href="https://www.airbnb.ca/rooms/34563447?check_in=2026-08-26&check_out=2026-08-29&adults=2" target="_blank" style="background:#FF385C">Rethymno Airbnb &rarr;</a>
+      <a class="btn" href="greece.html" style="background:var(--ocean)">Full Itinerary &rarr;</a>
+      <a class="btn" href="greece-flights.html" style="background:var(--palm)">Flights &rarr;</a>
     </div>
   </div>
 </div>
 </div>
 
-<!-- ============================================================ -->
-<!-- PATH C: SPLIT TRIP -->
-<!-- ============================================================ -->
+<!-- PATH C: SPLIT -->
 <div class="section" style="padding-top:0">
 <div class="path path-c">
   <div class="path-header">
-    <span class="path-badge">Path C &mdash; Best of Both Worlds</span>
-    <span class="path-title"><img src="https://flagcdn.com/w20/it.png" alt="" style="height:0.85em;vertical-align:-0.1em"> Italy + <img src="https://flagcdn.com/w20/gr.png" alt="" style="height:0.85em;vertical-align:-0.1em"> Greece</span>
-    <span class="path-dates">Aug 22 &ndash; Sept 3 &middot; 12 nights</span>
+    <span class="path-badge">Path C</span>
+    <span class="path-title"><img src="https://flagcdn.com/w20/it.png" alt="" style="height:0.85em"> Italy + <img src="https://flagcdn.com/w20/gr.png" alt="" style="height:0.85em"> Greece</span>
+    <span class="path-dates">12 nights &middot; Aug 22 &ndash; Sep 3</span>
   </div>
-
-  <!-- Timeline bar -->
   <div style="padding:16px 24px 0;">
     <div class="timeline">
-      <div class="tl-seg tl-italy"><div class="tl-days">5 nights</div><div class="tl-loc">Scala, Amalfi Coast</div>Aug 22&ndash;27</div>
+      <div class="tl-seg tl-italy"><div class="tl-days">5 nights</div><div class="tl-loc">Scala, Amalfi</div></div>
       <div class="tl-seg tl-flight">&#9992;&#65039;</div>
-      <div class="tl-seg tl-greece"><div class="tl-days">7 nights</div><div class="tl-loc">Chania, Crete</div>Aug 27&ndash;Sept 3</div>
+      <div class="tl-seg tl-greece"><div class="tl-days">7 nights</div><div class="tl-loc">Chania + Rethymno</div></div>
     </div>
   </div>
-
-  <!-- Two Airbnb cards side by side -->
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;margin:4px 0 0;">
+  <div class="photo-grid">
     <div class="photo-wrap">
-      <img src="https://a0.muscache.com/im/pictures/hosting/Hosting-32588731/original/d5f0a59a-9621-439f-a413-086d1c42b97f.jpeg" alt="Windows on Heaven" style="width:100%;height:220px;object-fit:cover;display:block;">
+      <img src="https://a0.muscache.com/im/pictures/hosting/Hosting-32588731/original/d5f0a59a-9621-439f-a413-086d1c42b97f.jpeg" alt="Windows on Heaven">
       <span class="photo-label">Scala &mdash; 5 nights</span>
     </div>
     <div class="photo-wrap">
-      <img src="https://a0.muscache.com/im/pictures/airflow/Hosting-44209542/original/38ef1c98-c39e-4e77-8deb-bbc4d9422ade.jpg" alt="Sunny Splatzia" style="width:100%;height:220px;object-fit:cover;display:block;">
-      <span class="photo-label">Chania &mdash; 7 nights</span>
+      <img src="https://a0.muscache.com/im/pictures/airflow/Hosting-44209542/original/38ef1c98-c39e-4e77-8deb-bbc4d9422ade.jpg" alt="Sunny Splatzia">
+      <span class="photo-label">Chania + Rethymno &mdash; 7 nights</span>
     </div>
   </div>
-
   <div class="path-body">
-    <h3>The Split: 5 Nights Amalfi + 7 Nights Crete</h3>
-    <p class="desc">
-      Start with the Italian cliff-side dream &mdash; Ravello, Path of the Gods, lemons, pasta. Then fly Naples &rarr; Athens &rarr; Chania and switch to Greek island mode &mdash; Balos Lagoon, Samaria Gorge, Venetian harbour sunsets, incredible seafood. Two completely different trips stitched together.
-    </p>
-
-    <h3>&#128747; The Flight Routing</h3>
-    <p class="desc" style="margin-bottom:6px">
-      <strong>Leg 1:</strong> YYZ &rarr; Naples (Aug 22) &mdash; ~$1,400&ndash;1,800 CAD RT would become one-way ~$800&ndash;1,000<br>
-      <strong>Leg 2:</strong> Naples &rarr; Athens &rarr; Chania (Aug 27) &mdash; Aegean/Volotea NAP&rarr;ATH (~&euro;80) + Aegean ATH&rarr;CHQ (~&euro;60) = ~$250 CAD<br>
-      <strong>Leg 3:</strong> Chania &rarr; Athens &rarr; Toronto (Sept 3) &mdash; ~$800&ndash;1,000 one-way
-    </p>
-    <div class="tip tip-warn"><strong>Flight complexity:</strong> You&rsquo;re booking 3 separate flight legs instead of 1 round trip. This usually costs $200&ndash;400 more total and adds transfer risk (if Leg 2 is delayed, Leg 3 doesn&rsquo;t know). Build in buffer days. Book Legs 1 &amp; 3 as a multi-city fare on Google Flights for best price.</div>
-
-    <h3 style="margin-top:14px">&#127968; Two Airbnbs</h3>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0;">
-      <div style="background:var(--light);border-radius:10px;padding:14px;">
-        <div style="font-weight:800;font-size:0.88rem;">Windows on Heaven, Scala</div>
-        <div style="font-size:0.82rem;color:var(--gray);">5 nights &times; ~$175 = <strong style="color:var(--ocean-dark)">$875 CAD</strong></div>
-        <div style="font-size:0.78rem;color:#555;margin-top:4px;">Sea view, homemade breakfast, 2 bed</div>
-        <a href="https://www.airbnb.ca/rooms/32588731" target="_blank" style="font-size:0.78rem;color:var(--ocean);font-weight:700;">View on Airbnb &rarr;</a>
+    <h3>3 Airbnbs</h3>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:8px 0;">
+      <div class="ab-card">
+        <div class="ab-name"><a href="https://www.airbnb.ca/rooms/32588731" target="_blank">Windows on Heaven</a></div>
+        <div class="ab-meta">Scala &middot; 5 nights</div>
+        <div class="ab-price">~$875</div>
       </div>
-      <div style="background:var(--light);border-radius:10px;padding:14px;">
-        <div style="font-weight:800;font-size:0.88rem;">Sunny Splatzia, Chania</div>
-        <div style="font-size:0.82rem;color:var(--gray);">7 nights &times; ~$191 = <strong style="color:var(--ocean-dark)">$1,340 CAD</strong></div>
-        <div style="font-size:0.78rem;color:#555;margin-top:4px;">Old Town, 2 balconies, self check-in</div>
-        <a href="https://www.airbnb.ca/rooms/44209542" target="_blank" style="font-size:0.78rem;color:var(--ocean);font-weight:700;">View on Airbnb &rarr;</a>
+      <div class="ab-card">
+        <div class="ab-name"><a href="https://www.airbnb.ca/rooms/44209542" target="_blank">Sunny Splatzia</a></div>
+        <div class="ab-meta">Chania &middot; 4 nights</div>
+        <div class="ab-price">~$766</div>
+      </div>
+      <div class="ab-card">
+        <div class="ab-name"><a href="https://www.airbnb.ca/rooms/34563447" target="_blank">Nikis Home</a></div>
+        <div class="ab-meta">Rethymno &middot; 3 nights</div>
+        <div class="ab-price">~$453</div>
       </div>
     </div>
+
+    <h3>&#128747; Flights</h3>
+    <p style="font-size:0.82rem;color:#555;">
+      <a href="https://www.google.com/travel/flights/search?tfs=CBwQAhooEgoyMDI2LTA4LTIyagwIAhIIL20vMGg3aDZyDAgCEggvbS8wNjl5NA" target="_blank">YYZ &rarr; Naples</a> (one-way ~$900) &rarr;
+      <a href="https://www.google.com/travel/flights/search?tfs=CBwQAhoeEgoyMDI2LTA4LTI3agcIARIDTkFQcgcIARIDQVRI" target="_blank">Naples &rarr; Athens</a> (~$140) &rarr;
+      <a href="https://www.google.com/travel/flights/search?tfs=CBwQAhoeEgoyMDI2LTA4LTI3agcIARIDQVRIcgcIARIDQ0hR" target="_blank">Athens &rarr; Chania</a> (~$110) &rarr;
+      <a href="https://www.google.com/travel/flights/search?tfs=CBwQAhooEgoyMDI2LTA5LTAzagwIAhIIL20vMDlnZDRyDAgCEggvbS8waDdoNg" target="_blank">Chania &rarr; YYZ</a> (~$900)
+    </p>
 
     <div class="stats-row">
       <div class="stat-card"><div class="sc-num">$7,800</div><div class="sc-label">Total (2 ppl)</div></div>
       <div class="stat-card"><div class="sc-num">12</div><div class="sc-label">Nights</div></div>
-      <div class="stat-card"><div class="sc-num">3&ndash;5</div><div class="sc-label">Beach Days</div></div>
-      <div class="stat-card"><div class="sc-num">$2,300</div><div class="sc-label">All Flights</div></div>
+      <div class="stat-card"><div class="sc-num">$4,100</div><div class="sc-label">All Flights</div></div>
+      <div class="stat-card"><div class="sc-num">8&ndash;9</div><div class="sc-label">Weekdays off</div></div>
     </div>
 
-    <h3 style="margin-top:14px">&#128197; Quick Itinerary</h3>
-    <div style="font-size:0.85rem;color:#444;line-height:1.8;">
-      <strong>Day 1 (Aug 22):</strong> Arrive Naples &rarr; transfer to Scala. Settle in, terrace sunset.<br>
-      <strong>Day 2:</strong> Ravello + Valle delle Ferriere hike. Dinner at Scala.<br>
-      <strong>Day 3:</strong> Path of the Gods (Bomerano &rarr; Nocelle). Positano lunch.<br>
-      <strong>Day 4:</strong> Amalfi town + Atrani beach day. Lemon groves.<br>
-      <strong>Day 5:</strong> Pompeii day trip or free beach day. Last Italian dinner.<br>
-      <strong>Day 6 (Aug 27):</strong> &#9992;&#65039; Morning bus to Naples. Fly NAP &rarr; ATH &rarr; CHQ. Arrive Chania evening. Harbour walk.<br>
-      <strong>Day 7:</strong> Explore Chania Old Town. Venetian Harbour, Maritime Museum, Splantzia.<br>
-      <strong>Day 8:</strong> Balos Lagoon &amp; Gramvousa (rent car, full day).<br>
-      <strong>Day 9:</strong> Samaria Gorge hike (KTEL bus from Chania).<br>
-      <strong>Day 10:</strong> Elafonissi Beach + Falassarna sunset.<br>
-      <strong>Day 11:</strong> Rethymno day trip. Fortezza castle, waterfront lunch.<br>
-      <strong>Day 12:</strong> Lake Kournas or Seitan Limania. Sunset dinner at harbour.<br>
-      <strong>Day 13 (Sept 3):</strong> Fly home CHQ &rarr; ATH &rarr; YYZ.
-    </div>
-
-    <h3 style="margin-top:14px">&#128176; Budget Breakdown</h3>
-    <div style="font-size:0.85rem;color:#444;margin:6px 0;">
-      <div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #f0f0f0;"><span>Flights (all legs, 2 ppl)</span><strong>$4,100</strong></div>
-      <div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #f0f0f0;"><span>Scala Airbnb (5 nights)</span><strong>$875</strong></div>
-      <div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #f0f0f0;"><span>Chania Airbnb (7 nights)</span><strong>$1,340</strong></div>
-      <div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #f0f0f0;"><span>Food (12 days &times; ~$70/day)</span><strong>$840</strong></div>
-      <div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #f0f0f0;"><span>Activities + transport</span><strong>$450</strong></div>
-      <div style="display:flex;justify-content:space-between;padding:4px 0;font-weight:800;color:var(--ocean-dark);font-size:0.95rem;"><span>Total</span><span>~$7,600 &ndash; $8,200 CAD</span></div>
-    </div>
-    <div class="tip tip-warn"><strong>Heads up:</strong> This is $2,500&ndash;3,000 more than either trip alone. The premium is mostly in flights (3 legs vs 1 RT) and 5 extra nights of accommodation + food. Worth it if you can take 13 days off and want both experiences. Not worth it if budget is firmly $5K.</div>
-
-    <div class="path-buttons">
-      <a href="https://www.airbnb.ca/rooms/32588731" target="_blank" class="btn btn-airbnb">Italy Airbnb &rarr;</a>
-      <a href="https://www.airbnb.ca/rooms/44209542" target="_blank" class="btn btn-airbnb">Greece Airbnb &rarr;</a>
-      <a href="best-trip.html" class="btn btn-plan">Italy Itinerary &rarr;</a>
-      <a href="greece.html" class="btn btn-plan">Greece Itinerary &rarr;</a>
+    <div class="btn-row">
+      <a class="btn" href="best-trip.html" style="background:var(--palm)">Italy Itinerary &rarr;</a>
+      <a class="btn" href="greece.html" style="background:var(--ocean)">Greece Itinerary &rarr;</a>
     </div>
   </div>
 </div>
 </div>
 
-<!-- ============================================================ -->
-<!-- HEAD-TO-HEAD TABLE -->
-<!-- ============================================================ -->
+<!-- COMPARISON TABLE -->
 <div class="section" style="padding-top:0">
-  <h2>&#128200; Side-by-Side Comparison</h2>
-  <p class="sub">The honest breakdown</p>
+  <h2>&#128200; Side-by-Side</h2>
   <div class="table-wrap">
   <table class="compare-table">
-    <thead><tr><th>Category</th><th><img src="https://flagcdn.com/w20/it.png" alt=""> Path A: Italy</th><th><img src="https://flagcdn.com/w20/gr.png" alt=""> Path B: Greece</th><th><img src="https://flagcdn.com/w20/it.png" alt=""><img src="https://flagcdn.com/w20/gr.png" alt=""> Path C: Both</th></tr></thead>
+    <thead><tr><th></th><th><img src="https://flagcdn.com/w20/it.png" alt=""> Italy</th><th><img src="https://flagcdn.com/w20/gr.png" alt=""> Greece</th><th><img src="https://flagcdn.com/w20/it.png" alt=""><img src="https://flagcdn.com/w20/gr.png" alt=""> Both</th></tr></thead>
     <tbody>
-      <tr><td><strong>Total cost</strong> (2 ppl)</td><td>$5,300</td><td class="winner">$4,800</td><td>$7,800</td></tr>
-      <tr><td><strong>Time off work</strong></td><td class="winner">5 weekdays</td><td class="winner">5 weekdays</td><td>8&ndash;9 weekdays</td></tr>
-      <tr><td><strong>Nights</strong></td><td>7</td><td>7</td><td class="winner">12</td></tr>
-      <tr><td><strong>Beaches</strong></td><td>Small, rocky, paid beds</td><td class="winner">World-class sandy, mostly free</td><td class="winner">Best of both</td></tr>
-      <tr><td><strong>Beach days</strong></td><td>2&ndash;3</td><td>3&ndash;4</td><td class="winner">3&ndash;5</td></tr>
-      <tr><td><strong>Food quality</strong></td><td class="winner">Peak Italian cuisine</td><td class="winner">Incredible Cretan cuisine</td><td class="winner">Both!</td></tr>
-      <tr><td><strong>Food cost</strong></td><td>$20&ndash;45/pp dinner</td><td class="winner">$12&ndash;30/pp dinner</td><td>Mix</td></tr>
-      <tr><td><strong>Hiking</strong></td><td>Path of the Gods (3h)</td><td class="winner">Samaria Gorge (6h) + more</td><td class="winner">Both!</td></tr>
-      <tr><td><strong>History/culture</strong></td><td class="winner">Pompeii, Ravello, 1000yr churches</td><td>Venetian/Ottoman old town</td><td class="winner">Both!</td></tr>
-      <tr><td><strong>Vibe</strong></td><td>Romantic, dramatic cliffs</td><td>Relaxed, beachy, adventurous</td><td>Both vibes</td></tr>
-      <tr><td><strong>Getting there</strong></td><td class="winner">1 RT flight (YYZ&rarr;NAP)</td><td>1 RT flight (1 stop)</td><td>3+ flights, complex</td></tr>
-      <tr><td><strong>Crowds (August)</strong></td><td>Very busy (Positano madness)</td><td class="winner">Busy but spread out</td><td>Mix</td></tr>
-      <tr><td><strong>Airbnb quality</strong></td><td class="winner">Stunning sea view terrace</td><td>Great location, Old Town</td><td class="winner">Both!</td></tr>
-      <tr><td><strong>Value for money</strong></td><td>Good</td><td class="winner">Excellent</td><td>OK (flight premium)</td></tr>
+      <tr><td><strong>Cost</strong></td><td>$5,300</td><td class="winner">$4,600</td><td>$7,800</td></tr>
+      <tr><td><strong>Weekdays off</strong></td><td class="winner">5</td><td class="winner">5</td><td>8&ndash;9</td></tr>
+      <tr><td><strong>Beaches</strong></td><td>Small, rocky, &euro;20 beds</td><td class="winner">World-class, free</td><td class="winner">Both</td></tr>
+      <tr><td><strong>Food cost</strong></td><td>&euro;20&ndash;45/pp</td><td class="winner">&euro;12&ndash;25/pp</td><td>Mix</td></tr>
+      <tr><td><strong>Rideshare</strong></td><td>&#10060; None</td><td class="winner">&#9989; BEAT app</td><td>Partial</td></tr>
+      <tr><td><strong>Delivery apps</strong></td><td>&#10060; None in Scala</td><td class="winner">&#9989; efood + Wolt</td><td>Partial</td></tr>
+      <tr><td><strong>Views</strong></td><td class="winner">Dramatic cliffs</td><td>Venetian harbours</td><td class="winner">Both</td></tr>
+      <tr><td><strong>Hiking</strong></td><td>Path of the Gods</td><td class="winner">Samaria + more</td><td class="winner">Both</td></tr>
+      <tr><td><strong>Crowds (Aug)</strong></td><td>Very busy</td><td class="winner">Busy but spread</td><td>Mix</td></tr>
+      <tr><td><strong>Flights</strong></td><td class="winner">1 round trip</td><td>1 RT (1 stop)</td><td>3+ legs</td></tr>
+      <tr><td><strong>Airbnbs</strong></td><td>1 (Scala)</td><td class="winner">2 (Chania + Rethymno)</td><td>3</td></tr>
     </tbody>
   </table>
   </div>
 </div>
 
-<!-- ============================================================ -->
 <!-- VERDICT -->
-<!-- ============================================================ -->
 <div class="section" style="padding-top:0">
   <h2>&#129300; The Verdict</h2>
-
-  <div style="background:white;border-radius:14px;padding:20px 24px;box-shadow:0 3px 12px rgba(0,0,0,0.05);margin-bottom:14px;border-left:4px solid var(--palm);">
-    <h3><img src="https://flagcdn.com/w20/gr.png" alt="" style="height:0.85em;vertical-align:-0.1em"> If you want beaches: <strong>Pick Greece</strong></h3>
-    <p class="desc">Not even close. Balos, Elafonissi, and Seitan Limania are world-class sandy beaches with free access and crystal water. Amalfi beaches are small, rocky, and expensive. If beaches matter to you, Crete is the clear winner. Plus it&rsquo;s $500 cheaper.</p>
+  <div class="verdict-card" style="border-color:var(--ocean);">
+    <span style="font-size:1.3rem;">&#127754;</span>
+    <div class="vc-text"><strong>Want beaches + cheap food + city life?</strong> &rarr; <a href="greece.html">Greece</a>. $700 less, free beaches, delivery apps, &euro;3 gyros.</div>
   </div>
-
-  <div style="background:white;border-radius:14px;padding:20px 24px;box-shadow:0 3px 12px rgba(0,0,0,0.05);margin-bottom:14px;border-left:4px solid var(--sunset);">
-    <h3><img src="https://flagcdn.com/w20/it.png" alt="" style="height:0.85em;vertical-align:-0.1em"> If you want romance + drama: <strong>Pick Italy</strong></h3>
-    <p class="desc">Nothing beats that terrace view from Windows on Heaven, Ravello at sunset, or the Path of the Gods trail. The Amalfi Coast is one of the most dramatic landscapes on Earth. The food is iconic Italian. It&rsquo;s more expensive and more crowded, but the &ldquo;wow&rdquo; factor is higher on the coast.</p>
+  <div class="verdict-card" style="border-color:var(--sunset);">
+    <span style="font-size:1.3rem;">&#127965;&#65039;</span>
+    <div class="vc-text"><strong>Want drama + romance + Italian food?</strong> &rarr; <a href="best-trip.html">Italy</a>. That terrace view, Path of the Gods, Capri ferry.</div>
   </div>
-
-  <div style="background:white;border-radius:14px;padding:20px 24px;box-shadow:0 3px 12px rgba(0,0,0,0.05);margin-bottom:14px;border-left:4px solid var(--gold);">
-    <h3><img src="https://flagcdn.com/w20/it.png" alt="" style="height:0.85em;vertical-align:-0.1em"> + <img src="https://flagcdn.com/w20/gr.png" alt="" style="height:0.85em;vertical-align:-0.1em"> If you can take 12+ days off: <strong>Do both</strong></h3>
-    <p class="desc">The ultimate option. Start with Italy&rsquo;s cliff drama, then switch gears to Crete&rsquo;s beach paradise. You get the Airbnb terrace views AND Balos Lagoon. It costs $2,500&ndash;3,000 more than either trip alone and requires 8&ndash;9 weekdays off. If the time and budget work &mdash; this is the move.</p>
+  <div class="verdict-card" style="border-color:var(--gold);">
+    <span style="font-size:1.3rem;">&#127775;</span>
+    <div class="vc-text"><strong>Have 12+ days and $8K?</strong> &rarr; Do both. Start with Italian cliffs, fly to Greek beaches.</div>
   </div>
-
-  <div class="tip tip-money"><strong>Our lean:</strong> If budget is $5K and you only have one week &mdash; go with <strong>Crete</strong>. Better beaches, better value, more variety per dollar. Italy is incredible but you can do it another year when you&rsquo;re willing to spend a bit more. If you can stretch to 12 days and $8K &mdash; do both.</div>
+  <div style="background:#dcfce7;border-radius:10px;padding:12px 16px;margin-top:10px;font-size:0.85rem;border-left:4px solid var(--palm);">
+    <strong>Our lean:</strong> Budget $5K, one week? &rarr; <a href="greece.html"><strong>Crete</strong></a>. Better beaches, better value, more variety. Italy is incredible but do it when you want to spend more.
+  </div>
 </div>
 
-</div><!-- /container -->
+</div>
 
 <footer>
-  Made with &#10084;&#65039; for our summer 2026 planning<br>
   <a href="best-trip.html">Italy itinerary</a> &middot;
   <a href="greece.html">Greece itinerary</a> &middot;
   <a href="flights.html">Italy flights</a> &middot;
   <a href="greece-flights.html">Greece flights</a> &middot;
-  <a href="restaurants.html">Italy restaurants</a> &middot;
-  <a href="greece-restaurants.html">Greece restaurants</a>
+  <a href="restaurants.html">Italy food</a> &middot;
+  <a href="greece-restaurants.html">Greece food</a>
 </footer>
 
 </body>
