@@ -789,7 +789,8 @@ function openModal(id) {
   document.getElementById('mNightsLabel').textContent = d.nights + ' Nights';
   document.getElementById('mRating').textContent = '★ ' + d.rating.toFixed(2);
   document.getElementById('mReviews').textContent = d.reviews;
-  document.getElementById('mLink').href = d.url;
+  const dates = d.area === 'Chania' ? 'check_in=2026-08-22&check_out=2026-08-26' : 'check_in=2026-08-26&check_out=2026-08-29';
+  document.getElementById('mLink').href = d.url + '?' + dates + '&adults=2';
   let b = '';
   if (s >= 65) b += '<span class="m-badge fire">🔥 Top Value</span>';
   if (d.pick) b += '<span class="m-badge blue">📌 Our Pick</span>';
