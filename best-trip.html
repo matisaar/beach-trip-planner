@@ -106,6 +106,24 @@
   .book-food { background: var(--coral); }
   .book-maps { background: var(--palm); }
 
+  /* Neighbourhood grid */
+  .hood-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 14px 0; }
+  .hood-card { background: white; border-radius: 12px; padding: 16px; box-shadow: 0 3px 12px rgba(0,0,0,0.05); }
+  .hood-card h4 { font-size: 0.88rem; font-weight: 800; margin-bottom: 2px; }
+  .hood-card .hc-dist { font-size: 0.72rem; color: var(--ocean); font-weight: 700; margin-bottom: 6px; }
+  .hood-card p { font-size: 0.8rem; color: #555; margin: 0; }
+  .hood-card .hc-meta { margin-top: 4px; font-size: 0.75rem; }
+  .hood-card .hc-meta a { color: var(--ocean); text-decoration: none; font-weight: 600; }
+  .hood-card .hc-stars { color: var(--gold); font-size: 0.78rem; font-weight: 700; }
+  .hood-card .hc-price { color: var(--sunset); font-weight: 700; font-size: 0.78rem; }
+  .hood-section-label { font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; color: var(--ocean-dark); margin: 20px 0 8px; padding-bottom: 4px; border-bottom: 2px solid var(--ocean-light); }
+  .walk-list { list-style: none; padding: 0; margin: 10px 0; }
+  .walk-list li { font-size: 0.82rem; padding: 6px 0; border-bottom: 1px solid #f0f0f0; display: flex; justify-content: space-between; align-items: center; }
+  .walk-list li:last-child { border-bottom: none; }
+  .walk-list .wl-place { font-weight: 600; }
+  .walk-list .wl-time { color: var(--ocean); font-weight: 700; font-size: 0.78rem; background: #dbeafe; padding: 2px 8px; border-radius: 6px; white-space: nowrap; }
+  .walk-list .wl-bus { color: var(--palm); background: #dcfce7; }
+
   footer { background: var(--dark); color: rgba(255,255,255,0.6); text-align: center; padding: 24px 20px; font-size: 0.78rem; margin-top: 20px; }
   footer a { color: var(--ocean-light); }
 
@@ -114,6 +132,7 @@
     .facts { grid-template-columns: 1fr 1fr; }
     .card, .day { padding: 18px; }
     .airbnb-hero img { height: 200px; }
+    .hood-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -178,6 +197,160 @@
   <div class="tip tip-pro">
     <strong>Why Scala?</strong> Ancient hilltop village perched 400 m above the coast. 10 min walk down to Ravello, 15 min SITA bus to Amalfi, 40 min bus to Positano. Quieter &amp; cheaper than the coast towns but right in the middle of everything.
   </div>
+</div>
+
+<!-- ======== YOUR NEIGHBOURHOOD ======== -->
+<div class="section">
+  <h2>&#128205; Your Neighbourhood</h2>
+  <p class="sub">Everything around the Airbnb on Via Torricella, Scala &mdash; past Ristorante Zi&rsquo;Ntonio at the end of the road</p>
+
+  <div class="tip tip-pro" style="margin-bottom:16px">
+    <strong>Bus stop at your door:</strong> There&rsquo;s a SITA bus stop right at Ristorante Zi&rsquo;Ntonio on Via Torricella &mdash; steps from the Airbnb. Buses run down to <strong>Amalfi</strong> (15 min, &euro;1.30) roughly every 30&ndash;60 min. From Amalfi you connect to everywhere on the coast. Last bus back is ~10:30 PM in summer.
+  </div>
+
+  <!-- Walking distances -->
+  <div class="card">
+    <h3>&#128694; How Far Is Everything?</h3>
+    <div class="card-sub">Walking times from the Airbnb door</div>
+    <ul class="walk-list">
+      <li><span class="wl-place">Ristorante Zi&rsquo;Ntonio &amp; bus stop</span> <span class="wl-time">1 min &#128694;</span></li>
+      <li><span class="wl-place">Mini Market &ldquo;Mostaccioli&rdquo; (groceries)</span> <span class="wl-time">8 min &#128694;</span></li>
+      <li><span class="wl-place">Piazza Municipio (Scala centre)</span> <span class="wl-time">10 min &#128694;</span></li>
+      <li><span class="wl-place">Duomo di Scala (11th-c. cathedral)</span> <span class="wl-time">10 min &#128694;</span></li>
+      <li><span class="wl-place">Ravello (Piazza Duomo)</span> <span class="wl-time">12 min &#128694;</span></li>
+      <li><span class="wl-place">Villa Rufolo, Ravello</span> <span class="wl-time">14 min &#128694;</span></li>
+      <li><span class="wl-place">Villa Cimbrone, Ravello</span> <span class="wl-time">20 min &#128694;</span></li>
+      <li><span class="wl-place">Torre dello Ziro (watchtower hike)</span> <span class="wl-time">25 min &#128694;</span></li>
+      <li><span class="wl-place">Amalfi town centre</span> <span class="wl-time wl-bus">15 min &#128652;</span></li>
+      <li><span class="wl-place">Atrani beach</span> <span class="wl-time wl-bus">18 min &#128652;</span></li>
+      <li><span class="wl-place">Positano</span> <span class="wl-time wl-bus">55 min &#128652;</span></li>
+    </ul>
+    <div class="tip tip-warn" style="margin-top:10px"><strong>Heads up:</strong> Scala is hilly &mdash; the walk to Ravello is mostly downhill (great!), but the walk back is a solid uphill. Worth it for the views. Wear good shoes, not flip-flops, on the stone paths.</div>
+  </div>
+
+  <!-- Affordable food spots -->
+  <div class="hood-section-label">&#127829; Affordable Eats Near You</div>
+  <div class="hood-grid">
+    <div class="hood-card">
+      <h4>Zi&rsquo;Ntonio</h4>
+      <div class="hc-dist">1 min walk &mdash; literally next door</div>
+      <p>Your default spot. Classic Scala trattoria &amp; pizzeria right on Via Torricella. Wood-fired pizza, pasta, local wine. Terrace seating with views.</p>
+      <div class="hc-meta"><span class="hc-stars">&#9733; 4.7</span> &middot; <span class="hc-price">&euro;10&ndash;18pp</span> &middot; <a href="https://maps.google.com/?q=Zi+Ntonio+Scala+Italy" target="_blank">Map</a></div>
+    </div>
+    <div class="hood-card">
+      <h4>San Giovanni Restaurant</h4>
+      <div class="hc-dist">3 min walk &mdash; further down Via Torricella</div>
+      <p>Family-run, at Via Torricella 39. Honest home-style cooking, generous portions. Great value set menus at lunch.</p>
+      <div class="hc-meta"><span class="hc-stars">&#9733; 4.3</span> &middot; <span class="hc-price">&euro;12&ndash;20pp</span> &middot; <a href="https://maps.google.com/?q=San+Giovanni+Restaurant+Scala+Italy" target="_blank">Map</a></div>
+    </div>
+    <div class="hood-card">
+      <h4>Ristorante Gli Ulivi</h4>
+      <div class="hc-dist">10 min walk &mdash; Piazza S. Pietro</div>
+      <p>Slightly more upscale but still affordable. Known for fresh seafood pasta and lemon-everything. Beautiful olive-tree garden.</p>
+      <div class="hc-meta"><span class="hc-stars">&#9733; 4.6</span> &middot; <span class="hc-price">&euro;15&ndash;25pp</span> &middot; <a href="https://maps.google.com/?q=Ristorante+Gli+Ulivi+Scala+Italy" target="_blank">Map</a></div>
+    </div>
+    <div class="hood-card">
+      <h4>Il Pinguino</h4>
+      <div class="hc-dist">12 min walk &mdash; Via Rosca</div>
+      <p>Casual local hangout. Great pizza and panini. Popular with locals at lunch. Super cheap.</p>
+      <div class="hc-meta"><span class="hc-stars">&#9733; 4.5</span> &middot; <span class="hc-price">&euro;8&ndash;14pp</span> &middot; <a href="https://maps.google.com/?q=Il+Pinguino+Scala+Italy" target="_blank">Map</a></div>
+    </div>
+    <div class="hood-card">
+      <h4>Borgo San Pietro</h4>
+      <div class="hc-dist">14 min walk &mdash; Via Fr&agrave; Gerardo Sasso</div>
+      <p>Pizzeria inside a charming B&amp;B. Laid-back vibe, stone courtyard. Good wine list and wood-fired pizza.</p>
+      <div class="hc-meta"><span class="hc-stars">&#9733; 4.5</span> &middot; <span class="hc-price">&euro;10&ndash;18pp</span> &middot; <a href="https://maps.google.com/?q=Borgo+San+Pietro+ristorante+Scala+Italy" target="_blank">Map</a></div>
+    </div>
+    <div class="hood-card">
+      <h4>Sotto le Stelle</h4>
+      <div class="hc-dist">15 min walk &mdash; upper Scala</div>
+      <p>Highest-rated pizza in Scala. Outdoor terrace under the stars (the name checks out). Arrive early &mdash; small place.</p>
+      <div class="hc-meta"><span class="hc-stars">&#9733; 4.9</span> &middot; <span class="hc-price">&euro;10&ndash;16pp</span> &middot; <a href="https://maps.google.com/?q=Ristorante+pizzeria+Sotto+le+Stelle+Scala+Italy" target="_blank">Map</a></div>
+    </div>
+  </div>
+
+  <div class="tip tip-money"><strong>Budget hack:</strong> Zi&rsquo;Ntonio next door is your weeknight go-to (&euro;20&ndash;30 for two with wine). For a splurge night, walk 12 min to Ravello where restaurants are pricier but the ambiance is worth it once. Cook at the Airbnb 3&ndash;4 nights &mdash; the kitchen has everything you need.</div>
+
+  <!-- Groceries -->
+  <div class="hood-section-label">&#128722; Groceries &amp; Essentials</div>
+  <div class="hood-grid">
+    <div class="hood-card">
+      <h4>Mini Market &ldquo;Mostaccioli&rdquo;</h4>
+      <div class="hc-dist">8 min walk &mdash; Via Vescovado</div>
+      <p>Best small grocery in Scala. Fresh bread, local cheese, salumi, pasta, wine, fruit. Everything you need for Airbnb cooking. Friendly owner.</p>
+      <div class="hc-meta"><span class="hc-stars">&#9733; 4.4</span> &middot; Opens 8 AM &middot; <a href="https://maps.google.com/?q=Mini+Market+Mostaccioli+Scala+Italy" target="_blank">Map</a></div>
+    </div>
+    <div class="hood-card">
+      <h4>Despar Supermarket</h4>
+      <div class="hc-dist">12 min walk &mdash; lower Scala</div>
+      <p>Bigger selection if you need a proper grocery run. Produce, dairy, cleaning supplies, snacks. Prices are normal (not tourist-inflated).</p>
+      <div class="hc-meta"><span class="hc-stars">&#9733; 3.7</span> &middot; Opens 8 AM &middot; <a href="https://maps.google.com/?q=Despar+Scala+SA+Italy" target="_blank">Map</a></div>
+    </div>
+    <div class="hood-card">
+      <h4>Cuomo Francesco</h4>
+      <div class="hc-dist">10 min walk &mdash; Piazza Municipio</div>
+      <p>Tiny alimentari in the main square. Good for quick grabs: water, wine, snacks, bread. Cash preferred.</p>
+      <div class="hc-meta"><span class="hc-stars">&#9733; 3.7</span> &middot; Opens 9:30 AM &middot; <a href="https://maps.google.com/?q=Cuomo+Francesco+Scala+Italy" target="_blank">Map</a></div>
+    </div>
+    <div class="hood-card">
+      <h4>Caffetteria Mansi Lorenzo</h4>
+      <div class="hc-dist">10 min walk &mdash; Piazza Municipio</div>
+      <p>Morning espresso &amp; cornetto spot. Not a grocery but your go-to caf&eacute; for a quick Italian breakfast (&euro;2&ndash;3).</p>
+      <div class="hc-meta"><span class="hc-stars">&#9733; 3.9</span> &middot; Opens 8 AM &middot; <a href="https://maps.google.com/?q=Caffetteria+Mansi+Lorenzo+Scala+Italy" target="_blank">Map</a></div>
+    </div>
+  </div>
+
+  <!-- Things to do nearby -->
+  <div class="hood-section-label">&#127965;&#65039; Things to Do Within Walking Distance</div>
+  <div class="hood-grid">
+    <div class="hood-card">
+      <h4>Torre dello Ziro</h4>
+      <div class="hc-dist">25 min walk south from Airbnb</div>
+      <p>Medieval watchtower on a cliff between Scala and Atrani. 360&deg; panorama of the entire coast. Free, no tickets needed. Best at sunset. The trail starts just past your Airbnb down Via Torricella.</p>
+      <div class="hc-meta"><span class="hc-stars">&#9733; 4.5</span> &middot; Free &middot; <a href="https://maps.google.com/?q=Torre+dello+Ziro+Scala+Italy" target="_blank">Map</a></div>
+    </div>
+    <div class="hood-card">
+      <h4>Ruins of San Eustaquio Basilica</h4>
+      <div class="hc-dist">15 min walk &mdash; Via Sant&rsquo;Eustachio</div>
+      <p>Atmospheric 12th-century basilica ruins with original frescoes. Hauntingly beautiful, barely any tourists. Free (donation jar).</p>
+      <div class="hc-meta"><span class="hc-stars">&#9733; 4.7</span> &middot; Free &middot; <a href="https://maps.google.com/?q=Ruins+San+Eustaquio+Basilica+Scala+Italy" target="_blank">Map</a></div>
+    </div>
+    <div class="hood-card">
+      <h4>Valle delle Ferriere</h4>
+      <div class="hc-dist">30 min walk to trailhead</div>
+      <p>Hidden nature reserve in the valley below Scala. Waterfalls, rare ferns, lush forest. A cool escape from the August heat. Trail runs down to Amalfi &mdash; you can hike one-way and bus back.</p>
+      <div class="hc-meta"><span class="hc-stars">&#9733; 4.7</span> &middot; &euro;5 entry &middot; <a href="https://maps.google.com/?q=Valle+delle+Ferriere+Scala+Italy" target="_blank">Map</a></div>
+    </div>
+    <div class="hood-card">
+      <h4>Duomo di Scala</h4>
+      <div class="hc-dist">10 min walk &mdash; Scala centre</div>
+      <p>11th-century cathedral with a crypt, medieval art, and zero crowds. One of the oldest churches on the Amalfi Coast. Free to enter.</p>
+      <div class="hc-meta"><span class="hc-stars">&#9733; 4.6</span> &middot; Free &middot; <a href="https://maps.google.com/?q=Duomo+di+Scala+Italy" target="_blank">Map</a></div>
+    </div>
+  </div>
+
+  <!-- Getting around -->
+  <div class="card" style="margin-top:16px">
+    <h3>&#128652; Getting Around From Via Torricella</h3>
+    <div class="card-sub">Your Airbnb is right off Via Torricella past Zi&rsquo;Ntonio &mdash; here&rsquo;s how to get everywhere</div>
+    <p style="font-size:0.85rem;color:#444;margin-bottom:10px">
+      <strong>By bus:</strong> The SITA bus stop is at Zi&rsquo;Ntonio, 1 min from your door. Buses go to Amalfi every 30&ndash;60 min (15 min ride, &euro;1.30). From Amalfi you connect to Positano, Salerno, ferries to Capri, and the coast road. Buy tickets at any tabaccheria or the Amalfi bus station &mdash; <strong>not on the bus</strong>.
+    </p>
+    <p style="font-size:0.85rem;color:#444;margin-bottom:10px">
+      <strong>By foot to Ravello:</strong> Walk down Via Torricella toward the valley, then follow signs to Ravello. It&rsquo;s about 12 min downhill on ancient stone paths. The walk back up is ~18 min and steep, but shaded. You can also take the bus from Scala Piazza to Ravello if your legs are tired.
+    </p>
+    <p style="font-size:0.85rem;color:#444;margin-bottom:10px">
+      <strong>By foot to Atrani/Amalfi:</strong> There&rsquo;s a walking path from Scala down through the valley to Atrani (45&ndash;60 min, steep steps, beautiful). Or just take the bus &mdash; much easier.
+    </p>
+    <p style="font-size:0.85rem;color:#444;margin-bottom:10px">
+      <strong>By ferry (from Amalfi):</strong> Bus to Amalfi, then Travelmar ferries to Positano (&euro;10, 25 min), Salerno (&euro;10, 35 min), or Minori/Maiori (&euro;5, 10 min). NLG ferries to Capri (&euro;23, 80 min).
+    </p>
+    <p style="font-size:0.85rem;color:#444">
+      <strong>Best pass:</strong> 24-hr <strong>Unico Costiera</strong> (&euro;10) = unlimited SITA buses. Worth it any day you take 3+ rides. Buy at Amalfi bus station or tabaccherie.
+    </p>
+  </div>
+
+  <div class="tip tip-warn"><strong>Driving?</strong> Don&rsquo;t. The coast road (SS163) is a one-lane nightmare in August. Buses and ferries are the way. Your Airbnb has free parking nearby if you rent a car for a Pompeii day trip, but for coast travel, go public.</div>
 </div>
 
 <!-- ======== BUDGET ======== -->
