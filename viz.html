@@ -232,17 +232,17 @@
     backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); transition: background 0.2s;
   }
   .m-close:hover { background: rgba(0,0,0,0.7); }
-  .m-img { width: 100%; height: 260px; object-fit: cover; display: block; }
-  .m-body { padding: 22px 26px 26px; }
-  .m-name { font-size: 1.15rem; font-weight: 800; margin-bottom: 3px; line-height: 1.3; }
-  .m-area { font-size: 0.8rem; color: var(--muted); margin-bottom: 16px; }
+  .m-img { width: 100%; height: 180px; object-fit: cover; display: block; }
+  .m-body { padding: 16px 22px 20px; }
+  .m-name { font-size: 1.05rem; font-weight: 800; margin-bottom: 2px; line-height: 1.25; }
+  .m-area { font-size: 0.78rem; color: var(--muted); margin-bottom: 10px; }
   .m-score-wrap {
     background: linear-gradient(135deg, #fff8f0, #fff5eb);
-    border: 1px solid #fed7aa; border-radius: 14px; padding: 16px 18px; margin-bottom: 16px;
+    border: 1px solid #fed7aa; border-radius: 12px; padding: 10px 14px; margin-bottom: 10px;
   }
   .m-score-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
   .m-score-label { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: #92400e; }
-  .m-score-num { font-size: 1.6rem; font-weight: 900; color: var(--ocean-dark); }
+  .m-score-num { font-size: 1.3rem; font-weight: 900; color: var(--ocean-dark); }
   .m-score-bar { height: 8px; border-radius: 4px; background: #f5e6d3; overflow: hidden; }
   .m-score-fill { height: 100%; border-radius: 4px; background: linear-gradient(90deg, #f0c27f, #e87d3e, #d4363b); transition: width 0.4s; }
   .m-breakdown {
@@ -250,20 +250,20 @@
     font-size: 0.68rem; color: var(--muted); text-align: center;
   }
   .m-breakdown .v { font-weight: 700; color: var(--dark); font-size: 0.78rem; }
-  .m-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
-  .m-stat { background: var(--bg); border-radius: 12px; padding: 14px; text-align: center; }
-  .m-stat .v { font-size: 1.2rem; font-weight: 800; color: var(--ocean-dark); }
+  .m-grid { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 6px; margin-bottom: 12px; }
+  .m-stat { background: var(--bg); border-radius: 10px; padding: 10px 8px; text-align: center; }
+  .m-stat .v { font-size: 1rem; font-weight: 800; color: var(--ocean-dark); }
   .m-stat .v.price-c { color: var(--palm); }
   .m-stat .l { font-size: 0.62rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
-  .m-badges { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 16px; }
+  .m-badges { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 10px; }
   .m-badge { font-size: 0.7rem; font-weight: 600; padding: 4px 10px; border-radius: 7px; }
   .m-badge.fire { background: #ffedd5; color: #9a3412; }
   .m-badge.gold { background: #fef3c7; color: #92400e; }
   .m-badge.green { background: #dcfce7; color: var(--palm); }
   .m-book {
-    display: block; width: 100%; padding: 14px; text-align: center;
+    display: block; width: 100%; padding: 12px; text-align: center;
     background: linear-gradient(135deg, #FF385C, #e31c5f); color: white;
-    text-decoration: none; border-radius: 12px; font-size: 0.9rem;
+    text-decoration: none; border-radius: 12px; font-size: 0.88rem;
     font-weight: 700; font-family: inherit; transition: all 0.2s;
   }
   .m-book:hover { filter: brightness(1.1); transform: translateY(-1px); }
@@ -346,7 +346,6 @@
   <p>Auto-ranked from 4424 Amalfi Coast listings. Scored by price, rating & reviews — adjust the weights below to match your priorities.</p>
   <div class="page-hero-nav">
     <a href="best-trip.html">← Itinerary</a>
-    <a href="airbnbs.html">All 4424 Listings</a>
   </div>
 </div>
 
@@ -491,7 +490,7 @@
 </div>
 
 <div class="footer">
-  Curated from <a href="airbnbs.html">4424 Airbnb listings</a> · Data scraped Jun 2025 · Prices in CAD
+  Top 1,000 curated from 4424 Airbnb listings · Data scraped Jun 2025 · Prices in CAD
 </div>
 
 <script>
