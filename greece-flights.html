@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flight Comparison — YYZ &rarr; CHQ / ATH — Crete 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+  :root {
+    --ocean: #0077b6; --ocean-dark: #023e8a; --ocean-light: #00b4d8;
+    --sand: #f5e6d3; --sunset: #ff6b35; --coral: #e63946;
+    --palm: #2d6a4f; --dark: #1a1a2e; --gray: #6b7280;
+    --light: #f8fafc; --white: #ffffff; --gold: #f59e0b;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: var(--light); color: var(--dark); line-height: 1.7; }
+  .hero { background: linear-gradient(135deg, #023e8a 0%, #0077b6 50%, #00b4d8 100%); color: white; padding: 60px 24px 50px; text-align: center; }
+  .hero h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 900; margin-bottom: 8px; }
+  .hero p { font-size: 1rem; opacity: 0.85; max-width: 640px; margin: 0 auto 20px; }
+  .hero-stats { display: flex; gap: 28px; justify-content: center; flex-wrap: wrap; margin-top: 16px; }
+  .hero-stat { text-align: center; }
+  .hero-stat .num { font-size: 1.5rem; font-weight: 900; }
+  .hero-stat .label { font-size: 0.72rem; opacity: 0.7; }
+  .container { max-width: 860px; margin: 0 auto; padding: 0 20px; }
+  .section { padding: 32px 0; }
+  .section h2 { font-size: 1.35rem; font-weight: 800; margin-bottom: 4px; color: var(--ocean-dark); }
+  .section .sub { color: var(--gray); font-size: 0.85rem; margin-bottom: 16px; }
+  .verdict-bar { background: linear-gradient(135deg, var(--sunset), var(--coral)); color: white; border-radius: 14px; padding: 24px; margin: -28px auto 0; position: relative; z-index: 10; max-width: 860px; box-shadow: 0 10px 30px rgba(230,57,70,0.2); text-align: center; }
+  .verdict-bar h2 { color: white; font-size: 1.3rem; font-weight: 900; margin-bottom: 6px; }
+  .verdict-bar p { font-size: 0.92rem; opacity: 0.92; margin: 0; }
+  .card { background: white; border-radius: 14px; padding: 24px; margin-bottom: 16px; box-shadow: 0 3px 12px rgba(0,0,0,0.05); }
+  .card h3 { font-size: 1.1rem; font-weight: 800; margin-bottom: 4px; }
+  .card .card-sub { color: var(--gray); font-size: 0.82rem; margin-bottom: 12px; }
+  .tip { border-radius: 10px; padding: 12px 14px; font-size: 0.82rem; margin: 10px 0; line-height: 1.5; }
+  .tip-money { background: #dcfce7; border-left: 4px solid var(--palm); }
+  .tip-warn { background: #fef3c7; border-left: 4px solid var(--gold); }
+  .tip-pro { background: #dbeafe; border-left: 4px solid var(--ocean); }
+  .tip strong { font-weight: 700; }
+  .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 14px 0; border-radius: 10px; }
+  .flight-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 0.82rem; min-width: 700px; margin: 14px 0; }
+  .flight-table thead th { background: var(--ocean-dark); color: white; padding: 10px 12px; text-align: left; font-weight: 700; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.5px; }
+  .flight-table thead th:first-child { border-radius: 10px 0 0 0; }
+  .flight-table thead th:last-child { border-radius: 0 10px 0 0; }
+  .flight-table tbody td { padding: 10px 12px; border-bottom: 1px solid #f0f0f0; vertical-align: middle; }
+  .flight-table tbody tr:last-child td { border-bottom: none; }
+  .flight-table tbody tr:hover { background: #f0f7ff; }
+  .flight-table .price { font-weight: 800; color: var(--ocean-dark); white-space: nowrap; }
+  .flight-table .price-couple { font-size: 0.75rem; color: var(--gray); font-weight: 600; }
+  .flight-table .airline { font-weight: 700; }
+  .flight-table .stops { white-space: nowrap; }
+  .flight-table .duration { white-space: nowrap; font-weight: 600; }
+  .flight-table .layover { font-size: 0.78rem; color: var(--gray); }
+  .flight-table .badge { display: inline-block; font-size: 0.65rem; font-weight: 800; padding: 2px 7px; border-radius: 6px; margin-left: 4px; vertical-align: middle; }
+  .badge-cheapest { background: #dcfce7; color: var(--palm); }
+  .badge-best { background: #dbeafe; color: var(--ocean-dark); }
+  .badge-fastest { background: #fef3c7; color: #92400e; }
+  .flight-table .airport-note { font-size: 0.72rem; color: var(--sunset); font-weight: 600; }
+  .pick-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin: 16px 0; }
+  .pick { background: white; border-radius: 14px; padding: 20px; box-shadow: 0 3px 12px rgba(0,0,0,0.05); border-top: 4px solid var(--ocean); }
+  .pick.cheapest { border-top-color: var(--palm); }
+  .pick.best { border-top-color: var(--ocean); }
+  .pick.fastest { border-top-color: var(--gold); }
+  .pick .pick-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 800; margin-bottom: 6px; }
+  .pick.cheapest .pick-label { color: var(--palm); }
+  .pick.best .pick-label { color: var(--ocean); }
+  .pick.fastest .pick-label { color: var(--gold); }
+  .pick .pick-airline { font-size: 1rem; font-weight: 800; margin-bottom: 2px; }
+  .pick .pick-detail { font-size: 0.82rem; color: #555; margin-bottom: 2px; }
+  .pick .pick-price { font-size: 1.15rem; font-weight: 900; color: var(--ocean-dark); }
+  footer { background: var(--dark); color: rgba(255,255,255,0.6); text-align: center; padding: 24px 20px; font-size: 0.78rem; margin-top: 20px; }
+  footer a { color: var(--ocean-light); }
+  @media (max-width: 640px) {
+    .hero h1 { font-size: 1.7rem; }
+    .card { padding: 18px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1><img src="https://flagcdn.com/w40/gr.png" alt="🇬🇷" style="height:1em;vertical-align:-0.1em;margin-right:4px"> Flights to Crete</h1>
+  <p>Every route from Toronto to Chania (CHQ) or Heraklion (HER) for Aug 22&ndash;29, 2026 &mdash; compared and ranked</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="num">12+</div><div class="label">Routes</div></div>
+    <div class="hero-stat"><div class="num">$1,400</div><div class="label">Cheapest RT</div></div>
+    <div class="hero-stat"><div class="num">13&ndash;20h</div><div class="label">Travel Time</div></div>
+    <div class="hero-stat"><div class="num">1&ndash;2</div><div class="label">Stops</div></div>
+  </div>
+</div>
+
+<div class="verdict-bar">
+  <h2>&#9992;&#65039; Best value: Turkish Airlines via Istanbul &mdash; ~$1,400 CAD/pp</h2>
+  <p>Cheapest route with good service. Best overall: Air Canada + Aegean via Athens (~$1,800) for easier connections and Star Alliance miles.</p>
+</div>
+
+<div class="container">
+
+<!-- ======== TOP PICKS ======== -->
+<div class="section">
+  <h2>&#127942; Top 3 Picks</h2>
+  <p class="sub">Our recommendations by priority</p>
+  <div class="pick-grid">
+    <div class="pick cheapest">
+      <div class="pick-label">&#128176; Cheapest</div>
+      <div class="pick-airline">Turkish Airlines</div>
+      <div class="pick-detail">YYZ &rarr; IST &rarr; CHQ &middot; 1 stop &middot; ~15h total</div>
+      <div class="pick-detail">Good legroom, free meals, 23kg bags included</div>
+      <div class="pick-price">~$1,400 CAD / person</div>
+    </div>
+    <div class="pick best">
+      <div class="pick-label">&#127942; Best Overall</div>
+      <div class="pick-airline">Air Canada + Aegean</div>
+      <div class="pick-detail">YYZ &rarr; ATH &rarr; CHQ &middot; 1 stop &middot; ~14h total</div>
+      <div class="pick-detail">Star Alliance, Aeroplan points, AC direct to Athens</div>
+      <div class="pick-price">~$1,800 CAD / person</div>
+    </div>
+    <div class="pick fastest">
+      <div class="pick-label">&#9201; Fastest</div>
+      <div class="pick-airline">Lufthansa</div>
+      <div class="pick-detail">YYZ &rarr; FRA &rarr; CHQ &middot; 1 stop &middot; ~13h total</div>
+      <div class="pick-detail">Short FRA layover, Condor or Aegean onward</div>
+      <div class="pick-price">~$1,700 CAD / person</div>
+    </div>
+  </div>
+</div>
+
+<!-- ======== FLY TO CHQ ======== -->
+<div class="section">
+  <h2>&#9992;&#65039; Routes to Chania (CHQ)</h2>
+  <p class="sub">Chania airport &mdash; 15 min taxi to Old Town. The ideal arrival.</p>
+  <div class="table-wrap">
+  <table class="flight-table">
+    <thead><tr><th>Route</th><th>Airlines</th><th>Stops</th><th>Duration</th><th>Price/pp</th><th>For Two</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>YYZ &rarr; IST &rarr; CHQ</td>
+        <td class="airline">Turkish Airlines</td>
+        <td class="stops">1 stop</td>
+        <td class="duration">~15h</td>
+        <td class="price">$1,400 <span class="badge badge-cheapest">CHEAPEST</span></td>
+        <td class="price-couple">$2,800</td>
+        <td>Best value. IST layover 2&ndash;4h. Good in-flight meals. 23kg bags included.</td>
+      </tr>
+      <tr>
+        <td>YYZ &rarr; ATH &rarr; CHQ</td>
+        <td class="airline">Air Canada + Aegean</td>
+        <td class="stops">1 stop</td>
+        <td class="duration">~14h</td>
+        <td class="price">$1,800 <span class="badge badge-best">BEST</span></td>
+        <td class="price-couple">$3,600</td>
+        <td>AC direct YYZ&rarr;ATH (9.5h), then Aegean ATH&rarr;CHQ (45 min). Star Alliance / Aeroplan.</td>
+      </tr>
+      <tr>
+        <td>YYZ &rarr; FRA &rarr; CHQ</td>
+        <td class="airline">Lufthansa / Condor</td>
+        <td class="stops">1 stop</td>
+        <td class="duration">~13h</td>
+        <td class="price">$1,700 <span class="badge badge-fastest">FASTEST</span></td>
+        <td class="price-couple">$3,400</td>
+        <td>Shortest total time. FRA is efficient for connections. Condor seasonal direct FRA&rarr;CHQ.</td>
+      </tr>
+      <tr>
+        <td>YYZ &rarr; MUC &rarr; CHQ</td>
+        <td class="airline">Lufthansa / Aegean</td>
+        <td class="stops">1 stop</td>
+        <td class="duration">~14h</td>
+        <td class="price">$1,750</td>
+        <td class="price-couple">$3,500</td>
+        <td>Similar to FRA route. Munich has good lounge options. Check both hub prices.</td>
+      </tr>
+      <tr>
+        <td>YYZ &rarr; AMS &rarr; CHQ</td>
+        <td class="airline">KLM / Transavia</td>
+        <td class="stops">1 stop</td>
+        <td class="duration">~14h</td>
+        <td class="price">$1,650</td>
+        <td class="price-couple">$3,300</td>
+        <td>KLM to AMS, then Transavia (KLM budget sister) to CHQ. Schiphol layover is easy.</td>
+      </tr>
+      <tr>
+        <td>YYZ &rarr; ZRH &rarr; CHQ</td>
+        <td class="airline">Swiss / Edelweiss</td>
+        <td class="stops">1 stop</td>
+        <td class="duration">~14h</td>
+        <td class="price">$1,800</td>
+        <td class="price-couple">$3,600</td>
+        <td>Swiss quality. Edelweiss (Swiss subsidiary) flies seasonal ZRH&rarr;CHQ direct.</td>
+      </tr>
+      <tr>
+        <td>YYZ &rarr; VIE &rarr; CHQ</td>
+        <td class="airline">Austrian</td>
+        <td class="stops">1 stop</td>
+        <td class="duration">~15h</td>
+        <td class="price">$1,700</td>
+        <td class="price-couple">$3,400</td>
+        <td>Austrian is Star Alliance (Aeroplan). VIE is a small, fast-connection airport.</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<!-- ======== FLY TO ATH ======== -->
+<div class="section">
+  <h2>&#127991;&#65039; Alternative: Fly to Athens (ATH) + Domestic</h2>
+  <p class="sub">More route options &mdash; just add a 45-min Aegean hop or overnight ferry</p>
+  <div class="table-wrap">
+  <table class="flight-table">
+    <thead><tr><th>Route</th><th>Airlines</th><th>Stops</th><th>Duration</th><th>Price/pp</th><th>For Two</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>YYZ &rarr; ATH (direct)</td>
+        <td class="airline">Air Canada</td>
+        <td class="stops">Non-stop</td>
+        <td class="duration">9.5h</td>
+        <td class="price">$1,500</td>
+        <td class="price-couple">$3,000</td>
+        <td>Seasonal direct (Jun&ndash;Oct). Then book Aegean ATH&rarr;CHQ separately (~$80 CAD).</td>
+      </tr>
+      <tr>
+        <td>YYZ &rarr; ATH (direct)</td>
+        <td class="airline">Air Transat</td>
+        <td class="stops">Non-stop</td>
+        <td class="duration">9.5h</td>
+        <td class="price">$1,200</td>
+        <td class="price-couple">$2,400</td>
+        <td>Budget carrier. Seasonal. + &euro;50&ndash;80 for Aegean ATH&rarr;CHQ = still cheapest total. Check baggage fees.</td>
+      </tr>
+      <tr>
+        <td>YYZ &rarr; ATH via LHR</td>
+        <td class="airline">BA / Aegean</td>
+        <td class="stops">1 stop</td>
+        <td class="duration">~15h</td>
+        <td class="price">$1,600</td>
+        <td class="price-couple">$3,200</td>
+        <td>BA to London, then Aegean or BA to ATH. Add domestic to CHQ. Total can be cheaper than direct flights.</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="tip tip-pro"><strong>ATH &rarr; CHQ connection:</strong> <a href="https://en.aegeanair.com/" target="_blank">Aegean Airlines</a> or <a href="https://www.skyexpress.gr/en" target="_blank">Sky Express</a> fly ATH&rarr;CHQ (45 min, &euro;50&ndash;80 one way). 5&ndash;8 flights daily. Book separately for the best price. Always add at least 2 hours between your international arrival and domestic departure.</div>
+</div>
+
+<!-- ======== FLY TO HER ======== -->
+<div class="section">
+  <h2>&#127991;&#65039; Alternative: Fly to Heraklion (HER)</h2>
+  <p class="sub">More flights, sometimes cheaper &mdash; but 2.5 hrs drive/bus to Chania</p>
+  <div class="table-wrap">
+  <table class="flight-table">
+    <thead><tr><th>Route</th><th>Airlines</th><th>Stops</th><th>Duration</th><th>Price/pp</th><th>For Two</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>YYZ &rarr; IST &rarr; HER</td>
+        <td class="airline">Turkish Airlines</td>
+        <td class="stops">1 stop</td>
+        <td class="duration">~14h</td>
+        <td class="price">$1,350</td>
+        <td class="price-couple">$2,700</td>
+        <td>Sometimes $50 cheaper than CHQ route. But add 2.5h KTEL bus to Chania (&euro;15pp).</td>
+      </tr>
+      <tr>
+        <td>YYZ &rarr; FRA &rarr; HER</td>
+        <td class="airline">Lufthansa / Condor</td>
+        <td class="stops">1 stop</td>
+        <td class="duration">~13h</td>
+        <td class="price">$1,650</td>
+        <td class="price-couple">$3,300</td>
+        <td>More flight options than CHQ. Direct Condor FRA&rarr;HER is common. Then 2.5h bus.</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="tip tip-warn"><strong>HER downside:</strong> Heraklion to Chania is 2.5 hours by KTEL bus (&euro;15pp) or rental car. That&rsquo;s 5 hours of road time round-trip you don&rsquo;t need if you fly into CHQ. Only pick HER if the price difference is $150+ per person.</div>
+</div>
+
+<!-- ======== BOOKING STRATEGY ======== -->
+<div class="section">
+  <h2>&#128161; Booking Strategy</h2>
+  <div class="card">
+    <h3>When &amp; How to Book</h3>
+    <div class="card-sub">For August 22&ndash;29, 2026 flights from Toronto</div>
+    <ul style="font-size:0.85rem;color:#444;margin-left:18px;margin-bottom:12px">
+      <li><strong>Best booking window:</strong> January&ndash;March 2026. Summer Greece flights from Canada get expensive fast.</li>
+      <li><strong>Set alerts:</strong> <a href="https://www.google.com/travel/flights" target="_blank">Google Flights</a> price alerts for YYZ&rarr;CHQ and YYZ&rarr;ATH. Set both and compare.</li>
+      <li><strong>Book separate legs:</strong> Sometimes YYZ&rarr;ATH on Air Transat + ATH&rarr;CHQ on Aegean is $400 cheaper than a single booking. Check the math.</li>
+      <li><strong>Flexibility:</strong> If you can depart Aug 21 or 23, check &plusmn;1 day &mdash; mid-week departures are often $100&ndash;200 cheaper.</li>
+      <li><strong>Aeroplan:</strong> AC direct to ATH earns Aeroplan points. Turkish is Star Alliance too. Redeem points for the ATH&rarr;CHQ hop (7,500 points one-way).</li>
+    </ul>
+  </div>
+  <div class="tip tip-money"><strong>Compared to Italy:</strong> Flights to Crete cost about the same as flights to Naples ($1,400&ndash;$2,000 range). The difference is that Crete is 30&ndash;40% cheaper on the ground &mdash; food, hotels, activities. You save on the trip, not the flight.</div>
+
+  <div class="card">
+    <h3 style="margin-top:8px">&#128279; Quick Links</h3>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:10px">
+      <a href="https://www.google.com/travel/flights/search?tfs=CBwQAhooEgoyMDI2LTA4LTIyagwIAhIIL20vMGg3aDZyDAgCEggvbS8wOWdkNBooEgoyMDI2LTA4LTI5agwIAhIIL20vMDlnZDRyDAgCEggvbS8waDdoNnABQAFIAXABggELCP___________wFAAYgBAQ" target="_blank" style="display:inline-block;padding:8px 16px;background:var(--ocean);color:white;text-decoration:none;font-weight:700;font-size:0.82rem;border-radius:8px;">Google Flights YYZ&rarr;CHQ</a>
+      <a href="https://www.google.com/travel/flights/search?tfs=CBwQAhooEgoyMDI2LTA4LTIyagwIAhIIL20vMGg3aDZyDAgCEggvbS8wNjVrcBooEgoyMDI2LTA4LTI5agwIAhIIL20vMDY1a3ByDAgCEggvbS8waDdoNnABQAFIAXABggELCP___________wFAAYgBAQ" target="_blank" style="display:inline-block;padding:8px 16px;background:var(--ocean);color:white;text-decoration:none;font-weight:700;font-size:0.82rem;border-radius:8px;">Google Flights YYZ&rarr;ATH</a>
+      <a href="https://en.aegeanair.com/" target="_blank" style="display:inline-block;padding:8px 16px;background:var(--palm);color:white;text-decoration:none;font-weight:700;font-size:0.82rem;border-radius:8px;">Aegean Airlines (ATH&rarr;CHQ)</a>
+      <a href="https://www.skyexpress.gr/en" target="_blank" style="display:inline-block;padding:8px 16px;background:var(--sunset);color:white;text-decoration:none;font-weight:700;font-size:0.82rem;border-radius:8px;">Sky Express (ATH&rarr;CHQ)</a>
+    </div>
+  </div>
+</div>
+
+</div><!-- /container -->
+
+<footer>
+  Made with &#10084;&#65039; for our Crete adventure &middot; Aug 2026<br>
+  <a href="greece.html">&larr; Back to itinerary</a> &middot;
+  <a href="greece-restaurants.html">Restaurant guide</a> &middot;
+  <a href="greece-hotels.html">Hotels vs Airbnb</a> &middot;
+  <a href="greece-alternatives.html">Other islands</a> &middot;
+  <a href="best-trip.html">Amalfi Coast trip</a>
+</footer>
+
+</body>
+</html>

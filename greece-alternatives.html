@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Other Greek Islands &amp; Alternatives — Crete 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+  :root {
+    --ocean: #0077b6; --ocean-dark: #023e8a; --ocean-light: #00b4d8;
+    --sand: #f5e6d3; --sunset: #ff6b35; --coral: #e63946;
+    --palm: #2d6a4f; --dark: #1a1a2e; --gray: #6b7280;
+    --light: #f8fafc; --white: #ffffff; --gold: #f59e0b;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: var(--light); color: var(--dark); line-height: 1.7; }
+  .hero { background: linear-gradient(135deg, #023e8a 0%, #0077b6 50%, #00b4d8 100%); color: white; padding: 60px 24px 50px; text-align: center; }
+  .hero h1 { font-size: clamp(2rem, 5vw, 2.8rem); font-weight: 900; margin-bottom: 8px; }
+  .hero p { font-size: 1rem; opacity: 0.85; max-width: 640px; margin: 0 auto; }
+  .container { max-width: 860px; margin: 0 auto; padding: 0 20px; }
+  .section { padding: 32px 0; }
+  .section h2 { font-size: 1.35rem; font-weight: 800; margin-bottom: 4px; color: var(--ocean-dark); }
+  .section .sub { color: var(--gray); font-size: 0.85rem; margin-bottom: 16px; }
+  .verdict-bar { background: linear-gradient(135deg, var(--palm), #3a9d5d); color: white; border-radius: 14px; padding: 24px; margin: -28px auto 0; position: relative; z-index: 10; max-width: 860px; box-shadow: 0 10px 30px rgba(45,106,79,0.2); text-align: center; }
+  .verdict-bar h2 { color: white; font-size: 1.2rem; font-weight: 900; margin-bottom: 6px; }
+  .verdict-bar p { font-size: 0.92rem; opacity: 0.92; margin: 0; }
+  .island-card { background: white; border-radius: 14px; overflow: hidden; box-shadow: 0 3px 12px rgba(0,0,0,0.05); margin-bottom: 18px; }
+  .island-card .island-body { padding: 20px 24px; }
+  .island-card h3 { font-size: 1.1rem; font-weight: 800; margin-bottom: 2px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .island-card .island-sub { color: var(--gray); font-size: 0.82rem; margin-bottom: 10px; }
+  .island-card .tag { display: inline-block; font-size: 0.65rem; font-weight: 800; padding: 2px 8px; border-radius: 6px; vertical-align: middle; }
+  .tag-famous { background: #fef3c7; color: #92400e; }
+  .tag-hidden { background: #dcfce7; color: var(--palm); }
+  .tag-budget { background: #dbeafe; color: var(--ocean-dark); }
+  .tag-splurge { background: #fde2e2; color: var(--coral); }
+  .tag-easy { background: #e0e7ff; color: #3730a3; }
+  .tag-effort { background: #fef3c7; color: #92400e; }
+  .island-card .stats { display: flex; flex-wrap: wrap; gap: 16px; margin: 10px 0; font-size: 0.82rem; }
+  .island-card .stat-item { display: flex; align-items: center; gap: 4px; }
+  .island-card .stat-item strong { color: var(--ocean-dark); }
+  .island-card .pros { font-size: 0.82rem; color: #444; margin: 8px 0; line-height: 1.6; }
+  .island-card .map-link { display: inline-block; font-size: 0.78rem; color: var(--ocean); font-weight: 600; text-decoration: none; margin-top: 4px; }
+  .island-card .map-link:hover { text-decoration: underline; }
+  .compare-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 0.82rem; margin: 14px 0; }
+  .compare-table thead th { background: var(--ocean-dark); color: white; padding: 10px 12px; text-align: left; font-weight: 700; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.5px; }
+  .compare-table thead th:first-child { border-radius: 10px 0 0 0; }
+  .compare-table thead th:last-child { border-radius: 0 10px 0 0; }
+  .compare-table tbody td { padding: 10px 12px; border-bottom: 1px solid #f0f0f0; vertical-align: middle; }
+  .compare-table tbody tr:last-child td { border-bottom: none; }
+  .compare-table .winner { font-weight: 700; color: var(--palm); }
+  .tip { border-radius: 10px; padding: 12px 14px; font-size: 0.82rem; margin: 10px 0; line-height: 1.5; }
+  .tip-pro { background: #dbeafe; border-left: 4px solid var(--ocean); }
+  .tip-money { background: #dcfce7; border-left: 4px solid var(--palm); }
+  .tip-warn { background: #fef3c7; border-left: 4px solid var(--gold); }
+  .tip strong { font-weight: 700; }
+  .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 10px; }
+  footer { background: var(--dark); color: rgba(255,255,255,0.6); text-align: center; padding: 24px 20px; font-size: 0.78rem; margin-top: 20px; }
+  footer a { color: var(--ocean-light); }
+  @media (max-width: 640px) { .hero h1 { font-size: 1.7rem; } .island-card .island-body { padding: 16px; } }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1><img src="https://flagcdn.com/w40/gr.png" alt="🇬🇷" style="height:1em;vertical-align:-0.1em;margin-right:4px"> Other Greek Islands</h1>
+  <p>We picked Chania, but here&rsquo;s what else was in the running &mdash; and how to extend the trip</p>
+</div>
+
+<div class="verdict-bar">
+  <h2>&#10004;&#65039; Verdict: Chania wins for this trip</h2>
+  <p>Best food scene, best beaches, best value, and the most variety for an 8-day first visit. But these are worth knowing about for future trips or a quick extension.</p>
+</div>
+
+<div class="container">
+
+<!-- ======== CYCLADES ======== -->
+<div class="section">
+  <h2>&#127964;&#65039; The Cyclades</h2>
+  <p class="sub">The classic Greek island postcard &mdash; white-blue villages, volcanic sunsets</p>
+
+  <div class="island-card">
+    <div class="island-body">
+      <h3>Santorini (Thira) <span class="tag tag-famous">ICONIC</span> <span class="tag tag-splurge">$$$</span></h3>
+      <div class="island-sub">Oia sunsets, caldera views, volcanic beaches, wine tasting</div>
+      <div class="stats">
+        <div class="stat-item">&#9992;&#65039; <strong>Flight:</strong> ~$1,900/pp from YYZ (via ATH)</div>
+        <div class="stat-item">&#127968; <strong>Hotels:</strong> $200&ndash;800/night</div>
+        <div class="stat-item">&#127860; <strong>Meals:</strong> $25&ndash;60/pp</div>
+      </div>
+      <div class="pros">
+        <strong>Why consider:</strong> Bucket-list destination. Oia sunset is legendary. Wine from volcanic grapes. Caldera swimming. Red Beach, Perissa black sand beach. Incredible photography.<br>
+        <strong>Why we didn&rsquo;t pick it:</strong> Massively overpriced in August ($300+/night minimums). Overcrowded &mdash; cruise ships dump 10,000 people/day. Very small, limited to 3&ndash;4 days of activities. Food is mediocre-to-good at high prices. Not enough variety for 7 nights. <strong>Budget: would blow past $7K easily.</strong>
+      </div>
+      <a href="https://maps.google.com/?q=Santorini+Greece" target="_blank" class="map-link">&#128205; View on Google Maps</a>
+    </div>
+  </div>
+
+  <div class="island-card">
+    <div class="island-body">
+      <h3>Naxos <span class="tag tag-hidden">HIDDEN GEM</span> <span class="tag tag-budget">$$</span></h3>
+      <div class="island-sub">Largest Cycladic island &mdash; great beaches, mountain villages, local food</div>
+      <div class="stats">
+        <div class="stat-item">&#9992;&#65039; <strong>Flight:</strong> ~$1,800/pp (via ATH + domestic)</div>
+        <div class="stat-item">&#127968; <strong>Hotels:</strong> $80&ndash;180/night</div>
+        <div class="stat-item">&#127860; <strong>Meals:</strong> $15&ndash;30/pp</div>
+      </div>
+      <div class="pros">
+        <strong>Why consider:</strong> Best beaches in the Cyclades (Plaka, Agios Prokopios). Excellent local cuisine &mdash; Naxian cheese and potatoes are legendary. Mountain villages (Halki, Apiranthos). Portara temple gate at sunset. Way less touristy than Santorini/Mykonos. Ferry connections to Paros, Santorini, Ios.<br>
+        <strong>Why we didn&rsquo;t pick it:</strong> Less variety than Crete &mdash; no gorges, fewer world-class beaches. Hard to fill 7 full days without island-hopping. Still pricier than Crete.
+      </div>
+      <a href="https://maps.google.com/?q=Naxos+Greece" target="_blank" class="map-link">&#128205; View on Google Maps</a>
+    </div>
+  </div>
+
+  <div class="island-card">
+    <div class="island-body">
+      <h3>Milos <span class="tag tag-hidden">HIDDEN GEM</span> <span class="tag tag-budget">$$</span></h3>
+      <div class="island-sub">Volcanic island, 70+ beaches, Kleftiko sea caves, Sarakiniko lunar beach</div>
+      <div class="stats">
+        <div class="stat-item">&#9992;&#65039; <strong>Flight:</strong> ~$1,900/pp (via ATH + domestic)</div>
+        <div class="stat-item">&#127968; <strong>Hotels:</strong> $100&ndash;250/night</div>
+        <div class="stat-item">&#127860; <strong>Meals:</strong> $18&ndash;35/pp</div>
+      </div>
+      <div class="pros">
+        <strong>Why consider:</strong> Sarakiniko (white moonscape beach) is otherworldly. Kleftiko sea caves by boat. Fishing village of Klima with colourful boat garages. 70+ beaches to explore. Venus de Milo was found here. Emerging but still uncrowded.<br>
+        <strong>Why we didn&rsquo;t pick it:</strong> Small island &mdash; 3&ndash;4 days max. August accommodation books up fast and prices spike. Need a car, limited public transit. No major towns for evening walks.
+      </div>
+      <a href="https://maps.google.com/?q=Milos+Greece" target="_blank" class="map-link">&#128205; View on Google Maps</a>
+    </div>
+  </div>
+
+  <div class="island-card">
+    <div class="island-body">
+      <h3>Paros <span class="tag tag-famous">POPULAR</span> <span class="tag tag-budget">$$</span></h3>
+      <div class="island-sub">Charming Naoussa, golden beaches, windsurfing, Cycladic architecture</div>
+      <div class="stats">
+        <div class="stat-item">&#9992;&#65039; <strong>Flight:</strong> ~$1,800/pp (via ATH + domestic)</div>
+        <div class="stat-item">&#127968; <strong>Hotels:</strong> $100&ndash;220/night</div>
+        <div class="stat-item">&#127860; <strong>Meals:</strong> $15&ndash;35/pp</div>
+      </div>
+      <div class="pros">
+        <strong>Why consider:</strong> Naoussa is one of Greece&rsquo;s most photogenic harbour villages. Golden Beach is world-class for windsurfing. Good food scene. Excellent ferry hub &mdash; easy to hop to Naxos, Mykonos, Santorini. Balanced between touristy and authentic.<br>
+        <strong>Why we didn&rsquo;t pick it:</strong> Not enough for 7 days solo. Best as part of a 2&ndash;3 island itinerary. Getting there from Toronto adds complexity and cost.
+      </div>
+      <a href="https://maps.google.com/?q=Paros+Greece" target="_blank" class="map-link">&#128205; View on Google Maps</a>
+    </div>
+  </div>
+</div>
+
+<!-- ======== DODECANESE / IONIAN ======== -->
+<div class="section">
+  <h2>&#127965;&#65039; Dodecanese &amp; Ionian Islands</h2>
+  <p class="sub">Beyond the Cyclades &mdash; medieval towns, lush green, Italian influence</p>
+
+  <div class="island-card">
+    <div class="island-body">
+      <h3>Rhodes <span class="tag tag-famous">POPULAR</span> <span class="tag tag-budget">$$</span></h3>
+      <div class="island-sub">Medieval Old Town (UNESCO), ancient ruins, Lindos acropolis, long beaches</div>
+      <div class="stats">
+        <div class="stat-item">&#9992;&#65039; <strong>Flight:</strong> ~$1,700/pp (via ATH or IST)</div>
+        <div class="stat-item">&#127968; <strong>Hotels:</strong> $70&ndash;180/night</div>
+        <div class="stat-item">&#127860; <strong>Meals:</strong> $12&ndash;28/pp</div>
+      </div>
+      <div class="pros">
+        <strong>Why consider:</strong> Rhodes Old Town is one of the best-preserved medieval cities in Europe. Lindos acropolis with that insane view. Long sandy beaches on the east coast. Good value for money. Direct flights from many European hubs. Warm water in August (27&deg;C).<br>
+        <strong>Why we didn&rsquo;t pick it:</strong> Can be quite resort-touristy outside Old Town. Beaches are nice but don&rsquo;t compete with Balos/Elafonissi. Food scene is decent but not Chania-level.
+      </div>
+      <a href="https://maps.google.com/?q=Rhodes+Old+Town+Greece" target="_blank" class="map-link">&#128205; View on Google Maps</a>
+    </div>
+  </div>
+
+  <div class="island-card">
+    <div class="island-body">
+      <h3>Corfu (Kerkyra) <span class="tag tag-hidden">UNDERRATED</span> <span class="tag tag-budget">$$</span></h3>
+      <div class="island-sub">Venetian Old Town (UNESCO), emerald water, lush green, Italian influence</div>
+      <div class="stats">
+        <div class="stat-item">&#9992;&#65039; <strong>Flight:</strong> ~$1,700/pp (via ATH or European hub)</div>
+        <div class="stat-item">&#127968; <strong>Hotels:</strong> $70&ndash;160/night</div>
+        <div class="stat-item">&#127860; <strong>Meals:</strong> $12&ndash;28/pp</div>
+      </div>
+      <div class="pros">
+        <strong>Why consider:</strong> Venetian, French, and British architectural layers. Stunning emerald/turquoise coves. Lush green unlike most Greek islands. Canal d&rsquo;Amour. Paleokastritsa monastery and bays. UNESCO Old Town with Italian feel. Good base for day trips to Albania and Paxos/Antipaxos.<br>
+        <strong>Why we didn&rsquo;t pick it:</strong> Less &ldquo;Greek island&rdquo; feeling. Beaches can&rsquo;t match Crete&rsquo;s world-famous ones. More rain in August than Crete (still rare). Food is good but not exceptional.
+      </div>
+      <a href="https://maps.google.com/?q=Corfu+Old+Town+Greece" target="_blank" class="map-link">&#128205; View on Google Maps</a>
+    </div>
+  </div>
+</div>
+
+<!-- ======== ALTERNATIVE CRETE BASES ======== -->
+<div class="section">
+  <h2>&#127466;&#65039; Alternative Crete Bases</h2>
+  <p class="sub">Same island, different vibe &mdash; if Chania doesn&rsquo;t click</p>
+
+  <div class="island-card">
+    <div class="island-body">
+      <h3>Rethymno <span class="tag tag-hidden">STRONG ALT</span> <span class="tag tag-budget">$$</span></h3>
+      <div class="island-sub">Smaller than Chania, equally charming, Venetian/Ottoman Old Town, Fortezza castle</div>
+      <div class="stats">
+        <div class="stat-item">&#127968; <strong>Airbnb:</strong> $100&ndash;140/night</div>
+        <div class="stat-item">&#127860; <strong>Meals:</strong> $12&ndash;25/pp</div>
+        <div class="stat-item">&#128663; <strong>From CHQ:</strong> 1h bus</div>
+      </div>
+      <div class="pros">
+        <strong>Why consider:</strong> Even cheaper than Chania. Fortezza is incredible at sunset. Long sandy beach in town. Excellent restaurants (<a href="https://maps.google.com/?q=Avli+Rethymno+Crete" target="_blank">Avli</a>, <a href="https://maps.google.com/?q=Prima+Plora+Rethymno+Crete" target="_blank">Prima Plora</a>). Less touristy, more local feel. Closer to Preveli and Plakias beaches. Well-connected by KTEL bus.<br>
+        <strong>Why Chania is better:</strong> Chania has a bigger harbour, more restaurant variety, closer to Balos/Elafonissi/Samaria, and the Venetian Quarter is more atmospheric.
+      </div>
+      <a href="https://maps.google.com/?q=Rethymno+Old+Town+Crete" target="_blank" class="map-link">&#128205; View on Google Maps</a>
+    </div>
+  </div>
+
+  <div class="island-card">
+    <div class="island-body">
+      <h3>Heraklion <span class="tag tag-effort">FOR HISTORY BUFFS</span></h3>
+      <div class="island-sub">Crete&rsquo;s capital, Knossos Palace, Archaeological Museum, urban energy</div>
+      <div class="stats">
+        <div class="stat-item">&#127968; <strong>Airbnb:</strong> $80&ndash;130/night</div>
+        <div class="stat-item">&#127860; <strong>Meals:</strong> $10&ndash;22/pp</div>
+        <div class="stat-item">&#128663; <strong>From CHQ:</strong> 2.5h bus</div>
+      </div>
+      <div class="pros">
+        <strong>Why consider:</strong> Knossos Palace &mdash; the Minoan civilization&rsquo;s heart. World-class Archaeological Museum. Cheapest accommodation in Crete. More flights to HER than CHQ. Good central base for day trips east (Agios Nikolaos, Spinalonga, Vai).<br>
+        <strong>Why Chania is better:</strong> Heraklion city is not charming &mdash; it&rsquo;s a working city, not a vacation destination. Far from western Crete&rsquo;s best beaches. You can visit Knossos as a day trip from Chania if you want.
+      </div>
+      <a href="https://maps.google.com/?q=Heraklion+Crete" target="_blank" class="map-link">&#128205; View on Google Maps</a>
+    </div>
+  </div>
+
+  <div class="island-card">
+    <div class="island-body">
+      <h3>Agios Nikolaos <span class="tag tag-hidden">CHILL OPTION</span></h3>
+      <div class="island-sub">Eastern Crete lakeside town, Spinalonga fortress, palm beach at Vai</div>
+      <div class="stats">
+        <div class="stat-item">&#127968; <strong>Airbnb:</strong> $80&ndash;120/night</div>
+        <div class="stat-item">&#127860; <strong>Meals:</strong> $10&ndash;22/pp</div>
+        <div class="stat-item">&#128663; <strong>From HER:</strong> 1h drive</div>
+      </div>
+      <div class="pros">
+        <strong>Why consider:</strong> Lake Voulismeni in the town centre. Spinalonga island (Venetian fortress, leper colony &mdash; haunting history). Vai palm beach (Europe&rsquo;s largest natural palm forest). Elounda luxury strip. Very chill, less touristic than Chania.<br>
+        <strong>Why Chania is better:</strong> Much less restaurant/nightlife variety. Eastern Crete beaches are nice but not world-class like Balos/Elafonissi. Far from Samaria Gorge. Harder to get to from Toronto (fly to HER then drive).
+      </div>
+      <a href="https://maps.google.com/?q=Agios+Nikolaos+Crete" target="_blank" class="map-link">&#128205; View on Google Maps</a>
+    </div>
+  </div>
+</div>
+
+<!-- ======== SOUTH COAST ======== -->
+<div class="section">
+  <h2>&#127754; Crete&rsquo;s South Coast</h2>
+  <p class="sub">Wild, remote, breathtaking &mdash; if you want the adventurous version of this trip</p>
+
+  <div class="island-card">
+    <div class="island-body">
+      <h3>Loutro <span class="tag tag-hidden">HIDDEN GEM</span> <span class="tag tag-budget">$</span></h3>
+      <div class="island-sub">No roads in. Only by boat or hiking. Tiny fishing village on the Libyan Sea.</div>
+      <div class="stats">
+        <div class="stat-item">&#128674; <strong>Access:</strong> Ferry from Hora Sfakion or hike from Samaria</div>
+        <div class="stat-item">&#127968; <strong>Rooms:</strong> $60&ndash;100/night</div>
+        <div class="stat-item">&#127860; <strong>Meals:</strong> $10&ndash;18/pp</div>
+      </div>
+      <div class="pros">
+        Only accessible by boat or on foot &mdash; this is what Greek islands felt like 30 years ago. Crystal-clear water, whitewashed buildings, zero cars, zero noise. Kayak to Sweetwater Beach (<a href="https://maps.google.com/?q=Sweetwater+Beach+Crete" target="_blank">Maps</a>). Hike to Marmara Beach. Perfect for 2&ndash;3 nights of total disconnection.
+      </div>
+      <a href="https://maps.google.com/?q=Loutro+Crete" target="_blank" class="map-link">&#128205; View on Google Maps</a>
+    </div>
+  </div>
+
+  <div class="island-card">
+    <div class="island-body">
+      <h3>Plakias &amp; Preveli <span class="tag tag-budget">$</span></h3>
+      <div class="island-sub">Laid-back beach town + palm forest river beach</div>
+      <div class="stats">
+        <div class="stat-item">&#128663; <strong>From Rethymno:</strong> 35 min</div>
+        <div class="stat-item">&#127968; <strong>Rooms:</strong> $50&ndash;90/night</div>
+        <div class="stat-item">&#127860; <strong>Meals:</strong> $8&ndash;15/pp</div>
+      </div>
+      <div class="pros">
+        Plakias has a long sandy beach, good tavernas, and a relaxed hippie feel. Preveli Beach (<a href="https://maps.google.com/?q=Preveli+Beach+Crete" target="_blank">Maps</a>) has a river lined with palm trees flowing into the sea &mdash; otherworldly. Damnoni Beach nearby is excellent. Good for budget-minded travellers.
+      </div>
+      <a href="https://maps.google.com/?q=Plakias+Crete" target="_blank" class="map-link">&#128205; View on Google Maps</a>
+    </div>
+  </div>
+
+  <div class="island-card">
+    <div class="island-body">
+      <h3>Matala <span class="tag tag-hidden">HIPPIE LEGEND</span></h3>
+      <div class="island-sub">Beach caves where Joni Mitchell lived, south coast sunsets, Red Beach hike</div>
+      <div class="stats">
+        <div class="stat-item">&#128663; <strong>From Heraklion:</strong> 1.5h</div>
+        <div class="stat-item">&#127968; <strong>Rooms:</strong> $50&ndash;80/night</div>
+        <div class="stat-item">&#127860; <strong>Meals:</strong> $8&ndash;15/pp</div>
+      </div>
+      <div class="pros">
+        Famous caves in the cliff where hippies lived in the 1960s&ndash;70s (Joni Mitchell wrote &ldquo;Carey&rdquo; here). Red Beach is a short hike over the headland. Annual beach festival in June. Very relaxed, cheap, and authentically weird. Not for everyone, but memorable.
+      </div>
+      <a href="https://maps.google.com/?q=Matala+Crete" target="_blank" class="map-link">&#128205; View on Google Maps</a>
+    </div>
+  </div>
+</div>
+
+<!-- ======== ATHENS STOPOVER ======== -->
+<div class="section">
+  <h2>&#127963;&#65039; Athens Stopover</h2>
+  <p class="sub">If your flight connects through Athens, add a night &mdash; it&rsquo;s worth it</p>
+
+  <div class="island-card">
+    <div class="island-body">
+      <h3>Athens in 24 Hours <span class="tag tag-easy">EASY ADD-ON</span></h3>
+      <div class="island-sub">Acropolis, Plaka, rooftop bars, incredible street food</div>
+      <div class="stats">
+        <div class="stat-item">&#127968; <strong>Hotels:</strong> $80&ndash;150/night (Plaka/Monastiraki)</div>
+        <div class="stat-item">&#127860; <strong>Meals:</strong> $10&ndash;20/pp</div>
+        <div class="stat-item">&#9992;&#65039; <strong>To CHQ:</strong> 45 min Aegean flight</div>
+      </div>
+      <div class="pros">
+        <strong>Morning:</strong> Acropolis at opening (8 AM, &euro;20pp) &rarr; Acropolis Museum (&euro;10pp). <strong>Lunch:</strong> Souvlaki at Kostas in Syntagma (&euro;3.50) or meze at Karamanlidika (&euro;15pp). <strong>Afternoon:</strong> Walk through Plaka &rarr; Anafiotika (mini Cyclades neighbourhood!) &rarr; Monastiraki flea market. <strong>Sunset:</strong> Rooftop cocktails at A for Athens or Couleur Locale overlooking the Acropolis. <strong>Dinner:</strong> Taverna in Psyrri (Oineas, Avocado).
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:10px">
+        <a href="https://maps.google.com/?q=Acropolis+Athens" target="_blank" class="map-link">&#128205; Acropolis</a>
+        <a href="https://maps.google.com/?q=Plaka+Athens" target="_blank" class="map-link">&#128205; Plaka</a>
+        <a href="https://maps.google.com/?q=Monastiraki+Athens" target="_blank" class="map-link">&#128205; Monastiraki</a>
+        <a href="https://maps.google.com/?q=Anafiotika+Athens" target="_blank" class="map-link">&#128205; Anafiotika</a>
+      </div>
+    </div>
+  </div>
+  <div class="tip tip-pro"><strong>Logistics:</strong> If you book Air Canada YYZ&rarr;ATH, you could do an overnight in Athens going or coming. Book a separate Aegean flight ATH&rarr;CHQ for the next morning (~&euro;60). The Athens Metro runs from the airport to Monastiraki in 40 min (&euro;9).</div>
+</div>
+
+<!-- ======== COMPARISON TABLE ======== -->
+<div class="section">
+  <h2>&#128200; Head-to-Head</h2>
+  <p class="sub">How the top contenders actually stack up for this specific trip</p>
+  <div class="table-wrap">
+  <table class="compare-table">
+    <thead><tr><th>Category</th><th>Chania (Crete)</th><th>Santorini</th><th>Naxos</th><th>Rhodes</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Budget (7 nights, 2 ppl)</strong></td><td class="winner">$4,800</td><td>$7,500+</td><td>$5,200</td><td>$4,600</td></tr>
+      <tr><td><strong>Beaches</strong></td><td class="winner">World-class (Balos, Elafonissi)</td><td>Good (volcanic)</td><td>Great (Plaka, Prokopios)</td><td>Very good (Tsambika, Lindos)</td></tr>
+      <tr><td><strong>Food scene</strong></td><td class="winner">Exceptional (50+ great spots)</td><td>Good, overpriced</td><td>Very good, local</td><td>Good</td></tr>
+      <tr><td><strong>Activities variety</strong></td><td class="winner">Gorges, ruins, caves, snorkeling</td><td>Wine, sailing, caldera</td><td>Temples, villages, surf</td><td>Medieval town, Lindos, ruins</td></tr>
+      <tr><td><strong>7-day content</strong></td><td class="winner">Easily fills 7 days</td><td>3&ndash;4 days max</td><td>4&ndash;5 days</td><td>5&ndash;6 days</td></tr>
+      <tr><td><strong>Getting there</strong></td><td>1 stop (ATH/IST/FRA)</td><td>1&ndash;2 stops</td><td>2 stops or ferry</td><td>1 stop (ATH/IST)</td></tr>
+      <tr><td><strong>Aug crowds</strong></td><td>Moderate</td><td>Extreme</td><td>Moderate</td><td>Moderate</td></tr>
+      <tr><td><strong>Instagram factor</strong></td><td>High</td><td class="winner">Off the charts</td><td>High</td><td>High</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="tip tip-money"><strong>Bottom line:</strong> Santorini wins on Instagram, but Chania wins on literally everything else for a week-long trip on a $5K budget. Rhodes is close on price but can&rsquo;t match Crete&rsquo;s beach/food combo. Naxos is a dark horse but needs island-hopping to fill 7 days.</div>
+</div>
+
+<!-- ======== ISLAND-HOPPING OPTION ======== -->
+<div class="section">
+  <h2>&#128674; Future Trip: Island-Hopping Itinerary</h2>
+  <p class="sub">If you ever want to do the Cyclades properly</p>
+  <div class="island-card">
+    <div class="island-body">
+      <h3>The Classic Cyclades Loop <span class="tag tag-effort">10+ DAYS</span></h3>
+      <div class="island-sub">For a future trip when you have more time and budget</div>
+      <div class="pros" style="margin-bottom:6px">
+        <strong>Day 1&ndash;2:</strong> Athens (Acropolis, Plaka, rooftop bars)<br>
+        <strong>Day 3&ndash;5:</strong> Naxos (beaches, mountain villages, Portara)<br>
+        <strong>Day 6&ndash;7:</strong> Paros (Naoussa harbour, Golden Beach)<br>
+        <strong>Day 8&ndash;9:</strong> Milos (Sarakiniko, Kleftiko boat tour, Klima)<br>
+        <strong>Day 10&ndash;11:</strong> Santorini (Oia sunset, wine tour, caldera swim)<br>
+        <strong>Day 12:</strong> Fly home from JTR (Santorini) via ATH<br>
+        <strong>Budget:</strong> ~$7,000&ndash;9,000 CAD for two (12 days). Ferries between islands: &euro;30&ndash;60 each, buy on <a href="https://www.ferryhopper.com" target="_blank">FerryHopper</a>.
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /container -->
+
+<footer>
+  Made with &#10084;&#65039; for our Crete adventure &middot; Aug 2026<br>
+  <a href="greece.html">&larr; Back to itinerary</a> &middot;
+  <a href="greece-flights.html">Flight comparison</a> &middot;
+  <a href="greece-restaurants.html">Restaurant guide</a> &middot;
+  <a href="greece-hotels.html">Hotels vs Airbnb</a> &middot;
+  <a href="best-trip.html">Amalfi Coast trip</a>
+</footer>
+
+</body>
+</html>

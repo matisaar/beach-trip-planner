@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crete 2026 — Your Week in Chania &amp; the West Coast</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+  :root {
+    --ocean: #0077b6; --ocean-dark: #023e8a; --ocean-light: #00b4d8;
+    --sand: #f5e6d3; --sunset: #ff6b35; --coral: #e63946;
+    --palm: #2d6a4f; --dark: #1a1a2e; --gray: #6b7280;
+    --light: #f8fafc; --white: #ffffff; --gold: #f59e0b;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: var(--light); color: var(--dark); line-height: 1.7; }
+  .hero { background: linear-gradient(135deg, #023e8a 0%, #0077b6 50%, #00b4d8 100%); color: white; padding: 60px 24px 50px; text-align: center; }
+  .hero h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 900; margin-bottom: 8px; }
+  .hero p { font-size: 1rem; opacity: 0.85; max-width: 600px; margin: 0 auto 20px; }
+  .hero-stats { display: flex; gap: 28px; justify-content: center; flex-wrap: wrap; margin-top: 16px; }
+  .hero-stat { text-align: center; }
+  .hero-stat .num { font-size: 1.5rem; font-weight: 900; }
+  .hero-stat .label { font-size: 0.72rem; opacity: 0.7; }
+  .container { max-width: 780px; margin: 0 auto; padding: 0 20px; }
+  .section { padding: 32px 0; }
+  .section h2 { font-size: 1.35rem; font-weight: 800; margin-bottom: 4px; color: var(--ocean-dark); }
+  .section .sub { color: var(--gray); font-size: 0.85rem; margin-bottom: 16px; }
+  .card { background: white; border-radius: 14px; padding: 24px; margin-bottom: 16px; box-shadow: 0 3px 12px rgba(0,0,0,0.05); }
+  .card h3 { font-size: 1.1rem; font-weight: 800; margin-bottom: 4px; }
+  .card .card-sub { color: var(--gray); font-size: 0.82rem; margin-bottom: 12px; }
+  .budget-row { display: flex; align-items: center; margin-bottom: 6px; gap: 8px; }
+  .budget-label { width: 80px; font-size: 0.78rem; font-weight: 600; flex-shrink: 0; }
+  .budget-bar-bg { flex: 1; height: 8px; background: #e5e7eb; border-radius: 4px; overflow: hidden; }
+  .budget-bar-fill { height: 100%; border-radius: 4px; }
+  .budget-val { width: 70px; text-align: right; font-size: 0.78rem; font-weight: 600; color: var(--ocean-dark); flex-shrink: 0; }
+  .fill-flight { background: var(--ocean); }
+  .fill-stay { background: var(--sunset); }
+  .fill-food { background: var(--palm); }
+  .fill-activity { background: var(--coral); }
+  .fill-transport { background: var(--ocean-light); }
+  .airbnb-hero { background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.1); margin: 14px 0; }
+  .airbnb-hero img { width: 100%; height: 260px; object-fit: cover; }
+  .airbnb-hero .ah-body { padding: 20px 24px; }
+  .airbnb-hero .ah-badge { display: inline-block; font-size: 0.72rem; font-weight: 700; padding: 3px 10px; border-radius: 14px; background: linear-gradient(135deg, var(--palm), #40916c); color: white; margin-bottom: 10px; }
+  .airbnb-hero .ah-name { font-size: 1.2rem; font-weight: 800; margin-bottom: 2px; }
+  .airbnb-hero .ah-loc { font-size: 0.85rem; color: var(--gray); margin-bottom: 10px; }
+  .airbnb-hero .ah-stats { display: flex; gap: 16px; font-size: 0.85rem; margin-bottom: 10px; flex-wrap: wrap; }
+  .airbnb-hero .ah-stats .star { color: var(--coral); font-weight: 700; }
+  .airbnb-hero .ah-price { font-size: 1rem; margin-bottom: 14px; }
+  .airbnb-hero .ah-price strong { font-size: 1.15rem; }
+  .airbnb-hero .ah-price .total { color: var(--gray); font-size: 0.85rem; }
+  .airbnb-hero .ah-perks { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+  .airbnb-hero .ah-perk { background: var(--light); border-radius: 8px; padding: 5px 10px; font-size: 0.78rem; font-weight: 600; }
+  .airbnb-hero .ah-link { display: block; text-align: center; padding: 12px; background: linear-gradient(135deg, #FF385C, #e31c5f); color: white; text-decoration: none; font-weight: 700; font-size: 0.92rem; border-radius: 10px; transition: filter 0.2s; }
+  .airbnb-hero .ah-link:hover { filter: brightness(1.1); }
+  .day { background: white; border-radius: 14px; padding: 24px; margin-bottom: 16px; box-shadow: 0 3px 12px rgba(0,0,0,0.05); border-left: 4px solid var(--ocean); }
+  .day.chill { border-left-color: var(--palm); }
+  .day.adventure { border-left-color: var(--sunset); }
+  .day h3 { font-size: 1rem; font-weight: 800; color: var(--ocean-dark); margin-bottom: 2px; }
+  .day .day-vibe { font-size: 0.78rem; color: var(--gray); margin-bottom: 14px; }
+  .day .block { margin-bottom: 12px; }
+  .day .block:last-of-type { margin-bottom: 0; }
+  .day .block-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700; margin-bottom: 3px; }
+  .day .block-label.morning { color: var(--gold); }
+  .day .block-label.afternoon { color: var(--ocean); }
+  .day .block-label.evening { color: var(--sunset); }
+  .day .block p { font-size: 0.85rem; color: #444; }
+  .day .block p a { color: var(--ocean); text-decoration: none; font-weight: 600; }
+  .day .block p a:hover { text-decoration: underline; }
+  .day .or { font-size: 0.8rem; color: var(--palm); font-style: italic; margin-top: 4px; }
+  .day .day-footer { display: flex; gap: 10px; margin-top: 14px; font-size: 0.75rem; flex-wrap: wrap; align-items: center; padding-top: 10px; border-top: 1px solid #f0f0f0; }
+  .day .day-cost { color: var(--sunset); font-weight: 700; background: #fff7ed; padding: 2px 8px; border-radius: 6px; }
+  .day .day-map a { color: var(--palm); text-decoration: none; font-weight: 600; }
+  .eat { background: var(--light); border-radius: 8px; padding: 10px 12px; margin-top: 6px; font-size: 0.82rem; }
+  .eat .eat-name { font-weight: 700; }
+  .eat .eat-desc { color: var(--gray); }
+  .eat .eat-meta { margin-top: 2px; font-size: 0.78rem; }
+  .eat .eat-meta a { color: var(--ocean); text-decoration: none; font-weight: 600; }
+  .eat .eat-cost { color: var(--sunset); font-weight: 600; }
+  .tip { border-radius: 10px; padding: 12px 14px; font-size: 0.82rem; margin: 10px 0; line-height: 1.5; }
+  .tip-money { background: #dcfce7; border-left: 4px solid var(--palm); }
+  .tip-warn { background: #fef3c7; border-left: 4px solid var(--gold); }
+  .tip-pro { background: #dbeafe; border-left: 4px solid var(--ocean); }
+  .tip strong { font-weight: 700; }
+  .book-grid { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0; }
+  .book-btn { display: inline-flex; align-items: center; gap: 5px; padding: 9px 16px; border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 0.82rem; color: white; transition: all 0.2s; }
+  .book-btn:hover { transform: translateY(-1px); filter: brightness(1.1); }
+  .book-flights { background: var(--ocean); }
+  .book-stay { background: var(--sunset); }
+  .book-ferry { background: #7c3aed; }
+  .book-food { background: var(--coral); }
+  .book-maps { background: var(--palm); }
+  .hood-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 14px 0; }
+  .hood-card { background: white; border-radius: 12px; padding: 16px; box-shadow: 0 3px 12px rgba(0,0,0,0.05); }
+  .hood-card h4 { font-size: 0.88rem; font-weight: 800; margin-bottom: 2px; }
+  .hood-card .hc-dist { font-size: 0.72rem; color: var(--ocean); font-weight: 700; margin-bottom: 6px; }
+  .hood-card p { font-size: 0.8rem; color: #555; margin: 0; }
+  .hood-card .hc-meta { margin-top: 4px; font-size: 0.75rem; }
+  .hood-card .hc-meta a { color: var(--ocean); text-decoration: none; font-weight: 600; }
+  .hood-card .hc-stars { color: var(--gold); font-size: 0.78rem; font-weight: 700; }
+  .hood-section-label { font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; color: var(--ocean-dark); margin: 20px 0 8px; padding-bottom: 4px; border-bottom: 2px solid var(--ocean-light); }
+  .walk-list { list-style: none; padding: 0; margin: 10px 0; }
+  .walk-list li { font-size: 0.82rem; padding: 6px 0; border-bottom: 1px solid #f0f0f0; display: flex; justify-content: space-between; align-items: center; }
+  .walk-list li:last-child { border-bottom: none; }
+  .walk-list .wl-place { font-weight: 600; }
+  .walk-list .wl-place a { color: var(--dark); text-decoration: none; }
+  .walk-list .wl-place a:hover { color: var(--ocean); text-decoration: underline; }
+  .walk-list .wl-time { color: var(--ocean); font-weight: 700; font-size: 0.78rem; background: #dbeafe; padding: 2px 8px; border-radius: 6px; white-space: nowrap; }
+  .walk-list .wl-bus { color: var(--palm); background: #dcfce7; }
+  .walk-list .wl-car { color: var(--sunset); background: #fff7ed; }
+  .nav-links { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; margin: 20px 0 0; }
+  .nav-link { display: flex; align-items: center; gap: 8px; padding: 14px 16px; border-radius: 12px; text-decoration: none; font-weight: 700; font-size: 0.85rem; color: white; transition: all 0.2s; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.15); }
+  .nav-link:hover { transform: translateY(-2px); background: rgba(255,255,255,0.22); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+  .nav-link .nl-icon { font-size: 1.1rem; }
+  .nav-link .nl-text { display: flex; flex-direction: column; }
+  .nav-link .nl-title { font-weight: 800; font-size: 0.82rem; }
+  .nav-link .nl-sub { font-weight: 400; font-size: 0.68rem; opacity: 0.75; }
+  .compare-banner { background: linear-gradient(135deg, var(--sunset), var(--coral)); border-radius: 14px; padding: 20px 24px; margin: 20px 0; text-align: center; color: white; }
+  .compare-banner h3 { font-size: 1.1rem; font-weight: 900; margin-bottom: 6px; }
+  .compare-banner p { font-size: 0.85rem; opacity: 0.9; margin-bottom: 12px; }
+  .compare-banner a { display: inline-block; background: white; color: var(--coral); font-weight: 800; padding: 10px 24px; border-radius: 10px; text-decoration: none; font-size: 0.88rem; transition: all 0.2s; }
+  .compare-banner a:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+  footer { background: var(--dark); color: rgba(255,255,255,0.6); text-align: center; padding: 24px 20px; font-size: 0.78rem; margin-top: 20px; }
+  footer a { color: var(--ocean-light); }
+  @media (max-width: 640px) {
+    .hero h1 { font-size: 1.7rem; }
+    .card, .day { padding: 18px; }
+    .airbnb-hero img { height: 200px; }
+    .hood-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ======== HERO ======== -->
+<div class="hero">
+  <h1><img src="https://flagcdn.com/w40/gr.png" alt="🇬🇷" style="height:1em;vertical-align:-0.1em;margin-right:4px"> Crete 2026</h1>
+  <p>7 nights in a Venetian harbour apartment in <strong>Chania Old Town</strong> &mdash; the most beautiful city in Greece</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="num">7</div><div class="label">Nights</div></div>
+    <div class="hero-stat"><div class="num">Aug 22&ndash;29</div><div class="label">2026</div></div>
+    <div class="hero-stat"><div class="num">$4,800</div><div class="label">CAD Total</div></div>
+    <div class="hero-stat"><div class="num">Chania</div><div class="label">Home Base</div></div>
+  </div>
+  <div class="nav-links" style="max-width:780px;margin:20px auto 0;">
+    <a class="nav-link" href="greece-flights.html"><span class="nl-icon">&#9992;&#65039;</span><span class="nl-text"><span class="nl-title">Flights</span><span class="nl-sub">12+ routes compared</span></span></a>
+    <a class="nav-link" href="greece-hotels.html"><span class="nl-icon">&#127976;</span><span class="nl-text"><span class="nl-title">Hotels vs Airbnb</span><span class="nl-sub">Price comparison</span></span></a>
+    <a class="nav-link" href="greece-restaurants.html"><span class="nl-icon">&#127869;</span><span class="nl-text"><span class="nl-title">Restaurant Guide</span><span class="nl-sub">45+ rated spots</span></span></a>
+    <a class="nav-link" href="greece-alternatives.html"><span class="nl-icon">&#127758;</span><span class="nl-text"><span class="nl-title">Other Islands</span><span class="nl-sub">Santorini, Naxos&hellip;</span></span></a>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ======== YOUR AIRBNB ======== -->
+<div class="section">
+  <h2>&#127968; Your Airbnb</h2>
+  <p class="sub">Target pick &mdash; Venetian Old Town apartment, Chania</p>
+
+  <div class="airbnb-hero">
+    <img src="https://images.unsplash.com/photo-1555993539-1732b0258235?w=800&h=400&fit=crop" alt="Chania Venetian Harbor at sunset">
+    <div class="ah-body">
+      <div class="ah-badge">&#127775; Top Pick &mdash; Old Town</div>
+      <div class="ah-name">Venetian Harbour Apartment</div>
+      <div class="ah-loc"><a href="https://maps.google.com/?q=Zambeliou+Street+Chania+Crete" target="_blank">Zambeliou Street, Old Town, Chania</a> &mdash; 2 min walk to harbour</div>
+      <div class="ah-stats">
+        <span>&#127968; 1-bed apartment</span>
+        <span>&#127859; Full kitchen</span>
+        <span>&#10052;&#65039; A/C</span>
+        <span>&#128246; WiFi</span>
+      </div>
+      <div class="ah-price">
+        <strong>~$150 CAD</strong> / night &middot; <span class="total">$1,050 CAD total for 7 nights</span>
+      </div>
+      <div class="ah-perks">
+        <div class="ah-perk">&#127758; Rooftop terrace</div>
+        <div class="ah-perk">&#128694; Walk to everything</div>
+        <div class="ah-perk">&#127859; Cook at home</div>
+        <div class="ah-perk">&#9992;&#65039; 20 min from CHQ airport</div>
+      </div>
+      <a class="ah-link" href="https://www.airbnb.ca/s/Chania-Old-Town--Crete--Greece/homes?checkin=2026-08-22&checkout=2026-08-29&adults=2&price_max=200&min_bedrooms=1&amenities%5B%5D=4&amenities%5B%5D=8" target="_blank">Search Chania Old Town Airbnbs &rarr;</a>
+    </div>
+  </div>
+
+  <div class="tip tip-pro"><strong>What to look for:</strong> A renovated Venetian building on Zambeliou, Kanevaro, or Theotokopoulou street. Rooftop terrace = sunset views over the lighthouse every night for free. 1-bedroom with kitchen is the sweet spot under $160/night. Book by March for best selection &mdash; Old Town fills up fast for August.</div>
+  <div class="tip tip-money"><strong>Budget hack:</strong> Crete Airbnbs are 30&ndash;40% cheaper than Santorini. A harbour-view apartment in Chania for $150/night would cost $250+ in Oia. You get a better location AND save $700.</div>
+</div>
+
+<!-- ======== NEIGHBOURHOOD ======== -->
+<div class="section">
+  <h2>&#127963;&#65039; Your Neighbourhood &mdash; Chania Old Town</h2>
+  <p class="sub">Venetian harbour, narrow lanes, everything on foot</p>
+
+  <div class="tip tip-pro" style="margin-top:0">
+    <strong>Location:</strong> Your Airbnb is in the heart of the Venetian Old Town on <a href="https://maps.google.com/?q=Zambeliou+Street+Chania+Crete" target="_blank">Zambeliou Street</a> &mdash; the most atmospheric lane in Chania. The harbour, restaurants, museums, and beaches are all walking distance. No car needed in town.
+  </div>
+
+  <!-- Walking distances -->
+  <div class="card">
+    <h3>&#128694; How Far Is Everything?</h3>
+    <div class="card-sub">Walking times from the Airbnb door</div>
+    <ul class="walk-list">
+      <li><span class="wl-place"><a href="https://maps.google.com/?q=Venetian+Harbour+Chania+Crete" target="_blank">Venetian Harbour</a></span> <span class="wl-time">2 min &#128694;</span></li>
+      <li><span class="wl-place"><a href="https://maps.google.com/?q=Tamam+Restaurant+Chania" target="_blank">Tamam</a> (best restaurant)</span> <span class="wl-time">1 min &#128694;</span></li>
+      <li><span class="wl-place"><a href="https://maps.google.com/?q=Bougatsa+Iordanis+Chania" target="_blank">Bougatsa Iordanis</a> (legendary pastry)</span> <span class="wl-time">3 min &#128694;</span></li>
+      <li><span class="wl-place"><a href="https://maps.google.com/?q=Municipal+Market+Chania+Crete" target="_blank">Agora Municipal Market</a></span> <span class="wl-time">5 min &#128694;</span></li>
+      <li><span class="wl-place"><a href="https://maps.google.com/?q=Firkas+Fortress+Chania+Crete" target="_blank">Firkas Fortress</a></span> <span class="wl-time">4 min &#128694;</span></li>
+      <li><span class="wl-place"><a href="https://maps.google.com/?q=Maritime+Museum+Chania+Crete" target="_blank">Maritime Museum of Crete</a></span> <span class="wl-time">5 min &#128694;</span></li>
+      <li><span class="wl-place"><a href="https://maps.google.com/?q=Archaeological+Museum+Chania+Crete" target="_blank">Archaeological Museum</a></span> <span class="wl-time">3 min &#128694;</span></li>
+      <li><span class="wl-place"><a href="https://maps.google.com/?q=Lighthouse+Chania+Crete" target="_blank">Venetian Lighthouse</a> (walk along seawall)</span> <span class="wl-time">10 min &#128694;</span></li>
+      <li><span class="wl-place"><a href="https://maps.google.com/?q=Koum+Kapi+Beach+Chania+Crete" target="_blank">Koum Kapi beach</a></span> <span class="wl-time">8 min &#128694;</span></li>
+      <li><span class="wl-place"><a href="https://maps.google.com/?q=Nea+Chora+Beach+Chania+Crete" target="_blank">Nea Chora beach</a></span> <span class="wl-time">12 min &#128694;</span></li>
+      <li><span class="wl-place"><a href="https://maps.google.com/?q=KTEL+Bus+Station+Chania+Crete" target="_blank">KTEL Bus Station</a></span> <span class="wl-time wl-bus">5 min &#128656;</span></li>
+    </ul>
+    <div class="tip tip-warn" style="margin-top:10px"><strong>August heat:</strong> It&rsquo;s 30&ndash;34&deg;C. Walk in the morning or after 5 PM. The Old Town lanes are shaded and cooler than open streets. Carry water everywhere.</div>
+  </div>
+
+  <div class="tip tip-pro"><strong>&#127829; Eating:</strong> 20+ restaurants within 5 min walk &mdash; <a href="https://maps.google.com/?q=Tamam+Restaurant+Chania" target="_blank">Tamam</a> (1 min, &euro;15&ndash;25pp) is your go-to for Cretan food. Cook 3 nights at the Airbnb. <a href="greece-restaurants.html">Full 45+ restaurant guide &rarr;</a></div>
+  <div class="tip tip-money"><strong>&#128722; Groceries:</strong> <a href="https://maps.google.com/?q=Municipal+Market+Chania+Crete" target="_blank">Agora Market</a> (5 min) for fresh produce, cheese, olives. Mini market on Halidon for basics. Fresh bread from <a href="https://maps.google.com/?q=Bougatsa+Iordanis+Chania" target="_blank">Iordanis</a> every morning (&euro;2&ndash;4).</div>
+
+  <!-- Things to do nearby -->
+  <div class="hood-section-label">&#127965;&#65039; Things to Do Within Walking Distance</div>
+  <div class="hood-grid">
+    <div class="hood-card">
+      <h4>Venetian Lighthouse Walk</h4>
+      <div class="hc-dist">10 min walk along the harbour wall</div>
+      <p>Walk the full length of the old harbour seawall to the iconic Venetian lighthouse. Best at sunset &mdash; the light on the harbour is unreal. Free. Go early to avoid crowds on the narrow path.</p>
+      <div class="hc-meta"><span class="hc-stars">&#9733; 4.7</span> &middot; Free &middot; <a href="https://maps.google.com/?q=Lighthouse+Chania+Crete" target="_blank">Map</a></div>
+    </div>
+    <div class="hood-card">
+      <h4>Maritime Museum of Crete</h4>
+      <div class="hc-dist">5 min walk &mdash; inside Firkas Fortress</div>
+      <p>Covers Cretan seafaring from Bronze Age to WWII. Small but excellent &mdash; the Battle of Crete exhibit is intense. Under an hour. A/C inside, great heat escape.</p>
+      <div class="hc-meta"><span class="hc-stars">&#9733; 4.5</span> &middot; &euro;4 &middot; <a href="https://maps.google.com/?q=Maritime+Museum+Chania+Crete" target="_blank">Map</a></div>
+    </div>
+    <div class="hood-card">
+      <h4>Splantzia Quarter</h4>
+      <div class="hc-dist">3 min walk east of harbour</div>
+      <p>The bohemian neighbourhood just behind the harbour. Plane trees, hidden courtyards, artisan shops, and the best tavernas the tourists miss. Wander with no plan.</p>
+      <div class="hc-meta"><span class="hc-stars">&#9733; 4.6</span> &middot; Free &middot; <a href="https://maps.google.com/?q=Splantzia+Chania+Crete" target="_blank">Map</a></div>
+    </div>
+    <div class="hood-card">
+      <h4>Nea Chora Beach</h4>
+      <div class="hc-dist">12 min walk west of Old Town</div>
+      <p>Small sandy beach with calm water. Local crowd, no tourist buses. Sunbeds &euro;8/pair or lay a towel for free. Fish tavernas right on the sand &mdash; <a href="https://maps.google.com/?q=Pallas+Nea+Chora+Chania" target="_blank">Pallas</a> is the move.</p>
+      <div class="hc-meta"><span class="hc-stars">&#9733; 4.4</span> &middot; Free &middot; <a href="https://maps.google.com/?q=Nea+Chora+Beach+Chania+Crete" target="_blank">Map</a></div>
+    </div>
+  </div>
+
+  <!-- Getting around -->
+  <div class="card" style="margin-top:16px">
+    <h3>&#128652; Getting Around From Chania</h3>
+    <div class="card-sub">You&rsquo;ll need a car for 3 days, bus/foot for the rest</div>
+    <p style="font-size:0.85rem;color:#444;margin-bottom:10px">
+      <strong>On foot:</strong> Chania Old Town is fully walkable. Everything in the neighbourhood section above is on foot. You don&rsquo;t need a car for town days.
+    </p>
+    <p style="font-size:0.85rem;color:#444;margin-bottom:10px">
+      <strong>KTEL bus:</strong> <a href="https://maps.google.com/?q=KTEL+Bus+Station+Chania+Crete" target="_blank">KTEL bus station</a> is a 5-min taxi from Old Town. Buses run to <a href="https://maps.google.com/?q=Rethymno+Old+Town+Crete" target="_blank">Rethymno</a> (1 hr, &euro;7), <a href="https://maps.google.com/?q=Omalos+Crete" target="_blank">Omalos / Samaria Gorge</a> (1 hr, &euro;8), and <a href="https://maps.google.com/?q=Heraklion+Crete" target="_blank">Heraklion</a> (2.5 hr, &euro;15). Buy at the station or online at <a href="https://www.e-ktel.com/en/" target="_blank">e-ktel.com</a>.
+    </p>
+    <p style="font-size:0.85rem;color:#444;margin-bottom:10px">
+      <strong>Rental car (3 days):</strong> Essential for <a href="https://maps.google.com/?q=Balos+Lagoon+Crete" target="_blank">Balos</a>, <a href="https://maps.google.com/?q=Elafonissi+Beach+Crete" target="_blank">Elafonissi</a>, and <a href="https://maps.google.com/?q=Seitan+Limania+Crete" target="_blank">Seitan Limania</a>. Buses exist but are slow and infrequent. Rent from the airport or Old Town pickup. ~&euro;35&ndash;45/day in August. Book ahead on <a href="https://www.discovercars.com/" target="_blank">DiscoverCars</a>.
+    </p>
+    <p style="font-size:0.85rem;color:#444;margin-bottom:10px">
+      <strong>Samaria Gorge day:</strong> Special KTEL bus package &mdash; bus to <a href="https://maps.google.com/?q=Omalos+Crete" target="_blank">Omalos</a> (6:15 AM), you hike down, ferry from <a href="https://maps.google.com/?q=Agia+Roumeli+Crete" target="_blank">Agia Roumeli</a> to <a href="https://maps.google.com/?q=Hora+Sfakion+Crete" target="_blank">Hora Sfakion</a>, bus back. No car needed &mdash; the road back is different from the start.
+    </p>
+    <p style="font-size:0.85rem;color:#444">
+      <strong>Airport:</strong> <a href="https://maps.google.com/?q=Chania+International+Airport" target="_blank">CHQ airport</a> is 15 min by taxi (&euro;25) or 30 min by city bus from <a href="https://maps.google.com/?q=KTEL+Bus+Station+Chania+Crete" target="_blank">KTEL station</a>.
+    </p>
+  </div>
+
+  <div class="tip tip-warn"><strong>Driving on Crete:</strong> Roads are good but mountain roads are narrow and winding. Greeks drive fast. Park outside Old Town &mdash; there&rsquo;s a lot at <a href="https://maps.google.com/?q=Public+Parking+1866+Square+Chania" target="_blank">1866 Square</a> (&euro;3/day). Don&rsquo;t drive into the Old Town &mdash; it&rsquo;s pedestrian.</div>
+</div>
+
+<!-- ======== BUDGET ======== -->
+<div class="section">
+  <h2>&#128176; Budget Breakdown</h2>
+  <p class="sub">~$4,800 CAD all-in for two people, 7 nights</p>
+  <div class="card">
+    <div class="budget-row"><div class="budget-label">&#9992;&#65039; Flights</div><div class="budget-bar-bg"><div class="budget-bar-fill fill-flight" style="width:40%"></div></div><div class="budget-val">$1,950</div></div>
+    <div class="budget-row"><div class="budget-label">&#127968; Airbnb</div><div class="budget-bar-bg"><div class="budget-bar-fill fill-stay" style="width:22%"></div></div><div class="budget-val">$1,050</div></div>
+    <div class="budget-row"><div class="budget-label">&#127837; Food</div><div class="budget-bar-bg"><div class="budget-bar-fill fill-food" style="width:12%"></div></div><div class="budget-val">$550</div></div>
+    <div class="budget-row"><div class="budget-label">&#127965;&#65039; Activities</div><div class="budget-bar-bg"><div class="budget-bar-fill fill-activity" style="width:7%"></div></div><div class="budget-val">$300</div></div>
+    <div class="budget-row"><div class="budget-label">&#128663; Car+Bus</div><div class="budget-bar-bg"><div class="budget-bar-fill fill-transport" style="width:10%"></div></div><div class="budget-val">$500</div></div>
+    <div class="budget-row"><div class="budget-label">&#128178; Buffer</div><div class="budget-bar-bg"><div class="budget-bar-fill" style="width:9%;background:var(--gray)"></div></div><div class="budget-val">$450</div></div>
+    <div style="text-align:right;margin-top:8px;font-size:0.92rem;font-weight:800;color:var(--ocean-dark);">Total &asymp; $4,800 CAD</div>
+  </div>
+  <div class="tip tip-money"><strong>$500 cheaper than Italy!</strong> Crete is significantly cheaper for food, accommodation, and activities. Flights are similar. You&rsquo;ll eat better for less &mdash; a full taverna dinner is &euro;12&ndash;18pp vs &euro;20&ndash;30pp on the Amalfi Coast.</div>
+</div>
+
+<!-- ======== DAY-BY-DAY ITINERARY ======== -->
+<div class="section">
+  <h2>&#128197; Day-by-Day Itinerary</h2>
+  <p class="sub">Flexible vibes &mdash; swap any day around, nothing is locked</p>
+
+  <!-- DAY 1 -->
+  <div class="day">
+    <h3>Day 1 &mdash; Arrival Day &#9992;&#65039;</h3>
+    <div class="day-vibe">Sat Aug 22 &middot; Travel &amp; settle in</div>
+    <div class="block"><div class="block-label morning">&#127749; Arrive</div>
+      <p>Land at <strong><a href="https://maps.google.com/?q=Chania+International+Airport" target="_blank">Chania (CHQ)</a></strong>. Taxi to Old Town (&euro;25, 15 min) or pre-book a transfer. CHQ is tiny &mdash; you&rsquo;ll be in a cab within 10 min of landing. Alternatively fly into <strong><a href="https://maps.google.com/?q=Athens+International+Airport" target="_blank">Athens (ATH)</a></strong> and connect on <a href="https://en.aegeanair.com/" target="_blank">Aegean Airlines</a> to CHQ (45 min, ~&euro;50&ndash;80).</p>
+    </div>
+    <div class="block"><div class="block-label afternoon">&#127793; Settle</div>
+      <p>Check into your Old Town apartment. Drop bags, grab a freddo espresso (&euro;3) from any kafeneio. Walk to <strong><a href="https://maps.google.com/?q=Municipal+Market+Chania+Crete" target="_blank">Agora Market</a></strong> for olive oil, tomatoes, feta, bread &mdash; breakfast sorted for the week.</p>
+    </div>
+    <div class="block"><div class="block-label evening">&#127769; Evening</div>
+      <p>Sunset walk along <strong><a href="https://maps.google.com/?q=Venetian+Harbour+Chania+Crete" target="_blank">Venetian Harbour</a></strong>. The light on the water at dusk is otherworldly. First dinner at your 1-min-walk neighbour.</p>
+      <div class="eat"><span class="eat-name">Tamam</span> &mdash; <span class="eat-desc">creative Cretan in a converted Ottoman bathhouse. Order the lamb with stamnagathi (wild greens).</span><div class="eat-meta"><a href="https://maps.google.com/?q=Tamam+Restaurant+Chania" target="_blank">Map</a> &middot; <span class="eat-cost">~&euro;20pp</span></div></div>
+    </div>
+    <div class="day-footer">
+      <span class="day-cost">~$80 taxi + dinner</span>
+      <span class="day-map"><a href="https://www.google.com/maps/dir/Chania+International+Airport/Venetian+Harbour+Chania" target="_blank">&#128506; Route map</a></span>
+    </div>
+  </div>
+
+  <!-- DAY 2 -->
+  <div class="day chill">
+    <h3>Day 2 &mdash; Chania Old Town &#127963;&#65039;</h3>
+    <div class="day-vibe">Sun Aug 23 &middot; Harbour, history &amp; beach</div>
+    <div class="block"><div class="block-label morning">&#9728;&#65039; Morning</div>
+      <p>Start at <strong><a href="https://maps.google.com/?q=Bougatsa+Iordanis+Chania" target="_blank">Bougatsa Iordanis</a></strong> &mdash; legendary custard pie (&euro;3.50), the best breakfast in Crete. Then walk the full <strong><a href="https://maps.google.com/?q=Venetian+Harbour+Chania+Crete" target="_blank">Venetian Harbour</a></strong> loop. Visit the <strong><a href="https://maps.google.com/?q=Maritime+Museum+Chania+Crete" target="_blank">Maritime Museum</a></strong> (&euro;4) inside Firkas Fortress, then walk out to the <strong><a href="https://maps.google.com/?q=Lighthouse+Chania+Crete" target="_blank">Lighthouse</a></strong>.</p>
+    </div>
+    <div class="block"><div class="block-label afternoon">&#127754; Afternoon</div>
+      <p>Wander through <strong><a href="https://maps.google.com/?q=Splantzia+Chania+Crete" target="_blank">Splantzia</a></strong> quarter. Browse the leather shops on Stivanadika street. Then walk to <strong><a href="https://maps.google.com/?q=Nea+Chora+Beach+Chania+Crete" target="_blank">Nea Chora beach</a></strong> (12 min) for your first swim. The water is warm and calm.</p>
+      <div class="eat"><span class="eat-name">Pallas</span> &mdash; <span class="eat-desc">feet-in-the-sand fish taverna right at Nea Chora beach. Fresh catch grilled whole.</span><div class="eat-meta"><a href="https://maps.google.com/?q=Pallas+Nea+Chora+Chania" target="_blank">Map</a> &middot; <span class="eat-cost">~&euro;18pp</span></div></div>
+    </div>
+    <div class="block"><div class="block-label evening">&#127769; Evening</div>
+      <p>Sunset drinks on the harbour wall. Dinner at the waterfront &mdash; splurge on seafood.</p>
+      <div class="eat"><span class="eat-name">Thalassino Ageri</span> &mdash; <span class="eat-desc">harbour-side seafood, romantic table on the water. Order the grilled octopus.</span><div class="eat-meta"><a href="https://maps.google.com/?q=Thalassino+Ageri+Chania" target="_blank">Map</a> &middot; <span class="eat-cost">~&euro;30pp</span></div></div>
+    </div>
+    <div class="day-footer">
+      <span class="day-cost">~$60</span>
+      <span class="day-map"><a href="https://www.google.com/maps/dir/Venetian+Harbour+Chania/Maritime+Museum+Chania/Lighthouse+Chania/Nea+Chora+Beach+Chania" target="_blank">&#128506; Route map</a></span>
+    </div>
+  </div>
+
+  <!-- DAY 3 -->
+  <div class="day adventure">
+    <h3>Day 3 &mdash; Balos Lagoon &amp; Gramvousa &#127754;</h3>
+    <div class="day-vibe">Mon Aug 24 &middot; The famous lagoon</div>
+    <div class="block"><div class="block-label morning">&#127774; Morning</div>
+      <p>Pick up rental car. Drive 1 hr west to <strong><a href="https://maps.google.com/?q=Kissamos+Crete" target="_blank">Kissamos</a></strong> harbour. Take the <strong><a href="https://maps.google.com/?q=Balos+Lagoon+Crete" target="_blank">Balos</a></strong> ferry (&euro;20pp return, 1 hr). The lagoon appears as the boat rounds the cape &mdash; Caribbean-blue water, white sand, waist-deep for 200m. Or drive the dirt road to the Balos parking lot and hike down (30 min, steep, bring good shoes).</p>
+    </div>
+    <div class="block"><div class="block-label afternoon">&#9971;&#65039; Afternoon</div>
+      <p>Swim all day in that turquoise lagoon. Scramble up to <strong><a href="https://maps.google.com/?q=Gramvousa+Fortress+Crete" target="_blank">Gramvousa fortress</a></strong> (if arriving by ferry) for 360&deg; views &mdash; an old Venetian castle on a barren island. Pack lunch and loads of water &mdash; there&rsquo;s nothing to buy at Balos.</p>
+    </div>
+    <div class="block"><div class="block-label evening">&#127769; Evening</div>
+      <p>Ferry back to Kissamos. Dinner on the harbour before driving back to Chania.</p>
+      <div class="eat"><span class="eat-name">Papadakis</span> &mdash; <span class="eat-desc">honest harbour taverna in Kissamos. Fresh fish, cold beer, &euro;12.</span><div class="eat-meta"><a href="https://maps.google.com/?q=Papadakis+Kissamos+Crete" target="_blank">Map</a> &middot; <span class="eat-cost">~&euro;14pp</span></div></div>
+    </div>
+    <div class="day-footer">
+      <span class="day-cost">~$80 (ferry + food + fuel)</span>
+      <span class="day-map"><a href="https://www.google.com/maps/dir/Chania+Crete/Kissamos+Crete/Balos+Lagoon+Crete" target="_blank">&#128506; Route map</a></span>
+    </div>
+  </div>
+
+  <!-- DAY 4 -->
+  <div class="day adventure">
+    <h3>Day 4 &mdash; Samaria Gorge &#9968;&#65039;</h3>
+    <div class="day-vibe">Tue Aug 25 &middot; Europe&rsquo;s longest gorge</div>
+    <div class="block"><div class="block-label morning">&#127748; Morning</div>
+      <p>Return rental car. Take the 6:15 AM KTEL bus from <a href="https://maps.google.com/?q=KTEL+Bus+Station+Chania+Crete" target="_blank">Chania bus station</a> to <strong><a href="https://maps.google.com/?q=Omalos+Crete" target="_blank">Omalos</a></strong> (1 hr, &euro;8). Enter <strong><a href="https://maps.google.com/?q=Samaria+Gorge+Crete" target="_blank">Samaria Gorge</a></strong> (&euro;5 entry). The hike is 16 km, mostly downhill, through massive cliff walls, pine forests, and wild goat territory. The &ldquo;Iron Gates&rdquo; &mdash; where the gorge narrows to 3 metres wide &mdash; is unforgettable. Budget 5&ndash;7 hours.</p>
+    </div>
+    <div class="block"><div class="block-label afternoon">&#127966;&#65039; Afternoon</div>
+      <p>Emerge at <strong><a href="https://maps.google.com/?q=Agia+Roumeli+Crete" target="_blank">Agia Roumeli</a></strong> on the Libyan Sea. Jump in the water &mdash; you&rsquo;ve earned it. The beach here is pebbly but gorgeous. Grab a late lunch.</p>
+      <div class="eat"><span class="eat-name">Livikon</span> &mdash; <span class="eat-desc">post-hike feast at the Agia Roumeli waterfront. Huge portions, cold Mythos.</span><div class="eat-meta"><a href="https://maps.google.com/?q=Agia+Roumeli+Crete+taverna" target="_blank">Map</a> &middot; <span class="eat-cost">~&euro;12pp</span></div></div>
+    </div>
+    <div class="block"><div class="block-label evening">&#127769; Evening</div>
+      <p>Ferry from Agia Roumeli to <strong><a href="https://maps.google.com/?q=Hora+Sfakion+Crete" target="_blank">Hora Sfakion</a></strong> (&euro;13, 1 hr &mdash; stunning coast views). KTEL bus back to Chania (2 hr, &euro;8). Collapse into bed. Worth every step.</p>
+    </div>
+    <div class="day-footer">
+      <span class="day-cost">~$55 (bus + entry + ferry + food)</span>
+      <span class="day-map"><a href="https://www.google.com/maps/dir/Chania+Crete/Omalos+Crete/Samaria+Gorge+Crete/Agia+Roumeli+Crete/Hora+Sfakion+Crete" target="_blank">&#128506; Route map</a></span>
+    </div>
+  </div>
+
+  <!-- DAY 5 -->
+  <div class="day adventure">
+    <h3>Day 5 &mdash; Elafonissi Beach &#127965;&#65039;</h3>
+    <div class="day-vibe">Wed Aug 26 &middot; Pink sand paradise</div>
+    <div class="block"><div class="block-label morning">&#127774; Morning</div>
+      <p>Pick up rental car again. Drive 75 min southwest to <strong><a href="https://maps.google.com/?q=Elafonissi+Beach+Crete" target="_blank">Elafonissi Beach</a></strong>. Pink-white sand, knee-deep turquoise lagoons, warm water. Wade across to the island side for more space. Bring an umbrella or rent one (&euro;8). Arrive before 10 AM to beat the bus crowds.</p>
+    </div>
+    <div class="block"><div class="block-label afternoon">&#127966;&#65039; Afternoon</div>
+      <p>On the way back, stop at <strong><a href="https://maps.google.com/?q=Chrysoskalitissa+Monastery+Crete" target="_blank">Chrysoskalitissa Monastery</a></strong> (10 min from Elafonissi) &mdash; whitewashed cliff-top monastery with sea views, free. Then continue to <strong><a href="https://maps.google.com/?q=Falassarna+Beach+Crete" target="_blank">Falassarna Beach</a></strong> (30 min north) for the best sunset on Crete. Wide sandy beach, west-facing, the sun drops straight into the sea.</p>
+      <div class="eat"><span class="eat-name">Sunset (Falassarna)</span> &mdash; <span class="eat-desc">aptly named beach taverna. Grilled lamb chops, local wine, sunset included.</span><div class="eat-meta"><a href="https://maps.google.com/?q=Sunset+Restaurant+Falassarna+Crete" target="_blank">Map</a> &middot; <span class="eat-cost">~&euro;15pp</span></div></div>
+    </div>
+    <div class="block"><div class="block-label evening">&#127769; Evening</div>
+      <p>Drive back to Chania (50 min). Late night harbour stroll &mdash; the harbour bars stay lively till 2 AM.</p>
+    </div>
+    <div class="day-footer">
+      <span class="day-cost">~$60 (fuel + food)</span>
+      <span class="day-map"><a href="https://www.google.com/maps/dir/Chania+Crete/Elafonissi+Beach+Crete/Chrysoskalitissa+Monastery/Falassarna+Beach+Crete/Chania+Crete" target="_blank">&#128506; Route map</a></span>
+    </div>
+  </div>
+
+  <!-- DAY 6 -->
+  <div class="day chill">
+    <h3>Day 6 &mdash; Rethymno Day Trip &#127963;&#65039;</h3>
+    <div class="day-vibe">Thu Aug 27 &middot; Venetian fortress &amp; old town</div>
+    <div class="block"><div class="block-label morning">&#9728;&#65039; Morning</div>
+      <p>Return rental car. KTEL bus to <strong><a href="https://maps.google.com/?q=Rethymno+Old+Town+Crete" target="_blank">Rethymno</a></strong> (1 hr, &euro;7 &mdash; buses every 30 min). Explore the <strong><a href="https://maps.google.com/?q=Fortezza+Rethymno+Crete" target="_blank">Fortezza</a></strong> (&euro;4) &mdash; massive Venetian fortress on the headland, panoramic views of the coast and White Mountains. Walk the old town lanes, find the <strong><a href="https://maps.google.com/?q=Rimondi+Fountain+Rethymno" target="_blank">Rimondi Fountain</a></strong>.</p>
+    </div>
+    <div class="block"><div class="block-label afternoon">&#127829; Afternoon</div>
+      <p>Lunch at one of Crete&rsquo;s most celebrated restaurants, then swim at the town beach or wander through the old Venetian quarter. Buy local herbs, honey, or raki as souvenirs.</p>
+      <div class="eat"><span class="eat-name">Avli</span> &mdash; <span class="eat-desc">converted Venetian mansion. Award-winning contemporary Cretan. Book ahead.</span><div class="eat-meta"><a href="https://maps.google.com/?q=Avli+Restaurant+Rethymno" target="_blank">Map</a> &middot; <span class="eat-cost">~&euro;30pp</span></div></div>
+    </div>
+    <div class="block"><div class="block-label evening">&#127769; Evening</div>
+      <p>Bus back to Chania. Light dinner at home or grab souvlaki from a gyrádiko (&euro;3&ndash;4 wrap).</p>
+    </div>
+    <div class="day-footer">
+      <span class="day-cost">~$65</span>
+      <span class="day-map"><a href="https://www.google.com/maps/dir/Chania+Crete/Rethymno+Old+Town+Crete/Fortezza+Rethymno/Chania+Crete" target="_blank">&#128506; Route map</a></span>
+    </div>
+  </div>
+
+  <!-- DAY 7 -->
+  <div class="day chill">
+    <h3>Day 7 &mdash; Last Day Vibes &#127773;</h3>
+    <div class="day-vibe">Fri Aug 28 &middot; Lake, villages &amp; chill</div>
+    <div class="block"><div class="block-label morning">&#9728;&#65039; Morning</div>
+      <p>Sleep in. Option A: Take a day-trip taxi or bus to <strong><a href="https://maps.google.com/?q=Lake+Kournas+Crete" target="_blank">Lake Kournas</a></strong> (45 min east) &mdash; Crete&rsquo;s only freshwater lake. Swim in the cool water, rent pedalos (&euro;8), lunch at a lakeside taverna. Option B: Taxi to <strong><a href="https://maps.google.com/?q=Seitan+Limania+Crete" target="_blank">Seitan Limania</a></strong> (20 min) &mdash; dramatic hidden cove with turquoise water between cliffs. Steep descent, bring shoes.</p>
+    </div>
+    <div class="block"><div class="block-label afternoon">&#127754; Afternoon</div>
+      <p>Back to Chania. One last loop through the Old Town. <a href="https://maps.google.com/?q=Municipal+Market+Chania+Crete" target="_blank">Agora Market</a> for olive oil, honey, and herbs to take home. Pick up mountain tea (<em>tsai tou vounou</em>) &mdash; the best souvenir.</p>
+      <div class="eat"><span class="eat-name">Glossitses</span> &mdash; <span class="eat-desc">tiny creative Cretan. Seasonal menu, book ahead. One of Chania&rsquo;s best-kept secrets.</span><div class="eat-meta"><a href="https://maps.google.com/?q=Glossitses+Chania" target="_blank">Map</a> &middot; <span class="eat-cost">~&euro;25pp</span></div></div>
+    </div>
+    <div class="block"><div class="block-label evening">&#127769; Evening</div>
+      <p>Last sunset from the harbour wall. Splurge dinner overlooking the water, or keep it casual at a Splantzia courtyard taverna.</p>
+      <div class="eat"><span class="eat-name">Salis</span> &mdash; <span class="eat-desc">upscale seafood right on the harbour. The tasting menu is &euro;45pp and worth every cent.</span><div class="eat-meta"><a href="https://maps.google.com/?q=Salis+Restaurant+Chania" target="_blank">Map</a> &middot; <span class="eat-cost">~&euro;40pp</span></div></div>
+      <p class="or">Or keep it casual at Tamam again &mdash; can&rsquo;t go wrong</p>
+    </div>
+    <div class="day-footer">
+      <span class="day-cost">~$60&ndash;$150</span>
+      <span class="day-map"><a href="https://www.google.com/maps/dir/Chania+Crete/Lake+Kournas+Crete/Chania+Crete" target="_blank">&#128506; Route map</a></span>
+    </div>
+  </div>
+
+  <!-- DAY 8 -->
+  <div class="day">
+    <h3>Day 8 &mdash; Departure &#9992;&#65039;</h3>
+    <div class="day-vibe">Sat Aug 29 &middot; Yia sas, Crete!</div>
+    <div class="block"><div class="block-label morning">&#128092; Morning</div>
+      <p>Check out. One last freddo from the harbour kafeneio. Taxi to <strong><a href="https://maps.google.com/?q=Chania+International+Airport" target="_blank">CHQ airport</a></strong> (&euro;25, 15 min). The airport is small &mdash; arrive 2 hrs before your flight. If flying via <a href="https://maps.google.com/?q=Athens+International+Airport" target="_blank">Athens</a>, you&rsquo;ll connect at ATH (allow 90 min layover minimum).</p>
+    </div>
+    <div class="tip tip-warn"><strong>Flight tip:</strong> Book a midday or afternoon flight. Morning flights out of CHQ are limited and pricey. The &euro;25 taxi is the only realistic way to the airport unless your KTEL bus timing lines up.</div>
+    <div class="day-footer">
+      <span class="day-cost">~$40 taxi</span>
+      <span class="day-map"><a href="https://www.google.com/maps/dir/Venetian+Harbour+Chania/Chania+International+Airport" target="_blank">&#128506; Route map</a></span>
+    </div>
+  </div>
+</div>
+
+<!-- ======== BOOK EVERYTHING ======== -->
+<div class="section">
+  <h2>&#128279; Book Everything</h2>
+  <p class="sub">All the links in one spot</p>
+  <div class="book-grid">
+    <a class="book-btn book-flights" href="https://www.google.com/travel/flights/search?tfs=CBwQAhooEgoyMDI2LTA4LTIyagwIAhIIL20vMGg3aDZyDAgCEggvbS8wOWdkNBooEgoyMDI2LTA4LTI5agwIAhIIL20vMDlnZDRyDAgCEggvbS8waDdoNnABQAFIAXABggELCP___________wFAAYgBAQ" target="_blank">&#9992;&#65039; Google Flights YYZ&rarr;CHQ</a>
+    <a class="book-btn book-stay" href="https://www.airbnb.ca/s/Chania-Old-Town--Crete--Greece/homes?checkin=2026-08-22&checkout=2026-08-29&adults=2&price_max=200&min_bedrooms=1" target="_blank">&#127968; Search Chania Airbnbs</a>
+    <a class="book-btn book-ferry" href="https://www.cretan-daily-cruises.com/balos-lagoon-cruise/" target="_blank">&#9973; Balos Ferry Tickets</a>
+    <a class="book-btn book-food" href="https://www.thefork.com/" target="_blank">&#127869;&#65039; TheFork Reservations</a>
+    <a class="book-btn book-maps" href="https://www.e-ktel.com/en/" target="_blank">&#128652; KTEL Bus Tickets</a>
+  </div>
+  <div class="tip tip-pro"><strong>Ferries:</strong> Balos day-cruise from Kissamos books out in August &mdash; reserve online 1&ndash;2 weeks ahead. KTEL buses for Samaria Gorge don&rsquo;t need advance booking. <a href="https://www.discovercars.com/" target="_blank">DiscoverCars</a> for rental cars.</div>
+</div>
+
+<!-- ======== QUICK TIPS ======== -->
+<div class="section">
+  <h2>&#128161; Quick Tips</h2>
+  <div class="tip tip-pro"><strong>Samaria Gorge prep:</strong> Gate opens 7 AM, last entry 1 PM. Start early to beat the heat. Bring 2L+ water, hat, sunscreen, sturdy shoes (not sandals). The last 3 km are flat and hot. The ferry from <a href="https://maps.google.com/?q=Agia+Roumeli+Crete" target="_blank">Agia Roumeli</a> runs until ~6 PM.</div>
+  <div class="tip tip-warn"><strong>Cash matters:</strong> Cards accepted at most Chania restaurants, but small tavernas in villages, gorge entrance, and beach vendors are cash-only. ATMs on every main street in Old Town. Wise card for best exchange rates.</div>
+  <div class="tip tip-pro"><strong>Getting to Chania:</strong> From <a href="https://maps.google.com/?q=Chania+International+Airport" target="_blank">CHQ airport</a>: taxi &euro;25 (15 min) or <a href="https://maps.google.com/?q=KTEL+Bus+Station+Chania+Crete" target="_blank">KTEL city bus</a> &euro;2.50 (30 min). If flying via Athens: Aegean or Sky Express domestic flights are 45 min to CHQ, &euro;50&ndash;80 one way.</div>
+  <div class="tip tip-money"><strong>Cretan food value:</strong> Crete has the best food-to-price ratio in Europe. Full taverna dinner with wine: &euro;12&ndash;18pp. A gyro wrap is &euro;3. Freddo espresso &euro;2.50&ndash;3.50. Cretan olive oil is liquid gold &mdash; buy 1L at the market (&euro;10) to take home.</div>
+</div>
+
+<!-- ======== COMPARE ======== -->
+<div class="compare-banner">
+  <h3>&#127470;&#127481; vs &#127468;&#127479; &mdash; Compare to the Amalfi Coast Trip</h3>
+  <p>Same dates, same budget, completely different vibe. See how they stack up side-by-side.</p>
+  <a href="best-trip.html">View the Amalfi Coast Itinerary &rarr;</a>
+</div>
+
+</div><!-- /container -->
+
+<footer>
+  Made with &#10084;&#65039; for our Crete adventure &middot; Aug 2026<br>
+  <a href="greece-flights.html">Compare flights &rarr;</a> &middot;
+  <a href="greece-restaurants.html">Restaurant guide &rarr;</a> &middot;
+  <a href="greece-hotels.html">Hotels vs Airbnb &rarr;</a> &middot;
+  <a href="greece-alternatives.html">Other islands &rarr;</a> &middot;
+  <a href="best-trip.html">Amalfi Coast trip &rarr;</a>
+</footer>
+
+</body>
+</html>

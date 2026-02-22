@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Restaurant Guide — Where to Eat in Chania &amp; Western Crete 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+  :root {
+    --ocean: #0077b6; --ocean-dark: #023e8a; --ocean-light: #00b4d8;
+    --sand: #f5e6d3; --sunset: #ff6b35; --coral: #e63946;
+    --palm: #2d6a4f; --dark: #1a1a2e; --gray: #6b7280;
+    --light: #f8fafc; --white: #ffffff; --gold: #f59e0b;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: var(--light); color: var(--dark); line-height: 1.7; }
+  .hero { background: linear-gradient(135deg, #023e8a 0%, #0077b6 50%, #00b4d8 100%); color: white; padding: 60px 24px 50px; text-align: center; }
+  .hero h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 900; margin-bottom: 8px; }
+  .hero p { font-size: 1rem; opacity: 0.85; max-width: 640px; margin: 0 auto 20px; }
+  .hero-stats { display: flex; gap: 28px; justify-content: center; flex-wrap: wrap; margin-top: 16px; }
+  .hero-stat { text-align: center; }
+  .hero-stat .num { font-size: 1.5rem; font-weight: 900; }
+  .hero-stat .label { font-size: 0.72rem; opacity: 0.7; }
+  .container { max-width: 860px; margin: 0 auto; padding: 0 20px; }
+  .section { padding: 32px 0; }
+  .section h2 { font-size: 1.35rem; font-weight: 800; margin-bottom: 4px; color: var(--ocean-dark); }
+  .section .sub { color: var(--gray); font-size: 0.85rem; margin-bottom: 16px; }
+  .verdict-bar { background: linear-gradient(135deg, var(--sunset), var(--coral)); color: white; border-radius: 14px; padding: 24px; margin: -28px auto 0; position: relative; z-index: 10; max-width: 860px; box-shadow: 0 10px 30px rgba(230,57,70,0.2); text-align: center; }
+  .verdict-bar h2 { color: white; font-size: 1.3rem; font-weight: 900; margin-bottom: 6px; }
+  .verdict-bar p { font-size: 0.92rem; opacity: 0.92; margin: 0; }
+  .card { background: white; border-radius: 14px; padding: 24px; margin-bottom: 16px; box-shadow: 0 3px 12px rgba(0,0,0,0.05); }
+  .card h3 { font-size: 1.1rem; font-weight: 800; margin-bottom: 4px; }
+  .card .card-sub { color: var(--gray); font-size: 0.82rem; margin-bottom: 12px; }
+  .tip { border-radius: 10px; padding: 12px 14px; font-size: 0.82rem; margin: 10px 0; line-height: 1.5; }
+  .tip-money { background: #dcfce7; border-left: 4px solid var(--palm); }
+  .tip-warn { background: #fef3c7; border-left: 4px solid var(--gold); }
+  .tip-pro { background: #dbeafe; border-left: 4px solid var(--ocean); }
+  .tip strong { font-weight: 700; }
+  .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 14px 0; border-radius: 10px; }
+  .rest-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 0.82rem; min-width: 640px; }
+  .rest-table thead th { background: var(--ocean-dark); color: white; padding: 10px 12px; text-align: left; font-weight: 700; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.5px; }
+  .rest-table thead th:first-child { border-radius: 10px 0 0 0; }
+  .rest-table thead th:last-child { border-radius: 0 10px 0 0; }
+  .rest-table tbody td { padding: 10px 12px; border-bottom: 1px solid #f0f0f0; vertical-align: middle; }
+  .rest-table tbody tr:last-child td { border-bottom: none; }
+  .rest-table tbody tr:hover { background: #f0f7ff; }
+  .rest-table .name { font-weight: 800; }
+  .rest-table .name a { color: var(--dark); text-decoration: none; }
+  .rest-table .name a:hover { color: var(--ocean); text-decoration: underline; }
+  .rest-table .cuisine { font-size: 0.78rem; color: var(--gray); }
+  .rest-table .price { font-weight: 800; color: var(--ocean-dark); white-space: nowrap; }
+  .rest-table .reviews { font-size: 0.78rem; color: var(--gray); font-weight: 600; }
+  .rest-table .badge { display: inline-block; font-size: 0.62rem; font-weight: 800; padding: 2px 7px; border-radius: 6px; margin-left: 4px; vertical-align: middle; white-space: nowrap; }
+  .badge-top { background: #fef3c7; color: #92400e; }
+  .badge-budget { background: #dbeafe; color: var(--ocean-dark); }
+  .badge-splurge { background: #fce7f3; color: #9d174d; }
+  .badge-tc { background: #dcfce7; color: var(--palm); }
+  .badge-local { background: #f3e8ff; color: #6b21a8; }
+  .pick-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin: 16px 0; }
+  .pick { background: white; border-radius: 14px; padding: 20px; box-shadow: 0 3px 12px rgba(0,0,0,0.05); border-top: 4px solid var(--ocean); }
+  .pick.budget { border-top-color: var(--palm); }
+  .pick.splurge { border-top-color: var(--coral); }
+  .pick.local { border-top-color: var(--gold); }
+  .pick .pick-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 800; margin-bottom: 6px; }
+  .pick.budget .pick-label { color: var(--palm); }
+  .pick.splurge .pick-label { color: var(--coral); }
+  .pick.local .pick-label { color: var(--gold); }
+  .pick .pick-name { font-size: 1rem; font-weight: 800; margin-bottom: 2px; }
+  .pick .pick-detail { font-size: 0.82rem; color: #555; margin-bottom: 2px; }
+  .pick .pick-price { font-size: 0.92rem; font-weight: 700; color: var(--ocean-dark); }
+  .pick .pick-order { font-size: 0.78rem; color: var(--gray); margin-top: 4px; font-style: italic; }
+  footer { background: var(--dark); color: rgba(255,255,255,0.6); text-align: center; padding: 24px 20px; font-size: 0.78rem; margin-top: 20px; }
+  footer a { color: var(--ocean-light); }
+  @media (max-width: 640px) {
+    .hero h1 { font-size: 1.7rem; }
+    .card { padding: 18px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1><img src="https://flagcdn.com/w40/gr.png" alt="🇬🇷" style="height:1em;vertical-align:-0.1em;margin-right:4px"> Where to Eat in Crete</h1>
+  <p>45+ restaurants across Chania, Rethymno, and the day-trip towns &mdash; rated, mapped, and priced</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="num">45+</div><div class="label">Restaurants</div></div>
+    <div class="hero-stat"><div class="num">7</div><div class="label">Areas</div></div>
+    <div class="hero-stat"><div class="num">&euro;3&ndash;45</div><div class="label">Per Person</div></div>
+    <div class="hero-stat"><div class="num">&#9733; 4.3+</div><div class="label">Min Rating</div></div>
+  </div>
+</div>
+
+<div class="verdict-bar">
+  <h2>&#127829; Cretan food is the best in Greece &mdash; and the cheapest</h2>
+  <p>Full taverna dinner with wine: &euro;12&ndash;18pp. A souvlaki wrap: &euro;3. The olive oil is liquid gold and it&rsquo;s on every table for free.</p>
+</div>
+
+<div class="container">
+
+<!-- ======== TOP PICKS ======== -->
+<div class="section">
+  <h2>&#127942; Top Picks by Occasion</h2>
+  <p class="sub">Quick recs for every vibe</p>
+  <div class="pick-grid">
+    <div class="pick">
+      <div class="pick-label">&#127942; Best Overall</div>
+      <div class="pick-name">Tamam</div>
+      <div class="pick-detail">Zambeliou 49, Old Town &middot; Creative Cretan in an Ottoman bathhouse</div>
+      <div class="pick-price">&euro;18&ndash;25pp</div>
+      <div class="pick-order">Order: lamb with stamnagathi, boureki (zucchini-cheese pie), any daily special</div>
+    </div>
+    <div class="pick budget">
+      <div class="pick-label">&#128176; Best Budget</div>
+      <div class="pick-name">Bougatsa Iordanis</div>
+      <div class="pick-detail">Apokoronou 24 &middot; Legendary Cretan pastry since 1924</div>
+      <div class="pick-price">&euro;3&ndash;5pp</div>
+      <div class="pick-order">Order: bougatsa with cream (sweet) or mizithra cheese (savoury). Eat standing at the counter like a local.</div>
+    </div>
+    <div class="pick splurge">
+      <div class="pick-label">&#127863; Best Splurge</div>
+      <div class="pick-name">Salis</div>
+      <div class="pick-detail">Harbour front &middot; Upscale seafood, stunning setting</div>
+      <div class="pick-price">&euro;35&ndash;45pp</div>
+      <div class="pick-order">Order: the seafood tasting menu (&euro;45), or the tuna tartare + fresh catch of the day.</div>
+    </div>
+    <div class="pick local">
+      <div class="pick-label">&#127860; Best Local Secret</div>
+      <div class="pick-name">Chrisostomos</div>
+      <div class="pick-detail">Plateia Ag. Deka &middot; Where Chania&rsquo;s old men eat lunch</div>
+      <div class="pick-price">&euro;8&ndash;12pp</div>
+      <div class="pick-order">Order: whatever&rsquo;s in the pot today. Point at what looks good. Don&rsquo;t expect a menu in English.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ======== CHANIA OLD TOWN ======== -->
+<div class="section">
+  <h2>&#127963;&#65039; Chania Old Town &amp; Venetian Harbour</h2>
+  <p class="sub">Your home turf &mdash; all within 5 min walk</p>
+  <div class="table-wrap">
+  <table class="rest-table">
+    <thead><tr><th>Restaurant</th><th>Style</th><th>Price/pp</th><th>Rating</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td class="name"><a href="https://maps.google.com/?q=Tamam+Restaurant+Chania" target="_blank">Tamam</a> <span class="badge badge-top">TOP PICK</span></td><td class="cuisine">Creative Cretan</td><td class="price">&euro;18&ndash;25</td><td class="reviews">&#9733; 4.6 &middot; 4.8k</td><td>Converted bathhouse. Book 1 day ahead in Aug. Best lamb on the island.</td></tr>
+      <tr><td class="name"><a href="https://maps.google.com/?q=Portes+Restaurant+Chania" target="_blank">Portes</a></td><td class="cuisine">Cretan fusion</td><td class="price">&euro;18&ndash;28</td><td class="reviews">&#9733; 4.5 &middot; 3.2k</td><td>Candlelit courtyard. Romantic dinner spot. Great wine list.</td></tr>
+      <tr><td class="name"><a href="https://maps.google.com/?q=Glossitses+Chania" target="_blank">Glossitses</a></td><td class="cuisine">Creative Cretan</td><td class="price">&euro;20&ndash;30</td><td class="reviews">&#9733; 4.7 &middot; 1.8k</td><td>Tiny &mdash; 8 tables. Seasonal menu. Best-kept secret in town. Book 2 days ahead.</td></tr>
+      <tr><td class="name"><a href="https://maps.google.com/?q=Thalassino+Ageri+Chania" target="_blank">Thalassino Ageri</a> <span class="badge badge-splurge">SPLURGE</span></td><td class="cuisine">Seafood</td><td class="price">&euro;25&ndash;40</td><td class="reviews">&#9733; 4.5 &middot; 3.5k</td><td>Table literally on the water. Grilled octopus is legendary. Sunset dinner.</td></tr>
+      <tr><td class="name"><a href="https://maps.google.com/?q=To+Maridaki+Chania" target="_blank">To Maridaki</a></td><td class="cuisine">Seafood taverna</td><td class="price">&euro;15&ndash;22</td><td class="reviews">&#9733; 4.4 &middot; 2.1k</td><td>Harbour-area fish taverna. Good value for fresh seafood. Try the fried calamari.</td></tr>
+      <tr><td class="name"><a href="https://maps.google.com/?q=Kouzina+EPE+Chania" target="_blank">Kouzina EPE</a></td><td class="cuisine">Modern Cretan</td><td class="price">&euro;15&ndash;22</td><td class="reviews">&#9733; 4.5 &middot; 1.5k</td><td>Wine bar + food. Great for a lighter dinner. Local wines by the glass.</td></tr>
+      <tr><td class="name"><a href="https://maps.google.com/?q=The+Well+of+the+Turk+Chania" target="_blank">The Well of the Turk</a></td><td class="cuisine">Middle Eastern-Cretan</td><td class="price">&euro;18&ndash;28</td><td class="reviews">&#9733; 4.4 &middot; 1.9k</td><td>In a restored Turkish bathhouse. Unique fusion food. Vegetarian-friendly.</td></tr>
+      <tr><td class="name"><a href="https://maps.google.com/?q=Salis+Restaurant+Chania" target="_blank">Salis</a> <span class="badge badge-splurge">SPLURGE</span></td><td class="cuisine">Upscale seafood</td><td class="price">&euro;35&ndash;45</td><td class="reviews">&#9733; 4.6 &middot; 1.2k</td><td>Harbour-front fine dining. Tasting menu &euro;45. Worth it for a special night.</td></tr>
+      <tr><td class="name"><a href="https://maps.google.com/?q=Palazzo+al+Mare+Chania" target="_blank">Palazzo al Mare</a> <span class="badge badge-splurge">SPLURGE</span></td><td class="cuisine">Mediterranean fine</td><td class="price">&euro;30&ndash;45</td><td class="reviews">&#9733; 4.5 &middot; 0.8k</td><td>Upscale harbour restaurant. Great for a date night. Italian-Cretan fusion.</td></tr>
+      <tr><td class="name"><a href="https://maps.google.com/?q=Apostolis+Chania+Harbour" target="_blank">Apostolis</a></td><td class="cuisine">Traditional taverna</td><td class="price">&euro;12&ndash;18</td><td class="reviews">&#9733; 4.3 &middot; 2.8k</td><td>Harbour-front, good grills and meze. Tourist-friendly but honest food.</td></tr>
+      <tr><td class="name"><a href="https://maps.google.com/?q=Ntounias+Chania" target="_blank">Ntounias</a> <span class="badge badge-local">LOCAL GEM</span></td><td class="cuisine">Traditional Cretan</td><td class="price">&euro;10&ndash;16</td><td class="reviews">&#9733; 4.5 &middot; 1.3k</td><td>Near the market. Olive-oil-forward cooking. Home-style Cretan staples. Great value.</td></tr>
+      <tr><td class="name"><a href="https://maps.google.com/?q=Chrisostomos+Chania" target="_blank">Chrisostomos</a> <span class="badge badge-budget">BUDGET</span></td><td class="cuisine">Traditional Greek</td><td class="price">&euro;8&ndash;12</td><td class="reviews">&#9733; 4.4 &middot; 0.6k</td><td>Locals-only feel. Daily specials from the pot. No English menu. Point and eat. Amazing.</td></tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<!-- ======== BREAKFAST & SNACKS ======== -->
+<div class="section">
+  <h2>&#127774; Breakfast, Coffee &amp; Snacks</h2>
+  <p class="sub">Morning fuel &mdash; you&rsquo;ll need it for those beach days</p>
+  <div class="table-wrap">
+  <table class="rest-table">
+    <thead><tr><th>Spot</th><th>Known For</th><th>Price/pp</th><th>Rating</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td class="name"><a href="https://maps.google.com/?q=Bougatsa+Iordanis+Chania" target="_blank">Bougatsa Iordanis</a> <span class="badge badge-top">LEGENDARY</span></td><td class="cuisine">Bougatsa (custard pie)</td><td class="price">&euro;3&ndash;5</td><td class="reviews">&#9733; 4.6 &middot; 5.2k</td><td>Since 1924. Queue every morning. Sweet (cream) or savoury (mizithra). Get both.</td></tr>
+      <tr><td class="name"><a href="https://maps.google.com/?q=Koukouvaya+Chania" target="_blank">Koukouvaya</a></td><td class="cuisine">Specialty coffee &amp; brunch</td><td class="price">&euro;5&ndash;10</td><td class="reviews">&#9733; 4.5 &middot; 0.9k</td><td>Best coffee in Chania. Instagram-worthy space. Eggs, avocado toast, smoothie bowls.</td></tr>
+      <tr><td class="name"><a href="https://maps.google.com/?q=Cremeria+de+Luca+Chania" target="_blank">Cremeria de Luca</a></td><td class="cuisine">Gelato</td><td class="price">&euro;3&ndash;5</td><td class="reviews">&#9733; 4.7 &middot; 1.4k</td><td>Best gelato in town. Pistachio and mastic flavours are next level.</td></tr>
+      <tr><td class="name"><a href="https://maps.google.com/?q=Agora+Municipal+Market+Chania" target="_blank">Agora Market stalls</a></td><td class="cuisine">Mixed street food</td><td class="price">&euro;3&ndash;8</td><td class="reviews">&#9733; 4.4 &middot; 3.1k</td><td>Cross-shaped market hall. Grab olives, cheese, pies. Best people-watching in Chania.</td></tr>
+      <tr><td class="name"><a href="https://maps.google.com/?q=Paper+Art+Cafe+Chania" target="_blank">Paper Art</a></td><td class="cuisine">Coffee &amp; pastries</td><td class="price">&euro;3&ndash;6</td><td class="reviews">&#9733; 4.4 &middot; 0.7k</td><td>Cute cafe hidden in the lanes. Freddo espresso + spanakopita for &euro;5.</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="tip tip-pro"><strong>Freddo culture:</strong> Greeks drink freddo espresso (iced, shaken) or freddo cappuccino year-round. &euro;2.50&ndash;3.50 everywhere. Order &ldquo;freddo espresso metrio&rdquo; for medium sweet, or &ldquo;sketo&rdquo; for no sugar.</div>
+</div>
+
+<!-- ======== SPLANTZIA & NEA CHORA ======== -->
+<div class="section">
+  <h2>&#127965;&#65039; Splantzia &amp; Nea Chora</h2>
+  <p class="sub">Slightly off the harbour &mdash; where locals eat</p>
+  <div class="table-wrap">
+  <table class="rest-table">
+    <thead><tr><th>Restaurant</th><th>Style</th><th>Price/pp</th><th>Rating</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td class="name"><a href="https://maps.google.com/?q=Kariatis+Chania" target="_blank">Kariatis</a></td><td class="cuisine">Cretan taverna</td><td class="price">&euro;14&ndash;20</td><td class="reviews">&#9733; 4.5 &middot; 1.1k</td><td>Rooftop dining in Splantzia. Charming, not touristy. Great moussaka.</td></tr>
+      <tr><td class="name"><a href="https://maps.google.com/?q=Elia+and+Diosmos+Chania" target="_blank">Elia &amp; Diosmos</a></td><td class="cuisine">Garden Cretan</td><td class="price">&euro;18&ndash;28</td><td class="reviews">&#9733; 4.6 &middot; 1.4k</td><td>Hidden garden restaurant. Organic ingredients. Everything cooked with local olive oil.</td></tr>
+      <tr><td class="name"><a href="https://maps.google.com/?q=Pallas+Nea+Chora+Chania" target="_blank">Pallas</a> <span class="badge badge-top">TOP PICK</span></td><td class="cuisine">Fish taverna</td><td class="price">&euro;15&ndash;25</td><td class="reviews">&#9733; 4.5 &middot; 2.3k</td><td>Right on Nea Chora beach. Tables in the sand. Fresh catch grilled on the spot. Sunset dinner.</td></tr>
+      <tr><td class="name"><a href="https://maps.google.com/?q=Akrogiali+Nea+Chora+Chania" target="_blank">Akrogiali</a></td><td class="cuisine">Seafood taverna</td><td class="price">&euro;12&ndash;20</td><td class="reviews">&#9733; 4.4 &middot; 1.8k</td><td>Next to Pallas on the beach. Slightly cheaper. Fried gavros (anchovies) are addictive.</td></tr>
+      <tr><td class="name"><a href="https://maps.google.com/?q=To+Steno+Chania" target="_blank">To Steno</a> <span class="badge badge-budget">BUDGET</span></td><td class="cuisine">Souvlaki &amp; grills</td><td class="price">&euro;5&ndash;8</td><td class="reviews">&#9733; 4.5 &middot; 1.6k</td><td>Best souvlaki in Chania. Hole-in-the-wall. &euro;3 gyro wraps that are enormous.</td></tr>
+      <tr><td class="name"><a href="https://maps.google.com/?q=Parasties+Koum+Kapi+Chania" target="_blank">Parasties</a></td><td class="cuisine">Seafront meze</td><td class="price">&euro;14&ndash;22</td><td class="reviews">&#9733; 4.3 &middot; 1.0k</td><td>Koum Kapi seafront. Great meze platters. Order rakómelo (warm raki with honey) after dinner.</td></tr>
+      <tr><td class="name"><a href="https://maps.google.com/?q=Nikolas+Nea+Chora+Chania" target="_blank">Nikolas</a></td><td class="cuisine">Beachside fish</td><td class="price">&euro;15&ndash;22</td><td class="reviews">&#9733; 4.4 &middot; 1.2k</td><td>Another Nea Chora beach option. Good for families. Calm water, fish by the kilo.</td></tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<!-- ======== KOUM KAPI ======== -->
+<div class="section">
+  <h2>&#127754; Koum Kapi Waterfront</h2>
+  <p class="sub">8 min walk east &mdash; the sunset-drink strip</p>
+  <div class="table-wrap">
+  <table class="rest-table">
+    <thead><tr><th>Restaurant</th><th>Style</th><th>Price/pp</th><th>Rating</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td class="name"><a href="https://maps.google.com/?q=Boheme+Chania+Koum+Kapi" target="_blank">Boheme</a></td><td class="cuisine">Bar &amp; food</td><td class="price">&euro;12&ndash;20</td><td class="reviews">&#9733; 4.3 &middot; 0.9k</td><td>Cocktails + small plates on the beach. Perfect sunset spot. DJ sets on weekends.</td></tr>
+      <tr><td class="name"><a href="https://maps.google.com/?q=Monastiri+Chania" target="_blank">Monastiri</a></td><td class="cuisine">Cretan taverna</td><td class="price">&euro;14&ndash;22</td><td class="reviews">&#9733; 4.4 &middot; 1.3k</td><td>Set in old monastery walls. Atmospheric courtyard. Good for groups.</td></tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<!-- ======== RETHYMNO ======== -->
+<div class="section">
+  <h2>&#127963;&#65039; Rethymno (Day Trip)</h2>
+  <p class="sub">1 hr by bus &mdash; Crete&rsquo;s second-most-beautiful old town</p>
+  <div class="table-wrap">
+  <table class="rest-table">
+    <thead><tr><th>Restaurant</th><th>Style</th><th>Price/pp</th><th>Rating</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td class="name"><a href="https://maps.google.com/?q=Avli+Restaurant+Rethymno" target="_blank">Avli</a> <span class="badge badge-top">TOP PICK</span></td><td class="cuisine">Contemporary Cretan</td><td class="price">&euro;25&ndash;40</td><td class="reviews">&#9733; 4.7 &middot; 2.5k</td><td>Converted Venetian mansion. Award-winning. Book ahead. One of the best meals on Crete.</td></tr>
+      <tr><td class="name"><a href="https://maps.google.com/?q=Othonas+Rethymno" target="_blank">Othonas</a> <span class="badge badge-local">LOCAL GEM</span></td><td class="cuisine">Traditional taverna</td><td class="price">&euro;10&ndash;18</td><td class="reviews">&#9733; 4.5 &middot; 1.8k</td><td>Hidden in a back lane. Home cooking. Daily specials from the kitchen. Huge portions.</td></tr>
+      <tr><td class="name"><a href="https://maps.google.com/?q=Prima+Plora+Rethymno" target="_blank">Prima Plora</a></td><td class="cuisine">Beachfront Mediterranean</td><td class="price">&euro;15&ndash;25</td><td class="reviews">&#9733; 4.4 &middot; 2.1k</td><td>Sunset dinner on the beach. Good cocktails. Book a waterfront table.</td></tr>
+      <tr><td class="name"><a href="https://maps.google.com/?q=Mili+Restaurant+Rethymno" target="_blank">Mili</a></td><td class="cuisine">Creative Cretan</td><td class="price">&euro;20&ndash;30</td><td class="reviews">&#9733; 4.6 &middot; 1.1k</td><td>Restored olive mill. Beautiful setting. Seasonal tasting menu &euro;35.</td></tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<!-- ======== KISSAMOS (BALOS) ======== -->
+<div class="section">
+  <h2>&#9973; Kissamos &amp; Balos Area</h2>
+  <p class="sub">1 hr west &mdash; your Balos Lagoon launch point</p>
+  <div class="table-wrap">
+  <table class="rest-table">
+    <thead><tr><th>Restaurant</th><th>Style</th><th>Price/pp</th><th>Rating</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td class="name"><a href="https://maps.google.com/?q=Papadakis+Kissamos+Crete" target="_blank">Papadakis</a></td><td class="cuisine">Harbour taverna</td><td class="price">&euro;10&ndash;18</td><td class="reviews">&#9733; 4.5 &middot; 1.4k</td><td>Right on Kissamos harbour. Fresh fish by the kilo. Cold Mythos. Honest and cheap.</td></tr>
+      <tr><td class="name"><a href="https://maps.google.com/?q=Stelios+Kissamos+Crete" target="_blank">Stelios</a> <span class="badge badge-budget">BUDGET</span></td><td class="cuisine">Traditional Greek</td><td class="price">&euro;8&ndash;14</td><td class="reviews">&#9733; 4.4 &middot; 0.8k</td><td>Simple town taverna. Moussaka, pastitsio, grilled meats. No frills, honest food.</td></tr>
+      <tr><td class="name"><a href="https://maps.google.com/?q=Maria+Beach+Kissamos" target="_blank">Maria Beach</a></td><td class="cuisine">Beach taverna</td><td class="price">&euro;10&ndash;16</td><td class="reviews">&#9733; 4.3 &middot; 0.6k</td><td>If you want to eat by the water before/after Balos. Simple, good value.</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="tip tip-warn"><strong>Pack lunch for Balos!</strong> There is literally nothing to buy at Balos beach. No shops, no tavernas. Bring sandwiches, fruit, and 2L+ water per person. Buy from Agora Market the night before.</div>
+</div>
+
+<!-- ======== HORA SFAKION & SOUTH COAST ======== -->
+<div class="section">
+  <h2>&#127754; Hora Sfakion &amp; South Coast</h2>
+  <p class="sub">Post-Samaria Gorge refuelling &mdash; you&rsquo;ll be starving</p>
+  <div class="table-wrap">
+  <table class="rest-table">
+    <thead><tr><th>Restaurant</th><th>Style</th><th>Price/pp</th><th>Rating</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td class="name"><a href="https://maps.google.com/?q=Livikon+Hora+Sfakion+Crete" target="_blank">Livikon</a></td><td class="cuisine">Waterfront taverna</td><td class="price">&euro;10&ndash;18</td><td class="reviews">&#9733; 4.4 &middot; 0.9k</td><td>Post-hike reward. Waterfront in Hora Sfakion. Cold beer, grilled lamb chops. Huge portions.</td></tr>
+      <tr><td class="name"><a href="https://maps.google.com/?q=Sofia+Taverna+Hora+Sfakion" target="_blank">Sofia</a> <span class="badge badge-budget">BUDGET</span></td><td class="cuisine">Village taverna</td><td class="price">&euro;8&ndash;14</td><td class="reviews">&#9733; 4.3 &middot; 0.5k</td><td>Simple but satisfying. Sfakian pies (cheese pies with honey) are the local speciality &mdash; try them here.</td></tr>
+      <tr><td class="name"><a href="https://maps.google.com/?q=Agia+Roumeli+taverna" target="_blank">Agia Roumeli tavernas</a></td><td class="cuisine">Beach tavernas</td><td class="price">&euro;8&ndash;15</td><td class="reviews">&#9733; 4.2 &middot; various</td><td>Multiple spots at the gorge exit beach. All similar &mdash; just pick the one with shade. You won&rsquo;t care about quality after 16 km.</td></tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<!-- ======== FALASSARNA & WEST COAST ======== -->
+<div class="section">
+  <h2>&#127773; Falassarna &amp; West Coast</h2>
+  <p class="sub">Sunset dinner territory &mdash; the sun drops straight into the sea</p>
+  <div class="table-wrap">
+  <table class="rest-table">
+    <thead><tr><th>Restaurant</th><th>Style</th><th>Price/pp</th><th>Rating</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td class="name"><a href="https://maps.google.com/?q=Sunset+Restaurant+Falassarna+Crete" target="_blank">Sunset</a></td><td class="cuisine">Beach taverna</td><td class="price">&euro;12&ndash;20</td><td class="reviews">&#9733; 4.4 &middot; 1.1k</td><td>Named for the view. Grilled lamb chops, local wine. Best sunset dinner on Crete.</td></tr>
+      <tr><td class="name"><a href="https://maps.google.com/?q=Orange+Blue+Falassarna+Crete" target="_blank">Orange Blue</a></td><td class="cuisine">Beach bar &amp; food</td><td class="price">&euro;10&ndash;16</td><td class="reviews">&#9733; 4.3 &middot; 0.7k</td><td>Chill beach bar with decent food. Salads, burgers, cocktails. Good for afternoon grazing.</td></tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<!-- ======== LAKE KOURNAS & APOKORONAS ======== -->
+<div class="section">
+  <h2>&#127795; Lake Kournas &amp; Apokoronas Villages</h2>
+  <p class="sub">45 min east &mdash; for your chill day trip</p>
+  <div class="table-wrap">
+  <table class="rest-table">
+    <thead><tr><th>Restaurant</th><th>Style</th><th>Price/pp</th><th>Rating</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td class="name"><a href="https://maps.google.com/?q=Lake+Kournas+Taverna+Crete" target="_blank">Taverna Kournas</a></td><td class="cuisine">Lakeside taverna</td><td class="price">&euro;10&ndash;15</td><td class="reviews">&#9733; 4.3 &middot; 0.8k</td><td>Tables overlooking the lake. Simple grills and salads. Peaceful vibe.</td></tr>
+      <tr><td class="name"><a href="https://maps.google.com/?q=Blooming+Vamos+Crete" target="_blank">Blooming (Vamos)</a></td><td class="cuisine">Creative village</td><td class="price">&euro;15&ndash;25</td><td class="reviews">&#9733; 4.6 &middot; 0.6k</td><td>In the pretty village of Vamos. Uses local ingredients. Worth the detour.</td></tr>
+      <tr><td class="name"><a href="https://maps.google.com/?q=Sterna+tou+Bloumosifi+Vamos" target="_blank">Sterna tou Bloumosifi</a> <span class="badge badge-local">LOCAL GEM</span></td><td class="cuisine">Traditional Cretan</td><td class="price">&euro;12&ndash;20</td><td class="reviews">&#9733; 4.7 &middot; 0.9k</td><td>Set in beautiful stone ruins. Incredible atmosphere. Slow food, big portions.</td></tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<!-- ======== FOOD COSTS ======== -->
+<div class="section">
+  <h2>&#128176; What Food Actually Costs in Crete</h2>
+  <p class="sub">Real prices, no tourism markup (mostly)</p>
+  <div class="card">
+    <div class="table-wrap">
+    <table class="rest-table" style="min-width:400px">
+      <thead><tr><th>Item</th><th>Price</th><th>Where</th></tr></thead>
+      <tbody>
+        <tr><td>Freddo espresso</td><td class="price">&euro;2.50&ndash;3.50</td><td>Any kafeneio</td></tr>
+        <tr><td>Bougatsa (pastry)</td><td class="price">&euro;3&ndash;4</td><td>Iordanis</td></tr>
+        <tr><td>Gyro wrap</td><td class="price">&euro;3&ndash;4</td><td>Any gyrádiko</td></tr>
+        <tr><td>Souvlaki plate</td><td class="price">&euro;8&ndash;10</td><td>To Steno</td></tr>
+        <tr><td>Greek salad</td><td class="price">&euro;6&ndash;9</td><td>Any taverna</td></tr>
+        <tr><td>Grilled octopus</td><td class="price">&euro;12&ndash;16</td><td>Harbour tavernas</td></tr>
+        <tr><td>Fresh fish (per kg)</td><td class="price">&euro;40&ndash;60/kg</td><td>Beach tavernas</td></tr>
+        <tr><td>Full taverna dinner + wine</td><td class="price">&euro;12&ndash;18pp</td><td>Most tavernas</td></tr>
+        <tr><td>Fancy dinner + wine</td><td class="price">&euro;30&ndash;45pp</td><td>Salis, Avli</td></tr>
+        <tr><td>Beer (Mythos / Fix)</td><td class="price">&euro;3&ndash;5</td><td>Anywhere</td></tr>
+        <tr><td>House wine (0.5L carafe)</td><td class="price">&euro;5&ndash;8</td><td>Tavernas</td></tr>
+        <tr><td>Raki (free!)</td><td class="price">&euro;0</td><td>End of every meal</td></tr>
+        <tr><td>1L local olive oil</td><td class="price">&euro;8&ndash;12</td><td>Agora Market</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+  <div class="tip tip-money"><strong>Free raki tradition:</strong> In Crete, tavernas bring free raki (grape spirit) and often a small dessert after your meal. This is a genuine Cretan tradition, not a tourist gimmick. Don&rsquo;t refuse it &mdash; it&rsquo;s considered rude.</div>
+  <div class="tip tip-pro"><strong>Cook 3 nights:</strong> With a kitchen in your Airbnb, do taverna dinners 4 nights and cook 3 nights. Hit <a href="https://maps.google.com/?q=Municipal+Market+Chania+Crete" target="_blank">Agora Market</a> for tomatoes, feta, olives, fresh bread &mdash; a &euro;10 shop feeds two for dinner. Cretan tomatoes in August are unreal.</div>
+</div>
+
+</div><!-- /container -->
+
+<footer>
+  Made with &#10084;&#65039; for our Crete adventure &middot; Aug 2026<br>
+  <a href="greece.html">&larr; Back to itinerary</a> &middot;
+  <a href="greece-flights.html">Compare flights</a> &middot;
+  <a href="greece-hotels.html">Hotels vs Airbnb</a> &middot;
+  <a href="greece-alternatives.html">Other islands</a> &middot;
+  <a href="best-trip.html">Amalfi Coast trip</a>
+</footer>
+
+</body>
+</html>
