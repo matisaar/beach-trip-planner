@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Explore the Areas — Summer 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+  :root{--ocean:#0077b6;--ocean-dark:#023e8a;--dark:#1a1a2e;--gray:#6b7280;--light:#f3f4f6;--card:rgba(255,255,255,.95);--shadow:0 8px 30px rgba(0,0,0,.1);}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Inter',system-ui,sans-serif;background:linear-gradient(135deg,#0077b6 0%,#023e8a 30%,#1a1a2e 100%);color:var(--dark);min-height:100vh;}
+
+  /* ── HERO ── */
+  .hero{padding:60px 20px 30px;text-align:center;color:#fff;}
+  .hero h1{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;text-shadow:0 2px 20px rgba(0,0,0,.3);}
+  .hero p{font-size:.95rem;opacity:.85;margin-top:6px;font-weight:300;}
+
+  /* ── CONTAINER ── */
+  .container{max-width:1100px;margin:0 auto;padding:0 16px 60px;}
+
+  /* ── PROPERTY SECTION ── */
+  .prop-section{background:var(--card);border-radius:20px;padding:28px;margin-bottom:28px;box-shadow:var(--shadow);border:1px solid rgba(255,255,255,.8);}
+  .prop-header{display:flex;align-items:center;gap:14px;margin-bottom:18px;flex-wrap:wrap;}
+  .prop-flag{font-size:1.6rem;}
+  .prop-name{font-size:1.15rem;font-weight:800;color:var(--ocean-dark);}
+  .prop-loc{font-size:.82rem;color:var(--gray);font-weight:500;}
+  .prop-link{margin-left:auto;display:inline-flex;align-items:center;gap:5px;background:linear-gradient(135deg,#FF385C,#e31c5f);color:#fff;text-decoration:none;padding:7px 14px;border-radius:10px;font-size:.75rem;font-weight:700;transition:filter .15s;}
+  .prop-link:hover{filter:brightness(1.15);}
+
+  /* ── PHOTO GALLERY ── */
+  .gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-bottom:20px;}
+  .gallery img{width:100%;height:160px;object-fit:cover;border-radius:12px;cursor:pointer;transition:transform .2s;}
+  .gallery img:hover{transform:scale(1.03);}
+  .gallery .wide{grid-column:span 2;}
+  @media(max-width:600px){.gallery{grid-template-columns:1fr 1fr;}.gallery .wide{grid-column:span 2;}}
+
+  /* ── MAP EMBED ── */
+  .map-wrap{border-radius:14px;overflow:hidden;margin-bottom:16px;position:relative;border:2px solid #e5e7eb;}
+  .map-wrap iframe{width:100%;height:300px;border:0;}
+  .map-btns{display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap;}
+  .map-btn{display:inline-flex;align-items:center;gap:6px;padding:9px 16px;border-radius:10px;font-size:.8rem;font-weight:700;text-decoration:none;color:#fff;transition:filter .15s;}
+  .map-btn:hover{filter:brightness(1.12);text-decoration:none;}
+  .map-btn.sv{background:linear-gradient(135deg,#f59e0b,#d97706);}
+  .map-btn.gm{background:linear-gradient(135deg,#10b981,#059669);}
+  .map-btn.wa{background:linear-gradient(135deg,#6366f1,#4f46e5);}
+
+  /* ── LINK CARDS ── */
+  .card-section{margin-bottom:14px;}
+  .card-section-title{font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.6px;color:var(--gray);margin-bottom:8px;}
+  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px;}
+  .card{display:flex;align-items:center;gap:8px;padding:10px 12px;background:var(--light);border-radius:10px;text-decoration:none;color:var(--dark);font-size:.82rem;font-weight:600;transition:background .15s,transform .1s;border:1px solid transparent;}
+  .card:hover{background:#dbeafe;border-color:#93c5fd;transform:translateY(-1px);text-decoration:none;}
+  .card .c-icon{font-size:1rem;flex-shrink:0;}
+  .card .c-name{line-height:1.2;}
+  .card .c-ext{font-size:.65rem;color:var(--gray);font-weight:500;}
+
+  /* ── AREA PHOTOS ── */
+  .area-title{font-size:.82rem;font-weight:800;color:var(--ocean-dark);margin:18px 0 8px;display:flex;align-items:center;gap:6px;}
+  .area-photos{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px;margin-bottom:14px;}
+  .area-photos img{width:100%;height:130px;object-fit:cover;border-radius:10px;transition:transform .2s;}
+  .area-photos img:hover{transform:scale(1.03);}
+
+  /* ── IMAGE CREDIT ── */
+  .credits{text-align:center;color:rgba(255,255,255,.5);font-size:.65rem;padding:20px;margin-top:-20px;}
+  .credits a{color:rgba(255,255,255,.6);}
+
+  /* ── Lightbox ── */
+  .lb{display:none;position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,.88);align-items:center;justify-content:center;cursor:zoom-out;}
+  .lb.show{display:flex;}
+  .lb img{max-width:92vw;max-height:90vh;border-radius:10px;box-shadow:0 10px 40px rgba(0,0,0,.5);}
+</style>
+</head>
+<body>
+
+<!-- LIGHTBOX -->
+<div class="lb" id="lb" onclick="this.classList.remove('show')"><img id="lb-img"></div>
+
+<div class="hero">
+  <h1>🔭 Explore the Areas</h1>
+  <p>See what's around each property — real photos, maps & nearby spots</p>
+</div>
+
+<div class="container">
+
+<!-- ═══════════════════════════════════════════════════════════
+     1. WINDOWS ON HEAVEN — SCALA, AMALFI COAST
+     ═══════════════════════════════════════════════════════════ -->
+<div class="prop-section">
+  <div class="prop-header">
+    <span class="prop-flag">🇮🇹</span>
+    <div>
+      <div class="prop-name">Windows on Heaven</div>
+      <div class="prop-loc">Scala · Amalfi Coast · Aug 22–29</div>
+    </div>
+    <a class="prop-link" href="https://www.airbnb.ca/rooms/32588731?check_in=2026-08-22&check_out=2026-08-29&adults=2" target="_blank">View on Airbnb ↗</a>
+  </div>
+
+  <!-- Property photos -->
+  <div class="gallery">
+    <img class="wide" src="https://a0.muscache.com/im/pictures/hosting/Hosting-32588731/original/d5f0a59a-9621-439f-a413-086d1c42b97f.jpeg" alt="Windows on Heaven — terrace view" onclick="openLb(this)">
+    <img src="https://a0.muscache.com/im/pictures/miso/Hosting-32588731/original/3c71f921-e500-419f-a552-d826496222de.jpeg" alt="Interior" onclick="openLb(this)">
+    <img src="https://a0.muscache.com/im/pictures/miso/Hosting-32588731/original/ba29b4e4-4315-4d6a-93b5-7c31751bcf76.jpeg" alt="Bedroom" onclick="openLb(this)">
+  </div>
+
+  <!-- Embedded map -->
+  <div class="map-wrap">
+    <iframe src="https://maps.google.com/maps?q=Scala+Amalfi+Coast+Italy&t=k&z=15&output=embed" loading="lazy" allowfullscreen></iframe>
+  </div>
+  <div class="map-btns">
+    <a class="map-btn sv" href="https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=40.651,14.604" target="_blank">📍 Street View</a>
+    <a class="map-btn gm" href="https://www.google.com/maps/search/Scala+Amalfi+Coast" target="_blank">🗺️ Open in Maps</a>
+    <a class="map-btn wa" href="https://www.google.com/maps/dir/Scala+SA/Ravello+SA" target="_blank">🚶 Walk to Ravello</a>
+  </div>
+
+  <!-- Area photos from Wikimedia -->
+  <div class="area-title">📸 Scala & Ravello area</div>
+  <div class="area-photos">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Campania_Ravello1_tango7174.jpg/1280px-Campania_Ravello1_tango7174.jpg" alt="Ravello panorama" onclick="openLb(this)">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Ravello-coastline.jpg/960px-Ravello-coastline.jpg" alt="Ravello coastline" onclick="openLb(this)">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Center_of_Ravello_Italy.JPG/1280px-Center_of_Ravello_Italy.JPG" alt="Ravello piazza" onclick="openLb(this)">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Ravello%2C_Villa_Rufolo_-_panoramio.jpg/1280px-Ravello%2C_Villa_Rufolo_-_panoramio.jpg" alt="Villa Rufolo view" onclick="openLb(this)">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Ravello_-_Villa_Cimbrone_03.jpg/1280px-Ravello_-_Villa_Cimbrone_03.jpg" alt="Villa Cimbrone terrace" onclick="openLb(this)">
+  </div>
+
+  <!-- Nearby restaurants -->
+  <div class="card-section">
+    <div class="card-section-title">🍽️ Restaurants nearby</div>
+    <div class="cards">
+      <a class="card" href="https://www.google.com/maps/search/Zi'Ntonio+Scala+Amalfi" target="_blank"><span class="c-icon">🍝</span><span class="c-name">Zi'Ntonio<br><span class="c-ext">Scala · traditional</span></span></a>
+      <a class="card" href="https://www.google.com/maps/search/Babel+Wine+Bar+Ravello" target="_blank"><span class="c-icon">🍷</span><span class="c-name">Babel Wine Bar<br><span class="c-ext">Ravello · wine + small plates</span></span></a>
+      <a class="card" href="https://www.google.com/maps/search/Le+Arcate+Atrani" target="_blank"><span class="c-icon">🐟</span><span class="c-name">Le Arcate<br><span class="c-ext">Atrani · seafood on the beach</span></span></a>
+      <a class="card" href="https://www.google.com/maps/search/Da+Vincenzo+Positano" target="_blank"><span class="c-icon">🍕</span><span class="c-name">Da Vincenzo<br><span class="c-ext">Positano · family-run classic</span></span></a>
+      <a class="card" href="https://www.google.com/maps/search/Andrea+Pansa+Amalfi" target="_blank"><span class="c-icon">🍰</span><span class="c-name">Andrea Pansa<br><span class="c-ext">Amalfi · historic pastry shop</span></span></a>
+    </div>
+  </div>
+
+  <!-- Nearby attractions -->
+  <div class="card-section">
+    <div class="card-section-title">📍 Things to see</div>
+    <div class="cards">
+      <a class="card" href="https://www.google.com/maps/search/Villa+Cimbrone+Ravello" target="_blank"><span class="c-icon">🏛️</span><span class="c-name">Villa Cimbrone<br><span class="c-ext">Infinity terrace · iconic view</span></span></a>
+      <a class="card" href="https://www.google.com/maps/search/Villa+Rufolo+Ravello" target="_blank"><span class="c-icon">🌿</span><span class="c-name">Villa Rufolo<br><span class="c-ext">Gardens + concert terrace</span></span></a>
+      <a class="card" href="https://www.google.com/maps/search/Duomo+di+Scala" target="_blank"><span class="c-icon">⛪</span><span class="c-name">Duomo di Scala<br><span class="c-ext">12th-century cathedral</span></span></a>
+      <a class="card" href="https://www.google.com/maps/search/Torre+dello+Ziro+Scala" target="_blank"><span class="c-icon">🏰</span><span class="c-name">Torre dello Ziro<br><span class="c-ext">Hike · panoramic watchtower</span></span></a>
+      <a class="card" href="https://www.google.com/maps/search/Atrani+Beach" target="_blank"><span class="c-icon">🏖️</span><span class="c-name">Atrani Beach<br><span class="c-ext">Closest beach · 15 min drive</span></span></a>
+      <a class="card" href="https://www.google.com/maps/search/Path+of+the+Gods+Amalfi" target="_blank"><span class="c-icon">🥾</span><span class="c-name">Path of the Gods<br><span class="c-ext">Famous coastal hike</span></span></a>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     2. SUNNY SPLATZIA — CHANIA, CRETE
+     ═══════════════════════════════════════════════════════════ -->
+<div class="prop-section">
+  <div class="prop-header">
+    <span class="prop-flag">🇬🇷</span>
+    <div>
+      <div class="prop-name">Sunny Splatzia Apartment</div>
+      <div class="prop-loc">Chania Old Town · Crete · Aug 22–26</div>
+    </div>
+    <a class="prop-link" href="https://www.airbnb.ca/rooms/44209542?check_in=2026-08-22&check_out=2026-08-26&adults=2" target="_blank">View on Airbnb ↗</a>
+  </div>
+
+  <!-- Property photos -->
+  <div class="gallery">
+    <img class="wide" src="https://a0.muscache.com/im/pictures/airflow/Hosting-44209542/original/38ef1c98-c39e-4e77-8deb-bbc4d9422ade.jpg" alt="Sunny Splatzia — main" onclick="openLb(this)">
+    <img src="https://a0.muscache.com/im/pictures/airflow/Hosting-44209542/original/380d0413-70af-499f-bd4b-c5280b78a2f1.jpg" alt="Bedroom" onclick="openLb(this)">
+    <img src="https://a0.muscache.com/im/pictures/airflow/Hosting-44209542/original/0b13a7b5-66c3-4ae3-a34d-2fffb3788697.jpg" alt="Living room" onclick="openLb(this)">
+    <img src="https://a0.muscache.com/im/pictures/airflow/Hosting-44209542/original/49a7d9f3-3743-4fbf-8f94-3e5d2935dad4.jpg" alt="Balcony" onclick="openLb(this)">
+  </div>
+
+  <!-- Embedded map -->
+  <div class="map-wrap">
+    <iframe src="https://maps.google.com/maps?q=Splatzia+Chania+Old+Town+Crete&t=k&z=16&output=embed" loading="lazy" allowfullscreen></iframe>
+  </div>
+  <div class="map-btns">
+    <a class="map-btn sv" href="https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=35.518,24.018" target="_blank">📍 Street View</a>
+    <a class="map-btn gm" href="https://www.google.com/maps/search/Chania+Old+Town+Crete" target="_blank">🗺️ Open in Maps</a>
+    <a class="map-btn wa" href="https://www.google.com/maps/dir/Splatzia+Chania/Venetian+Harbour+Chania" target="_blank">🚶 Walk to Harbour</a>
+  </div>
+
+  <!-- Area photos from Wikimedia -->
+  <div class="area-title">📸 Chania area</div>
+  <div class="area-photos">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Aerial_view_of_the_Old_Venetian_Harbour_in_Chania%2C_Greece.jpg/960px-Aerial_view_of_the_Old_Venetian_Harbour_in_Chania%2C_Greece.jpg" alt="Aerial view of Venetian Harbour" onclick="openLb(this)">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Lighthouse_of_Chania_in_November.jpg/1280px-Lighthouse_of_Chania_in_November.jpg" alt="Chania Lighthouse" onclick="openLb(this)">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Chania_harbour.jpg/1280px-Chania_harbour.jpg" alt="Harbour promenade" onclick="openLb(this)">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Chania_-_Agora_1.jpg/1280px-Chania_-_Agora_1.jpg" alt="Agora Market" onclick="openLb(this)">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Alley_in_Chania%27s_old_town.jpg/1280px-Alley_in_Chania%27s_old_town.jpg" alt="Old town alley" onclick="openLb(this)">
+  </div>
+
+  <!-- Day trip beaches -->
+  <div class="area-title">🏖️ Day trip beaches</div>
+  <div class="area-photos">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Beach_of_Balos_and_Gramvoussa_%28Panorama%29.jpg/1280px-Beach_of_Balos_and_Gramvoussa_%28Panorama%29.jpg" alt="Balos Lagoon" onclick="openLb(this)">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Balos_Beach.jpg/250px-Balos_Beach.jpg" alt="Balos Beach" onclick="openLb(this)">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/%CE%95%CE%BB%CE%B1%CF%86%CE%BF%CE%BD%CE%AE%CF%83%CE%B9_1287.jpg/500px-%CE%95%CE%BB%CE%B1%CF%86%CE%BF%CE%BD%CE%AE%CF%83%CE%B9_1287.jpg" alt="Elafonissi Beach" onclick="openLb(this)">
+  </div>
+
+  <!-- Nearby restaurants -->
+  <div class="card-section">
+    <div class="card-section-title">🍽️ Restaurants nearby</div>
+    <div class="cards">
+      <a class="card" href="https://www.google.com/maps/search/To+Steno+Chania+Crete" target="_blank"><span class="c-icon">🥙</span><span class="c-name">To Steno<br><span class="c-ext">Chania · famous souvlaki</span></span></a>
+      <a class="card" href="https://www.google.com/maps/search/Tamam+Restaurant+Chania" target="_blank"><span class="c-icon">🍲</span><span class="c-name">Tamam<br><span class="c-ext">Chania · Cretan-Mediterranean</span></span></a>
+      <a class="card" href="https://www.google.com/maps/search/Bougatsa+Iordanis+Chania" target="_blank"><span class="c-icon">🥐</span><span class="c-name">Bougatsa Iordanis<br><span class="c-ext">Chania · legendary pastry</span></span></a>
+      <a class="card" href="https://www.google.com/maps/search/Thalassino+Ageri+Chania" target="_blank"><span class="c-icon">🐟</span><span class="c-name">Thalassino Ageri<br><span class="c-ext">Harbourfront seafood</span></span></a>
+      <a class="card" href="https://www.google.com/maps/search/Pallas+Chania+restaurant" target="_blank"><span class="c-icon">🍽️</span><span class="c-name">Pallas<br><span class="c-ext">Chania · rooftop dining</span></span></a>
+      <a class="card" href="https://www.google.com/maps/search/Sinagogi+Bar+Chania" target="_blank"><span class="c-icon">🍸</span><span class="c-name">Sinagogi Bar<br><span class="c-ext">Cocktails in old synagogue</span></span></a>
+    </div>
+  </div>
+
+  <!-- Nearby attractions -->
+  <div class="card-section">
+    <div class="card-section-title">📍 Things to see</div>
+    <div class="cards">
+      <a class="card" href="https://www.google.com/maps/search/Venetian+Harbour+Chania" target="_blank"><span class="c-icon">⚓</span><span class="c-name">Venetian Harbour<br><span class="c-ext">2 min walk · iconic waterfront</span></span></a>
+      <a class="card" href="https://www.google.com/maps/search/Venetian+Lighthouse+Chania" target="_blank"><span class="c-icon">🗼</span><span class="c-name">Venetian Lighthouse<br><span class="c-ext">Walk along the harbour arm</span></span></a>
+      <a class="card" href="https://www.google.com/maps/search/Nea+Chora+Beach+Chania" target="_blank"><span class="c-icon">🏖️</span><span class="c-name">Nea Chora Beach<br><span class="c-ext">Closest beach · 10 min walk</span></span></a>
+      <a class="card" href="https://www.google.com/maps/search/Agora+Market+Chania" target="_blank"><span class="c-icon">🏪</span><span class="c-name">Agora Market<br><span class="c-ext">Cross-shaped covered market</span></span></a>
+      <a class="card" href="https://www.google.com/maps/search/Balos+Lagoon+Crete" target="_blank"><span class="c-icon">🌊</span><span class="c-name">Balos Lagoon<br><span class="c-ext">Day trip · turquoise lagoon</span></span></a>
+      <a class="card" href="https://www.google.com/maps/search/Elafonissi+Beach+Crete" target="_blank"><span class="c-icon">🩷</span><span class="c-name">Elafonissi Beach<br><span class="c-ext">Day trip · pink sand</span></span></a>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     3. NIKIS HOME — RETHYMNO, CRETE
+     ═══════════════════════════════════════════════════════════ -->
+<div class="prop-section">
+  <div class="prop-header">
+    <span class="prop-flag">🇬🇷</span>
+    <div>
+      <div class="prop-name">Nikis Home</div>
+      <div class="prop-loc">Rethymno Old Town · Crete · Aug 26–29</div>
+    </div>
+    <a class="prop-link" href="https://www.airbnb.ca/rooms/34563447?check_in=2026-08-26&check_out=2026-08-29&adults=2" target="_blank">View on Airbnb ↗</a>
+  </div>
+
+  <!-- Property photos -->
+  <div class="gallery">
+    <img class="wide" src="https://a0.muscache.com/im/pictures/hosting/Hosting-34563447/original/4a4d99f6-2bce-404e-a917-b8dd82628912.jpeg" alt="Nikis Home — main" onclick="openLb(this)">
+    <img src="https://a0.muscache.com/im/pictures/53eb94ad-2037-4f25-82cf-707cfa331bb9.jpg" alt="Interior" onclick="openLb(this)">
+    <img src="https://a0.muscache.com/im/pictures/0bbde530-25fb-442f-9634-4714934b5623.jpg" alt="Room" onclick="openLb(this)">
+    <img src="https://a0.muscache.com/im/pictures/49dd6ad6-5710-4ac9-a5a1-53e77dcaefce.jpg" alt="Outdoor" onclick="openLb(this)">
+  </div>
+
+  <!-- Embedded map -->
+  <div class="map-wrap">
+    <iframe src="https://maps.google.com/maps?q=Rethymno+Old+Town+Crete&t=k&z=16&output=embed" loading="lazy" allowfullscreen></iframe>
+  </div>
+  <div class="map-btns">
+    <a class="map-btn sv" href="https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=35.369,24.474" target="_blank">📍 Street View</a>
+    <a class="map-btn gm" href="https://www.google.com/maps/search/Rethymno+Old+Town+Crete" target="_blank">🗺️ Open in Maps</a>
+    <a class="map-btn wa" href="https://www.google.com/maps/dir/Rethymno+Old+Town/Fortezza+Rethymno" target="_blank">🚶 Walk to Fortezza</a>
+  </div>
+
+  <!-- Area photos from Wikimedia -->
+  <div class="area-title">📸 Rethymno area</div>
+  <div class="area-photos">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Rethymno_-_Venetian_fortress.jpg/1280px-Rethymno_-_Venetian_fortress.jpg" alt="Fortezza Castle" onclick="openLb(this)">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Rethymno_Harbour.jpg/1280px-Rethymno_Harbour.jpg" alt="Old harbour" onclick="openLb(this)">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Vue_de_la_plage_de_R%C3%A9thymnon_-_2.JPG/1280px-Vue_de_la_plage_de_R%C3%A9thymnon_-_2.JPG" alt="Rethymno beach" onclick="openLb(this)">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Fontaine_Rimondi_%28R%C3%A9thymnon%29.JPG/250px-Fontaine_Rimondi_%28R%C3%A9thymnon%29.JPG" alt="Rimondi Fountain" onclick="openLb(this)">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Rethymno_venetian_port_and_fort.jpg/250px-Rethymno_venetian_port_and_fort.jpg" alt="Port and fort" onclick="openLb(this)">
+  </div>
+
+  <!-- Nearby restaurants -->
+  <div class="card-section">
+    <div class="card-section-title">🍽️ Restaurants nearby</div>
+    <div class="cards">
+      <a class="card" href="https://www.google.com/maps/search/Avli+Restaurant+Rethymno" target="_blank"><span class="c-icon">🍷</span><span class="c-name">Avli<br><span class="c-ext">Rethymno · fine Cretan dining</span></span></a>
+      <a class="card" href="https://www.google.com/maps/search/Othonas+Rethymno" target="_blank"><span class="c-icon">🥙</span><span class="c-name">Othonas<br><span class="c-ext">Rethymno · gyros + souvlaki</span></span></a>
+      <a class="card" href="https://www.google.com/maps/search/Prima+Plora+Rethymno" target="_blank"><span class="c-icon">🐟</span><span class="c-name">Prima Plora<br><span class="c-ext">Beachfront seafood</span></span></a>
+      <a class="card" href="https://www.google.com/maps/search/Mili+Restaurant+Rethymno" target="_blank"><span class="c-icon">🍽️</span><span class="c-name">Mili<br><span class="c-ext">Garden courtyard · Cretan</span></span></a>
+      <a class="card" href="https://www.google.com/maps/search/Livingroom+Bar+Rethymno" target="_blank"><span class="c-icon">🍸</span><span class="c-name">Livingroom Bar<br><span class="c-ext">Cocktails in old town</span></span></a>
+    </div>
+  </div>
+
+  <!-- Nearby attractions -->
+  <div class="card-section">
+    <div class="card-section-title">📍 Things to see</div>
+    <div class="cards">
+      <a class="card" href="https://www.google.com/maps/search/Fortezza+Castle+Rethymno" target="_blank"><span class="c-icon">🏰</span><span class="c-name">Fortezza Castle<br><span class="c-ext">8 min walk · Venetian fortress</span></span></a>
+      <a class="card" href="https://www.google.com/maps/search/Rethymno+Beach" target="_blank"><span class="c-icon">🏖️</span><span class="c-name">Rethymno Beach<br><span class="c-ext">5 min walk · long sandy beach</span></span></a>
+      <a class="card" href="https://www.google.com/maps/search/Venetian+Harbour+Rethymno" target="_blank"><span class="c-icon">⚓</span><span class="c-name">Venetian Harbour<br><span class="c-ext">Picturesque old port</span></span></a>
+      <a class="card" href="https://www.google.com/maps/search/Rimondi+Fountain+Rethymno" target="_blank"><span class="c-icon">⛲</span><span class="c-name">Rimondi Fountain<br><span class="c-ext">1626 Venetian fountain</span></span></a>
+      <a class="card" href="https://www.google.com/maps/search/Arkadi+Monastery+Rethymno" target="_blank"><span class="c-icon">⛪</span><span class="c-name">Arkadi Monastery<br><span class="c-ext">Day trip · 25 min drive</span></span></a>
+      <a class="card" href="https://www.google.com/maps/search/Preveli+Beach+Crete" target="_blank"><span class="c-icon">🌴</span><span class="c-name">Preveli Beach<br><span class="c-ext">Day trip · palm forest beach</span></span></a>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<div class="credits">Area photos from <a href="https://commons.wikimedia.org" target="_blank">Wikimedia Commons</a> · Property photos from Airbnb</div>
+
+<script>
+function openLb(img){var l=document.getElementById('lb');document.getElementById('lb-img').src=img.src;l.classList.add('show');}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')document.getElementById('lb').classList.remove('show');});
+</script>
+<script src="nav.js"></script>
+</body>
+</html>

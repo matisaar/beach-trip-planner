@@ -12,6 +12,14 @@
   var CACHE = '_nav_pages';
   var TTL   = 600000;                       // 10 min cache
 
+  // ── Other projects (external links shown in nav) ──────────
+  var EXTERNAL_PROJECTS = [
+    { name: '🏠 Greek Property Finder', url: 'https://matisaar.github.io/greek-property-finder/', desc: 'Investment properties under €75k' },
+    { name: '🛒 Calgary Grocery Scraper', url: 'https://github.com/matisaar/calgary-grocery-scraper', desc: 'Price comparison tool' },
+    { name: '📈 Stock Analyzer', url: 'https://michael-stock-analyzer.vercel.app', desc: 'Michael\'s stock analyzer' },
+    { name: '📋 T661 Checker', url: 'https://t661-checker.vercel.app', desc: 'SR&ED claim checker' }
+  ];
+
   // ── Current page ──────────────────────────────────────────
   var cur = location.pathname.split('/').pop() || 'index.html';
 
@@ -26,6 +34,7 @@
     if (f === 'index.html')       return '🏠';
     if (/compare/i.test(f))       return '⚖️';
     if (/share/i.test(f))         return '📤';
+    if (/explore/i.test(f))       return '🔭';
     if (/flight/i.test(f))        return '✈️';
     if (/restaurant/i.test(f))    return '🍽️';
     if (/hotel/i.test(f))         return '🏨';
@@ -38,21 +47,21 @@
   }
 
   // ── Grouping (prefix-based, fully dynamic) ────────────────
-  var GROUP_ORDER  = ['main', 'italy', 'greece', 'other'];
+  var GROUP_ORDER  = ['main', 'italy', 'greece', 'projects'];
   var GROUP_LABELS = {
-    main:   '📍 Overview',
-    italy:  '🇮🇹 Italy · Amalfi Coast',
-    greece: '🇬🇷 Greece · Crete',
-    other:  '📄 Other'
+    main:     '📍 Overview',
+    italy:    '🇮🇹 Italy · Amalfi Coast',
+    greece:   '🇬🇷 Greece · Crete',
+    projects: '🚀 Other Projects'
   };
   // Pages that sort first within their group
   var PINS = { 'index.html': 1, 'best-trip.html': 1, 'greece.html': 1, 'compare.html': 1 };
 
   function group(f) {
-    if (/^(index|compare|share)\.html$/.test(f)) return 'main';
+    if (/^(index|compare|share|explore)\.html$/.test(f)) return 'main';
     if (/^greece/i.test(f)) return 'greece';
     if (/^(best-trip|flights|restaurants|hotels|airbnbs|alternatives|viz)/i.test(f)) return 'italy';
-    return 'other';
+    return 'main';
   }
 
   function sortWithin(a, b) {
@@ -117,10 +126,10 @@
   pnl.id = '_nav-panel';
   pnl.setAttribute('aria-label', 'Site navigation');
   pnl.innerHTML =
-    '<div id="_nav-hdr"><span>🗺️ All Pages</span>' +
+    '<div id="_nav-hdr"><span>🗺️ matisaar</span>' +
     '<button id="_nav-x" aria-label="Close">✕</button></div>' +
     '<div id="_nav-body"><div class="_nav-ld">Loading…</div></div>' +
-    '<div id="_nav-foot"><a href="https://github.com/' + REPO + '" target="_blank">View on GitHub ↗</a></div>';
+    '<div id="_nav-foot"><a href="https://github.com/matisaar" target="_blank">GitHub ↗</a></div>';
 
   document.body.appendChild(btn);
   document.body.appendChild(ov);
@@ -148,6 +157,7 @@
 
     var html = '';
     GROUP_ORDER.forEach(function (key) {
+      if (key === 'projects') return; // render external separately below
       var list = buckets[key];
       if (!list || !list.length) return;
       list.sort(sortWithin);
@@ -159,6 +169,15 @@
       });
       html += '</div>';
     });
+
+    // ── External projects section ───────────────────────────
+    html += '<div class="_nav-g"><p class="_nav-gl">' + GROUP_LABELS.projects + '</p>';
+    EXTERNAL_PROJECTS.forEach(function (proj) {
+      html += '<a class="_nav-a" href="' + proj.url + '" target="_blank">' +
+              '<span class="_nav-i" style="font-size:0.92rem">' + proj.name.split(' ')[0] + '</span>' +
+              proj.name.replace(/^[^\s]+\s/, '') + ' <span style="opacity:.4;font-size:.7rem">↗</span></a>';
+    });
+    html += '</div>';
 
     document.getElementById('_nav-body').innerHTML = html;
   }
