@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crete — Best Airbnb Picks</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+  :root {
+    --ocean: #0077b6; --ocean-dark: #023e8a;
+    --sunset: #ff6b35; --coral: #e63946;
+    --palm: #2d6a4f; --dark: #1a1a2e; --gray: #6b7280;
+    --gold: #f59e0b;
+    --bg: #faf8f5; --border: #e8e4df; --card: #ffffff;
+    --muted: #7a7a7a; --accent: #c2956a;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--dark); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+  /* ── Hero ── */
+  .page-hero {
+    background: linear-gradient(135deg, #1a472a 0%, #023e8a 50%, var(--ocean) 100%);
+    color: white; padding: 44px 24px 32px; text-align: center;
+  }
+  .page-hero h1 { font-size: clamp(1.5rem, 4vw, 2rem); font-weight: 900; margin-bottom: 6px; letter-spacing: -0.5px; }
+  .page-hero p { font-size: 0.88rem; opacity: 0.7; margin-bottom: 16px; max-width: 520px; margin-left: auto; margin-right: auto; }
+  .page-hero-nav { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+  .page-hero-nav a {
+    color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.78rem;
+    padding: 6px 16px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2);
+    transition: all 0.2s;
+  }
+  .page-hero-nav a:hover { background: rgba(255,255,255,0.12); color: white; }
+
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+  /* ── Weight Sliders Panel ── */
+  .weights-panel {
+    margin: -20px auto 0; max-width: 1100px; padding: 0 20px; position: relative; z-index: 20;
+  }
+  .weights-card {
+    background: var(--card); border-radius: 16px; padding: 20px 24px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.08); border: 1px solid var(--border);
+  }
+  .weights-header {
+    display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;
+  }
+  .weights-title { font-size: 0.82rem; font-weight: 700; color: var(--dark); }
+  .weights-reset {
+    font-size: 0.72rem; color: var(--ocean); cursor: pointer; border: none;
+    background: none; font-family: inherit; font-weight: 600; padding: 4px 8px;
+    border-radius: 6px; transition: background 0.2s;
+  }
+  .weights-reset:hover { background: #e0f2fe; }
+  .sliders { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+  .slider-group { }
+  .slider-label {
+    display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;
+  }
+  .slider-name { font-size: 0.75rem; font-weight: 700; }
+  .slider-name.rating { color: var(--gold); }
+  .slider-name.reviews { color: var(--ocean); }
+  .slider-name.price { color: var(--palm); }
+  .slider-val { font-size: 0.72rem; font-weight: 800; color: var(--dark); }
+  input[type="range"] {
+    width: 100%; height: 6px; -webkit-appearance: none; appearance: none;
+    border-radius: 3px; outline: none; cursor: pointer;
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%;
+    border: 2px solid white; box-shadow: 0 2px 6px rgba(0,0,0,0.2); cursor: pointer;
+  }
+  #sRating { background: linear-gradient(90deg, #fef3c7, var(--gold)); }
+  #sRating::-webkit-slider-thumb { background: var(--gold); }
+  #sReviews { background: linear-gradient(90deg, #dbeafe, var(--ocean)); }
+  #sReviews::-webkit-slider-thumb { background: var(--ocean); }
+  #sPrice { background: linear-gradient(90deg, #dcfce7, var(--palm)); }
+  #sPrice::-webkit-slider-thumb { background: var(--palm); }
+
+  /* ── #1 Pick Hero Card ── */
+  .pick-hero { margin: 20px auto 0; max-width: 1100px; padding: 0 20px; }
+  .pick-hero-card {
+    display: grid; grid-template-columns: 1fr 1fr; border-radius: 20px; overflow: hidden;
+    background: var(--card); box-shadow: 0 16px 60px rgba(0,0,0,0.12);
+    border: 1px solid var(--border); cursor: pointer; transition: all 0.3s;
+  }
+  .pick-hero-card:hover { box-shadow: 0 20px 70px rgba(0,0,0,0.18); transform: translateY(-2px); }
+  .pick-hero-img { width: 100%; height: 340px; object-fit: cover; display: block; }
+  .pick-hero-body { padding: 32px 36px; display: flex; flex-direction: column; justify-content: center; }
+  .pick-hero-badge {
+    display: inline-flex; align-items: center; gap: 6px; background: linear-gradient(135deg, #e87d3e, #d4363b);
+    color: white; font-size: 0.72rem; font-weight: 800; padding: 5px 14px;
+    border-radius: 20px; width: fit-content; margin-bottom: 14px; letter-spacing: 0.3px;
+  }
+  .pick-hero-name { font-size: 1.4rem; font-weight: 800; margin-bottom: 4px; line-height: 1.3; }
+  .pick-hero-area { font-size: 0.82rem; color: var(--muted); margin-bottom: 18px; }
+  .pick-hero-stats { display: flex; gap: 20px; margin-bottom: 18px; flex-wrap: wrap; }
+  .pick-hero-stat { text-align: center; }
+  .pick-hero-stat .val { font-size: 1.3rem; font-weight: 800; }
+  .pick-hero-stat .val.price-c { color: var(--palm); }
+  .pick-hero-stat .val.rating-c { color: var(--gold); }
+  .pick-hero-stat .val.reviews-c { color: var(--ocean); }
+  .pick-hero-stat .lbl { font-size: 0.62rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
+  .pick-hero-score {
+    display: flex; align-items: center; gap: 10px;
+    background: linear-gradient(135deg, #fff8f0, #fff5eb);
+    border: 1px solid #fed7aa; border-radius: 12px; padding: 12px 16px;
+  }
+  .score-ring { width: 48px; height: 48px; position: relative; }
+  .score-ring svg { width: 48px; height: 48px; transform: rotate(-90deg); }
+  .score-ring .bg { fill: none; stroke: #f5e6d3; stroke-width: 4; }
+  .score-ring .fg { fill: none; stroke-width: 4; stroke-linecap: round; transition: stroke-dashoffset 0.6s ease; }
+  .score-ring .num {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    font-size: 0.82rem; font-weight: 900; color: var(--ocean-dark);
+  }
+  .score-info { flex: 1; }
+  .score-info .title { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: #92400e; }
+  .score-info .desc { font-size: 0.72rem; color: var(--muted); line-height: 1.4; }
+
+  /* ── Section ── */
+  .section { padding: 40px 0 16px; }
+  .section-header { margin-bottom: 18px; padding: 0 20px; max-width: 1100px; margin-left: auto; margin-right: auto; }
+  .section-emoji { font-size: 1.5rem; margin-bottom: 4px; display: block; }
+  .section-title { font-size: 1.2rem; font-weight: 800; letter-spacing: -0.3px; }
+  .section-sub { font-size: 0.82rem; color: var(--muted); margin-top: 2px; }
+  .section-divider {
+    width: 40px; height: 3px; border-radius: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--sunset)); margin-top: 10px;
+  }
+
+  /* ── Horizontal scroll row ── */
+  .scroll-row {
+    display: flex; gap: 16px; overflow-x: auto; padding: 0 20px 16px;
+    max-width: 1100px; margin: 0 auto;
+    scroll-snap-type: x mandatory;
+    -ms-overflow-style: none; scrollbar-width: none;
+  }
+  .scroll-row::-webkit-scrollbar { display: none; }
+
+  /* ── Card ── */
+  .card {
+    flex: 0 0 260px; scroll-snap-align: start;
+    background: var(--card); border-radius: 16px; overflow: hidden;
+    border: 1px solid var(--border); transition: all 0.25s; cursor: pointer;
+  }
+  .card:hover { box-shadow: 0 10px 35px rgba(0,0,0,0.1); transform: translateY(-3px); }
+  .card-img-wrap { position: relative; overflow: hidden; }
+  .card-img {
+    width: 100%; height: 175px; object-fit: cover; display: block;
+    transition: transform 0.4s;
+  }
+  .card:hover .card-img { transform: scale(1.04); }
+  .card-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.35) 0%, transparent 50%);
+  }
+  .card-rank {
+    position: absolute; top: 10px; left: 10px;
+    min-width: 26px; height: 26px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center; padding: 0 8px;
+    font-size: 0.68rem; font-weight: 800; color: white;
+    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  }
+  .card-rank.high { background: rgba(212,54,59,0.85); }
+  .card-rank.mid { background: rgba(230,167,86,0.85); }
+  .card-rank.low { background: rgba(160,174,192,0.85); }
+  .card-fav {
+    position: absolute; top: 10px; right: 10px;
+    background: rgba(0,0,0,0.5); color: white; font-size: 0.65rem;
+    padding: 3px 8px; border-radius: 6px; font-weight: 600;
+    backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+  }
+  .card-price-tag {
+    position: absolute; bottom: 10px; left: 10px;
+    background: rgba(0,0,0,0.55); color: white; font-size: 0.82rem;
+    padding: 4px 10px; border-radius: 8px; font-weight: 700;
+    backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+  }
+  .card-body { padding: 14px 16px 16px; }
+  .card-name {
+    font-size: 0.88rem; font-weight: 700; margin-bottom: 3px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .card-area { font-size: 0.72rem; color: var(--muted); margin-bottom: 10px; }
+  .card-row { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+  .card-rating { font-size: 0.78rem; color: var(--gold); font-weight: 700; }
+  .card-reviews { font-size: 0.72rem; color: var(--muted); }
+  .card-total { font-size: 0.72rem; color: var(--muted); margin-left: auto; }
+  .card-score-bar { display: flex; align-items: center; gap: 6px; }
+  .bar-track { flex: 1; height: 5px; border-radius: 3px; background: #f0ece7; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 3px; transition: width 0.4s ease; }
+  .bar-fill.high { background: linear-gradient(90deg, #e87d3e, #d4363b); }
+  .bar-fill.mid { background: linear-gradient(90deg, #f0c27f, #e6a756); }
+  .bar-fill.low { background: #b8c9d6; }
+  .bar-num { font-size: 0.7rem; font-weight: 800; color: var(--ocean-dark); min-width: 20px; transition: all 0.3s; }
+
+  /* ── Explainer ── */
+  .explainer { max-width: 1100px; margin: 32px auto 0; padding: 0 20px; }
+  .explainer-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: 16px;
+    padding: 24px 28px; display: flex; gap: 24px; align-items: flex-start; flex-wrap: wrap;
+  }
+  .explainer-card h3 { font-size: 0.88rem; font-weight: 800; margin-bottom: 6px; }
+  .explainer-card p { font-size: 0.78rem; color: var(--muted); line-height: 1.6; }
+  .explainer-item { flex: 1; min-width: 200px; }
+  .explainer-formula {
+    background: var(--bg); border-radius: 10px; padding: 12px 16px;
+    font-size: 0.78rem; color: var(--dark); font-weight: 500; margin-top: 6px;
+    border: 1px solid var(--border); font-family: 'Inter', monospace;
+  }
+  .explainer-formula span { font-weight: 800; }
+
+  /* ── Detail Modal ── */
+  .modal-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.55); z-index: 900;
+    display: none; align-items: center; justify-content: center;
+    backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
+  }
+  .modal-overlay.visible { display: flex; }
+  .modal {
+    background: var(--card); border-radius: 20px; width: 92%; max-width: 460px;
+    max-height: 90vh; overflow-y: auto; position: relative;
+    box-shadow: 0 24px 70px rgba(0,0,0,0.3); animation: modalIn 0.25s ease;
+  }
+  @keyframes modalIn { from { opacity: 0; transform: scale(0.95) translateY(10px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+  .m-close {
+    position: absolute; top: 14px; right: 14px; z-index: 10;
+    background: rgba(0,0,0,0.45); border: none; color: white;
+    width: 34px; height: 34px; border-radius: 50%; font-size: 20px;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); transition: background 0.2s;
+  }
+  .m-close:hover { background: rgba(0,0,0,0.7); }
+  .m-img { width: 100%; height: 180px; object-fit: cover; display: block; }
+  .m-body { padding: 16px 22px 20px; }
+  .m-name { font-size: 1.05rem; font-weight: 800; margin-bottom: 2px; line-height: 1.25; }
+  .m-area { font-size: 0.78rem; color: var(--muted); margin-bottom: 10px; }
+  .m-score-wrap {
+    background: linear-gradient(135deg, #fff8f0, #fff5eb);
+    border: 1px solid #fed7aa; border-radius: 12px; padding: 10px 14px; margin-bottom: 10px;
+  }
+  .m-score-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+  .m-score-label { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: #92400e; }
+  .m-score-num { font-size: 1.3rem; font-weight: 900; color: var(--ocean-dark); }
+  .m-score-bar { height: 8px; border-radius: 4px; background: #f5e6d3; overflow: hidden; }
+  .m-score-fill { height: 100%; border-radius: 4px; background: linear-gradient(90deg, #f0c27f, #e87d3e, #d4363b); transition: width 0.4s; }
+  .m-breakdown {
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 4px; margin-top: 10px;
+    font-size: 0.68rem; color: var(--muted); text-align: center;
+  }
+  .m-breakdown .v { font-weight: 700; color: var(--dark); font-size: 0.78rem; }
+  .m-grid { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 6px; margin-bottom: 12px; }
+  .m-stat { background: var(--bg); border-radius: 10px; padding: 10px 8px; text-align: center; }
+  .m-stat .v { font-size: 1rem; font-weight: 800; color: var(--ocean-dark); }
+  .m-stat .v.price-c { color: var(--palm); }
+  .m-stat .l { font-size: 0.62rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
+  .m-badges { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 10px; }
+  .m-badge { font-size: 0.7rem; font-weight: 600; padding: 4px 10px; border-radius: 7px; }
+  .m-badge.fire { background: #ffedd5; color: #9a3412; }
+  .m-badge.gold { background: #fef3c7; color: #92400e; }
+  .m-badge.green { background: #dcfce7; color: var(--palm); }
+  .m-badge.blue { background: #dbeafe; color: var(--ocean-dark); }
+  .m-book {
+    display: block; width: 100%; padding: 12px; text-align: center;
+    background: linear-gradient(135deg, #FF385C, #e31c5f); color: white;
+    text-decoration: none; border-radius: 12px; font-size: 0.88rem;
+    font-weight: 700; font-family: inherit; transition: all 0.2s;
+  }
+  .m-book:hover { filter: brightness(1.1); transform: translateY(-1px); }
+
+  .footer {
+    text-align: center; padding: 32px 20px 40px; color: var(--muted); font-size: 0.72rem;
+  }
+  .footer a { color: var(--ocean); text-decoration: none; }
+
+  /* ── Browse All Grid ── */
+  .browse-section {
+    max-width: 1100px; margin: 40px auto 0; padding: 0 20px;
+  }
+  .browse-header {
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 12px; margin-bottom: 20px;
+  }
+  .browse-title-area {}
+  .browse-title { font-size: 1.3rem; font-weight: 800; letter-spacing: -0.3px; }
+  .browse-sub { font-size: 0.82rem; color: var(--muted); margin-top: 2px; }
+  .browse-count { font-weight: 700; color: var(--ocean); }
+
+  /* Filters */
+  .filters {
+    display: flex; gap: 8px; flex-wrap: wrap; align-items: center;
+  }
+  .filter-select, .filter-input {
+    font-family: 'Inter', sans-serif; font-size: 0.78rem; font-weight: 500;
+    padding: 7px 12px; border: 1px solid var(--border); border-radius: 10px;
+    background: var(--card); color: var(--dark); cursor: pointer;
+    transition: border-color 0.2s;
+  }
+  .filter-select:focus, .filter-input:focus {
+    outline: none; border-color: var(--ocean);
+  }
+  .filter-input { width: 90px; }
+  .filter-label { font-size: 0.72rem; color: var(--muted); font-weight: 600; }
+  .filter-clear {
+    font-size: 0.72rem; color: var(--ocean); cursor: pointer; border: none;
+    background: none; font-family: inherit; font-weight: 600; padding: 4px 8px;
+    border-radius: 6px; transition: background 0.2s;
+  }
+  .filter-clear:hover { background: #e0f2fe; }
+
+  /* Grid */
+  .browse-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+  }
+  .browse-grid .card { flex: none; }
+
+  .load-more-wrap { text-align: center; padding: 30px 0 10px; }
+  .load-more-btn {
+    font-family: 'Inter', sans-serif; font-size: 0.88rem; font-weight: 700;
+    padding: 14px 40px; border-radius: 12px; border: 2px solid var(--ocean);
+    background: transparent; color: var(--ocean); cursor: pointer;
+    transition: all 0.2s;
+  }
+  .load-more-btn:hover { background: var(--ocean); color: white; }
+  .browse-empty {
+    text-align: center; padding: 40px 20px; color: var(--muted);
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 700px) {
+    .pick-hero-card { grid-template-columns: 1fr; }
+    .pick-hero-img { height: 220px; }
+    .pick-hero-body { padding: 20px; }
+    .card { flex: 0 0 240px; }
+    .sliders { grid-template-columns: 1fr; gap: 12px; }
+    .explainer-card { flex-direction: column; gap: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-hero">
+  <h1>🏆 Best Crete Airbnb Picks</h1>
+  <p>Handpicked Chania & Rethymno listings, auto-ranked by price, rating & reviews — adjust the weights below to match your priorities.</p>
+  <div class="page-hero-nav">
+    <a href="greece.html">← Greece Itinerary</a>
+    <a href="compare.html">Compare Trips</a>
+  </div>
+</div>
+
+<!-- WEIGHT SLIDERS -->
+<div class="weights-panel">
+  <div class="weights-card">
+    <div class="weights-header">
+      <span class="weights-title">⚙️ Adjust What Matters to You</span>
+      <button class="weights-reset" onclick="resetWeights()">Reset</button>
+    </div>
+    <div class="sliders">
+      <div class="slider-group">
+        <div class="slider-label">
+          <span class="slider-name rating">★ Rating</span>
+          <span class="slider-val" id="vRating">35%</span>
+        </div>
+        <input type="range" id="sRating" min="0" max="100" value="35">
+      </div>
+      <div class="slider-group">
+        <div class="slider-label">
+          <span class="slider-name reviews">💬 Reviews</span>
+          <span class="slider-val" id="vReviews">35%</span>
+        </div>
+        <input type="range" id="sReviews" min="0" max="100" value="35">
+      </div>
+      <div class="slider-group">
+        <div class="slider-label">
+          <span class="slider-name price">💰 Lower Price</span>
+          <span class="slider-val" id="vPrice">30%</span>
+        </div>
+        <input type="range" id="sPrice" min="0" max="100" value="30">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- #1 PICK -->
+<div class="pick-hero">
+  <div class="pick-hero-card" id="heroCard">
+    <img class="pick-hero-img" src="" alt="" id="heroImg">
+    <div class="pick-hero-body">
+      <div class="pick-hero-badge">👑 #1 OVERALL PICK</div>
+      <div class="pick-hero-name" id="heroName"></div>
+      <div class="pick-hero-area" id="heroArea"></div>
+      <div class="pick-hero-stats">
+        <div class="pick-hero-stat"><div class="val price-c" id="heroPrice"></div><div class="lbl">Per Night</div></div>
+        <div class="pick-hero-stat"><div class="val rating-c" id="heroRating"></div><div class="lbl">Rating</div></div>
+        <div class="pick-hero-stat"><div class="val reviews-c" id="heroReviews"></div><div class="lbl">Reviews</div></div>
+      </div>
+      <div class="pick-hero-score">
+        <div class="score-ring">
+          <svg viewBox="0 0 48 48">
+            <circle class="bg" cx="24" cy="24" r="20"/>
+            <circle class="fg" id="heroRing" cx="24" cy="24" r="20"
+              stroke-dasharray="125.6" stroke-dashoffset="125.6"/>
+          </svg>
+          <div class="num" id="heroScoreNum"></div>
+        </div>
+        <div class="score-info">
+          <div class="title">Value Score</div>
+          <div class="desc" id="heroScoreDesc">Best combined rating, reviews<br>& price out of 35 handpicked listings</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTIONS -->
+<div id="sections"></div>
+
+<!-- EXPLAINER -->
+<div class="explainer">
+  <div class="explainer-card">
+    <div class="explainer-item">
+      <h3>🧪 How scoring works</h3>
+      <p>Each listing gets a composite score (0–100) from three normalized dimensions. Use the sliders above to adjust the weights:</p>
+      <div class="explainer-formula" id="formulaDisplay">
+        Score = <span>35%</span> Rating + <span>35%</span> Reviews + <span>30%</span> Lower Price
+      </div>
+    </div>
+    <div class="explainer-item">
+      <h3>📊 What we analyzed</h3>
+      <p>35 handpicked Airbnb listings from 1,500+ scraped in Chania & Rethymno for Aug 22–29, 2026 (2 adults). Auto-sorted into curated categories. Rankings update live as you adjust weights.</p>
+    </div>
+  </div>
+</div>
+
+<!-- BROWSE ALL -->
+<div class="browse-section" id="browseSection">
+  <div class="browse-header">
+    <div class="browse-title-area">
+      <div class="browse-title">🔍 Browse All Listings</div>
+      <div class="browse-sub">Showing <span class="browse-count" id="browseCount">0</span> listings, ranked by your weights</div>
+    </div>
+    <div class="filters">
+      <select class="filter-select" id="fArea"><option value="">All Areas</option></select>
+      <span class="filter-label">$</span>
+      <input class="filter-input" id="fPriceMin" type="number" placeholder="Min/n" step="10">
+      <span class="filter-label">–</span>
+      <input class="filter-input" id="fPriceMax" type="number" placeholder="Max/n" step="10">
+      <span class="filter-label">★</span>
+      <input class="filter-input" id="fRatingMin" type="number" placeholder="Min" step="0.05" min="0" max="5" style="width:70px">
+      <button class="filter-clear" onclick="clearFilters()">Clear</button>
+    </div>
+  </div>
+  <div class="browse-grid" id="browseGrid"></div>
+  <div class="load-more-wrap" id="loadMoreWrap">
+    <button class="load-more-btn" id="loadMoreBtn" onclick="loadMore()">Load More</button>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <button class="m-close" onclick="closeModal()">&times;</button>
+    <img class="m-img" id="mImg" src="" alt="">
+    <div class="m-body">
+      <div class="m-name" id="mName"></div>
+      <div class="m-area" id="mArea"></div>
+      <div class="m-score-wrap">
+        <div class="m-score-top">
+          <span class="m-score-label">Value Score</span>
+          <span class="m-score-num" id="mScore"></span>
+        </div>
+        <div class="m-score-bar"><div class="m-score-fill" id="mScoreFill"></div></div>
+        <div class="m-breakdown">
+          <div><div class="v" id="mBkR"></div>Rating</div>
+          <div><div class="v" id="mBkRv"></div>Reviews</div>
+          <div><div class="v" id="mBkP"></div>Price</div>
+        </div>
+      </div>
+      <div class="m-grid">
+        <div class="m-stat"><div class="v price-c" id="mPrice"></div><div class="l">Per Night</div></div>
+        <div class="m-stat"><div class="v" id="mTotal"></div><div class="l" id="mNightsLabel">Total</div></div>
+        <div class="m-stat"><div class="v" id="mRating"></div><div class="l">Rating</div></div>
+        <div class="m-stat"><div class="v" id="mReviews"></div><div class="l">Reviews</div></div>
+      </div>
+      <div class="m-badges" id="mBadges"></div>
+      <a class="m-book" id="mLink" href="#" target="_blank">View on Airbnb →</a>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  35 handpicked from 1,500+ Crete Airbnb listings · Data scraped Jun 2025 · Prices in CAD<br>
+  <a href="greece.html">← Back to Greece itinerary</a>
+</div>
+
+<script>
+const P = "https://a0.muscache.com/im/pictures/";
+const DATA = [
+  // ── Chania — 4 nights, Aug 22–26 ──
+  {id:"1308112816025958633",name:"CHōRA Classic 2",area:"Chania",price:255,total:1019,rating:5.0,reviews:126,nights:4,pick:0,url:"https://www.airbnb.ca/rooms/1308112816025958633",img:P+"hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTMwODExMjgxNjAyNTk1ODYzMw%3D%3D/original/32660619-616d-4533-8e02-ca72e5ad6b2e.jpeg?im_w=720"},
+  {id:"24056978",name:"Stracciatella Apartment",area:"Chania",price:196,total:783,rating:5.0,reviews:14,nights:4,pick:0,url:"https://www.airbnb.ca/rooms/24056978",img:P+"1f291c55-b882-472f-81f8-d67390b3ef8d.jpg?im_w=720"},
+  {id:"1187532358846781545",name:"IntOwn Sea-View Apartment",area:"Chania",price:298,total:1190,rating:4.9,reviews:147,nights:4,pick:0,url:"https://www.airbnb.ca/rooms/1187532358846781545",img:P+"miso/Hosting-1187532358846781545/original/81190d8c-96d4-4449-b549-009bfda58cf5.jpeg?im_w=720"},
+  {id:"896781181442828044",name:"Amelia Suite 2",area:"Chania",price:239,total:957,rating:4.88,reviews:56,nights:4,pick:0,url:"https://www.airbnb.ca/rooms/896781181442828044",img:P+"f9bd3a1c-9944-4811-b244-9296e5188c60.jpg?im_w=720"},
+  {id:"3588764",name:"Sunshine Loft",area:"Chania",price:239,total:955,rating:4.99,reviews:165,nights:4,pick:0,url:"https://www.airbnb.ca/rooms/3588764",img:P+"f4452643-f727-4b09-9485-2a78691c89c1.jpg?im_w=720"},
+  {id:"44209542",name:"Sunny Splatzia Apartment",area:"Chania",price:202,total:809,rating:4.96,reviews:93,nights:4,pick:1,url:"https://www.airbnb.ca/rooms/44209542",img:P+"airflow/Hosting-44209542/original/38ef1c98-c39e-4e77-8deb-bbc4d9422ade.jpg?im_w=720"},
+  {id:"16721544",name:"Old Town Center / Old Port",area:"Chania",price:218,total:870,rating:4.93,reviews:154,nights:4,pick:0,url:"https://www.airbnb.ca/rooms/16721544",img:P+"cf2555cd-1599-443e-8f62-cf360765b6e4.jpg?im_w=720"},
+  {id:"1179482881484741117",name:"Cherry Central Luxury Suite 4",area:"Chania",price:224,total:897,rating:5.0,reviews:24,nights:4,pick:0,url:"https://www.airbnb.ca/rooms/1179482881484741117",img:P+"prohost-api/Hosting-1179482881484741117/original/6b779969-a478-42b6-a7e8-33ce9443ce48.jpeg?im_w=720"},
+  {id:"44593045",name:"Eva Plus Stone Arch Room",area:"Chania",price:213,total:853,rating:4.92,reviews:169,nights:4,pick:0,url:"https://www.airbnb.ca/rooms/44593045",img:P+"hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6NDQ1OTMwNDU=/original/8bf3a7ec-3992-4a87-b6ec-e87263f6d9ee.jpeg?im_w=720"},
+  {id:"33289447",name:"B-Side Apartment",area:"Chania",price:197,total:787,rating:4.97,reviews:30,nights:4,pick:0,url:"https://www.airbnb.ca/rooms/33289447",img:P+"79cb5709-f787-4b82-987d-7d4849ceb4e1.jpg?im_w=720"},
+  {id:"25787792",name:"Rare Rustic Old Town Kamara",area:"Chania",price:168,total:670,rating:4.96,reviews:158,nights:4,pick:0,url:"https://www.airbnb.ca/rooms/25787792",img:P+"miso/Hosting-25787792/original/e5097057-f940-4be9-a47c-010cdf9b6dfb.jpeg?im_w=720"},
+  {id:"960781718626780859",name:"Charming 1 Bedroom Apartment",area:"Chania",price:231,total:922,rating:4.98,reviews:60,nights:4,pick:0,url:"https://www.airbnb.ca/rooms/960781718626780859",img:P+"miso/Hosting-960781718626780859/original/cb0846b8-b726-40ba-bfa2-f99d413c5c51.jpeg?im_w=720"},
+  {id:"550384039939241345",name:"EYGE Modern Apartment",area:"Chania",price:236,total:944,rating:4.95,reviews:79,nights:4,pick:0,url:"https://www.airbnb.ca/rooms/550384039939241345",img:P+"miso/Hosting-550384039939241345/original/e67f85c8-5bf4-4c7e-b4c0-03309e7d24f7.jpeg?im_w=720"},
+  {id:"1282699173980820563",name:"A3stays Cozy Retreat",area:"Chania",price:277,total:1108,rating:5.0,reviews:11,nights:4,pick:0,url:"https://www.airbnb.ca/rooms/1282699173980820563",img:P+"hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTI4MjY5OTE3Mzk4MDgyMDU2Mw%3D%3D/original/569562ea-7294-44c3-b890-a2c1bcf5a830.jpeg?im_w=720"},
+  {id:"49340239",name:"Nikis Dream Prime Apartment",area:"Chania",price:258,total:1030,rating:4.99,reviews:72,nights:4,pick:0,url:"https://www.airbnb.ca/rooms/49340239",img:P+"miso/Hosting-49340239/original/91d3b1c8-d8b9-4a7c-b94c-3d051464bc41.jpeg?im_w=720"},
+  {id:"13202816",name:"KEY Rooms",area:"Chania",price:174,total:697,rating:4.95,reviews:200,nights:4,pick:0,url:"https://www.airbnb.ca/rooms/13202816",img:P+"miso/Hosting-13202816/original/57e61011-c9fa-402c-9800-95dc3f4ec961.jpeg?im_w=720"},
+  {id:"38901159",name:"Modern Old Town Maisonette",area:"Chania",price:236,total:944,rating:4.78,reviews:156,nights:4,pick:0,url:"https://www.airbnb.ca/rooms/38901159",img:P+"d4ebe7e9-1058-4a39-9a04-f1f61cb619cf.jpg?im_w=720"},
+  // ── Rethymno — 3 nights, Aug 26–29 ──
+  {id:"1465251366032950892",name:"Amelie Studio",area:"Rethymno",price:181,total:542,rating:5.0,reviews:11,nights:3,pick:0,url:"https://www.airbnb.ca/rooms/1465251366032950892",img:P+"miso/Hosting-1465251366032950892/original/e7a7602d-2515-4233-8441-9d72b2ccaf14.jpeg?im_w=720"},
+  {id:"48279374",name:"Near the Beach",area:"Rethymno",price:140,total:421,rating:4.54,reviews:65,nights:3,pick:0,url:"https://www.airbnb.ca/rooms/48279374",img:P+"miso/Hosting-48279374/original/f904ed17-703c-4e1c-a458-3032eda3cc5f.jpeg?im_w=720"},
+  {id:"956587520848762543",name:"Va-Po Seaside Apartment",area:"Rethymno",price:156,total:469,rating:4.76,reviews:29,nights:3,pick:0,url:"https://www.airbnb.ca/rooms/956587520848762543",img:P+"2678cbaa-1f77-41f7-8891-0ddeb71cb004.jpg?im_w=720"},
+  {id:"34379267",name:"Marylee\u2019s Studio",area:"Rethymno",price:167,total:502,rating:4.85,reviews:98,nights:3,pick:0,url:"https://www.airbnb.ca/rooms/34379267",img:P+"hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MzQzNzkyNjc%3D/original/0e0862dc-0fd5-414b-9496-d050dec85374.jpeg?im_w=720"},
+  {id:"983839951556882028",name:"Aqua Breeze Apartment",area:"Rethymno",price:218,total:653,rating:5.0,reviews:23,nights:3,pick:0,url:"https://www.airbnb.ca/rooms/983839951556882028",img:P+"hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6OTgzODM5OTUxNTU2ODgyMDI4/original/266193a5-d5e4-4396-8b2a-92bd80ee701e.jpeg?im_w=720"},
+  {id:"1150738191096528747",name:"City & Beach Apartment II",area:"Rethymno",price:134,total:402,rating:5.0,reviews:12,nights:3,pick:0,url:"https://www.airbnb.ca/rooms/1150738191096528747",img:P+"miso/Hosting-1150738191096528747/original/8bf73bb5-5dfa-420a-9d43-5480580c16a2.jpeg?im_w=720"},
+  {id:"1233847072008501399",name:"VDG Elegant Seafront Residence",area:"Rethymno",price:210,total:629,rating:4.85,reviews:26,nights:3,pick:0,url:"https://www.airbnb.ca/rooms/1233847072008501399",img:P+"hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTIzMzg0NzA3MjAwODUwMTM5OQ==/original/4b5299e6-411e-4e9f-9580-f1d690bb6bf8.jpeg?im_w=720"},
+  {id:"19050840",name:"My Little Loft",area:"Rethymno",price:214,total:643,rating:4.9,reviews:51,nights:3,pick:0,url:"https://www.airbnb.ca/rooms/19050840",img:P+"722f63d8-1501-4b95-a054-e4229d4b8d24.jpg?im_w=720"},
+  {id:"1376739775298720596",name:"Chill Spot",area:"Rethymno",price:227,total:680,rating:5.0,reviews:37,nights:3,pick:0,url:"https://www.airbnb.ca/rooms/1376739775298720596",img:P+"hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTM3NjczOTc3NTI5ODcyMDU5Ng==/original/f79a609f-7a7f-473f-9fa2-e74ef4bee931.jpeg?im_w=720"},
+  {id:"908565621162581242",name:"Moon of the Loggia",area:"Rethymno",price:230,total:689,rating:4.95,reviews:60,nights:3,pick:0,url:"https://www.airbnb.ca/rooms/908565621162581242",img:P+"miso/Hosting-908565621162581242/original/53ab8c24-426d-44b5-babf-3574d3d5086f.jpeg?im_w=720"},
+  {id:"32443582",name:"Penelope Apartment",area:"Rethymno",price:202,total:606,rating:4.89,reviews:138,nights:3,pick:0,url:"https://www.airbnb.ca/rooms/32443582",img:P+"f6b63486-6882-478b-b227-ceac72584928.jpg?im_w=720"},
+  {id:"31680853",name:"Rethymno Megali Porta",area:"Rethymno",price:221,total:664,rating:4.9,reviews:149,nights:3,pick:0,url:"https://www.airbnb.ca/rooms/31680853",img:P+"f240e7e0-3b1c-44a7-ab5d-223adf8d19d7.jpg?im_w=720"},
+  {id:"23103104",name:"Modern Apartment 70m from Sea",area:"Rethymno",price:236,total:708,rating:4.98,reviews:192,nights:3,pick:0,url:"https://www.airbnb.ca/rooms/23103104",img:P+"miso/Hosting-23103104/original/b1c093fe-e74f-483f-a926-bb9286345b93.jpeg?im_w=720"},
+  {id:"43290543",name:"Cookie in the Yard",area:"Rethymno",price:99,total:296,rating:4.93,reviews:74,nights:3,pick:0,url:"https://www.airbnb.ca/rooms/43290543",img:P+"miso/Hosting-43290543/original/853bc111-e5e0-483b-a3bd-05795a78451a.jpeg?im_w=720"},
+  {id:"1334851478570338707",name:"Sk8 Pistachio City",area:"Rethymno",price:180,total:541,rating:4.89,reviews:18,nights:3,pick:0,url:"https://www.airbnb.ca/rooms/1334851478570338707",img:P+"hosting/Hosting-1334851478570338707/original/de1a52d2-7d1b-4ffa-845f-a95331cd32d8.jpeg?im_w=720"},
+  {id:"43266216",name:"K\u0101los",area:"Rethymno",price:205,total:614,rating:4.78,reviews:27,nights:3,pick:0,url:"https://www.airbnb.ca/rooms/43266216",img:P+"f0229110-e697-4989-ade9-215be4a9875a.jpg?im_w=720"},
+  {id:"1204156910248811951",name:"CozyNest in the Old Town",area:"Rethymno",price:162,total:486,rating:4.83,reviews:23,nights:3,pick:0,url:"https://www.airbnb.ca/rooms/1204156910248811951",img:P+"miso/Hosting-1204156910248811951/original/ce5d69ac-5fd2-42ad-b7a4-4d5caf22f8fa.jpeg?im_w=720"},
+  {id:"34563447",name:"Nikis Home",area:"Rethymno",price:151,total:453,rating:4.92,reviews:195,nights:3,pick:1,url:"https://www.airbnb.ca/rooms/34563447",img:P+"hosting/Hosting-34563447/original/4a4d99f6-2bce-404e-a917-b8dd82628912.jpeg?im_w=720"},
+];
+
+// ── Compute normalized values (0–1) ──
+const ratings = DATA.map(d => d.rating);
+const reviews = DATA.map(d => d.reviews);
+const prices  = DATA.map(d => d.price);
+const minR = Math.min(...ratings), maxR = Math.max(...ratings);
+const minV = Math.min(...reviews), maxV = Math.max(...reviews);
+const minP = Math.min(...prices),  maxP = Math.max(...prices);
+DATA.forEach(d => {
+  d.nr = maxR === minR ? 0.5 : (d.rating - minR) / (maxR - minR);
+  d.nv = maxV === minV ? 0.5 : (d.reviews - minV) / (maxV - minV);
+  d.np = maxP === minP ? 0.5 : (maxP - d.price) / (maxP - minP);
+});
+
+const AREAS = ["Chania", "Rethymno"];
+
+// Populate area filter
+const fAreaEl = document.getElementById('fArea');
+AREAS.forEach(a => { const o = document.createElement('option'); o.value = a; o.textContent = a; fAreaEl.appendChild(o); });
+
+let wR = 35, wV = 35, wP = 30;
+
+function score(d) {
+  const total = wR + wV + wP || 1;
+  return (d.nr * wR + d.nv * wV + d.np * wP) / total * 100;
+}
+
+function scoreTier(s) { return s >= 65 ? 'high' : s >= 40 ? 'mid' : 'low'; }
+function scoreColor(s) { return s >= 65 ? '#d4363b' : s >= 40 ? '#e6a756' : '#b8c9d6'; }
+
+function makeCard(d, rank) {
+  const s = score(d);
+  const t = scoreTier(s);
+  return `
+    <div class="card" onclick="openModal('${d.id}')">
+      <div class="card-img-wrap">
+        <img class="card-img" src="${d.img}" alt="${d.name}" loading="lazy">
+        <div class="card-overlay"></div>
+        <div class="card-rank ${t}">${rank !== null ? '#'+rank : Math.round(s)}</div>
+        ${d.pick ? '<div class="card-fav">📌 Our Pick</div>' : ''}
+        <div class="card-price-tag">$${d.price}/n</div>
+      </div>
+      <div class="card-body">
+        <div class="card-name">${d.name}</div>
+        <div class="card-area">📍 ${d.area}</div>
+        <div class="card-row">
+          <span class="card-rating">★ ${d.rating.toFixed(2)}</span>
+          <span class="card-reviews">${d.reviews} reviews</span>
+          <span class="card-total">$${d.total} total</span>
+        </div>
+        <div class="card-score-bar">
+          <div class="bar-track"><div class="bar-fill ${t}" style="width:${s.toFixed(0)}%"></div></div>
+          <span class="bar-num">${Math.round(s)}</span>
+        </div>
+      </div>
+    </div>`;
+}
+
+function rebuild() {
+  const ranked = DATA.map(d => ({...d, score: score(d)})).sort((a,b) => b.score - a.score);
+  const used = new Set();
+
+  function pick(pool, n) {
+    const result = [];
+    for (const d of pool) {
+      if (used.has(d.id)) continue;
+      result.push(d);
+      used.add(d.id);
+      if (result.length >= n) break;
+    }
+    return result;
+  }
+
+  // Hero = #1
+  const hero = ranked[0];
+  used.add(hero.id);
+  const hs = hero.score;
+
+  document.getElementById('heroImg').src = hero.img;
+  document.getElementById('heroName').textContent = hero.name;
+  document.getElementById('heroArea').textContent = '📍 ' + hero.area;
+  document.getElementById('heroPrice').textContent = '$' + hero.price;
+  document.getElementById('heroRating').textContent = '★ ' + hero.rating.toFixed(2);
+  document.getElementById('heroReviews').textContent = hero.reviews;
+  document.getElementById('heroScoreNum').textContent = Math.round(hs);
+  document.getElementById('heroCard').onclick = () => openModal(hero.id);
+  const ring = document.getElementById('heroRing');
+  ring.style.stroke = scoreColor(hs);
+  ring.style.strokeDashoffset = 125.6 * (1 - hs / 100);
+
+  // ── Curated sections ──
+  const bestValue = pick(ranked, 5);
+
+  const budgetPool = ranked.filter(d => d.price <= 180 && d.rating >= 4.85).sort((a,b) => b.score - a.score);
+  const budgetGems = pick(budgetPool, 4);
+
+  const reviewPool = [...ranked].sort((a,b) => b.reviews - a.reviews);
+  const mostLoved = pick(reviewPool, 4);
+
+  const perfectPool = ranked.filter(d => d.reviews >= 50).sort((a,b) => b.rating - a.rating);
+  const perfect = pick(perfectPool, 4);
+
+  const ourPicks = DATA.filter(d => d.pick === 1 && !used.has(d.id));
+  ourPicks.forEach(d => used.add(d.id));
+
+  const sections = [
+    { emoji: '🎯', title: 'Best Overall Value', sub: 'Highest combined score across price, rating & reviews', cards: bestValue, ranked: true },
+    { emoji: '💰', title: 'Budget Gems', sub: 'Under $180/night with a 4.85+ rating', cards: budgetGems },
+    { emoji: '💬', title: 'Most Reviewed', sub: 'Tried, tested & loved by hundreds of guests', cards: mostLoved },
+    { emoji: '⭐', title: 'Highest Rated', sub: 'Near-perfect ratings with 50+ reviews to back it up', cards: perfect },
+    { emoji: '📌', title: 'Our Picks', sub: 'The Airbnbs we actually booked for this trip', cards: ourPicks },
+  ].filter(s => s.cards.length > 0);
+
+  let globalRank = 2;
+  const html = sections.map(sec => `
+    <div class="section">
+      <div class="section-header">
+        <span class="section-emoji">${sec.emoji}</span>
+        <div class="section-title">${sec.title}</div>
+        <div class="section-sub">${sec.sub}</div>
+        <div class="section-divider"></div>
+      </div>
+      <div class="scroll-row">
+        ${sec.cards.map(d => {
+          const rank = sec.ranked ? globalRank++ : null;
+          return makeCard(d, rank);
+        }).join('')}
+      </div>
+    </div>
+  `).join('');
+
+  document.getElementById('sections').innerHTML = html;
+
+  // Update formula display
+  const total = wR + wV + wP || 1;
+  const pR = Math.round(wR / total * 100);
+  const pV = Math.round(wV / total * 100);
+  const pP = 100 - pR - pV;
+  document.getElementById('formulaDisplay').innerHTML =
+    `Score = <span>${pR}%</span> Rating + <span>${pV}%</span> Reviews + <span>${pP}%</span> Lower Price`;
+
+  rebuildBrowse();
+}
+
+// ── Browse All Logic ──
+const BATCH = 48;
+let browseShown = 0;
+let browseFiltered = [];
+
+function getFilters() {
+  return {
+    area: document.getElementById('fArea').value,
+    priceMin: parseFloat(document.getElementById('fPriceMin').value) || 0,
+    priceMax: parseFloat(document.getElementById('fPriceMax').value) || Infinity,
+    ratingMin: parseFloat(document.getElementById('fRatingMin').value) || 0,
+  };
+}
+
+function rebuildBrowse() {
+  const f = getFilters();
+  browseFiltered = DATA
+    .map(d => ({...d, score: score(d)}))
+    .filter(d => {
+      if (f.area && d.area !== f.area) return false;
+      if (d.price < f.priceMin || d.price > f.priceMax) return false;
+      if (d.rating < f.ratingMin) return false;
+      return true;
+    })
+    .sort((a, b) => b.score - a.score);
+
+  browseShown = 0;
+  document.getElementById('browseGrid').innerHTML = '';
+  document.getElementById('browseCount').textContent = browseFiltered.length;
+  loadMore();
+}
+
+function loadMore() {
+  const grid = document.getElementById('browseGrid');
+  const end = Math.min(browseShown + BATCH, browseFiltered.length);
+  let html = '';
+  for (let i = browseShown; i < end; i++) {
+    html += makeCard(browseFiltered[i], null);
+  }
+  grid.insertAdjacentHTML('beforeend', html);
+  browseShown = end;
+
+  const btn = document.getElementById('loadMoreWrap');
+  if (browseShown >= browseFiltered.length) {
+    btn.style.display = 'none';
+  } else {
+    btn.style.display = 'block';
+    document.getElementById('loadMoreBtn').textContent =
+      `Load More (${browseShown} of ${browseFiltered.length})`;
+  }
+}
+
+function clearFilters() {
+  document.getElementById('fArea').value = '';
+  document.getElementById('fPriceMin').value = '';
+  document.getElementById('fPriceMax').value = '';
+  document.getElementById('fRatingMin').value = '';
+  rebuildBrowse();
+}
+
+// Filter change listeners
+['fArea', 'fPriceMin', 'fPriceMax', 'fRatingMin'].forEach(id => {
+  const el = document.getElementById(id);
+  el.addEventListener('change', rebuildBrowse);
+  el.addEventListener('input', () => { clearTimeout(el._t); el._t = setTimeout(rebuildBrowse, 400); });
+});
+
+// Slider events
+const sR = document.getElementById('sRating');
+const sV = document.getElementById('sReviews');
+const sP = document.getElementById('sPrice');
+
+function updateFromSliders() {
+  wR = +sR.value; wV = +sV.value; wP = +sP.value;
+  const total = wR + wV + wP || 1;
+  document.getElementById('vRating').textContent = Math.round(wR/total*100) + '%';
+  document.getElementById('vReviews').textContent = Math.round(wV/total*100) + '%';
+  document.getElementById('vPrice').textContent = (100 - Math.round(wR/total*100) - Math.round(wV/total*100)) + '%';
+  rebuild();
+}
+
+sR.addEventListener('input', updateFromSliders);
+sV.addEventListener('input', updateFromSliders);
+sP.addEventListener('input', updateFromSliders);
+
+function resetWeights() {
+  sR.value = 35; sV.value = 35; sP.value = 30;
+  updateFromSliders();
+}
+
+// Modal
+function openModal(id) {
+  const d = DATA.find(x => x.id === id);
+  if (!d) return;
+  const s = score(d);
+  document.getElementById('mImg').src = d.img;
+  document.getElementById('mName').textContent = d.name;
+  document.getElementById('mArea').textContent = '📍 ' + d.area;
+  document.getElementById('mScore').textContent = Math.round(s) + '/100';
+  document.getElementById('mScoreFill').style.width = s.toFixed(0) + '%';
+  document.getElementById('mBkR').textContent = '★ ' + d.rating.toFixed(2);
+  document.getElementById('mBkRv').textContent = d.reviews;
+  document.getElementById('mBkP').textContent = '$' + d.price + '/n';
+  document.getElementById('mPrice').textContent = '$' + d.price;
+  document.getElementById('mTotal').textContent = '$' + d.total;
+  document.getElementById('mNightsLabel').textContent = d.nights + ' Nights';
+  document.getElementById('mRating').textContent = '★ ' + d.rating.toFixed(2);
+  document.getElementById('mReviews').textContent = d.reviews;
+  document.getElementById('mLink').href = d.url;
+  let b = '';
+  if (s >= 65) b += '<span class="m-badge fire">🔥 Top Value</span>';
+  if (d.pick) b += '<span class="m-badge blue">📌 Our Pick</span>';
+  if (d.area === 'Chania') b += '<span class="m-badge green">🏛 Chania Old Town</span>';
+  if (d.area === 'Rethymno') b += '<span class="m-badge gold">🏖 Rethymno Old Town</span>';
+  document.getElementById('mBadges').innerHTML = b;
+  document.getElementById('modalOverlay').classList.add('visible');
+}
+
+function closeModal() { document.getElementById('modalOverlay').classList.remove('visible'); }
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+// Initial render
+rebuild();
+</script>
+</body>
+</html>
