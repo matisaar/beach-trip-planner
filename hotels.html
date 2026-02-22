@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hotel vs Airbnb — Amalfi Coast 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+  :root {
+    --ocean: #0077b6; --ocean-dark: #023e8a; --ocean-light: #00b4d8;
+    --sand: #f5e6d3; --sunset: #ff6b35; --coral: #e63946;
+    --palm: #2d6a4f; --dark: #1a1a2e; --gray: #6b7280;
+    --light: #f8fafc; --white: #ffffff; --gold: #f59e0b;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: var(--light); color: var(--dark); line-height: 1.7; }
+
+  .hero { background: linear-gradient(135deg, #1a472a 0%, #023e8a 50%, var(--ocean) 100%); color: white; padding: 60px 24px 50px; text-align: center; }
+  .hero h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 900; margin-bottom: 8px; }
+  .hero p { font-size: 1rem; opacity: 0.85; max-width: 620px; margin: 0 auto 20px; }
+  .hero-stats { display: flex; gap: 28px; justify-content: center; flex-wrap: wrap; margin-top: 16px; }
+  .hero-stat { text-align: center; }
+  .hero-stat .num { font-size: 1.5rem; font-weight: 900; }
+  .hero-stat .label { font-size: 0.72rem; opacity: 0.7; }
+
+  .container { max-width: 820px; margin: 0 auto; padding: 0 20px; }
+  .section { padding: 32px 0; }
+  .section h2 { font-size: 1.35rem; font-weight: 800; margin-bottom: 4px; color: var(--ocean-dark); }
+  .section .sub { color: var(--gray); font-size: 0.85rem; margin-bottom: 16px; }
+
+  .card { background: white; border-radius: 14px; padding: 24px; margin-bottom: 16px; box-shadow: 0 3px 12px rgba(0,0,0,0.05); }
+  .card h3 { font-size: 1.1rem; font-weight: 800; margin-bottom: 4px; }
+  .card .card-sub { color: var(--gray); font-size: 0.82rem; margin-bottom: 12px; }
+
+  .tip { border-radius: 10px; padding: 12px 14px; font-size: 0.82rem; margin: 10px 0; line-height: 1.5; }
+  .tip-money { background: #dcfce7; border-left: 4px solid var(--palm); }
+  .tip-warn { background: #fef3c7; border-left: 4px solid var(--gold); }
+  .tip-pro { background: #dbeafe; border-left: 4px solid var(--ocean); }
+  .tip-info { background: #dbeafe; border-left: 4px solid var(--ocean); }
+  .tip strong { font-weight: 700; }
+
+  /* VERDICT banner */
+  .verdict-bar { background: linear-gradient(135deg, var(--sunset), var(--coral)); color: white; border-radius: 14px; padding: 24px; margin: -28px auto 0; position: relative; z-index: 10; max-width: 820px; box-shadow: 0 10px 30px rgba(230,57,70,0.2); text-align: center; }
+  .verdict-bar h2 { color: white; font-size: 1.3rem; font-weight: 900; margin-bottom: 6px; }
+  .verdict-bar p { font-size: 0.92rem; opacity: 0.92; margin: 0; }
+
+  /* Winner card */
+  .winner { border: 3px solid var(--palm); position: relative; }
+  .winner::before { content: "🏆 WINNER"; position: absolute; top: -14px; left: 20px; background: var(--palm); color: white; padding: 2px 12px; border-radius: 8px; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.5px; }
+
+  /* Hotel grid */
+  .hotel-grid { display: grid; grid-template-columns: 1fr; gap: 16px; margin: 14px 0; }
+  .hotel-card { background: white; border-radius: 14px; overflow: hidden; box-shadow: 0 3px 12px rgba(0,0,0,0.06); }
+  .hotel-card .hc-body { padding: 18px 20px; }
+  .hotel-card h4 { font-size: 1rem; font-weight: 800; margin-bottom: 2px; }
+  .hotel-card .hc-loc { font-size: 0.78rem; color: var(--gray); margin-bottom: 8px; }
+  .hotel-card .hc-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+  .hotel-card .hc-tag { font-size: 0.72rem; font-weight: 700; padding: 3px 10px; border-radius: 8px; }
+  .tag-stars { background: #fef3c7; color: #92400e; }
+  .tag-rating { background: #dcfce7; color: var(--palm); }
+  .tag-price { background: #fee2e2; color: var(--coral); }
+  .tag-bfast { background: #dbeafe; color: var(--ocean-dark); }
+  .hotel-card .hc-desc { font-size: 0.82rem; color: #555; margin-bottom: 10px; }
+  .hotel-card .hc-price { font-size: 0.92rem; font-weight: 800; color: var(--coral); margin-bottom: 4px; }
+  .hotel-card .hc-total { font-size: 0.8rem; color: var(--gray); }
+  .hotel-card .hc-pros { font-size: 0.8rem; margin-top: 10px; }
+  .hotel-card .hc-pros li { margin-bottom: 3px; }
+  .hotel-card .hc-cons { color: var(--coral); }
+  .hotel-card .hc-link { display: inline-block; margin-top: 10px; font-size: 0.82rem; font-weight: 700; color: var(--ocean); text-decoration: none; }
+  .hotel-card .hc-link:hover { text-decoration: underline; }
+
+  /* Comparison table */
+  .compare-table { width: 100%; border-collapse: separate; border-spacing: 0; margin: 16px 0; font-size: 0.82rem; }
+  .compare-table thead th { background: var(--ocean-dark); color: white; padding: 10px 12px; font-weight: 700; text-align: left; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.3px; }
+  .compare-table thead th:first-child { border-radius: 10px 0 0 0; }
+  .compare-table thead th:last-child { border-radius: 0 10px 0 0; }
+  .compare-table td { padding: 10px 12px; border-bottom: 1px solid #f0f0f0; vertical-align: top; }
+  .compare-table tr:last-child td { border-bottom: none; }
+  .compare-table .cat { font-weight: 700; color: var(--ocean-dark); background: #f8fafc; width: 130px; }
+  .compare-table .win { background: #dcfce7; font-weight: 600; }
+  .compare-table .lose { background: #fee2e2; }
+  .compare-table .tie { background: #fef3c7; }
+  .compare-table tbody tr:last-child td:first-child { border-radius: 0 0 0 10px; }
+  .compare-table tbody tr:last-child td:last-child { border-radius: 0 0 10px 0; }
+
+  /* Score viz */
+  .score-row { display: flex; align-items: center; gap: 10px; margin: 8px 0; }
+  .score-label { width: 120px; font-size: 0.82rem; font-weight: 600; flex-shrink: 0; }
+  .score-bar-bg { flex: 1; height: 10px; background: #e5e7eb; border-radius: 5px; overflow: hidden; }
+  .score-bar { height: 100%; border-radius: 5px; transition: width 0.5s; }
+  .score-val { width: 50px; text-align: right; font-size: 0.82rem; font-weight: 700; }
+  .bar-airbnb { background: linear-gradient(90deg, var(--palm), #40916c); }
+  .bar-hotel { background: linear-gradient(90deg, var(--ocean), var(--ocean-light)); }
+
+  /* nav */
+  .back-link { display: inline-block; margin: 18px 0 0; font-size: 0.85rem; color: var(--ocean); text-decoration: none; font-weight: 600; }
+  .back-link:hover { text-decoration: underline; }
+
+  footer { background: var(--dark); color: rgba(255,255,255,0.6); text-align: center; padding: 24px 20px; font-size: 0.78rem; margin-top: 20px; }
+  footer a { color: var(--ocean-light); text-decoration: none; }
+
+  @media (max-width: 640px) {
+    .hero h1 { font-size: 1.7rem; }
+    .card { padding: 18px; }
+    .compare-table { font-size: 0.75rem; }
+    .compare-table td, .compare-table th { padding: 8px; }
+    .compare-table .cat { width: 90px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ======== HERO ======== -->
+<div class="hero">
+  <h1><img src="https://flagcdn.com/w40/it.png" alt="🇮🇹" style="height:1em;vertical-align:-0.1em;margin-right:4px"> Hotel vs Airbnb</h1>
+  <p>Should you ditch the Airbnb for a hotel?<br>A deep-dive comparison for <strong>Scala / Ravello / Amalfi</strong>, Aug 22&ndash;29 2026</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="num">16</div><div class="label">Hotels Researched</div></div>
+    <div class="hero-stat"><div class="num">3</div><div class="label">Towns Compared</div></div>
+    <div class="hero-stat"><div class="num">7</div><div class="label">Nights</div></div>
+    <div class="hero-stat"><div class="num">$5K</div><div class="label">CAD Budget</div></div>
+  </div>
+</div>
+
+<!-- ======== VERDICT ======== -->
+<div class="container">
+<div class="verdict-bar">
+  <h2>&#127942; Verdict: Airbnb wins by a mile</h2>
+  <p>Even the cheapest real hotel costs 60&ndash;120% more per night, gives you less space, and no kitchen. The Airbnb is the clear choice for your trip.</p>
+</div>
+
+<!-- ======== THE AIRBNB BASELINE ======== -->
+<div class="section">
+  <h2>&#127968; Your Current Pick (Baseline)</h2>
+  <p class="sub">This is the Airbnb everything else is measured against</p>
+
+  <div class="card winner">
+    <h3>Windows on Heaven &mdash; Scala</h3>
+    <div class="card-sub">Entire 2BR home &bull; Superhost &bull; Guest Favourite &bull; 4.98 &#9733; (445 reviews)</div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px;">
+      <div>
+        <div style="font-size:0.72rem;text-transform:uppercase;letter-spacing:0.5px;font-weight:700;color:var(--gray);">Per Night</div>
+        <div style="font-size:1.3rem;font-weight:900;color:var(--palm);">$230 <span style="font-size:0.8rem;font-weight:600;color:var(--gray);">CAD</span></div>
+      </div>
+      <div>
+        <div style="font-size:0.72rem;text-transform:uppercase;letter-spacing:0.5px;font-weight:700;color:var(--gray);">7-Night Total</div>
+        <div style="font-size:1.3rem;font-weight:900;color:var(--palm);">$1,569 <span style="font-size:0.8rem;font-weight:600;color:var(--gray);">CAD</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;">
+      <span class="hc-tag tag-bfast">&#127859; Full Kitchen</span>
+      <span class="hc-tag tag-rating">&#127967;&#65039; Sea-View Terrace</span>
+      <span class="hc-tag tag-stars">&#128716; 2 Bedrooms</span>
+      <span class="hc-tag tag-bfast">&#128167; Washing Machine</span>
+      <span class="hc-tag tag-rating">&#127861; Cook Your Own Meals</span>
+      <span class="hc-tag tag-stars">&#128246; Free WiFi &amp; AC</span>
+    </div>
+    <p style="font-size:0.85rem;color:#555;">Entire 2-bedroom house on the cliff between Scala and Ravello with jaw-dropping Mediterranean views. Full kitchen means you can cook breakfast, make coffee, prepare lunch. Weekly discount brings the total well under $1,600 CAD for 7 nights.</p>
+    <a href="https://www.airbnb.ca/rooms/32588731" target="_blank" style="display:inline-block;margin-top:12px;padding:10px 18px;background:linear-gradient(135deg,#FF385C,#e31c5f);color:white;text-decoration:none;font-weight:700;font-size:0.85rem;border-radius:10px;">View on Airbnb &rarr;</a>
+  </div>
+</div>
+
+<!-- ======== HOTEL OPTIONS ======== -->
+<div class="section">
+  <h2>&#127976; Hotels in the Area</h2>
+  <p class="sub">Prices are estimated August 2026 peak-season rates in CAD, based on current off-peak listings with seasonal adjustment</p>
+
+  <div class="tip tip-warn">
+    <strong>&#9888;&#65039; Peak season premium:</strong> August is THE most expensive month on the Amalfi Coast. Spring prices (shown on booking sites now) are typically 60&ndash;100% lower than what you&rsquo;ll actually pay in late August. All prices below include this seasonal uplift.
+  </div>
+
+  <!-- Ravello section -->
+  <div style="font-size:0.85rem;font-weight:800;text-transform:uppercase;letter-spacing:0.5px;color:var(--ocean-dark);margin:24px 0 10px;padding-bottom:4px;border-bottom:2px solid var(--ocean-light);">&#127963;&#65039; Ravello &mdash; 10 min walk from Airbnb</div>
+
+  <div class="hotel-grid">
+    <!-- Hotel Toro -->
+    <div class="hotel-card">
+      <div class="hc-body">
+        <h4>Hotel Toro</h4>
+        <div class="hc-loc">Ravello centre &bull; 12 min walk from Airbnb</div>
+        <div class="hc-meta">
+          <span class="hc-tag tag-stars">&#11088; 3-Star</span>
+          <span class="hc-tag tag-rating">8.2 / 10</span>
+          <span class="hc-tag tag-bfast">&#127828; Breakfast Incl.</span>
+        </div>
+        <p class="hc-desc">Charming budget hotel near Villa Rufolo with hand-painted Vietri ceramics. Rooms are simple but clean, with garden breakfast. No pool, no kitchen access, small rooms.</p>
+        <div class="hc-price">~$350&ndash;420 CAD / night (Aug peak)</div>
+        <div class="hc-total">7-night total: ~$2,600&ndash;2,940 CAD</div>
+        <ul class="hc-pros" style="margin-top:8px;">
+          <li>&#9989; Breakfast included</li>
+          <li>&#9989; Central Ravello location</li>
+          <li style="color:var(--coral)">&#10060; No kitchen &mdash; all meals out</li>
+          <li style="color:var(--coral)">&#10060; Small room vs entire house</li>
+          <li style="color:var(--coral)">&#10060; 65&ndash;87% more expensive</li>
+        </ul>
+        <a class="hc-link" href="https://www.thehotelguru.com/hotel/hotel-toro-ravello" target="_blank">View details &rarr;</a>
+      </div>
+    </div>
+
+    <!-- Villa San Michele -->
+    <div class="hotel-card">
+      <div class="hc-body">
+        <h4>Villa San Michele</h4>
+        <div class="hc-loc">Ravello cliff-side &bull; 15 min walk from Airbnb</div>
+        <div class="hc-meta">
+          <span class="hc-tag tag-stars">&#11088; 3-Star</span>
+          <span class="hc-tag tag-rating">8.5 / 10</span>
+          <span class="hc-tag tag-bfast">&#127828; Breakfast Incl.</span>
+        </div>
+        <p class="hc-desc">Mediterranean-style rooms with nautical decor, private balconies, and a sunny terrace overlooking the Tyrrhenian Sea. Breakfast served on the terrace.</p>
+        <div class="hc-price">~$360&ndash;430 CAD / night (Aug peak)</div>
+        <div class="hc-total">7-night total: ~$2,520&ndash;3,010 CAD</div>
+        <ul class="hc-pros" style="margin-top:8px;">
+          <li>&#9989; Sea views &amp; private balcony</li>
+          <li>&#9989; Breakfast on the terrace</li>
+          <li style="color:var(--coral)">&#10060; No kitchen &mdash; all meals out</li>
+          <li style="color:var(--coral)">&#10060; Small rooms, 1 bed only</li>
+          <li style="color:var(--coral)">&#10060; ~60&ndash;90% more expensive</li>
+        </ul>
+        <a class="hc-link" href="https://www.thehotelguru.com/hotel/villa-san-michele-ravello-ravello" target="_blank">View details &rarr;</a>
+      </div>
+    </div>
+
+    <!-- Hotel Parsifal -->
+    <div class="hotel-card">
+      <div class="hc-body">
+        <h4>Hotel Parsifal</h4>
+        <div class="hc-loc">Ravello centre &bull; 13th-century convent &bull; 12 min walk</div>
+        <div class="hc-meta">
+          <span class="hc-tag tag-stars">&#11088; 3-Star</span>
+          <span class="hc-tag tag-rating">8.7 / 10 (800 reviews)</span>
+          <span class="hc-tag tag-bfast">&#127828; Breakfast Incl.</span>
+        </div>
+        <p class="hc-desc">Beautiful converted convent with stunning Valle del Dragone views, a cloister bar, and restaurant on-site. Standard rooms are dated but the location is magic. #3 on TripAdvisor for Ravello.</p>
+        <div class="hc-price">~$400&ndash;480 CAD / night (Aug peak)</div>
+        <div class="hc-total">7-night total: ~$2,800&ndash;3,360 CAD</div>
+        <ul class="hc-pros" style="margin-top:8px;">
+          <li>&#9989; Stunning cloister &amp; terrace views</li>
+          <li>&#9989; On-site restaurant &amp; bar</li>
+          <li>&#9989; Breakfast included</li>
+          <li style="color:var(--coral)">&#10060; No kitchen &mdash; all meals out</li>
+          <li style="color:var(--coral)">&#10060; ~75&ndash;115% more expensive</li>
+        </ul>
+        <a class="hc-link" href="https://hotelparsifal.it/" target="_blank">View details &rarr;</a>
+      </div>
+    </div>
+
+    <!-- Villa Fraulo -->
+    <div class="hotel-card">
+      <div class="hc-body">
+        <h4>Villa Fraulo</h4>
+        <div class="hc-loc">Ravello centre &bull; 4-star palazzo with pool &bull; 12 min walk</div>
+        <div class="hc-meta">
+          <span class="hc-tag tag-stars">&#11088; 4-Star</span>
+          <span class="hc-tag tag-rating">8.9 / 10</span>
+          <span class="hc-tag tag-bfast">&#127828; Breakfast Incl.</span>
+          <span class="hc-tag tag-rating">&#127946; Pool</span>
+        </div>
+        <p class="hc-desc">Sophisticated palazzo with sea-view pool, spa, elegant interiors. This is the first "proper" mid-range option &mdash; but it&rsquo;s already well above the Airbnb.</p>
+        <div class="hc-price">~$580&ndash;720 CAD / night (Aug peak)</div>
+        <div class="hc-total">7-night total: ~$4,060&ndash;5,040 CAD</div>
+        <ul class="hc-pros" style="margin-top:8px;">
+          <li>&#9989; Pool, spa, elegant grounds</li>
+          <li>&#9989; Breakfast included</li>
+          <li style="color:var(--coral)">&#10060; $4K+ for the room alone</li>
+          <li style="color:var(--coral)">&#10060; No kitchen &mdash; food costs add $600+</li>
+          <li style="color:var(--coral)">&#10060; 155&ndash;220% more expensive</li>
+        </ul>
+        <a class="hc-link" href="https://www.thehotelguru.com/hotel/villa-fraulo-ravello" target="_blank">View details &rarr;</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Amalfi section -->
+  <div style="font-size:0.85rem;font-weight:800;text-transform:uppercase;letter-spacing:0.5px;color:var(--ocean-dark);margin:24px 0 10px;padding-bottom:4px;border-bottom:2px solid var(--ocean-light);">&#9875; Amalfi Town &mdash; 15 min bus from Airbnb</div>
+
+  <div class="hotel-grid">
+    <!-- La Bambagina -->
+    <div class="hotel-card">
+      <div class="hc-body">
+        <h4>La Bambagina</h4>
+        <div class="hc-loc">Amalfi centre &bull; B&amp;B &bull; 15 min bus from Airbnb</div>
+        <div class="hc-meta">
+          <span class="hc-tag tag-stars">B&amp;B</span>
+          <span class="hc-tag tag-rating">9.0 / 10</span>
+          <span class="hc-tag tag-bfast">&#127828; Breakfast Incl.</span>
+        </div>
+        <p class="hc-desc">Intimate B&amp;B with jazzy wallpapers and quirky tiling on a central square. Close to the beach. Small but stylish rooms with a charming bistro for breakfast.</p>
+        <div class="hc-price">~$310&ndash;380 CAD / night (Aug peak)</div>
+        <div class="hc-total">7-night total: ~$2,170&ndash;2,660 CAD</div>
+        <ul class="hc-pros" style="margin-top:8px;">
+          <li>&#9989; Great central location</li>
+          <li>&#9989; Breakfast included</li>
+          <li>&#9989; Walking distance to beach</li>
+          <li style="color:var(--coral)">&#10060; No kitchen, no terrace</li>
+          <li style="color:var(--coral)">&#10060; Tiny rooms &mdash; no living space</li>
+          <li style="color:var(--coral)">&#10060; Need SITA bus to get there</li>
+          <li style="color:var(--coral)">&#10060; 38&ndash;70% more expensive</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Diecisedici -->
+    <div class="hotel-card">
+      <div class="hc-body">
+        <h4>Diecisedici</h4>
+        <div class="hc-loc">Amalfi centre &bull; B&amp;B behind the Duomo &bull; 15 min bus</div>
+        <div class="hc-meta">
+          <span class="hc-tag tag-stars">B&amp;B</span>
+          <span class="hc-tag tag-rating">9.2 / 10</span>
+          <span class="hc-tag tag-bfast">Sea-Facing Rooms</span>
+        </div>
+        <p class="hc-desc">Chic B&amp;B in a medieval building, sea-facing rooms with traditional decor. Behind the Cathedral &mdash; feel the real Amalfi.</p>
+        <div class="hc-price">~$380&ndash;460 CAD / night (Aug peak)</div>
+        <div class="hc-total">7-night total: ~$2,660&ndash;3,220 CAD</div>
+        <ul class="hc-pros" style="margin-top:8px;">
+          <li>&#9989; Beautiful sea views</li>
+          <li>&#9989; Historic building character</li>
+          <li style="color:var(--coral)">&#10060; No kitchen, no real common area</li>
+          <li style="color:var(--coral)">&#10060; Small rooms</li>
+          <li style="color:var(--coral)">&#10060; 70&ndash;105% more expensive</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Hotel Marina Riviera -->
+    <div class="hotel-card">
+      <div class="hc-body">
+        <h4>Hotel Marina Riviera</h4>
+        <div class="hc-loc">Amalfi waterfront &bull; 4-star with rooftop pool &bull; 15 min bus</div>
+        <div class="hc-meta">
+          <span class="hc-tag tag-stars">&#11088; 4-Star</span>
+          <span class="hc-tag tag-rating">9.1 / 10</span>
+          <span class="hc-tag tag-bfast">&#127828; Breakfast Incl.</span>
+          <span class="hc-tag tag-rating">&#127946; Rooftop Pool</span>
+        </div>
+        <p class="hc-desc">Gorgeous 19th-century hotel right on the Amalfi waterfront with rooftop pool, sea terrace, and elegant rooms. This is the dream hotel option &mdash; but it&rsquo;s expensive.</p>
+        <div class="hc-price">~$660&ndash;810 CAD / night (Aug peak)</div>
+        <div class="hc-total">7-night total: ~$4,620&ndash;5,670 CAD</div>
+        <ul class="hc-pros" style="margin-top:8px;">
+          <li>&#9989; Rooftop pool with sea views</li>
+          <li>&#9989; Right on the waterfront</li>
+          <li>&#9989; Breakfast included</li>
+          <li style="color:var(--coral)">&#10060; $4,600+ just for the room</li>
+          <li style="color:var(--coral)">&#10060; No kitchen &mdash; add $600+ for food</li>
+          <li style="color:var(--coral)">&#10060; 190&ndash;260% more expensive</li>
+        </ul>
+        <a class="hc-link" href="https://www.thehotelguru.com/hotel/hotel-marina-riviera-amalfi" target="_blank">View details &rarr;</a>
+      </div>
+    </div>
+
+    <!-- Luna Convento -->
+    <div class="hotel-card">
+      <div class="hc-body">
+        <h4>Luna Convento</h4>
+        <div class="hc-loc">Amalfi cliff-side &bull; 4-star former convent &bull; 15 min bus</div>
+        <div class="hc-meta">
+          <span class="hc-tag tag-stars">&#11088; 4-Star</span>
+          <span class="hc-tag tag-rating">8.8 / 10</span>
+          <span class="hc-tag tag-bfast">&#127828; Breakfast Incl.</span>
+          <span class="hc-tag tag-rating">&#127946; Pool</span>
+        </div>
+        <p class="hc-desc">Stunning former convent with a Moorish cloister, two restaurants with spectacular views, and an outdoor pool. One of the most famous hotels in Amalfi.</p>
+        <div class="hc-price">~$830&ndash;1,040 CAD / night (Aug peak)</div>
+        <div class="hc-total">7-night total: ~$5,810&ndash;7,280 CAD</div>
+        <ul class="hc-pros" style="margin-top:8px;">
+          <li>&#9989; Stunning cloister &amp; 2 restaurants</li>
+          <li>&#9989; Pool with views</li>
+          <li style="color:var(--coral)">&#10060; $5,800+ for room alone &mdash; exceeds budget</li>
+          <li style="color:var(--coral)">&#10060; 260&ndash;365% more expensive</li>
+        </ul>
+        <a class="hc-link" href="https://www.thehotelguru.com/hotel/luna-convento-amalfi" target="_blank">View details &rarr;</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scala section -->
+  <div style="font-size:0.85rem;font-weight:800;text-transform:uppercase;letter-spacing:0.5px;color:var(--ocean-dark);margin:24px 0 10px;padding-bottom:4px;border-bottom:2px solid var(--ocean-light);">&#127956;&#65039; Scala &mdash; Your Home Base</div>
+
+  <div class="tip tip-info">
+    <strong>&#128161; Fun fact:</strong> Scala (pop. ~1,500) has essentially <strong>zero real hotels</strong>. The entire village runs on B&amp;Bs, small guesthouses, and Airbnb. The closest &ldquo;hotel&rdquo; is more of a family-run agriturismo. This is actually a <em>good</em> thing &mdash; it means your Airbnb is exactly the kind of accommodation this area specializes in.
+  </div>
+</div>
+
+<!-- ======== SIDE BY SIDE ======== -->
+<div class="section">
+  <h2>&#9878;&#65039; Head-to-Head Comparison</h2>
+  <p class="sub">Airbnb vs. cheapest hotel option (Hotel Toro, Ravello) &mdash; the most realistic hotel alternative</p>
+
+  <div class="card" style="overflow-x:auto;">
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>&#127968; Airbnb (Windows on Heaven)</th>
+          <th>&#127976; Hotel Toro (Ravello)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="cat">Per Night</td>
+          <td class="win">$230 CAD</td>
+          <td class="lose">~$380 CAD</td>
+        </tr>
+        <tr>
+          <td class="cat">7-Night Total</td>
+          <td class="win">$1,569 CAD</td>
+          <td class="lose">~$2,660 CAD</td>
+        </tr>
+        <tr>
+          <td class="cat">+ Food Costs</td>
+          <td class="win">~$600 (cook most meals)</td>
+          <td class="lose">~$1,050 (all meals at restaurants)</td>
+        </tr>
+        <tr>
+          <td class="cat">True Total</td>
+          <td class="win"><strong>~$2,169 CAD</strong></td>
+          <td class="lose"><strong>~$3,710 CAD</strong></td>
+        </tr>
+        <tr>
+          <td class="cat">Space</td>
+          <td class="win">Entire 2BR house + terrace</td>
+          <td class="lose">One hotel room (~18m&sup2;)</td>
+        </tr>
+        <tr>
+          <td class="cat">Kitchen</td>
+          <td class="win">Full kitchen + stove + fridge</td>
+          <td class="lose">&#10060; None</td>
+        </tr>
+        <tr>
+          <td class="cat">Breakfast</td>
+          <td class="tie">DIY (kitchen + grocery store)</td>
+          <td class="win">Included</td>
+        </tr>
+        <tr>
+          <td class="cat">Laundry</td>
+          <td class="win">Washing machine in unit</td>
+          <td class="lose">Paid laundry service</td>
+        </tr>
+        <tr>
+          <td class="cat">Views</td>
+          <td class="win">Panoramic sea-view terrace</td>
+          <td class="tie">Some rooms have valley views</td>
+        </tr>
+        <tr>
+          <td class="cat">Rating</td>
+          <td class="win">4.98 / 5 (445 reviews)</td>
+          <td class="tie">8.2 / 10 (~4.1/5 equiv.)</td>
+        </tr>
+        <tr>
+          <td class="cat">Location</td>
+          <td class="win">Between Scala &amp; Ravello &mdash; quiet</td>
+          <td class="tie">Ravello centre &mdash; busier</td>
+        </tr>
+        <tr>
+          <td class="cat">Transit to Amalfi</td>
+          <td class="tie">15 min SITA bus</td>
+          <td class="tie">15 min SITA bus</td>
+        </tr>
+        <tr>
+          <td class="cat">Food Delivery</td>
+          <td class="tie">&#10060; No apps serve this area</td>
+          <td class="tie">&#10060; No apps serve this area</td>
+        </tr>
+        <tr>
+          <td class="cat">Privacy</td>
+          <td class="win">Complete &mdash; entire home</td>
+          <td class="lose">Shared hotel with other guests</td>
+        </tr>
+        <tr>
+          <td class="cat">Pool</td>
+          <td class="lose">&#10060; None</td>
+          <td class="lose">&#10060; None (Hotel Toro)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ======== SCORECARD ======== -->
+<div class="section">
+  <h2>&#128200; Scorecard</h2>
+  <p class="sub">Visual breakdown &mdash; Airbnb vs. cheapest reasonable hotel (Hotel Toro, Ravello)</p>
+
+  <div class="card">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px;text-align:center;">
+      <div style="padding:10px;background:#dcfce7;border-radius:10px;">
+        <div style="font-size:0.72rem;text-transform:uppercase;font-weight:700;color:var(--palm);">Airbnb Score</div>
+        <div style="font-size:2rem;font-weight:900;color:var(--palm);">9.0</div>
+      </div>
+      <div style="padding:10px;background:#dbeafe;border-radius:10px;">
+        <div style="font-size:0.72rem;text-transform:uppercase;font-weight:700;color:var(--ocean-dark);">Hotel Score</div>
+        <div style="font-size:2rem;font-weight:900;color:var(--ocean-dark);">5.5</div>
+      </div>
+    </div>
+
+    <div class="score-row">
+      <div class="score-label">&#128176; Value</div>
+      <div class="score-bar-bg"><div class="score-bar bar-airbnb" style="width:95%;"></div></div>
+      <div class="score-val" style="color:var(--palm)">9.5</div>
+    </div>
+    <div class="score-row">
+      <div class="score-label" style="opacity:0.5;font-size:0.72rem;">Hotel</div>
+      <div class="score-bar-bg"><div class="score-bar bar-hotel" style="width:40%;"></div></div>
+      <div class="score-val" style="color:var(--ocean)">4.0</div>
+    </div>
+
+    <div class="score-row" style="margin-top:12px;">
+      <div class="score-label">&#127858; Food Flexibility</div>
+      <div class="score-bar-bg"><div class="score-bar bar-airbnb" style="width:90%;"></div></div>
+      <div class="score-val" style="color:var(--palm)">9.0</div>
+    </div>
+    <div class="score-row">
+      <div class="score-label" style="opacity:0.5;font-size:0.72rem;">Hotel</div>
+      <div class="score-bar-bg"><div class="score-bar bar-hotel" style="width:50%;"></div></div>
+      <div class="score-val" style="color:var(--ocean)">5.0</div>
+    </div>
+
+    <div class="score-row" style="margin-top:12px;">
+      <div class="score-label">&#127968; Space &amp; Privacy</div>
+      <div class="score-bar-bg"><div class="score-bar bar-airbnb" style="width:95%;"></div></div>
+      <div class="score-val" style="color:var(--palm)">9.5</div>
+    </div>
+    <div class="score-row">
+      <div class="score-label" style="opacity:0.5;font-size:0.72rem;">Hotel</div>
+      <div class="score-bar-bg"><div class="score-bar bar-hotel" style="width:35%;"></div></div>
+      <div class="score-val" style="color:var(--ocean)">3.5</div>
+    </div>
+
+    <div class="score-row" style="margin-top:12px;">
+      <div class="score-label">&#128205; Location</div>
+      <div class="score-bar-bg"><div class="score-bar bar-airbnb" style="width:85%;"></div></div>
+      <div class="score-val" style="color:var(--palm)">8.5</div>
+    </div>
+    <div class="score-row">
+      <div class="score-label" style="opacity:0.5;font-size:0.72rem;">Hotel</div>
+      <div class="score-bar-bg"><div class="score-bar bar-hotel" style="width:80%;"></div></div>
+      <div class="score-val" style="color:var(--ocean)">8.0</div>
+    </div>
+
+    <div class="score-row" style="margin-top:12px;">
+      <div class="score-label">&#127774; Views</div>
+      <div class="score-bar-bg"><div class="score-bar bar-airbnb" style="width:95%;"></div></div>
+      <div class="score-val" style="color:var(--palm)">9.5</div>
+    </div>
+    <div class="score-row">
+      <div class="score-label" style="opacity:0.5;font-size:0.72rem;">Hotel</div>
+      <div class="score-bar-bg"><div class="score-bar bar-hotel" style="width:65%;"></div></div>
+      <div class="score-val" style="color:var(--ocean)">6.5</div>
+    </div>
+
+    <div class="score-row" style="margin-top:12px;">
+      <div class="score-label">&#128721; Amenities</div>
+      <div class="score-bar-bg"><div class="score-bar bar-airbnb" style="width:75%;"></div></div>
+      <div class="score-val" style="color:var(--palm)">7.5</div>
+    </div>
+    <div class="score-row">
+      <div class="score-label" style="opacity:0.5;font-size:0.72rem;">Hotel</div>
+      <div class="score-bar-bg"><div class="score-bar bar-hotel" style="width:65%;"></div></div>
+      <div class="score-val" style="color:var(--ocean)">6.5</div>
+    </div>
+  </div>
+</div>
+
+<!-- ======== THE REAL COST PICTURE ======== -->
+<div class="section">
+  <h2>&#128176; The Real Cost Picture</h2>
+  <p class="sub">It&rsquo;s not just the room rate &mdash; no kitchen means every meal costs restaurant prices</p>
+
+  <div class="card">
+    <h3>Total Trip Cost: Airbnb vs. Hotel</h3>
+    <div class="card-sub">7 nights, 2 people, including accommodation + food + activities + transit</div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px;">
+      <div style="background:#dcfce7;border-radius:12px;padding:16px;text-align:center;">
+        <div style="font-size:0.72rem;text-transform:uppercase;font-weight:700;color:var(--palm);margin-bottom:4px;">&#127968; Airbnb Route</div>
+        <div style="font-size:0.78rem;color:#555;margin-bottom:8px;">
+          Stay: $1,569<br>
+          Flights: $2,200<br>
+          Food: $600<br>
+          Activities: $400<br>
+          Transit: $500
+        </div>
+        <div style="font-size:1.6rem;font-weight:900;color:var(--palm);">$5,269</div>
+        <div style="font-size:0.72rem;color:var(--gray);">CAD Total</div>
+      </div>
+      <div style="background:#fee2e2;border-radius:12px;padding:16px;text-align:center;">
+        <div style="font-size:0.72rem;text-transform:uppercase;font-weight:700;color:var(--coral);margin-bottom:4px;">&#127976; Hotel Route (cheapest)</div>
+        <div style="font-size:0.78rem;color:#555;margin-bottom:8px;">
+          Stay: $2,660<br>
+          Flights: $2,200<br>
+          Food: $1,050<br>
+          Activities: $400<br>
+          Transit: $500
+        </div>
+        <div style="font-size:1.6rem;font-weight:900;color:var(--coral);">$6,810</div>
+        <div style="font-size:0.72rem;color:var(--gray);">CAD Total</div>
+      </div>
+    </div>
+
+    <div class="tip tip-money" style="margin-top:16px;">
+      <strong>&#128184; That&rsquo;s $1,541 more</strong> for LESS space, no kitchen, and a lower-rated room. The hotel route busts your $5K budget by ~$1,800, while the Airbnb keeps you within ~$300 of it.
+    </div>
+  </div>
+</div>
+
+<!-- ======== FOOD DELIVERY ======== -->
+<div class="section">
+  <h2>&#128666; Food Delivery &mdash; Same Problem Everywhere</h2>
+  <p class="sub">We checked this previously &mdash; it&rsquo;s the same whether you&rsquo;re in a hotel or Airbnb</p>
+
+  <div class="card">
+    <p style="font-size:0.85rem;color:#555;">We already confirmed that <strong>Glovo, Just Eat, Deliveroo, and Uber Eats all have zero coverage</strong> in Scala, Ravello, and even most of Amalfi. This applies equally to hotels and Airbnbs &mdash; a hotel doesn&rsquo;t fix this problem.</p>
+    <div style="margin-top:12px;">
+      <p style="font-size:0.85rem;font-weight:700;">What a hotel <em>does</em> give you:</p>
+      <ul style="font-size:0.82rem;color:#555;padding-left:18px;margin-top:4px;">
+        <li>Breakfast is typically included (worth ~$15&ndash;20 CAD per person per day, saving ~$210&ndash;280)</li>
+        <li>Some have on-site restaurants for dinner (but at elevated hotel prices)</li>
+        <li>Front desk can call local restaurants for you</li>
+      </ul>
+      <p style="font-size:0.85rem;font-weight:700;margin-top:12px;">What the Airbnb gives you instead:</p>
+      <ul style="font-size:0.82rem;color:#555;padding-left:18px;margin-top:4px;">
+        <li>Full kitchen &mdash; cook whatever you want, whenever</li>
+        <li>Grocery store (Sigma) is a 5-min walk</li>
+        <li>Host provides breakfast supplies on arrival</li>
+        <li>Pizza da asporto from Zi&rsquo;Ntonio in Scala (~&euro;5&ndash;8)</li>
+        <li>More flexible schedule &mdash; eat when you want</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ======== WHEN TO CONSIDER A HOTEL INSTEAD ======== -->
+<div class="section">
+  <h2>&#129300; When <em>Would</em> a Hotel Make Sense?</h2>
+  <p class="sub">Being fair &mdash; here are some scenarios where a hotel might win</p>
+
+  <div class="card">
+    <div style="font-size:0.85rem;color:#555;">
+      <p style="margin-bottom:10px;"><strong>1. You hate cooking on vacation.</strong> If you genuinely don&rsquo;t want to use a kitchen at all, a hotel with breakfast + on-site restaurant removes that decision. But you&rsquo;d pay ~$1,500 more for the privilege.</p>
+      <p style="margin-bottom:10px;"><strong>2. You want a pool.</strong> The Airbnb has an incredible terrace but no pool. Hotels like Villa Fraulo ($580+/night) or Luna Convento ($830+/night) have pools. But that&rsquo;s $3,000&ndash;5,000 extra for 7 nights.</p>
+      <p style="margin-bottom:10px;"><strong>3. Budget isn&rsquo;t a factor.</strong> If you were working with a $10K+ budget, a stay at Hotel Caruso ($1,567/night) or Palazzo Avino ($933/night) would be phenomenal. But those are $7K&ndash;11K just for accommodation.</p>
+      <p style="margin-bottom:10px;"><strong>4. You prefer Amalfi town itself.</strong> If being in the centre of the action matters more than quiet and views, a B&amp;B in Amalfi town puts you right there. But it&rsquo;s still more expensive and gives you less space.</p>
+      <p><strong>5. You&rsquo;re a solo traveller.</strong> For one person, a hotel room makes more sense than renting a whole 2BR house. But for a couple, the Airbnb is perfect.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ======== FINAL VERDICT ======== -->
+<div class="section">
+  <h2>&#9989; Final Verdict</h2>
+
+  <div class="card" style="border-left:4px solid var(--palm);">
+    <h3 style="color:var(--palm);">Stick with the Airbnb</h3>
+    <div style="font-size:0.85rem;color:#555;margin-top:8px;">
+      <p style="margin-bottom:10px;">For your specific situation &mdash; Toronto couple, $5K budget, 7 nights in late August &mdash; the <strong>Windows on Heaven Airbnb in Scala</strong> is the correct choice by every meaningful metric:</p>
+      <ul style="padding-left:18px;margin-bottom:12px;">
+        <li><strong>$1,091&ndash;1,541 cheaper</strong> than even the budget hotel option (including food costs)</li>
+        <li><strong>3x the living space</strong> of a hotel room</li>
+        <li><strong>Full kitchen</strong> saves $400&ndash;500 on food over 7 days</li>
+        <li><strong>Better rated</strong> &mdash; 4.98/5 vs 8.2/10 for Hotel Toro</li>
+        <li><strong>Better location</strong> for your itinerary &mdash; between Scala and Ravello, quiet hilltop</li>
+        <li><strong>Sea-view terrace</strong> that rivals any hotel in the area</li>
+        <li>Food delivery is nonexistent either way &mdash; hotel doesn&rsquo;t fix that</li>
+      </ul>
+      <p>The <em>only</em> thing a hotel adds is hands-free breakfast and (at higher price tiers) a pool. Those perks don&rsquo;t justify an extra $1,500&ndash;5,000.</p>
+    </div>
+  </div>
+
+  <div class="tip tip-money">
+    <strong>&#128184; Bottom line:</strong> The Airbnb saves you enough money to fund an extra day of vacation &mdash; or a proper splurge dinner at Palazzo Avino&rsquo;s Michelin-starred restaurant instead ($100&ndash;150 per person).
+  </div>
+</div>
+
+<!-- ======== QUICK HOTEL BOOKING LINKS ======== -->
+<div class="section">
+  <h2>&#128279; If You Still Want to Browse</h2>
+  <p class="sub">Check these links to see live availability and August 2026 prices yourself</p>
+
+  <div class="card">
+    <div style="display:flex;flex-wrap:wrap;gap:8px;">
+      <a href="https://www.booking.com/searchresults.html?ss=Ravello&checkin=2026-08-22&checkout=2026-08-29&group_adults=2&no_rooms=1&selected_currency=CAD" target="_blank" style="display:inline-flex;align-items:center;gap:5px;padding:10px 16px;border-radius:10px;text-decoration:none;font-weight:700;font-size:0.82rem;color:white;background:var(--ocean);transition:all 0.2s;">Booking.com &mdash; Ravello</a>
+      <a href="https://www.booking.com/searchresults.html?ss=Amalfi&checkin=2026-08-22&checkout=2026-08-29&group_adults=2&no_rooms=1&selected_currency=CAD" target="_blank" style="display:inline-flex;align-items:center;gap:5px;padding:10px 16px;border-radius:10px;text-decoration:none;font-weight:700;font-size:0.82rem;color:white;background:var(--sunset);transition:all 0.2s;">Booking.com &mdash; Amalfi</a>
+      <a href="https://www.booking.com/searchresults.html?ss=Scala%2C+Campania&checkin=2026-08-22&checkout=2026-08-29&group_adults=2&no_rooms=1&selected_currency=CAD" target="_blank" style="display:inline-flex;align-items:center;gap:5px;padding:10px 16px;border-radius:10px;text-decoration:none;font-weight:700;font-size:0.82rem;color:white;background:var(--palm);transition:all 0.2s;">Booking.com &mdash; Scala</a>
+      <a href="https://www.google.com/travel/hotels/Ravello?q=hotels+in+Ravello+Italy&dates=2026-08-22,2026-08-29" target="_blank" style="display:inline-flex;align-items:center;gap:5px;padding:10px 16px;border-radius:10px;text-decoration:none;font-weight:700;font-size:0.82rem;color:white;background:var(--coral);transition:all 0.2s;">Google Hotels &mdash; Ravello</a>
+    </div>
+    <p style="font-size:0.78rem;color:var(--gray);margin-top:10px;">Prices will likely show placeholder rates until closer to Aug 2026. Many hotels don&rsquo;t release summer pricing until 6&ndash;9 months out.</p>
+  </div>
+</div>
+
+<a href="best-trip.html" class="back-link">&larr; Back to the full itinerary</a>
+
+</div><!-- /container -->
+
+<footer>
+  <p>Hotel vs Airbnb comparison &bull; Amalfi Coast 2026 &bull; Researched Jun 2025</p>
+  <p style="margin-top:4px;">Hotel prices sourced from <a href="https://www.thehotelguru.com/best-hotels-in/italy/ravello" target="_blank">The Hotel Guru</a>, <a href="https://hotelparsifal.it/" target="_blank">Hotel Parsifal</a>, and public booking sites. August peak estimates are +60&ndash;100% over current off-peak rates, converted at 1 USD &asymp; 1.36 CAD.</p>
+</footer>
+
+</body>
+</html>
